@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spot-Undoo Presentation Deck</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #0f1016;
+      color: #111;
+    }
+    .slide-canvas {
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+    .slide-canvas.active {
+      display: flex;
+    }
+    .grid-bg-blue {
+      background-color: #0B3BF4;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+    .grid-bg-light {
+      background-color: #F4F6F9;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+    .neo-card {
+      border: 3px solid #000;
+      box-shadow: 6px 6px 0 0 #000;
+    }
+    .neo-pill {
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0 0 #000;
+    }
+  </style>
+</head>
+<body class="overflow-hidden select-none">
+
+  <!-- SLIDE 1: TITLE SLIDE -->
+  <section class="slide-canvas grid-bg-blue active text-white" id="slide-1">
+    <div class="max-w-4xl w-full text-center space-y-6">
+      <div class="inline-flex items-center gap-2 bg-white text-black font-black text-xs px-4 py-1.5 rounded-full neo-pill uppercase tracking-widest">
+        <span>⚡ HACKATHON BUILD • HACKTOBERFEST 2026</span>
+      </div>
+      <div class="flex justify-center my-4">
+        <img src="../public/spot-undoo-logo.png" alt="Spot-Undoo" class="h-28 object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)]" />
+      </div>
+      <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-none drop-shadow-md">
+        SPOT-UNDOO
+      </h1>
+      <p class="text-xl md:text-2xl font-bold text-blue-100 max-w-2xl mx-auto leading-snug">
+        Local-First AI Kerala Travel & Hidden-Spots Discovery Engine
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-4">
+        <span class="bg-black text-white px-4 py-2 rounded-xl text-xs font-black neo-pill flex items-center gap-1.5">
+          <span>🧠</span> POWERED BY LOCAL QWEN 2.5:3B
+        </span>
+        <span class="bg-[#10B981] text-black px-4 py-2 rounded-xl text-xs font-black neo-pill flex items-center gap-1.5">
+          <span>🍃</span> MONGODB ATLAS CLUSTER
+        </span>
+        <span class="bg-yellow-400 text-black px-4 py-2 rounded-xl text-xs font-black neo-pill flex items-center gap-1.5">
+          <span>📱</span> PWA & NATIVE ANDROID
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: THE CHALLENGE -->
+  <section class="slide-canvas grid-bg-light" id="slide-2">
+    <div class="max-w-5xl w-full space-y-5">
+      <div class="flex items-center justify-between border-b-2 border-black pb-3">
+        <div>
+          <span class="text-xs font-black uppercase text-[#0B3BF4] tracking-wider">Focus: Transit & Layover Travelers</span>
+          <h2 class="text-3xl font-black text-black">THE CHALLENGE: Travel Friction vs. Hyper-Local Discovery</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-white px-3 py-1 rounded-full neo-pill">02 / 08</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+        <!-- Problem -->
+        <div class="bg-white p-6 rounded-2xl neo-card space-y-4">
+          <div class="flex items-center gap-2 text-rose-600">
+            <span class="text-2xl">⚠️</span>
+            <h3 class="font-black text-lg text-black">The Layover Dilemma</h3>
+          </div>
+          <ul class="space-y-3 text-sm font-semibold text-gray-700">
+            <li class="flex items-start gap-2">
+              <span class="text-rose-500 font-black">✕</span>
+              <span><strong>Tourist Trap Bias:</strong> Google Maps & TripAdvisor funnel thousands into overcrowded commercial spots, completely missing local heritage alleys & bakeries.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-rose-500 font-black">✕</span>
+              <span><strong>Connection Anxiety:</strong> Travelers waiting for trains/flights can't reliably estimate local auto transit times and risk missing departures.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-rose-500 font-black">✕</span>
+              <span><strong>Cloud & Privacy Dependency:</strong> Cloud travel tools fail in backwater/hill dead-zones and harvest live personal GPS data.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Solution -->
+        <div class="bg-white p-6 rounded-2xl neo-card space-y-4 border-emerald-500">
+          <div class="flex items-center gap-2 text-emerald-600">
+            <span class="text-2xl">✨</span>
+            <h3 class="font-black text-lg text-black">The SPOT-UNDOO Engine</h3>
+          </div>
+          <ul class="space-y-3 text-sm font-semibold text-gray-700">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-black">✓</span>
+              <span><strong>Hyper-Local Kerala Discovery:</strong> 70 curated, authentic spots across 7 major Kerala transit hubs with real high-resolution imagery.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-black">✓</span>
+              <span><strong>Deterministic Buffer Guarantee:</strong> Non-negotiable 30m return safety cushion ensures travelers never miss trains or flights.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-black">✓</span>
+              <span><strong>100% Offline Edge Intelligence:</strong> Local inference using fine-tuned Qwen 2.5 (3B) on Ollama at <strong>71.4 tokens/sec</strong>.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: EXPLORE & DISCOVERY -->
+  <section class="slide-canvas grid-bg-light" id="slide-3">
+    <div class="max-w-5xl w-full space-y-5">
+      <div class="flex items-center justify-between border-b-2 border-black pb-3">
+        <div>
+          <span class="text-xs font-black uppercase text-emerald-600 tracking-wider">Tab 01 • Discovery Map</span>
+          <h2 class="text-3xl font-black text-black">Explore: Dual Canvas & 7 Kerala Hubs</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-white px-3 py-1 rounded-full neo-pill">03 / 08</span>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4 pt-1">
+        <div class="bg-white p-4 rounded-2xl neo-card space-y-2">
+          <span class="text-2xl">🗺️</span>
+          <h4 class="font-black text-sm text-black">Dual Canvas Views</h4>
+          <p class="text-xs font-medium text-gray-600">Switch instantly between the stylized neo-brutalist Adventure trail and interactive Leaflet OpenStreetMap with live pins.</p>
+        </div>
+        <div class="bg-white p-4 rounded-2xl neo-card space-y-2">
+          <span class="text-2xl">📍</span>
+          <h4 class="font-black text-sm text-black">7 Major Kerala Hubs</h4>
+          <p class="text-xs font-medium text-gray-600">Shoranur Jn, Kochi, Calicut, Palakkad, Trivandrum, Kollam, and Wayanad with custom coordinates and transit math.</p>
+        </div>
+        <div class="bg-white p-4 rounded-2xl neo-card space-y-2">
+          <span class="text-2xl">🔍</span>
+          <h4 class="font-black text-sm text-black">Live Filtering & Deep-Links</h4>
+          <p class="text-xs font-medium text-gray-600">Filter by Hidden Spots, Food, Chill, or Tourist; inspect estimated expenses, and launch one-tap Google Maps navigation.</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl neo-card">
+        <h4 class="font-black text-xs uppercase tracking-wider text-gray-500 mb-2">Live Demo Highlights across Hubs</h4>
+        <div class="grid grid-cols-4 gap-3 text-center">
+          <div class="p-2 bg-gray-50 rounded-xl border border-black">
+            <div class="font-black text-xs text-black">Bharathapuzha View</div>
+            <div class="text-[10px] text-emerald-600 font-bold">Free • 0.6 km • River Bed</div>
+          </div>
+          <div class="p-2 bg-gray-50 rounded-xl border border-black">
+            <div class="font-black text-xs text-black">Kayees Biryani</div>
+            <div class="text-[10px] text-orange-600 font-bold">₹120 • Kochi Legacy</div>
+          </div>
+          <div class="p-2 bg-gray-50 rounded-xl border border-black">
+            <div class="font-black text-xs text-black">SM Street Halwa</div>
+            <div class="text-[10px] text-purple-600 font-bold">₹50 • Calicut Heritage</div>
+          </div>
+          <div class="p-2 bg-gray-50 rounded-xl border border-black">
+            <div class="font-black text-xs text-black">LevelUp Gaming</div>
+            <div class="text-[10px] text-blue-600 font-bold">₹90 • AC Chill Lounge</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: AI PLANNER -->
+  <section class="slide-canvas grid-bg-light" id="slide-4">
+    <div class="max-w-5xl w-full space-y-5">
+      <div class="flex items-center justify-between border-b-2 border-black pb-3">
+        <div>
+          <span class="text-xs font-black uppercase text-[#0B3BF4] tracking-wider">Tab 02 • Constraints & Intent</span>
+          <h2 class="text-3xl font-black text-black">AI Planner: Natural Language & Hard Bounds</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-white px-3 py-1 rounded-full neo-pill">04 / 08</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white p-5 rounded-2xl neo-card space-y-3">
+          <div class="font-black text-sm text-black flex items-center gap-1.5">
+            <span>⚡</span> Context Trip Modes
+          </div>
+          <div class="space-y-1.5">
+            <div class="p-2 bg-blue-50 border border-blue-500 rounded-lg text-xs font-bold text-blue-900">🚆 Layover (Train / Flight Buffer)</div>
+            <div class="p-2 bg-gray-50 border border-black rounded-lg text-xs font-bold">⚡ Quick Free Time (1 - 3 Hrs)</div>
+            <div class="p-2 bg-gray-50 border border-black rounded-lg text-xs font-bold">🎒 Full Day Exploration</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl neo-card space-y-3">
+          <div class="font-black text-sm text-black flex items-center gap-1.5">
+            <span>🛡️</span> Hard Constraint Sliders
+          </div>
+          <div class="space-y-2 text-xs font-bold">
+            <div class="flex justify-between"><span>Available Window:</span> <span class="text-blue-600">3 Hours</span></div>
+            <div class="h-2 bg-blue-100 rounded-full overflow-hidden"><div class="w-1/2 h-full bg-[#0B3BF4]"></div></div>
+            <div class="flex justify-between"><span>Max Budget:</span> <span class="text-emerald-600">₹500 / person</span></div>
+            <div class="h-2 bg-emerald-100 rounded-full overflow-hidden"><div class="w-2/5 h-full bg-emerald-500"></div></div>
+            <p class="text-[11px] text-gray-500 font-medium pt-1">🔒 Locked 30m return safety cushion automatically deducted in layover mode.</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl neo-card space-y-3">
+          <div class="font-black text-sm text-black flex items-center gap-1.5">
+            <span>💬</span> Natural Language Prompt
+          </div>
+          <div class="p-3 bg-amber-50 border border-amber-300 rounded-xl text-xs font-mono text-gray-800 leading-relaxed italic">
+            "I want quiet nature spots near water, amazing local pazhampori, and a gaming cafe with AC before my 5 PM train..."
+          </div>
+          <div class="flex flex-wrap gap-1">
+            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🍜 Street Food</span>
+            <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🌿 Hidden Nature</span>
+            <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🎮 Gaming</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: ITINERARY MAP & PLANS -->
+  <section class="slide-canvas grid-bg-light" id="slide-5">
+    <div class="max-w-5xl w-full space-y-5">
+      <div class="flex items-center justify-between border-b-2 border-black pb-3">
+        <div>
+          <span class="text-xs font-black uppercase text-purple-600 tracking-wider">Generated Route • 3 Options</span>
+          <h2 class="text-3xl font-black text-black">Itinerary Map: 3 Diverse Safe Plans</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-white px-3 py-1 rounded-full neo-pill">05 / 08</span>
+      </div>
+
+      <div class="grid grid-cols-3 gap-5">
+        <div class="bg-white p-4 rounded-2xl neo-card space-y-2 border-purple-500">
+          <div class="bg-purple-600 text-white font-black text-xs px-2.5 py-1 rounded-md inline-block">PLAN 1</div>
+          <h4 class="font-black text-sm text-black">Best Mood & Review Match</h4>
+          <p class="text-xs text-gray-600 font-medium">Tailored to user prompt: Riverside quiet banyan walk followed by iconic tea stall snack.</p>
+          <div class="text-xs font-bold text-purple-700 pt-1">Total: ₹65 • 2h 15m</div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl neo-card space-y-2 border-emerald-500">
+          <div class="bg-emerald-600 text-white font-black text-xs px-2.5 py-1 rounded-md inline-block">PLAN 2</div>
+          <h4 class="font-black text-sm text-black">Ultra-Budget Saver</h4>
+          <p class="text-xs text-gray-600 font-medium">Sorted by lowest cost: Free scenic viewpoints and minimum walking transit distance.</p>
+          <div class="text-xs font-bold text-emerald-700 pt-1">Total: ₹0 - ₹30 • 1h 45m</div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl neo-card space-y-2 border-blue-500">
+          <div class="bg-blue-600 text-white font-black text-xs px-2.5 py-1 rounded-md inline-block">PLAN 3</div>
+          <h4 class="font-black text-sm text-black">Hidden Gem Route</h4>
+          <p class="text-xs text-gray-600 font-medium">Prioritizes artisan pottery clusters, off-grid river sandbars, and secret viewpoint spots.</p>
+          <div class="text-xs font-bold text-blue-700 pt-1">Total: ₹110 • 2h 40m</div>
+        </div>
+      </div>
+
+      <div class="bg-black text-white p-3.5 rounded-2xl neo-card flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="text-xl">⏰</span>
+          <div class="text-xs font-bold font-mono">
+            SAFE RETURN PROTOCOL: Guaranteed arrival back at hub 30 mins prior to train departure.
+          </div>
+        </div>
+        <span class="bg-[#10B981] text-black font-black text-xs px-3 py-1 rounded-lg">VERIFIED ROUTE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: COMMUNITY UGC & MONGODB ATLAS -->
+  <section class="slide-canvas grid-bg-light" id="slide-6">
+    <div class="max-w-5xl w-full space-y-5">
+      <div class="flex items-center justify-between border-b-2 border-black pb-3">
+        <div>
+          <span class="text-xs font-black uppercase text-emerald-600 tracking-wider">Tab 03 • Community UGC</span>
+          <h2 class="text-3xl font-black text-black">Community Uploads & MongoDB Atlas Cloud</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-white px-3 py-1 rounded-full neo-pill">06 / 08</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="bg-white p-5 rounded-2xl neo-card space-y-3">
+          <div class="font-black text-base text-black flex items-center gap-2">
+            <span>📸</span> Community Photo & Tip Upload
+          </div>
+          <p class="text-xs font-semibold text-gray-600">
+            Travelers contribute newly discovered secret spots directly from their smartphones:
+          </p>
+          <ul class="text-xs font-bold text-gray-700 space-y-1.5">
+            <li>• Auto-resizes to 512px on HTML5 canvas for lightweight transmission.</li>
+            <li>• On-device multimodal AI generates auto-vibe hashtags & captions.</li>
+            <li>• Immediate local map integration with zero app restart.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl neo-card space-y-3">
+          <div class="font-black text-base text-black flex items-center gap-2">
+            <span>🍃</span> MongoDB Atlas Cloud Sync
+          </div>
+          <p class="text-xs font-semibold text-gray-600">
+            Complete cloud persistence powering micro-tourism across Kerala:
+          </p>
+          <div class="grid grid-cols-2 gap-2 text-xs font-mono pt-1">
+            <div class="p-2 bg-emerald-50 border border-emerald-500 rounded-lg">
+              <strong>places</strong><br/><span class="text-[10px] text-gray-500">UGC hidden gems</span>
+            </div>
+            <div class="p-2 bg-emerald-50 border border-emerald-500 rounded-lg">
+              <strong>reviews</strong><br/><span class="text-[10px] text-gray-500">Star ratings & tips</span>
+            </div>
+            <div class="p-2 bg-emerald-50 border border-emerald-500 rounded-lg">
+              <strong>plans</strong><br/><span class="text-[10px] text-gray-500">Saved itineraries</span>
+            </div>
+            <div class="p-2 bg-emerald-50 border border-emerald-500 rounded-lg">
+              <strong>Atlas Cluster</strong><br/><span class="text-[10px] text-gray-500">Global cloud DB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: TECHNICAL ARCHITECTURE -->
+  <section class="slide-canvas grid-bg-light" id="slide-7">
+    <div class="max-w-5xl w-full space-y-5">
+      <div class="flex items-center justify-between border-b-2 border-black pb-3">
+        <div>
+          <span class="text-xs font-black uppercase text-blue-600 tracking-wider">Architecture • Zero Hallucination</span>
+          <h2 class="text-3xl font-black text-black">Two-Stage Zero-Hallucination Pipeline</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-white px-3 py-1 rounded-full neo-pill">07 / 08</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <!-- Stage 1 -->
+        <div class="bg-white p-5 rounded-2xl neo-card space-y-3">
+          <div class="bg-[#0B3BF4] text-white font-black text-xs px-2.5 py-1 rounded-md inline-block">STAGE 1: HARD FILTER</div>
+          <h4 class="font-black text-sm text-black">Deterministic Native Application Logic</h4>
+          <ul class="text-xs font-bold text-gray-700 space-y-1.5">
+            <li>• Haversine & 1.3x road transit matrix calculation.</li>
+            <li>• Strict budget cutoff dropping over-budget spots.</li>
+            <li>• Non-negotiable 30m return safety cushion.</li>
+            <li>• Feasible pool sliced to top 6 candidates in <span class="text-blue-600">2.1ms</span>.</li>
+          </ul>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="bg-white p-5 rounded-2xl neo-card space-y-3">
+          <div class="bg-[#F59E0B] text-black font-black text-xs px-2.5 py-1 rounded-md inline-block">STAGE 2: AI INFERENCE</div>
+          <h4 class="font-black text-sm text-black">Fine-Tuned Qwen 2.5:3B on Ollama</h4>
+          <ul class="text-xs font-bold text-gray-700 space-y-1.5">
+            <li>• Interprets subjective vibes and mood keywords.</li>
+            <li>• Sequences stops into 3 non-overlapping plans.</li>
+            <li>• GPU cuBLAS acceleration: <strong>71.4 tokens / sec</strong>.</li>
+            <li>• Warm latency: <strong>2.39s</strong> with locked VRAM keep-alive.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gray-100 border-2 border-black rounded-xl p-3 text-center font-mono text-xs font-bold">
+        <span>Frontend (React 18 + PWA)</span> ➔ <span>Express API (:4000) + MongoDB Atlas</span> ➔ <span>Ollama Qwen 2.5 (:11434)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: ROADMAP -->
+  <section class="slide-canvas grid-bg-light" id="slide-8">
+    <div class="max-w-5xl w-full space-y-5">
+      <div class="flex items-center justify-between border-b-2 border-black pb-3">
+        <div>
+          <span class="text-xs font-black uppercase text-emerald-600 tracking-wider">Execution Plan</span>
+          <h2 class="text-3xl font-black text-black">Project Roadmap & Future Priorities</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-white px-3 py-1 rounded-full neo-pill">08 / 08</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="bg-white p-5 rounded-2xl neo-card space-y-3 border-emerald-500">
+          <span class="bg-emerald-500 text-white font-black text-xs px-2.5 py-1 rounded-md inline-block">PHASE 1: COMPLETED</span>
+          <h4 class="font-black text-sm text-black">Hackathon Build & Live Prototype</h4>
+          <ul class="text-xs font-bold text-gray-700 space-y-2">
+            <li>✓ 7 Kerala Hubs & 70 verified spots with real photos.</li>
+            <li>✓ On-device Qwen 2.5 3B inference via Ollama (2.39s).</li>
+            <li>✓ MongoDB Atlas cloud cluster for spots, reviews & plans.</li>
+            <li>✓ Dual canvas: Neo-brutalist Adventure trail & Leaflet OSM.</li>
+            <li>✓ Native Android APK package & PWA LAN access.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl neo-card space-y-3 border-blue-500">
+          <span class="bg-[#0B3BF4] text-white font-black text-xs px-2.5 py-1 rounded-md inline-block">PHASE 2: ROADMAP</span>
+          <h4 class="font-black text-sm text-black">Expansion & Scaled Side Hustle</h4>
+          <ul class="text-xs font-bold text-gray-700 space-y-2">
+            <li>➔ <strong>Offline Vector Search</strong>: Qdrant/Chroma for semantic gem lookups.</li>
+            <li>➔ <strong>Malayalam Audio Guide</strong>: On-device Piper TTS + Whisper voice assistant.</li>
+            <li>➔ <strong>Live Train Delay Webhooks</strong>: Dynamic layover buffer adjustments.</li>
+            <li>➔ <strong>Auto-Driver Kiosk Portal</strong>: Monetized curated guide cards via UPI QR codes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVIGATION OVERLAY -->
+  <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur border-2 border-black rounded-full px-4 py-2 flex items-center gap-4 shadow-[0_4px_0_0_#000]">
+    <button id="prevBtn" class="font-black text-xs px-3 py-1 bg-gray-100 hover:bg-gray-200 border border-black rounded-full">← Prev</button>
+    <span id="slideCounter" class="text-xs font-black font-mono">1 / 8</span>
+    <button id="nextBtn" class="font-black text-xs px-3 py-1 bg-[#0B3BF4] text-white hover:bg-blue-700 border border-black rounded-full">Next →</button>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 8;
+
+    function showSlide(n) {
+      document.querySelectorAll('.slide-canvas').forEach((el, idx) => {
+        el.classList.toggle('active', idx + 1 === n);
+      });
+      document.getElementById('slideCounter').textContent = `${n} / ${totalSlides}`;
+      currentSlide = n;
+    }
+
+    document.getElementById('prevBtn').onclick = () => {
+      if (currentSlide > 1) showSlide(currentSlide - 1);
+    };
+    document.getElementById('nextBtn').onclick = () => {
+      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    };
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft') {
+        if (currentSlide > 1) showSlide(currentSlide - 1);
+      }
+    });
+  </script>
+</body>
+</html>

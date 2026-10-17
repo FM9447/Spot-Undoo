@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Spot Undoo</string>
+    <string name="title_activity_main">Spot Undoo</string>
+    <string name="package_name">com.spotundoo.app</string>
+    <string name="custom_url_scheme">com.spotundoo.app</string>
+</resources>
