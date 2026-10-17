@@ -21,6 +21,8 @@ export function getTransit(distKm) {
 }
 
 export function filterCandidates(places, userLat, userLon, usableTimeMins, maxBudget) {
+  // Keep a larger candidate pool so newly added spots are not filtered out prematurely.
+  // Previously limited to top 8; increase to 20 to include more spots.
   return places
     .map((p) => {
       const dist = roadDistanceKm(userLat, userLon, p.lat, p.lng);
@@ -33,7 +35,7 @@ export function filterCandidates(places, userLat, userLon, usableTimeMins, maxBu
     })
     .filter((p) => p.totalMins <= usableTimeMins && p.totalCost <= maxBudget)
     .sort((a, b) => b.rating - a.rating)
-    .slice(0, 8);
+    .slice(0, 20);
 }
 
 export function buildFallbackPlans(candidates, startTime, maxBudget) {

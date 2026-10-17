@@ -116,6 +116,21 @@ app.post('/api/places', async (req, res) => {
   try {
     const spot = req.body;
     if (!spot || !spot.name) return res.status(400).json({ error: 'Name required' });
+    // Duplicate guard: same name OR same lat/lng (within tiny tolerance)
+    const tolerance = 0.00001;
+    const query = {
+      $or: [
+        { name: spot.name },
+        {
+          lat: { $gte: spot.lat - tolerance, $lte: spot.lat + tolerance },
+          lng: { $gte: spot.lng - tolerance, $lte: spot.lng + tolerance },
+        },
+      ],
+    };
+    const existing = await db.collection('places').findOne(query);
+    if (existing) {
+      return res.status(409).json({ error: 'Duplicate spot detected' });
+    }
     const doc = { ...spot, createdAt: new Date() };
     const result = await db.collection('places').insertOne(doc);
     res.json({ success: true, insertedId: result.insertedId });
