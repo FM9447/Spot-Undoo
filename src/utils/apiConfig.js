@@ -1,5 +1,8 @@
 export const getBackendUrl = () => {
   if (typeof window !== 'undefined') {
+    if (import.meta.env?.VITE_BACKEND_URL) {
+      return import.meta.env.VITE_BACKEND_URL;
+    }
     const host = window.location.hostname;
     if (host && host !== 'localhost' && host !== '127.0.0.1') {
       return `http://${host}:4000`;
@@ -10,6 +13,11 @@ export const getBackendUrl = () => {
 
 export const getOllamaUrl = () => {
   if (typeof window !== 'undefined') {
+    const custom = localStorage.getItem('spot_undoo_ollama_url');
+    if (custom) return custom;
+    if (import.meta.env?.VITE_OLLAMA_URL) {
+      return import.meta.env.VITE_OLLAMA_URL;
+    }
     const host = window.location.hostname;
     if (host && host !== 'localhost' && host !== '127.0.0.1') {
       return `http://${host}:11434`;
@@ -17,3 +25,4 @@ export const getOllamaUrl = () => {
   }
   return 'http://localhost:11434';
 };
+

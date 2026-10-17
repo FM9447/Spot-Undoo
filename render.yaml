@@ -1,0 +1,17 @@
+services:
+  # Spot-Undoo Fullstack (API + React SPA) on Render Free Web Service
+  - type: web
+    name: spot-undoo
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # Set securely in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true
