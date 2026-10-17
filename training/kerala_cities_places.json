@@ -1,0 +1,772 @@
+{
+  "Kochi (Ernakulam)": {
+    "hub": {
+      "name": "Ernakulam Jn (South)",
+      "platform": "Ernakulam South Pl. 1",
+      "lat": 9.9678,
+      "lng": 76.2905
+    },
+    "spots": [
+      {
+        "name": "Fort Kochi Spice Lane",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 45,
+        "dist": 4.5,
+        "transit": "⛴️ 20m • ₹20 (Water Metro)",
+        "rating": 4.8,
+        "review": "Aromatic back-alleys with antique spice warehouses, no crowds.",
+        "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Fort%20Kochi%20Spice%20Lane%20Kochi%20(Ernakulam)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Fort%20Kochi%20Spice%20Lane"
+        ]
+      },
+      {
+        "name": "Kayees Rahmathulla Biryani",
+        "category": "Food",
+        "expense": 180,
+        "time": 30,
+        "dist": 3.8,
+        "transit": "🛺 12m • ₹40",
+        "rating": 4.9,
+        "review": "Iconic tender Malabar mutton biryani with ghee aroma.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Kayees%20Rahmathulla%20Biryani%20Kochi%20(Ernakulam)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Kayees%20Rahmathulla%20Biryani"
+        ]
+      },
+      {
+        "name": "Mangalavanam Bird Sanctuary Park",
+        "category": "Hidden Spots",
+        "expense": 10,
+        "time": 40,
+        "dist": 2.2,
+        "transit": "🛺 8m • ₹25",
+        "rating": 4.5,
+        "review": "The green lung of Kochi, quiet mangrove walk in the city center.",
+        "photo": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Mangalavanam%20Bird%20Sanctuary%20Park%20Kochi%20(Ernakulam)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Mangalavanam%20Bird%20Sanctuary%20Park"
+        ]
+      },
+      {
+        "name": "Broadway Kulukki & Snacks",
+        "category": "Food",
+        "expense": 35,
+        "time": 20,
+        "dist": 1.5,
+        "transit": "🚶 7m • Free",
+        "rating": 4.7,
+        "review": "Spicy green-chilli kulukki sarbath and hot banana chips.",
+        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Broadway%20Kulukki%20%26%20Snacks%20Kochi%20(Ernakulam)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Broadway%20Kulukki%20%26%20Snacks"
+        ]
+      },
+      {
+        "name": "Galaxy Cyber Gaming Hub",
+        "category": "Gaming & Chill",
+        "expense": 90,
+        "time": 60,
+        "dist": 2,
+        "transit": "🚶 10m • Free",
+        "rating": 4.6,
+        "review": "Fast 500Mbps fiber, RTX gaming rigs, chilled AC atmosphere.",
+        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Galaxy%20Cyber%20Gaming%20Hub%20Kochi%20(Ernakulam)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Galaxy%20Cyber%20Gaming%20Hub"
+        ]
+      },
+      {
+        "name": "Water Metro High Court Jetty",
+        "category": "Hidden Spots",
+        "expense": 30,
+        "time": 40,
+        "dist": 2.8,
+        "transit": "🛺 10m • ₹30",
+        "rating": 4.8,
+        "review": "Ultra-modern electric boat cruise overlooking Vembanad backwaters.",
+        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Water%20Metro%20High%20Court%20Jetty%20Kochi%20(Ernakulam)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Water%20Metro%20High%20Court%20Jetty"
+        ]
+      },
+      {
+        "name": "Mattancherry Jew Town Antique Walk",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 50,
+        "dist": 4.2,
+        "transit": "🛺 14m • ₹45",
+        "rating": 4.7,
+        "review": "16th-century cobblestone alleys, curio shops, and heritage cafes.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Mattancherry%20Jew%20Town%20Antique%20Walk%20Kochi%20(Ernakulam)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Mattancherry%20Jew%20Town%20Antique%20Walk"
+        ]
+      },
+      {
+        "name": "Subhash Bose Park Waterfront",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 35,
+        "dist": 1.2,
+        "transit": "🚶 6m • Free",
+        "rating": 4.4,
+        "review": "Breezy harbor promenade with sunset views over ships.",
+        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Subhash%20Bose%20Park%20Waterfront%20Kochi%20(Ernakulam)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Subhash%20Bose%20Park%20Waterfront"
+        ]
+      }
+    ]
+  },
+  "Trivandrum (Thiruvananthapuram)": {
+    "hub": {
+      "name": "Trivandrum Central",
+      "platform": "Trivandrum Central Pl. 1",
+      "lat": 8.4875,
+      "lng": 76.9532
+    },
+    "spots": [
+      {
+        "name": "Kuthira Malika Palace Grounds",
+        "category": "Hidden Spots",
+        "expense": 40,
+        "time": 45,
+        "dist": 1.1,
+        "transit": "🚶 8m • Free",
+        "rating": 4.7,
+        "review": "122 carved wooden horses, teakwood silence, historic temple vibe.",
+        "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Kuthira%20Malika%20Palace%20Grounds%20Trivandrum%20(Thiruvananthapuram)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Kuthira%20Malika%20Palace%20Grounds"
+        ]
+      },
+      {
+        "name": "Maha Chips & Boli Stall",
+        "category": "Food",
+        "expense": 60,
+        "time": 20,
+        "dist": 0.9,
+        "transit": "🚶 6m • Free",
+        "rating": 4.9,
+        "review": "Fresh hot Trivandrum yellow Boli with sweet condensed milk.",
+        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Maha%20Chips%20%26%20Boli%20Stall%20Trivandrum%20(Thiruvananthapuram)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Maha%20Chips%20%26%20Boli%20Stall"
+        ]
+      },
+      {
+        "name": "Napier Museum Heritage Gardens",
+        "category": "Hidden Spots",
+        "expense": 20,
+        "time": 50,
+        "dist": 3,
+        "transit": "🛺 10m • ₹30",
+        "rating": 4.8,
+        "review": "Indo-Saracenic masterpiece nestled under massive rain trees.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Napier%20Museum%20Heritage%20Gardens%20Trivandrum%20(Thiruvananthapuram)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Napier%20Museum%20Heritage%20Gardens"
+        ]
+      },
+      {
+        "name": "Villa Maya Courtyard Chai",
+        "category": "Food",
+        "expense": 120,
+        "time": 40,
+        "dist": 2.1,
+        "transit": "🛺 8m • ₹25",
+        "rating": 4.6,
+        "review": "18th-century restored Dutch manor for quiet filter coffee.",
+        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Villa%20Maya%20Courtyard%20Chai%20Trivandrum%20(Thiruvananthapuram)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Villa%20Maya%20Courtyard%20Chai"
+        ]
+      },
+      {
+        "name": "Pixel Play Lounge",
+        "category": "Gaming & Chill",
+        "expense": 80,
+        "time": 60,
+        "dist": 2.4,
+        "transit": "🛺 9m • ₹25",
+        "rating": 4.5,
+        "review": "PS5 and PC setups, plush sofas, cold beverages and snacks.",
+        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Pixel%20Play%20Lounge%20Trivandrum%20(Thiruvananthapuram)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Pixel%20Play%20Lounge"
+        ]
+      },
+      {
+        "name": "Shanghumukham Beach Giant Mermaid",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 60,
+        "dist": 6.5,
+        "transit": "🛺 18m • ₹60",
+        "rating": 4.6,
+        "review": "Kanayi Kunhiraman's iconic colossal Sagarakanyaka sculpture at dusk.",
+        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Shanghumukham%20Beach%20Giant%20Mermaid%20Trivandrum%20(Thiruvananthapuram)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Shanghumukham%20Beach%20Giant%20Mermaid"
+        ]
+      },
+      {
+        "name": "Chala Market Spice Alley",
+        "category": "Food",
+        "expense": 40,
+        "time": 30,
+        "dist": 0.8,
+        "transit": "🚶 5m • Free",
+        "rating": 4.5,
+        "review": "Centuries-old bazaar alley serving cardamom black tea and piping parotta.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Chala%20Market%20Spice%20Alley%20Trivandrum%20(Thiruvananthapuram)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Chala%20Market%20Spice%20Alley"
+        ]
+      }
+    ]
+  },
+  "Calicut (Kozhikode)": {
+    "hub": {
+      "name": "Kozhikode Main",
+      "platform": "Kozhikode Main Pl. 1",
+      "lat": 11.2464,
+      "lng": 75.7804
+    },
+    "spots": [
+      {
+        "name": "Mananchira Square Park Walk",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 40,
+        "dist": 1.2,
+        "transit": "🚶 7m • Free",
+        "rating": 4.7,
+        "review": "Clear water square reservoir enclosed by traditional red-tile gates.",
+        "photo": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=600&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Mananchira%20Square%20Park%20Walk%20Calicut%20(Kozhikode)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Mananchira%20Square%20Park%20Walk"
+        ]
+      },
+      {
+        "name": "Paragon Restaurant Biryani",
+        "category": "Food",
+        "expense": 190,
+        "time": 40,
+        "dist": 1.5,
+        "transit": "🚶 8m • Free",
+        "rating": 4.9,
+        "review": "Legendary Calicut dum biryani with melt-in-mouth chicken and pickle.",
+        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Paragon%20Restaurant%20Biryani%20Calicut%20(Kozhikode)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Paragon%20Restaurant%20Biryani"
+        ]
+      },
+      {
+        "name": "Kozhikode Beach Old Sea Pier",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 45,
+        "dist": 2,
+        "transit": "🛺 6m • ₹25",
+        "rating": 4.8,
+        "review": "Century-old collapsed shipping pier jutting into Arabian sea waves.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Kozhikode%20Beach%20Old%20Sea%20Pier%20Calicut%20(Kozhikode)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Kozhikode%20Beach%20Old%20Sea%20Pier"
+        ]
+      },
+      {
+        "name": "SM Street (Mittai Theruvu) Halwa Lane",
+        "category": "Food",
+        "expense": 50,
+        "time": 35,
+        "dist": 0.9,
+        "transit": "🚶 5m • Free",
+        "rating": 4.8,
+        "review": "Pedestrian heritage street with warm black halwa and banana chips.",
+        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=SM%20Street%20(Mittai%20Theruvu)%20Halwa%20Lane%20Calicut%20(Kozhikode)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=SM%20Street%20(Mittai%20Theruvu)%20Halwa%20Lane"
+        ]
+      },
+      {
+        "name": "LevelUp Esports Cafe",
+        "category": "Gaming & Chill",
+        "expense": 80,
+        "time": 60,
+        "dist": 2.2,
+        "transit": "🛺 8m • ₹25",
+        "rating": 4.7,
+        "review": "Ultra-low latency LAN gaming and bubble tea in AC lounge.",
+        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=LevelUp%20Esports%20Cafe%20Calicut%20(Kozhikode)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=LevelUp%20Esports%20Cafe"
+        ]
+      },
+      {
+        "name": "Zains Heritage Moplah Snacks",
+        "category": "Food",
+        "expense": 75,
+        "time": 25,
+        "dist": 1.8,
+        "transit": "🚶 10m • Free",
+        "rating": 4.9,
+        "review": "Authentic unnakkaya, chattipathiri, and Sulaimani tea.",
+        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Zains%20Heritage%20Moplah%20Snacks%20Calicut%20(Kozhikode)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Zains%20Heritage%20Moplah%20Snacks"
+        ]
+      },
+      {
+        "name": "Kallayi River Timber Yard Footbridge",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 40,
+        "dist": 3.1,
+        "transit": "🛺 10m • ₹30",
+        "rating": 4.6,
+        "review": "Historical timber floating river with tranquil iron railway bridge.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Kallayi%20River%20Timber%20Yard%20Footbridge%20Calicut%20(Kozhikode)",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Kallayi%20River%20Timber%20Yard%20Footbridge"
+        ]
+      }
+    ]
+  },
+  "Palakkad": {
+    "hub": {
+      "name": "Palakkad Jn (Olavakkode)",
+      "platform": "Palakkad Jn Pl. 1",
+      "lat": 10.8268,
+      "lng": 76.6433
+    },
+    "spots": [
+      {
+        "name": "Palakkad Tipu Fort & Moat",
+        "category": "Hidden Spots",
+        "expense": 20,
+        "time": 50,
+        "dist": 4.5,
+        "transit": "🛺 12m • ₹40",
+        "rating": 4.8,
+        "review": "Well-preserved granite fortress surrounded by a tranquil water moat.",
+        "photo": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=600&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Palakkad%20Tipu%20Fort%20%26%20Moat%20Palakkad",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Palakkad%20Tipu%20Fort%20%26%20Moat"
+        ]
+      },
+      {
+        "name": "Noorjehan Fort View Biryani",
+        "category": "Food",
+        "expense": 150,
+        "time": 30,
+        "dist": 4.2,
+        "transit": "🛺 11m • ₹35",
+        "rating": 4.7,
+        "review": "Spicy Malabar biryani with roasted chicken and fragrant ghee rice.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Noorjehan%20Fort%20View%20Biryani%20Palakkad",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Noorjehan%20Fort%20View%20Biryani"
+        ]
+      },
+      {
+        "name": "Kalpathy Heritage Agraharam Lane",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 45,
+        "dist": 2.8,
+        "transit": "🛺 8m • ₹25",
+        "rating": 4.8,
+        "review": "Ancient Brahmin settlement with row houses and historic chariot festival grounds.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Kalpathy%20Heritage%20Agraharam%20Lane%20Palakkad",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Kalpathy%20Heritage%20Agraharam%20Lane"
+        ]
+      },
+      {
+        "name": "Indian Coffee House Olavakkode",
+        "category": "Food",
+        "expense": 55,
+        "time": 25,
+        "dist": 0.5,
+        "transit": "🚶 3m • Free",
+        "rating": 4.6,
+        "review": "Retro spiral tables serving filter coffee, beetroot cutlets, and dosas.",
+        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Indian%20Coffee%20House%20Olavakkode%20Palakkad",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Indian%20Coffee%20House%20Olavakkode"
+        ]
+      },
+      {
+        "name": "Malampuzha Garden Canal Walkway",
+        "category": "Hidden Spots",
+        "expense": 30,
+        "time": 60,
+        "dist": 8,
+        "transit": "🛺 20m • ₹70",
+        "rating": 4.7,
+        "review": "Green mountain reservoir backdrop with ropeway and peaceful canal paths.",
+        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Malampuzha%20Garden%20Canal%20Walkway%20Palakkad",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Malampuzha%20Garden%20Canal%20Walkway"
+        ]
+      },
+      {
+        "name": "Gamerz Zone Cyber Point",
+        "category": "Gaming & Chill",
+        "expense": 70,
+        "time": 60,
+        "dist": 1.5,
+        "transit": "🚶 8m • Free",
+        "rating": 4.5,
+        "review": "AC private gaming booths, racing simulator, and cold frappes.",
+        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Gamerz%20Zone%20Cyber%20Point%20Palakkad",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Gamerz%20Zone%20Cyber%20Point"
+        ]
+      },
+      {
+        "name": "Kava Hidden Valley Sunset Point",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 60,
+        "dist": 9.5,
+        "transit": "🛺 25m • ₹90",
+        "rating": 4.9,
+        "review": "Pristine reservoir backwaters flanked by the misty Western Ghats.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Kava%20Hidden%20Valley%20Sunset%20Point%20Palakkad",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Kava%20Hidden%20Valley%20Sunset%20Point"
+        ]
+      }
+    ]
+  },
+  "Shoranur": {
+    "hub": {
+      "name": "Shoranur Jn Hub (Active)",
+      "platform": "Shoranur Jn Pl. 1",
+      "lat": 10.7606,
+      "lng": 76.2711
+    },
+    "spots": [
+      {
+        "name": "River Ghat Step Walk",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 30,
+        "dist": 0.8,
+        "transit": "🚶 8m • Free",
+        "rating": 5,
+        "review": "Serene stepped ghat overlooking Bharathapuzha. Perfect quiet walk.",
+        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=River%20Ghat%20Step%20Walk%20Shoranur",
+          "https://en.wikipedia.org/wiki/Special:Search?search=River%20Ghat%20Step%20Walk"
+        ]
+      },
+      {
+        "name": "Nila River Secret Banyan",
+        "category": "Hidden Spots",
+        "expense": 40,
+        "time": 45,
+        "dist": 2.1,
+        "transit": "🛺 10m • ₹30",
+        "rating": 4.8,
+        "review": "Quiet riverside shade with hot pazhampori and chai.",
+        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Nila%20River%20Secret%20Banyan%20Shoranur",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Nila%20River%20Secret%20Banyan"
+        ]
+      },
+      {
+        "name": "Amma's Crispy Vada",
+        "category": "Food",
+        "expense": 25,
+        "time": 20,
+        "dist": 1.2,
+        "transit": "🚶 6m • Free",
+        "rating": 4.9,
+        "review": "Golden uzhunnu vada hot off the oil pan with coconut chutney.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Amma's%20Crispy%20Vada%20Shoranur",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Amma's%20Crispy%20Vada"
+        ]
+      },
+      {
+        "name": "LevelUp Cyber Hub",
+        "category": "Gaming & Chill",
+        "expense": 80,
+        "time": 60,
+        "dist": 3,
+        "transit": "🛺 8m • ₹25",
+        "rating": 4.7,
+        "review": "High-speed broadband, esports gaming setups, chilled AC.",
+        "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80",
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=LevelUp%20Cyber%20Hub%20Shoranur",
+          "https://en.wikipedia.org/wiki/Special:Search?search=LevelUp%20Cyber%20Hub"
+        ]
+      },
+      {
+        "name": "Clay Craft Village",
+        "category": "Hidden Spots",
+        "expense": 0,
+        "time": 30,
+        "dist": 4.2,
+        "transit": "🛺 10m • ₹35",
+        "rating": 4.6,
+        "review": "Generations of potters shaping terracotta lamps and pots by hand.",
+        "photo": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&q=80",
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Clay%20Craft%20Village%20Shoranur",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Clay%20Craft%20Village"
+        ]
+      },
+      {
+        "name": "Varikkasseri Mana Heritage",
+        "category": "Hidden Spots",
+        "expense": 50,
+        "time": 60,
+        "dist": 7.5,
+        "transit": "🛺 18m • ₹65",
+        "rating": 4.9,
+        "review": "Magnificent traditional aristocratic illam where Malayalam movies are shot.",
+        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+          "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Varikkasseri%20Mana%20Heritage%20Shoranur",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Varikkasseri%20Mana%20Heritage"
+        ]
+      },
+      {
+        "name": "Old Banyan Chai Stall",
+        "category": "Food",
+        "expense": 15,
+        "time": 20,
+        "dist": 0.6,
+        "transit": "🚶 4m • Free",
+        "rating": 4.8,
+        "review": "Strong ginger tea with fresh banana fritters under shady tree canopy.",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80"
+        ],
+        "links": [
+          "https://www.google.com/maps/search/?api=1&query=Old%20Banyan%20Chai%20Stall%20Shoranur",
+          "https://en.wikipedia.org/wiki/Special:Search?search=Old%20Banyan%20Chai%20Stall"
+        ]
+      }
+    ]
+  }
+}

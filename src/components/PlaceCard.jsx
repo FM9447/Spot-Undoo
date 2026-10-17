@@ -1,0 +1,100 @@
+import { Star, MapPin, Clock, IndianRupee } from 'lucide-react';
+import { roadDistanceKm, getTransit } from '../utils/plannerMath';
+import ImageCarousel from './ImageCarousel';
+
+const CATEGORY_COLORS = {
+  'Hidden Spots': 'bg-emerald-500/20 text-emerald-400',
+  'Tourist': 'bg-blue-500/20 text-blue-400',
+  'Food Spots': 'bg-orange-500/20 text-orange-400',
+  'Gaming & Chill': 'bg-violet-500/20 text-violet-400',
+  'Party/Night': 'bg-pink-500/20 text-pink-400',
+};
+
+export default function PlaceCard({ place, userLat, userLon }) {
+  const dist = roadDistanceKm(userLat, userLon, place.lat, place.lng);
+  const transit = getTransit(dist);
+
+  const photos = place.photos && place.photos.length > 0
+    ? place.photos
+    : [
+        place.photo || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
+        'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80',
+        'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80',
+      ];
+
+  const links = place.links || [
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}`,
+    `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(place.name)}`,
+  ];
+
+  return (
+    <div className="bg-[#1a1a24] rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition">
+      <div className="relative h-40">
+        <ImageCarousel
+          images={photos}
+          links={links}
+          alt={place.name}
+          className="w-full h-full"
+        >
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+          <div className="absolute bottom-2 left-2 flex gap-1 z-10">
+            <span className={`text-[10px] px-2 py-0.5 rounded-full ${CATEGORY_COLORS[place.category] || 'bg-gray-500/20 text-gray-400'}`}>
+              {place.category}
+            </span>
+            {place.category === 'Hidden Spots' && (
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-400">💎 Hidden Gem</span>
+            )}
+          </div>
+          <div className="absolute top-2 right-12 flex items-center gap-0.5 bg-black/60 rounded-full px-2 py-0.5 z-10 border border-white/20">
+            <Star size={10} className="text-yellow-400 fill-yellow-400" />
+            <span className="text-xs text-white">{place.rating}</span>
+          </div>
+        </ImageCarousel>
+      </div>
+
+      <div className="p-3 space-y-2">
+        <div className="flex items-start justify-between gap-1">
+          <h3 className="font-semibold text-sm text-white leading-tight">{place.name}</h3>
+          <a
+            href={`https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLon}&destination=${place.lat},${place.lng}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open in Google Maps"
+            className="shrink-0 p-1 bg-white/5 hover:bg-emerald-500/20 text-gray-400 hover:text-emerald-400 rounded-lg transition"
+          >
+            <MapPin size={14} />
+          </a>
+        </div>
+
+        <div className="grid grid-cols-3 gap-1">
+          <a
+            href={`https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLon}&destination=${place.lat},${place.lng}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-xs text-gray-400 hover:text-emerald-400 transition"
+          >
+            <MapPin size={10} className="text-emerald-400" />
+            {dist.toFixed(1)} km ↗
+          </a>
+          <div className="flex items-center gap-1 text-xs text-gray-400">
+            <Clock size={10} className="text-blue-400" />
+            {place.spendTime} min
+          </div>
+          <div className="flex items-center gap-1 text-xs text-gray-400">
+            <IndianRupee size={10} className="text-orange-400" />
+            {place.expense === 0 ? 'Free' : `₹${place.expense}`}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-1 bg-white/5 rounded-lg px-2 py-1">
+          <span className="text-[10px] text-gray-400">{transit.mode}</span>
+          <span className="text-[10px] text-white ml-auto">
+            {transit.cost === 0 ? '₹0' : `₹${transit.cost}`} · {transit.mins} min
+          </span>
+        </div>
+
+        <p className="text-[11px] text-gray-400 italic leading-snug line-clamp-2">"{place.review}"</p>
+      </div>
+    </div>
+  );
+}

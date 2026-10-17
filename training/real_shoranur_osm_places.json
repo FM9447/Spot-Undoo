@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Shoranur Junction Railway Station",
+    "category": "Transit Hub",
+    "badge": "Railway Junction",
+    "lat": 10.7595499,
+    "lng": 76.2719238,
+    "display_name": "Shoranur Junction, Over Bridge, Shoranur, Ottappalam, Palakkad, Kerala, 679121, India",
+    "osm_type": "station"
+  },
+  {
+    "name": "Ottappalam",
+    "category": "Hidden Spots",
+    "badge": "Quiet Town & Riverside",
+    "lat": 10.7732226,
+    "lng": 76.3772453,
+    "display_name": "Ottappalam, Palakkad, Kerala, 679101, India",
+    "osm_type": "town"
+  },
+  {
+    "name": "Varikkasseri Mana",
+    "category": "Culture & Heritage",
+    "badge": "Traditional Illam & Heritage",
+    "lat": 10.7653523,
+    "lng": 76.3379189,
+    "display_name": "Manissery Varikkasseri Mana Road, Manisseri, Ottappalam, Palakkad, Kerala, 679521, India",
+    "osm_type": "tertiary"
+  },
+  {
+    "name": "Indian Coffee House",
+    "category": "Food",
+    "badge": "Classic Coffee & Cutlets",
+    "lat": 10.7681079,
+    "lng": 76.6485028,
+    "display_name": "Indian Coffee House, Shoranur Road, Manjakulam, Palakkad, Kerala, 678001, India",
+    "osm_type": "restaurant"
+  }
+]
