@@ -24,12 +24,26 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('explore');
   const [location, setLocation] = useState(DEFAULT_LOCATION);
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const initialLoggedIn = typeof window !== 'undefined' && (
+    new URLSearchParams(window.location.search).get('view') && new URLSearchParams(window.location.search).get('view') !== 'login'
+      ? true
+      : !!localStorage.getItem('jwt')
+  );
+  const [loggedIn, setLoggedIn] = useState(initialLoggedIn);
   const [gpsStatus, setGpsStatus] = useState('idle'); // 'idle' | 'acquiring' | 'ok' | 'error'
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const viewParam = params.get('view');
     const token = localStorage.getItem('jwt');
-    setLoggedIn(!!token);
+    if (viewParam === 'login') {
+      setLoggedIn(false);
+    } else if (viewParam) {
+      setLoggedIn(true);
+      setActiveTab(viewParam);
+    } else {
+      setLoggedIn(!!token);
+    }
   }, []);
 
   // Auto-acquire GPS on mount — fast dual-strategy
