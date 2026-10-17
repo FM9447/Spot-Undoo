@@ -1,4 +1,5 @@
 import { KERALA_CITIES } from '../data/keralaCitiesData';
+import { Geolocation } from '@capacitor/geolocation';
 
 /** Haversine distance in km */
 function haversine(lat1, lon1, lat2, lon2) {
@@ -32,20 +33,11 @@ export function nearestCityKey(lat, lon) {
 }
 
 /**
- * Acquires GPS position as fast as possible.
- * Strategy:
- *  1. Try IP-based location first (instant, no permission needed) as a warm-up.
- *  2. Fire high-accuracy GPS immediately with a short timeout.
- *  3. If high-accuracy times out, fall back to low-accuracy (cached).
- * Calls onSuccess({ lat, lon, label, cityKey }) whenever a fix is obtained.
- * Calls onError(msg) if everything fails.
+ * Acquires GPS position using native Capacitor Geolocation (which triggers
+ * the official Android OS "Allow Location Permission" dialog) with fallback
+ * to HTML5 navigator.geolocation for browser mode.
  */
-export function acquireGPS({ onSuccess, onError }) {
-  if (!navigator.geolocation) {
-    onError?.('Geolocation not supported');
-    return;
-  }
-
+export async function acquireGPS({ onSuccess, onError }) {
   let resolved = false;
 
   const resolve = (lat, lon, label) => {
@@ -57,17 +49,45 @@ export function acquireGPS({ onSuccess, onError }) {
     onSuccess?.({ lat, lon, label: finalLabel, cityKey });
   };
 
-  // 1. High-accuracy with a 5-second timeout
+  // 1. Try Native Capacitor Geolocation first (prompts on Android)
+  try {
+    const permStatus = await Geolocation.checkPermissions();
+    if (permStatus.location !== 'granted') {
+      const requested = await Geolocation.requestPermissions();
+      if (requested.location !== 'granted') {
+        console.warn('Native GPS permission not granted');
+      }
+    }
+
+    const pos = await Geolocation.getCurrentPosition({
+      enableHighAccuracy: true,
+      timeout: 8000,
+      maximumAge: 5000,
+    });
+
+    if (pos && pos.coords) {
+      resolve(pos.coords.latitude, pos.coords.longitude, 'Native Android GPS');
+      return;
+    }
+  } catch (nativeErr) {
+    console.warn('Native Capacitor Geolocation fallback to web API:', nativeErr);
+  }
+
+  // 2. Web fallback (for browser testing)
+  if (!navigator.geolocation) {
+    onError?.('Geolocation not supported');
+    return;
+  }
+
   navigator.geolocation.getCurrentPosition(
-    (pos) => resolve(pos.coords.latitude, pos.coords.longitude, 'GPS (High Accuracy)'),
+    (pos) => resolve(pos.coords.latitude, pos.coords.longitude, 'Browser GPS'),
     () => {
-      // 2. Fallback: low-accuracy / cached fix (faster on mobile)
       navigator.geolocation.getCurrentPosition(
-        (pos) => resolve(pos.coords.latitude, pos.coords.longitude, 'GPS (Cached)'),
+        (pos) => resolve(pos.coords.latitude, pos.coords.longitude, 'Cached GPS'),
         (err) => onError?.(err.message || 'GPS denied'),
         { enableHighAccuracy: false, timeout: 5000, maximumAge: 60000 }
       );
     },
-    { enableHighAccuracy: true, timeout: 5000, maximumAge: 10000 }
+    { enableHighAccuracy: true, timeout: 6000, maximumAge: 10000 }
   );
 }
