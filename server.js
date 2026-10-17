@@ -24,10 +24,63 @@ client.connect().then(() => {
   process.exit(1);
 });
 
-// Save generated plans with hub, prompt, and image
+// User Registration
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: 'Name, email, and password required' });
+    }
+    const cleanEmail = email.toLowerCase().trim();
+    const existing = await db.collection('users').findOne({ email: cleanEmail });
+    if (existing) {
+      return res.status(409).json({ error: 'Email already registered' });
+    }
+    const userDoc = {
+      name: name.trim(),
+      email: cleanEmail,
+      password, // in real production you would hash with bcrypt
+      createdAt: new Date(),
+    };
+    const result = await db.collection('users').insertOne(userDoc);
+    res.json({
+      success: true,
+      user: { id: result.insertedId, name: userDoc.name, email: userDoc.email },
+      token: Buffer.from(`${cleanEmail}:${userDoc.name}`).toString('base64'),
+    });
+  } catch (e) {
+    console.error('Registration failed:', e);
+    res.status(500).json({ error: 'Registration failed' });
+  }
+});
+
+// User Login
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password required' });
+    }
+    const cleanEmail = email.toLowerCase().trim();
+    const user = await db.collection('users').findOne({ email: cleanEmail });
+    if (!user || user.password !== password) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+    res.json({
+      success: true,
+      user: { id: user._id, name: user.name, email: user.email },
+      token: Buffer.from(`${cleanEmail}:${user.name}`).toString('base64'),
+    });
+  } catch (e) {
+    console.error('Login failed:', e);
+    res.status(500).json({ error: 'Login failed' });
+  }
+});
+
+// Save generated plans with user-specific ownership
 app.post('/api/plans', async (req, res) => {
   try {
-    const { hub, plans, prompt, imageUrl } = req.body;
+    const { hub, plans, prompt, imageUrl, userEmail } = req.body;
     if (!hub || !Array.isArray(plans)) {
       return res.status(400).json({ error: 'hub and plans required' });
     }
@@ -36,6 +89,7 @@ app.post('/api/plans', async (req, res) => {
       plans,
       prompt: prompt || '',
       imageUrl: imageUrl || null,
+      userEmail: (userEmail || 'guest@spotundoo.local').toLowerCase().trim(),
       createdAt: new Date(),
     };
     const result = await db.collection('plans').insertOne(doc);
@@ -46,13 +100,18 @@ app.post('/api/plans', async (req, res) => {
   }
 });
 
-// Get plan history
+// Get user-specific plan history
 app.get('/api/plans', async (req, res) => {
   try {
+    const { userEmail } = req.query;
+    let query = {};
+    if (userEmail) {
+      query.userEmail = userEmail.toLowerCase().trim();
+    }
     const docs = await db.collection('plans')
-      .find({})
+      .find(query)
       .sort({ createdAt: -1 })
-      .limit(20)
+      .limit(30)
       .toArray();
     res.json(docs);
   } catch (e) {

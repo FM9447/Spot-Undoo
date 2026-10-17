@@ -224,17 +224,22 @@ export default function ChatTab({ location, setLocation, settings }) {
     );
   };
 
-  // Fetch past plans from MongoDB Atlas + LocalStorage fallback
+  // Fetch past plans from MongoDB Atlas specific to current logged-in user
   const loadHistory = async () => {
     setHistoryLoading(true);
     setShowHistory(true);
-    // 1. Get local cached plans immediately
-    const localSaved = JSON.parse(localStorage.getItem('savedPlansHistory') || '[]');
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const userEmail = currentUser.email || 'hadhy@spotundoo.local';
+    const localKey = `savedPlansHistory_${userEmail}`;
+
+    // 1. Get user-specific local cached plans immediately
+    const localSaved = JSON.parse(localStorage.getItem(localKey) || '[]');
     setHistoryItems(localSaved);
 
-    // 2. Fetch from MongoDB Atlas and merge without duplicates
+    // 2. Fetch from MongoDB Atlas scoped to userEmail
     try {
-      const res = await fetch(`${BACKEND_URL}/api/plans`);
+      const res = await fetch(`${BACKEND_URL}/api/plans?userEmail=${encodeURIComponent(userEmail)}`);
       if (res.ok) {
         const mongoPlans = await res.json();
         if (Array.isArray(mongoPlans)) {
@@ -257,27 +262,32 @@ export default function ChatTab({ location, setLocation, settings }) {
     }
   };
 
-  // Save plan to both LocalStorage AND MongoDB Atlas
+  // Save plan to both user-scoped LocalStorage AND MongoDB Atlas
   const savePlanToDatabase = async (plansToSave, cityObj) => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const userEmail = currentUser.email || 'hadhy@spotundoo.local';
+    const localKey = `savedPlansHistory_${userEmail}`;
+
     const newRecord = {
       id: Date.now().toString(),
       hub: cityObj.displayName || cityObj.name,
       prompt: promptText,
       imageUrl: plansToSave[0]?.stops[0]?.photo || cityObj.spots[0]?.photo,
       plans: plansToSave,
+      userEmail,
       createdAt: new Date().toISOString(),
     };
 
-    // 1. Instantly persist to localStorage
+    // 1. Instantly persist to user-scoped localStorage
     try {
-      const existing = JSON.parse(localStorage.getItem('savedPlansHistory') || '[]');
+      const existing = JSON.parse(localStorage.getItem(localKey) || '[]');
       const updated = [newRecord, ...existing].slice(0, 30);
-      localStorage.setItem('savedPlansHistory', JSON.stringify(updated));
+      localStorage.setItem(localKey, JSON.stringify(updated));
     } catch (err) {
       console.warn('Local plan storage error:', err);
     }
 
-    // 2. Persist to MongoDB Atlas cloud
+    // 2. Persist to MongoDB Atlas cloud with userEmail ownership
     try {
       await fetch(`${BACKEND_URL}/api/plans`, {
         method: 'POST',

@@ -89,11 +89,26 @@ export default function Header({ location, setLocation, settings, setSettings, g
             {/* Profile card */}
             <div className="flex items-center gap-3 bg-[#F4F6F9] border-[2px] border-black rounded-2xl p-3">
               <img src="/profile.png" alt="Profile" className="w-14 h-14 rounded-full border-[2.5px] border-black object-cover" />
-              <div>
-                <div className="font-black text-base text-black">Hadhy</div>
-                <div className="text-xs text-gray-500 font-bold">Explorer · Spot-Undoo</div>
+              <div className="flex-1 min-w-0">
+                <div className="font-black text-base text-black truncate">
+                  {JSON.parse(localStorage.getItem('currentUser') || '{}').name || 'Hadhy'}
+                </div>
+                <div className="text-xs text-gray-500 font-bold truncate">
+                  {JSON.parse(localStorage.getItem('currentUser') || '{}').email || 'Explorer · Spot-Undoo'}
+                </div>
                 <div className="text-[11px] text-emerald-600 font-bold mt-0.5">{timeStr}</div>
               </div>
+              <button
+                onClick={() => {
+                  localStorage.removeItem('jwt');
+                  localStorage.removeItem('currentUser');
+                  window.location.reload();
+                }}
+                className="bg-red-500 hover:bg-red-600 text-white text-[11px] font-black px-2.5 py-1.5 rounded-xl border-[1.5px] border-black shadow-[0_1.5px_0_0_#000000]"
+                title="Log Out"
+              >
+                Sign out
+              </button>
             </div>
 
             {/* GPS section */}

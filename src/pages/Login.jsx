@@ -1,16 +1,68 @@
 import { useState } from 'react';
-import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Loader2, Sparkles } from 'lucide-react';
+import { getBackendUrl } from '../utils/apiConfig';
 
 export default function Login({ onLogin }) {
+  const [mode, setMode] = useState('login'); // 'login' | 'register'
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleSubmit = (e) => {
+  const backendUrl = getBackendUrl();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = btoa(`${email || 'hadhy@spotundoo.local'}:${password || 'demo123'}`);
-    localStorage.setItem('jwt', token);
-    if (onLogin) onLogin();
+    setErrorMsg('');
+    setLoading(true);
+
+    const cleanEmail = email.trim().toLowerCase();
+
+    try {
+      if (mode === 'register') {
+        const res = await fetch(`${backendUrl}/api/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name.trim(), email: cleanEmail, password }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Registration failed');
+
+        localStorage.setItem('jwt', data.token);
+        localStorage.setItem('currentUser', JSON.stringify(data.user));
+        if (onLogin) onLogin();
+      } else {
+        const res = await fetch(`${backendUrl}/api/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: cleanEmail, password }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Invalid credentials');
+
+        localStorage.setItem('jwt', data.token);
+        localStorage.setItem('currentUser', JSON.stringify(data.user));
+        if (onLogin) onLogin();
+      }
+    } catch (err) {
+      // Local fallback for offline/demo access
+      if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
+        const fallbackUser = {
+          name: name.trim() || 'Local Explorer',
+          email: cleanEmail || 'explorer@spotundoo.local',
+        };
+        const token = btoa(`${fallbackUser.email}:${fallbackUser.name}`);
+        localStorage.setItem('jwt', token);
+        localStorage.setItem('currentUser', JSON.stringify(fallbackUser));
+        if (onLogin) onLogin();
+      } else {
+        setErrorMsg(err.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -25,13 +77,12 @@ export default function Login({ onLogin }) {
             className="h-9 w-auto object-contain"
           />
           <span className="bg-white border-[2px] border-black rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-wider shadow-[0_2px_0_0_#000000]">
-            GO LOCAL!
+            {mode === 'login' ? 'GO LOCAL!' : 'JOIN THE CLUB'}
           </span>
         </div>
 
         {/* Illustrated S-Curve Map Mini Banner */}
         <div className="relative bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] overflow-hidden min-h-[140px] flex items-center justify-between">
-          {/* Subtle River Path SVG */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none"
             viewBox="0 0 320 140"
@@ -54,7 +105,7 @@ export default function Login({ onLogin }) {
             />
           </svg>
 
-          {/* Pill 1: Hidden Nature */}
+          {/* Pill 1 */}
           <div className="relative z-10 bg-white border-[2px] border-black rounded-full px-3 py-1 flex items-center gap-1.5 shadow-[0_2px_0_0_#000000]">
             <span className="text-xs">🌿</span>
             <span className="text-[11px] font-black text-black">Hidden nature</span>
@@ -68,7 +119,7 @@ export default function Login({ onLogin }) {
             <div className="w-4 h-1 bg-black/20 rounded-full blur-[1px] mt-0.5" />
           </div>
 
-          {/* Pill 2: Local Bites */}
+          {/* Pill 2 */}
           <div className="relative z-10 bg-white border-[2px] border-black rounded-full px-3 py-1 flex items-center gap-1.5 shadow-[0_2px_0_0_#000000]">
             <span className="text-xs">🍴</span>
             <span className="text-[11px] font-black text-black">Local bites</span>
@@ -78,17 +129,67 @@ export default function Login({ onLogin }) {
         {/* Welcome Text */}
         <div className="pt-2">
           <h1 className="text-3xl font-black text-black tracking-tight leading-tight">
-            Welcome back,
+            {mode === 'login' ? 'Welcome back,' : 'Create account,'}
           </h1>
           <p className="text-xs font-semibold text-gray-600 mt-1 leading-relaxed">
-            Sign in for little detours, local favourites and hidden spots worth finding.
+            {mode === 'login'
+              ? 'Sign in for little detours, local favourites and hidden spots worth finding.'
+              : 'Join Spot-Undoo to discover secret gems and save itineraries to your cloud history.'}
           </p>
         </div>
       </div>
 
-      {/* ── Login Form Card ── */}
-      <div className="my-5 bg-white border-[2.5px] border-black rounded-3xl p-5 shadow-[0_5px_0_0_#000000] space-y-4">
+      {/* ── Auth Form Card ── */}
+      <div className="my-4 bg-white border-[2.5px] border-black rounded-3xl p-5 shadow-[0_5px_0_0_#000000] space-y-4">
+        {/* Mode Toggle Switcher */}
+        <div className="flex bg-[#F4F6F9] border-[2px] border-black rounded-2xl p-1 shadow-[0_1.5px_0_0_#000000]">
+          <button
+            type="button"
+            onClick={() => { setMode('login'); setErrorMsg(''); }}
+            className={`flex-1 py-1.5 text-xs font-black rounded-xl transition ${
+              mode === 'login' ? 'bg-[#0B3BF4] text-white shadow-[0_1.5px_0_0_#000000]' : 'text-gray-600 hover:text-black'
+            }`}
+          >
+            Sign In
+          </button>
+          <button
+            type="button"
+            onClick={() => { setMode('register'); setErrorMsg(''); }}
+            className={`flex-1 py-1.5 text-xs font-black rounded-xl transition ${
+              mode === 'register' ? 'bg-[#0B3BF4] text-white shadow-[0_1.5px_0_0_#000000]' : 'text-gray-600 hover:text-black'
+            }`}
+          >
+            Create Account
+          </button>
+        </div>
+
+        {errorMsg && (
+          <div className="bg-red-50 border-[1.5px] border-red-500 rounded-xl p-2.5 text-xs font-bold text-red-600">
+            ⚠ {errorMsg}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-3.5">
+          {/* Name Field (Only in Register mode) */}
+          {mode === 'register' && (
+            <div className="space-y-1.5">
+              <label className="text-xs font-black text-black block">
+                Your full name
+              </label>
+              <div className="relative flex items-center bg-white border-[2px] border-black rounded-2xl px-3 py-2.5 shadow-[0_1.5px_0_0_#000000] focus-within:ring-2 focus-within:ring-[#0B3BF4]">
+                <User size={16} className="text-black shrink-0 mr-2" strokeWidth={2.2} />
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Hadhy Rahman"
+                  className="w-full text-xs font-bold text-black placeholder-gray-400 outline-none bg-transparent"
+                />
+              </div>
+            </div>
+          )}
+
           {/* Email Address */}
           <div className="space-y-1.5">
             <label className="text-xs font-black text-black block">
@@ -119,7 +220,7 @@ export default function Login({ onLogin }) {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
+                placeholder={mode === 'register' ? 'Choose a secure password' : 'Enter your password'}
                 className="w-full text-xs font-bold text-black placeholder-gray-400 outline-none bg-transparent"
               />
               <button
@@ -132,24 +233,36 @@ export default function Login({ onLogin }) {
             </div>
           </div>
 
-          {/* Forgot Password Link */}
-          <div className="flex justify-end pt-0.5">
-            <button
-              type="button"
-              onClick={() => alert('Demo login: Any email & password works!')}
-              className="text-xs font-black text-[#0B3BF4] hover:underline"
-            >
-              Forgot password?
-            </button>
-          </div>
+          {/* Forgot Password Link (Only in Login mode) */}
+          {mode === 'login' && (
+            <div className="flex justify-end pt-0.5">
+              <button
+                type="button"
+                onClick={() => alert('Demo recovery: You can sign in with any email or create a new account!')}
+                className="text-xs font-black text-[#0B3BF4] hover:underline"
+              >
+                Forgot password?
+              </button>
+            </div>
+          )}
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-[#0B3BF4] hover:bg-blue-700 active:translate-y-0.5 border-[2.5px] border-black rounded-2xl py-3 text-white font-black text-sm flex items-center justify-center gap-2 shadow-[0_3px_0_0_#000000] transition"
+            disabled={loading}
+            className="w-full bg-[#0B3BF4] hover:bg-blue-700 active:translate-y-0.5 border-[2.5px] border-black rounded-2xl py-3 text-white font-black text-sm flex items-center justify-center gap-2 shadow-[0_3px_0_0_#000000] transition disabled:opacity-50"
           >
-            <span>Sign in</span>
-            <ArrowRight size={16} strokeWidth={2.8} />
+            {loading ? (
+              <>
+                <Loader2 size={16} className="animate-spin text-white" />
+                <span>{mode === 'login' ? 'Signing in...' : 'Creating account...'}</span>
+              </>
+            ) : (
+              <>
+                <span>{mode === 'login' ? 'Sign in' : 'Create My Account'}</span>
+                <ArrowRight size={16} strokeWidth={2.8} />
+              </>
+            )}
           </button>
         </form>
       </div>
@@ -157,13 +270,16 @@ export default function Login({ onLogin }) {
       {/* ── Footer ── */}
       <div className="text-center space-y-1.5 pb-2">
         <p className="text-xs font-bold text-gray-700">
-          New around here?{' '}
+          {mode === 'login' ? 'New around here? ' : 'Already have an account? '}
           <button
             type="button"
-            onClick={handleSubmit}
+            onClick={() => {
+              setMode(mode === 'login' ? 'register' : 'login');
+              setErrorMsg('');
+            }}
             className="font-black text-[#0B3BF4] underline cursor-pointer"
           >
-            Sign up
+            {mode === 'login' ? 'Sign up' : 'Sign in'}
           </button>
         </p>
         <p className="text-[11px] font-semibold text-gray-500">
