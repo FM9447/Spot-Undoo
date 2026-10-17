@@ -392,7 +392,7 @@ export default function ExploreTab({ location, setLocation }) {
               </button>
             </div>
           ) : (
-            <div className="relative z-10 space-y-3.5 my-1">
+            <div className="relative z-10 space-y-4 my-1">
               {filteredSpots.slice(0, 8).map((spot, idx) => {
                 const isLeft = idx % 2 === 0;
                 const isSelected = selectedSpot?.id === spot.id || selectedSpot?.name === spot.name;
@@ -403,52 +403,52 @@ export default function ExploreTab({ location, setLocation }) {
                   >
                     <div
                       onClick={() => setSelectedSpot(spot)}
-                      className={`bg-white border-[2px] border-black rounded-2xl p-1.5 shadow-[0_3px_0_0_#000000] flex items-center gap-2 cursor-pointer transition hover:scale-102 max-w-[240px] relative ${
+                      className={`bg-white border-[2px] border-black rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer transition hover:scale-[1.02] max-w-[265px] relative ${
                         isSelected ? 'border-[#0B3BF4] ring-2 ring-[#0B3BF4]' : ''
                       }`}
                     >
                       {spot.badge && (
-                        <div className="w-2.5 h-2.5 rounded-full bg-amber-400 border border-black absolute -top-1 -left-1" />
+                        <div className="w-3 h-3 rounded-full bg-amber-400 border border-black absolute -top-1.5 -left-1.5" />
                       )}
                       {isLeft ? (
                         <>
                           <img
                             src={spot.photo || spot.photos?.[0]}
                             alt={spot.name}
-                            className="w-12 h-12 rounded-xl border-[1.5px] border-black object-cover shrink-0"
+                            className="w-16 h-16 rounded-xl border-[1.5px] border-black object-cover shrink-0"
                           />
                           <div className="leading-tight min-w-0">
-                            <div className="flex items-center gap-1.5">
-                              <span className="font-black text-xs text-black truncate">{spot.name}</span>
+                            <div className="flex items-center gap-1.5 flex-wrap">
+                              <span className="font-black text-[13px] text-black truncate leading-snug">{spot.name}</span>
                               {spot.badge && (
-                                <span className="bg-[#F59E0B] border border-black text-black font-black text-[7px] px-1 rounded uppercase shrink-0">
+                                <span className="bg-[#F59E0B] border border-black text-black font-black text-[8px] px-1.5 py-0.5 rounded uppercase shrink-0 leading-none">
                                   {spot.badge}
                                 </span>
                               )}
                             </div>
-                            <div className="text-[11px] font-bold text-emerald-700">
+                            <div className="text-[12px] font-bold text-emerald-700 mt-0.5">
                               {spot.expense === 0 ? 'Free' : `₹${spot.expense}`} • {spot.rating || 4.8} ⭐
                             </div>
-                            <div className="text-[10px] font-bold text-gray-500">
-                              {spot.distanceKm ? `${spot.distanceKm} km away` : spot.transitText || 'Near station'}
+                            <div className="text-[11px] font-semibold text-gray-500 mt-0.5">
+                              📍 {spot.distanceKm ? `${spot.distanceKm} km away` : spot.transitText || 'Near station'}
                             </div>
                           </div>
                         </>
                       ) : (
                         <>
                           <div className="leading-tight text-right flex-1 min-w-0">
-                            <div className="font-black text-xs text-black truncate">{spot.name}</div>
-                            <div className="text-[11px] font-bold text-emerald-700">
+                            <div className="font-black text-[13px] text-black truncate leading-snug">{spot.name}</div>
+                            <div className="text-[12px] font-bold text-emerald-700 mt-0.5">
                               {spot.expense === 0 ? 'Free' : `₹${spot.expense}`} • {spot.rating || 4.8} ⭐
                             </div>
-                            <div className="text-[10px] font-bold text-gray-500">
-                              {spot.distanceKm ? `${spot.distanceKm} km away` : spot.transitText || 'Near station'}
+                            <div className="text-[11px] font-semibold text-gray-500 mt-0.5">
+                              📍 {spot.distanceKm ? `${spot.distanceKm} km away` : spot.transitText || 'Near station'}
                             </div>
                           </div>
                           <img
                             src={spot.photo || spot.photos?.[0]}
                             alt={spot.name}
-                            className="w-12 h-12 rounded-xl border-[1.5px] border-black object-cover shrink-0"
+                            className="w-16 h-16 rounded-xl border-[1.5px] border-black object-cover shrink-0"
                           />
                         </>
                       )}
@@ -490,24 +490,24 @@ export default function ExploreTab({ location, setLocation }) {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {filteredSpots.map((spot) => (
               <div
                 key={spot.id || spot.name}
                 onClick={() => setSelectedSpot(spot)}
-                className="bg-white border-[2.5px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] flex gap-2.5 cursor-pointer hover:bg-gray-50 transition"
+                className="bg-white border-[2.5px] border-black rounded-2xl p-3 shadow-[0_3px_0_0_#000000] flex gap-3 cursor-pointer hover:bg-gray-50 transition"
               >
                 <img
                   src={spot.photo || spot.photos?.[0]}
                   alt={spot.name}
-                  className="w-16 h-16 rounded-xl border-[1.5px] border-black object-cover shrink-0"
+                  className="w-20 h-20 rounded-xl border-[1.5px] border-black object-cover shrink-0"
                 />
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-black text-xs text-black truncate">{spot.name}</h4>
-                  <div className="text-[11px] font-bold text-emerald-600 mt-0.5">
+                  <h4 className="font-black text-[13px] text-black truncate leading-snug">{spot.name}</h4>
+                  <div className="text-[12px] font-bold text-emerald-600 mt-1">
                     {spot.expense === 0 ? 'Free' : `₹${spot.expense}`} • {spot.rating || 4.8} ⭐
                   </div>
-                  <div className="text-[10px] text-gray-600 mt-1 line-clamp-1">
+                  <div className="text-[11px] text-gray-500 mt-1 line-clamp-2 leading-snug">
                     {spot.review}
                   </div>
                 </div>
