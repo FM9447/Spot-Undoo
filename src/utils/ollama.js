@@ -25,9 +25,14 @@ export async function ollamaChat({ baseUrl, model, messages }) {
     model,
     messages,
     stream: false,
-    think: false,
     format: 'json',
-    options: { temperature: 0.7, num_ctx: 8192 },
+    keep_alive: '24h',
+    options: {
+      temperature: 0.4,
+      num_ctx: 2048,
+      num_predict: 750,
+      top_p: 0.9,
+    },
   };
 
   let data;

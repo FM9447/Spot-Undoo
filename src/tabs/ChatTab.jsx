@@ -298,6 +298,7 @@ export default function ChatTab({ location, setLocation, settings }) {
         candidates = sorted.slice(0, Math.max(4, sorted.length));
       }
 
+      const topCandidates = candidates.slice(0, 6);
       const targetStops = availableTimeHrs <= 1 ? 1 : availableTimeHrs <= 3 ? 2 : availableTimeHrs <= 5 ? 3 : 4;
 
       const prompt = `You are an expert Kerala travel planner at ${currentCity.displayName}.
@@ -309,7 +310,7 @@ Prompt: "${promptText}"
 Selected vibes: ${selectedVibes.join(', ')}
 
 Available local spots matching constraints:
-${candidates.map((c, i) => `${i + 1}. "${c.name}" (${c.category}) | Expense: ₹${c.expense} | ${c.spendTime}m | Dist: ${c.distanceKm}km`).join('\n')}
+${topCandidates.map((c, i) => `${i + 1}. "${c.name}" (${c.category}) | Expense: ₹${c.expense} | ${c.spendTime}m | Dist: ${c.distanceKm}km`).join('\n')}
 
 Generate 3 diverse itinerary plans strictly within ₹${maxBudget} and ${availableTimeHrs} hours in JSON format.
 Rules:
