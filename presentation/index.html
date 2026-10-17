@@ -419,16 +419,79 @@
     </div>
   </section>
 
+  <!-- SLIDE 9: INTERACTIVE UI CONTROLS & BUTTON WALKTHROUGH -->
+  <section class="slide-canvas grid-bg-light" id="slide-9">
+    <div class="max-w-5xl w-full space-y-4">
+      <div class="flex items-center justify-between border-b-2 border-black pb-2">
+        <div>
+          <span class="text-xs font-black uppercase text-[#0B3BF4] tracking-wider">Interface Guide</span>
+          <h2 class="text-2xl md:text-3xl font-black text-black">Interactive UI Controls & Button Guide</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-white px-3 py-1 rounded-full neo-pill">09 / 09</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+        <!-- Control 1 -->
+        <div class="bg-white p-3.5 rounded-2xl neo-card space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-full border-2 border-black bg-blue-100 flex items-center justify-center font-black text-sm">📍</span>
+            <h4 class="font-black text-xs text-black">Header & Fast GPS</h4>
+          </div>
+          <p class="text-[11px] font-semibold text-gray-700 leading-snug">
+            <strong>Tap Profile Avatar:</strong> Opens the bottom-sheet settings for AI Model selection (Fine-tuned Qwen 2.5 3B / Ollama URL) and local data cache controls.
+          </p>
+          <p class="text-[11px] font-semibold text-gray-700 leading-snug">
+            <strong>Auto-GPS Pulse:</strong> Instant dual-mode geolocation (high accuracy with fast fallback) auto-snapping to the closest Kerala hub.
+          </p>
+        </div>
+
+        <!-- Control 2 -->
+        <div class="bg-white p-3.5 rounded-2xl neo-card space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-full border-2 border-black bg-amber-100 flex items-center justify-center font-black text-sm">🎨</span>
+            <h4 class="font-black text-xs text-black">View Switchers & Filters</h4>
+          </div>
+          <p class="text-[11px] font-semibold text-gray-700 leading-snug">
+            <strong>Canvas vs. Live OSM vs. Grid:</strong> Toggle between the illustrated Neo-Brutalist adventure trail, interactive Leaflet OpenStreetMap, or fast item grid.
+          </p>
+          <p class="text-[11px] font-semibold text-gray-700 leading-snug">
+            <strong>Vibe & Category Pills:</strong> Single-click filtering for Hidden Spots, Food, Gaming & Nightlife with immediate reactive state update.
+          </p>
+        </div>
+
+        <!-- Control 3 -->
+        <div class="bg-white p-3.5 rounded-2xl neo-card space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-full border-2 border-black bg-emerald-100 flex items-center justify-center font-black text-sm">⚡</span>
+            <h4 class="font-black text-xs text-black">AI Planner & Bottom Dock</h4>
+          </div>
+          <p class="text-[11px] font-semibold text-gray-700 leading-snug">
+            <strong>Generate 3 Plans:</strong> Triggers on-device Qwen inference calculating exact budget, transit legs, buffer time, and return station guarantees.
+          </p>
+          <p class="text-[11px] font-semibold text-gray-700 leading-snug">
+            <strong>Bottom Dock:</strong> One-tap navigation across Explore, AI Planner, Add Spot (community upload with duplicate guard), and LLM Debugger.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Highlight Banner -->
+      <div class="bg-white border-2 border-black rounded-xl p-3 neo-pill flex items-center justify-between text-xs font-black">
+        <span class="text-[#0B3BF4]">🎯 SAFE RETURN GUARANTEE:</span>
+        <span class="text-gray-700">Every route's blue trail terminates behind the safe return card back to the station before departure time.</span>
+      </div>
+    </div>
+  </section>
+
   <!-- NAVIGATION OVERLAY -->
   <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur border-2 border-black rounded-full px-4 py-2 flex items-center gap-4 shadow-[0_4px_0_0_#000]">
     <button id="prevBtn" class="font-black text-xs px-3 py-1 bg-gray-100 hover:bg-gray-200 border border-black rounded-full">← Prev</button>
-    <span id="slideCounter" class="text-xs font-black font-mono">1 / 8</span>
+    <span id="slideCounter" class="text-xs font-black font-mono">1 / 9</span>
     <button id="nextBtn" class="font-black text-xs px-3 py-1 bg-[#0B3BF4] text-white hover:bg-blue-700 border border-black rounded-full">Next →</button>
   </div>
 
   <script>
     let currentSlide = 1;
-    const totalSlides = 8;
+    const totalSlides = 9;
 
     function showSlide(n) {
       document.querySelectorAll('.slide-canvas').forEach((el, idx) => {
