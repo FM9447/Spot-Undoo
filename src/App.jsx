@@ -7,6 +7,7 @@ import UploadTab from './tabs/UploadTab';
 import LLMDebugTab from './tabs/LLMDebugTab';
 import { getOllamaUrl } from './utils/apiConfig';
 import Login from './pages/Login';
+import { acquireGPS } from './utils/gps';
 
 const DEFAULT_LOCATION = {
   lat: 10.7606,
@@ -24,10 +25,23 @@ export default function App() {
   const [location, setLocation] = useState(DEFAULT_LOCATION);
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [gpsStatus, setGpsStatus] = useState('idle'); // 'idle' | 'acquiring' | 'ok' | 'error'
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     setLoggedIn(!!token);
+  }, []);
+
+  // Auto-acquire GPS on mount — fast dual-strategy
+  useEffect(() => {
+    setGpsStatus('acquiring');
+    acquireGPS({
+      onSuccess: ({ lat, lon, label, cityKey }) => {
+        setLocation({ lat, lon, label, cityKey });
+        setGpsStatus('ok');
+      },
+      onError: () => setGpsStatus('error'),
+    });
   }, []);
 
   const handleLogin = () => setLoggedIn(true);
@@ -42,12 +56,23 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F4F6F9] max-w-[420px] mx-auto px-3.5 pt-3 pb-24 relative flex flex-col font-sans">
-      {/* 1. Header (Shared across screens) */}
+      {/* 1. Header */}
       <Header
         location={location}
         setLocation={setLocation}
         settings={settings}
         setSettings={setSettings}
+        gpsStatus={gpsStatus}
+        onRefreshGPS={() => {
+          setGpsStatus('acquiring');
+          acquireGPS({
+            onSuccess: ({ lat, lon, label, cityKey }) => {
+              setLocation({ lat, lon, label, cityKey });
+              setGpsStatus('ok');
+            },
+            onError: () => setGpsStatus('error'),
+          });
+        }}
       />
 
       {/* 2. Main Tab Body */}
@@ -66,16 +91,8 @@ export default function App() {
         </div>
       </main>
 
-      {/* 3. Floating Bottom Navigation Dock */}
+      {/* 3. Floating Bottom Nav */}
       <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
-
-      {/* Logout button */}
-      <button
-        onClick={handleLogout}
-        className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded"
-      >
-        Logout
-      </button>
     </div>
   );
 }
