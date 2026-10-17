@@ -5,27 +5,41 @@ dst_path = "/media/fm9447/D/MULearn/Hackotberfest/presentation/Spot-Undoo_Presen
 
 prs = Presentation(src_path)
 
-# Dictionary of updates to align with latest project status:
-# 1. Update model labels: qwen3:4b -> spot-undo-qwen (Fine-Tuned Qwen 2.5 3B)
-# 2. Add Android & MongoDB Atlas details where relevant
-# 3. Add Slide 10 UI Controls / Key Interaction section before Thank You
-
-replacements = {
+comprehensive_replacements = {
+    # Models & Runtime
+    "POWERED BY LOCAL QWEN3 4B": "POWERED BY LOCAL QWEN 2.5:3B",
     "qwen3:4b": "spot-undo-qwen (Qwen 2.5:3B)",
     "Qwen3 4B": "Qwen 2.5:3B Edge",
     "Qwen 3  Preference Match": "Qwen 2.5:3B Preference Match",
+    
+    # Dataset & Hubs
+    "Live Shoranur Demo Dataset": "Live Kerala Multi-Hub Dataset",
+    "5 SPOTS NEARBY": "70+ SPOTS ACROSS 7 KERALA HUBS",
+    
+    # Database & Persistence Architecture
     "SQL / KV": "MongoDB Atlas Cloud / Local",
     "LOCAL DRAFT": "Atlas Sync & Duplicate Guard",
-    "5 SPOTS NEARBY": "70+ SPOTS ACROSS 7 KERALA HUBS",
+    "Offline-First Local Store": "Hybrid Local + Atlas Persistence",
+    
+    # Features & Guarantees
+    "ITINERARY MAP": "NEO-BRUTALIST ADVENTURE TRAIL",
+    "Adventure Trail & Step-by-Step Route": "Adventure Trail with Safe Return & Dot Anchor",
+    "Add Spot: Community Vision Contribution": "Add Spot: Community Contributions & Dup Guard",
+    "Deterministic Hard Filter": "Deterministic Hard Filter (Pool Expanded to 20)",
+    
+    # Roadmap Updates
+    "Shared Global Community Feed": "Native Android APK & PWA Offline Package",
+    "Cross-Device Profile & Saved Sync": "Geospatial Duplicate Protection (±0.00001°)",
+    "Interactive Itinerary Step Editing": "Dual-Strategy High-Accuracy Auto-GPS",
 }
 
 for slide in prs.slides:
     for shape in slide.shapes:
         if shape.has_text_frame:
             for p in shape.text_frame.paragraphs:
-                for k, v in replacements.items():
-                    if k in p.text:
-                        p.text = p.text.replace(k, v)
+                for old_val, new_val in comprehensive_replacements.items():
+                    if old_val in p.text:
+                        p.text = p.text.replace(old_val, new_val)
 
 prs.save(dst_path)
-print(f"Updated presentation saved with user's exact visual theme to: {dst_path}")
+print(f"Presentation thoroughly updated and saved to: {dst_path}")

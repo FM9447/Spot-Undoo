@@ -224,35 +224,65 @@ export default function ChatTab({ location, setLocation, settings }) {
     );
   };
 
-  // Fetch past plans from MongoDB Atlas
+  // Fetch past plans from MongoDB Atlas + LocalStorage fallback
   const loadHistory = async () => {
     setHistoryLoading(true);
     setShowHistory(true);
+    // 1. Get local cached plans immediately
+    const localSaved = JSON.parse(localStorage.getItem('savedPlansHistory') || '[]');
+    setHistoryItems(localSaved);
+
+    // 2. Fetch from MongoDB Atlas and merge without duplicates
     try {
       const res = await fetch(`${BACKEND_URL}/api/plans`);
       if (res.ok) {
-        const data = await res.json();
-        setHistoryItems(data);
+        const mongoPlans = await res.json();
+        if (Array.isArray(mongoPlans)) {
+          const seen = new Set();
+          const merged = [];
+          for (const p of [...localSaved, ...mongoPlans]) {
+            const key = p._id || `${p.hub}_${p.createdAt}_${p.prompt?.slice(0, 20)}`;
+            if (!seen.has(key)) {
+              seen.add(key);
+              merged.push(p);
+            }
+          }
+          setHistoryItems(merged);
+        }
       }
     } catch (e) {
-      console.error('History fetch error:', e);
+      console.warn('History fetch from MongoDB failed, showing local:', e);
     } finally {
       setHistoryLoading(false);
     }
   };
 
-  // Save plan to MongoDB Atlas
+  // Save plan to both LocalStorage AND MongoDB Atlas
   const savePlanToDatabase = async (plansToSave, cityObj) => {
+    const newRecord = {
+      id: Date.now().toString(),
+      hub: cityObj.displayName || cityObj.name,
+      prompt: promptText,
+      imageUrl: plansToSave[0]?.stops[0]?.photo || cityObj.spots[0]?.photo,
+      plans: plansToSave,
+      createdAt: new Date().toISOString(),
+    };
+
+    // 1. Instantly persist to localStorage
+    try {
+      const existing = JSON.parse(localStorage.getItem('savedPlansHistory') || '[]');
+      const updated = [newRecord, ...existing].slice(0, 30);
+      localStorage.setItem('savedPlansHistory', JSON.stringify(updated));
+    } catch (err) {
+      console.warn('Local plan storage error:', err);
+    }
+
+    // 2. Persist to MongoDB Atlas cloud
     try {
       await fetch(`${BACKEND_URL}/api/plans`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          hub: cityObj.displayName || cityObj.name,
-          prompt: promptText,
-          imageUrl: plansToSave[0]?.stops[0]?.photo || cityObj.spots[0]?.photo,
-          plans: plansToSave,
-        }),
+        body: JSON.stringify(newRecord),
       });
     } catch (e) {
       console.warn('Could not save plan to MongoDB (backend may be offline):', e.message);
