@@ -643,27 +643,31 @@ Return JSON in this format:
 
           {/* Trail Map Canvas */}
           <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] min-h-[500px] overflow-hidden">
-            {/* Winding Blue Trail S-curve SVG Line */}
+            {/* Winding Blue Trail S-curve SVG Line — ends at the Safe Return card */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none"
               viewBox="0 0 360 520"
               preserveAspectRatio="none"
             >
+              {/* Black outline */}
               <path
-                d="M 280 40 C 100 80, 20 140, 100 200 S 300 280, 220 360 S 80 440, 180 480"
+                d="M 280 40 C 100 80, 20 140, 100 200 S 300 280, 220 355 S 80 405, 180 415"
                 fill="none"
                 stroke="#000000"
                 strokeWidth="10"
                 strokeLinecap="round"
               />
+              {/* Blue dashed trail */}
               <path
-                d="M 280 40 C 100 80, 20 140, 100 200 S 300 280, 220 360 S 80 440, 180 480"
+                d="M 280 40 C 100 80, 20 140, 100 200 S 300 280, 220 355 S 80 405, 180 415"
                 fill="none"
                 stroke="#0B3BF4"
                 strokeWidth="6"
                 strokeDasharray="8 6"
                 strokeLinecap="round"
               />
+              {/* Terminal dot at the return card */}
+              <circle cx="180" cy="415" r="7" fill="#F59E0B" stroke="#000000" strokeWidth="2.5" />
             </svg>
 
             {/* 1. START Station Pill (Top Right) */}
