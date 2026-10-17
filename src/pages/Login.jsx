@@ -128,13 +128,13 @@ export default function Login({ onLogin }) {
 
         {/* Welcome Text */}
         <div className="pt-2">
-          <h1 className="text-3xl font-black text-black tracking-tight leading-tight">
-            {mode === 'login' ? 'Welcome back,' : 'Create account,'}
+          <h1 className="text-2xl sm:text-3xl font-black text-black tracking-tight leading-snug">
+            {mode === 'login' ? 'Welcome Back!' : 'Create Account'}
           </h1>
-          <p className="text-xs font-semibold text-gray-600 mt-1 leading-relaxed">
+          <p className="text-xs font-semibold text-gray-600 mt-1.5 leading-relaxed">
             {mode === 'login'
-              ? 'Sign in for little detours, local favourites and hidden spots worth finding.'
-              : 'Join Spot-Undoo to discover secret gems and save itineraries to your cloud history.'}
+              ? 'Sign in for little detours, local favourites, and hidden spots worth finding.'
+              : 'Join Spot-Undoo to discover secret Kerala gems and save itineraries to cloud history.'}
           </p>
         </div>
       </div>
@@ -259,7 +259,7 @@ export default function Login({ onLogin }) {
               </>
             ) : (
               <>
-                <span>{mode === 'login' ? 'Sign in' : 'Create My Account'}</span>
+                <span>{mode === 'login' ? 'Sign In' : 'Create Account'}</span>
                 <ArrowRight size={16} strokeWidth={2.8} />
               </>
             )}
@@ -270,7 +270,7 @@ export default function Login({ onLogin }) {
       {/* ── Footer ── */}
       <div className="text-center space-y-1.5 pb-2">
         <p className="text-xs font-bold text-gray-700">
-          {mode === 'login' ? 'New around here? ' : 'Already have an account? '}
+          {mode === 'login' ? "Don't have an account? " : 'Already have an account? '}
           <button
             type="button"
             onClick={() => {
@@ -279,7 +279,7 @@ export default function Login({ onLogin }) {
             }}
             className="font-black text-[#0B3BF4] underline cursor-pointer"
           >
-            {mode === 'login' ? 'Sign up' : 'Sign in'}
+            {mode === 'login' ? 'Create one' : 'Sign in'}
           </button>
         </p>
         <p className="text-[11px] font-semibold text-gray-500">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Cpu, Globe, MapPin, Trash2, CheckCircle2, Loader2, Navigation, X, Settings, LogOut } from 'lucide-react';
 
-export default function Header({ location, setLocation, settings, setSettings, gpsStatus = 'idle', onRefreshGPS }) {
+export default function Header({ location, setLocation, settings, setSettings, gpsStatus = 'idle', onRefreshGPS, onLogout }) {
   const [showProfile, setShowProfile] = useState(false);
   const [cleared, setCleared] = useState(false);
   const [timeStr, setTimeStr] = useState('');
@@ -169,9 +169,22 @@ export default function Header({ location, setLocation, settings, setSettings, g
 
             {/* Footer */}
             <div className="flex items-center justify-between pt-2 border-t-[1.5px] border-gray-200">
-              <button onClick={handleClear} className="text-xs font-bold text-rose-600 flex items-center gap-1 hover:underline">
-                <Trash2 size={12} /> Clear Local Spots
-              </button>
+              <div className="flex items-center gap-3">
+                <button onClick={handleClear} className="text-xs font-bold text-gray-500 hover:text-black flex items-center gap-1 hover:underline">
+                  <Trash2 size={12} /> Clear Spots
+                </button>
+                {onLogout && (
+                  <button
+                    onClick={() => {
+                      setShowProfile(false);
+                      onLogout();
+                    }}
+                    className="text-xs font-bold text-rose-600 flex items-center gap-1 hover:underline"
+                  >
+                    <LogOut size={12} /> Sign Out
+                  </button>
+                )}
+              </div>
               {cleared && <span className="text-[11px] text-emerald-600 font-bold flex items-center gap-1"><CheckCircle2 size={11} /> Cleared!</span>}
               <button
                 onClick={() => setShowProfile(false)}

@@ -87,6 +87,7 @@ export default function App() {
             onError: () => setGpsStatus('error'),
           });
         }}
+        onLogout={handleLogout}
       />
 
       {/* 2. Main Tab Body */}
