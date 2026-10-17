@@ -66,7 +66,7 @@ export async function acquireGPS({ onSuccess, onError }) {
     });
 
     if (pos && pos.coords) {
-      resolve(pos.coords.latitude, pos.coords.longitude, 'Native Android GPS');
+      resolve(pos.coords.latitude, pos.coords.longitude);
       return;
     }
   } catch (nativeErr) {

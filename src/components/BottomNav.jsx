@@ -9,7 +9,7 @@ const TABS = [
 
 export default function BottomNav({ activeTab, setActiveTab }) {
   return (
-    <nav className="fixed bottom-3 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[390px] bg-white border-[2.5px] border-black rounded-full px-2 py-2 flex items-center justify-around shadow-[0_4px_0_0_#000000] z-50">
+    <nav className="fixed bottom-3 left-1/2 -translate-x-1/2 w-[calc(100%-1.25rem)] max-w-md bg-white border-[2.5px] border-black rounded-full px-2 py-2 flex items-center justify-around shadow-[0_4px_0_0_#000000] z-50">
       {TABS.map(({ id, label, icon: Icon }) => {
         const isActive = activeTab === id;
         return (

@@ -66,7 +66,7 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F6F9] max-w-[420px] mx-auto px-4 py-6 flex flex-col justify-between font-sans">
+    <div className="min-h-screen bg-[#F4F6F9] w-full max-w-md mx-auto px-2.5 sm:px-4 py-4 sm:py-6 flex flex-col justify-between font-sans">
       {/* ── Top Hero Card ── */}
       <div className="space-y-3">
         {/* Top Header Pill Row */}
@@ -74,9 +74,9 @@ export default function Login({ onLogin }) {
           <img
             src="/logo.png"
             alt="spot-undoo"
-            className="h-9 w-auto object-contain"
+            className="h-14 sm:h-16 w-auto object-contain"
           />
-          <span className="bg-white border-[2px] border-black rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-wider shadow-[0_2px_0_0_#000000]">
+          <span className="bg-white border-[2px] border-black rounded-full px-3.5 py-1.5 text-xs font-black uppercase tracking-wider shadow-[0_2px_0_0_#000000]">
             {mode === 'login' ? 'GO LOCAL!' : 'JOIN THE CLUB'}
           </span>
         </div>
@@ -127,11 +127,11 @@ export default function Login({ onLogin }) {
         </div>
 
         {/* Welcome Text */}
-        <div className="pt-2">
-          <h1 className="text-2xl sm:text-3xl font-black text-black tracking-tight leading-snug">
+        <div className="pt-3 pb-1">
+          <h1 className="text-3xl sm:text-4xl font-black text-black tracking-tight leading-tight">
             {mode === 'login' ? 'Welcome Back!' : 'Create Account'}
           </h1>
-          <p className="text-xs font-semibold text-gray-600 mt-1.5 leading-relaxed">
+          <p className="text-sm font-semibold text-gray-700 mt-1 leading-snug">
             {mode === 'login'
               ? 'Sign in for little detours, local favourites, and hidden spots worth finding.'
               : 'Join Spot-Undoo to discover secret Kerala gems and save itineraries to cloud history.'}

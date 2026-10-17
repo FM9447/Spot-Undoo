@@ -69,7 +69,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F4F6F9] max-w-[420px] mx-auto px-3.5 pt-3 pb-24 relative flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F4F6F9] w-full max-w-md mx-auto px-2.5 sm:px-4 pt-2.5 pb-24 relative flex flex-col font-sans">
       {/* 1. Header */}
       <Header
         location={location}

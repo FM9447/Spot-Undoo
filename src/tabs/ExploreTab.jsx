@@ -207,8 +207,7 @@ export default function ExploreTab({ location, setLocation }) {
       <div className="bg-white border-[2.5px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] space-y-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-xs font-black text-black">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
-            <span>📍 Auto-GPS: {location?.label || 'Shoranur Jn Hub (Active)'}</span>
+            <span>GPS: {location?.label || 'Shoranur Jn Hub (Active)'}</span>
           </div>
           <button
             onClick={usePhoneGPS}

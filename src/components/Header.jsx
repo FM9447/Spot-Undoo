@@ -27,27 +27,16 @@ export default function Header({ location, setLocation, settings, setSettings, g
   return (
     <>
       {/* ── Main Header Bar ── */}
-      <header className="w-full bg-white border-[2.5px] border-black rounded-2xl px-4 py-3 flex items-center justify-between shadow-[0_4px_0_0_#0B3BF4] mb-3">
+      <header className="w-full bg-white border-[2.5px] border-black rounded-2xl px-3.5 py-2.5 flex items-center justify-between shadow-[0_4px_0_0_#0B3BF4] mb-3">
         {/* Left: Logo */}
         <img
           src="/logo.png"
           alt="spot-undoo"
-          className="h-10 w-auto object-contain"
+          className="h-12 sm:h-14 w-auto object-contain"
         />
 
-        {/* Right: GPS status dot + Profile */}
+        {/* Right: Profile */}
         <div className="flex items-center gap-2">
-          {/* GPS indicator */}
-          {gpsStatus === 'acquiring' && (
-            <Loader2 size={14} className="text-amber-500 animate-spin" />
-          )}
-          {gpsStatus === 'ok' && (
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse inline-block" />
-          )}
-          {gpsStatus === 'error' && (
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block" />
-          )}
-
           {/* Profile picture — tap to open settings */}
           <button
             onClick={() => setShowProfile(true)}
@@ -58,23 +47,6 @@ export default function Header({ location, setLocation, settings, setSettings, g
           </button>
         </div>
       </header>
-
-      {/* ── GPS toasts (below header) ── */}
-      {gpsStatus === 'acquiring' && (
-        <div className="flex items-center gap-1.5 text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-300 rounded-full px-3 py-1 mb-2 w-fit mx-auto">
-          <Loader2 size={11} className="animate-spin" /> Locating you…
-        </div>
-      )}
-      {gpsStatus === 'ok' && (
-        <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-300 rounded-full px-3 py-1 mb-2 w-fit mx-auto">
-          <CheckCircle2 size={11} /> 📍 {location?.label}
-        </div>
-      )}
-      {gpsStatus === 'error' && (
-        <div className="flex items-center gap-1.5 text-[11px] font-bold text-red-700 bg-red-50 border border-red-300 rounded-full px-3 py-1 mb-2 w-fit mx-auto">
-          ⚠ GPS unavailable
-        </div>
-      )}
 
       {/* ── Profile / Settings Bottom Sheet ── */}
       {showProfile && (
