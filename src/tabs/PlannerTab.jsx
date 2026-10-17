@@ -139,7 +139,7 @@ Return this JSON structure:
       {/* Generate Button */}
       <button onClick={generate} disabled={loading}
         className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 disabled:opacity-50 transition">
-        {loading ? <><Loader2 size={16} className="animate-spin" /> Generating Plans...</> : <><BrainCircuit size={16} /> Generate Plans with Gemma 4</>}
+        {loading ? <><Loader2 size={16} className="animate-spin" /> Generating Plans...</> : <><BrainCircuit size={16} /> Generate Plans with Qwen 2.5</>}
       </button>
 
       {error && <p className="text-xs text-orange-400 bg-orange-400/10 rounded-lg p-2">{error}</p>}

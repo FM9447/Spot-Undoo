@@ -102,7 +102,7 @@ Return JSON ONLY:
       // 1. Downscale on HTML5 Canvas to 512px max JPEG (0.7 quality) as per specs
       const base64Img = await resizeImageToBase64(file, 512, 0.7);
 
-      // 2. Call Gemma 4 Vision
+      // 2. Call Edge AI Vision
       const res = await ollamaChat({
         baseUrl: settings.baseUrl,
         model: settings.model,

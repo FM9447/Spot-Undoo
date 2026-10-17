@@ -242,7 +242,7 @@ export default function LLMDebugTab({ settings }) {
             <div className="w-6 h-6 rounded-lg bg-[#F59E0B] border border-black flex items-center justify-center text-black">
               <Brain size={12} strokeWidth={2.5} />
             </div>
-            <span className="font-black text-xs text-black">Gemma 4 Thinking Trace</span>
+            <span className="font-black text-xs text-black">Qwen Edge Inference Trace</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="bg-[#10B981] text-white border border-black rounded px-1.5 py-0.2 text-[9px] font-black uppercase">
