@@ -194,6 +194,33 @@ npm run dev -- --host 0.0.0.0
 
 ---
 
+## ☁️ Cloud & Edge Hosting
+
+### 1. 🚀 One-Click Deploy to Render (Frontend & Backend API)
+Spot-Undoo includes a ready-to-deploy [`render.yaml`](./render.yaml) blueprint:
+1. Connect your GitHub repository to [Render](https://render.com).
+2. Create a new **Blueprint Instance** pointing to `render.yaml`.
+3. Set your `MONGODB_URI` environment variable in the Render Dashboard.
+4. Render builds the React SPA and launches the Node/Express backend on a single unified URL with automatic SSL.
+
+### 2. 🦙 DigitalOcean Droplet LLM Node (Hacktoberfest Credit Ready)
+Deploy Ollama with remote GPU/CPU acceleration on a DigitalOcean droplet:
+```bash
+# SSH into your DigitalOcean Ubuntu Droplet
+chmod +x scripts/deploy-digitalocean-ollama.sh
+./scripts/deploy-digitalocean-ollama.sh
+```
+This script configures UFW firewall rules, installs Ollama, exposes port 11434 with CORS enabled (`OLLAMA_ORIGINS="*"`), and pulls `qwen2.5:3b`. You can then plug the droplet's public IP directly into Spot-Undoo's in-app settings!
+
+### 3. 🐳 Docker Fullstack Container
+```bash
+docker build -t spot-undoo:latest .
+docker run -p 4000:4000 -e MONGODB_URI="your_mongodb_atlas_uri" spot-undoo:latest
+```
+
+
+---
+
 ## 🔬 Dataset & Fine-Tuning Pipeline
 
 The repository includes a complete training pipeline under the `training/` directory:
