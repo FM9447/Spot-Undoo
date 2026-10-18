@@ -390,6 +390,24 @@ export default function Login({ onLogin }) {
               </>
             )}
           </button>
+
+          {/* Guest Mode Direct Access */}
+          <button
+            type="button"
+            onClick={() => {
+              const guestUser = {
+                name: 'Local Explorer',
+                email: 'guest@spotundoo.local',
+                avatar: '/profile.png',
+              };
+              localStorage.setItem('currentUser', JSON.stringify(guestUser));
+              localStorage.setItem('jwt', 'guest_bypass_' + Date.now());
+              if (onLogin) onLogin();
+            }}
+            className="w-full bg-[#FEF08A] hover:bg-yellow-200 active:translate-y-0.5 border-[2.5px] border-black rounded-2xl py-2.5 text-black font-black text-xs flex items-center justify-center gap-1.5 shadow-[0_2.5px_0_0_#000000] transition cursor-pointer"
+          >
+            <span>🧭 Continue as Guest / Explore Instantly</span>
+          </button>
         </form>
       </div>
 

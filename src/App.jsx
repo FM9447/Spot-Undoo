@@ -25,14 +25,29 @@ export default function App() {
   const [location, setLocation] = useState(DEFAULT_LOCATION);
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const initialLoggedIn = typeof window !== 'undefined' && (
-    new URLSearchParams(window.location.search).get('view') && new URLSearchParams(window.location.search).get('view') !== 'login'
-      ? true
-      : !!localStorage.getItem('jwt')
+    new URLSearchParams(window.location.search).get('view') === 'login'
+      ? false
+      : true
   );
   const [loggedIn, setLoggedIn] = useState(initialLoggedIn);
   const [gpsStatus, setGpsStatus] = useState('idle'); // 'idle' | 'acquiring' | 'ok' | 'error'
   const [showLoading, setShowLoading] = useState(true);
   const [fadeLoading, setFadeLoading] = useState(false);
+
+  // Initialize guest profile for instant exploration
+  useEffect(() => {
+    if (!localStorage.getItem('currentUser')) {
+      const defaultUser = {
+        name: 'Local Explorer',
+        email: 'explorer@spotundoo.com',
+        avatar: '/profile.png',
+        bio: 'Hidden Gem Hunter 🌿',
+        homeCity: 'Kochi',
+      };
+      localStorage.setItem('currentUser', JSON.stringify(defaultUser));
+      localStorage.setItem('jwt', 'guest_' + Date.now());
+    }
+  }, []);
 
   // Initial startup screen with smooth ending transition
   useEffect(() => {
@@ -51,14 +66,11 @@ export default function App() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const viewParam = params.get('view');
-    const token = localStorage.getItem('jwt');
     if (viewParam === 'login') {
       setLoggedIn(false);
     } else if (viewParam) {
       setLoggedIn(true);
       setActiveTab(viewParam);
-    } else {
-      setLoggedIn(!!token);
     }
   }, []);
 

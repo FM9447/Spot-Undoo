@@ -1,17 +1,18 @@
 [
   {
-    "eventType": "VIEW_CLICKED",
-    "timestamp": 1500,
-    "elementDescriptors": [
-      {
-        "className": "android.view.View",
-        "text": "Explore"
-      }
-    ]
+    "eventType": "DELAYED_MESSAGE_POSTED",
+    "timestamp": 1729255000000,
+    "actionCode": -1,
+    "delayTime": 2500,
+    "canScrollTo": false,
+    "elementDescriptors": []
   },
   {
     "eventType": "VIEW_CLICKED",
-    "timestamp": 3000,
+    "timestamp": 1729255003000,
+    "actionCode": -1,
+    "delayTime": 500,
+    "canScrollTo": false,
     "elementDescriptors": [
       {
         "className": "android.view.View",
@@ -20,8 +21,19 @@
     ]
   },
   {
+    "eventType": "DELAYED_MESSAGE_POSTED",
+    "timestamp": 1729255004000,
+    "actionCode": -1,
+    "delayTime": 1500,
+    "canScrollTo": false,
+    "elementDescriptors": []
+  },
+  {
     "eventType": "VIEW_CLICKED",
-    "timestamp": 5000,
+    "timestamp": 1729255006000,
+    "actionCode": -1,
+    "delayTime": 500,
+    "canScrollTo": false,
     "elementDescriptors": [
       {
         "className": "android.widget.Button",
@@ -30,8 +42,19 @@
     ]
   },
   {
+    "eventType": "DELAYED_MESSAGE_POSTED",
+    "timestamp": 1729255007000,
+    "actionCode": -1,
+    "delayTime": 2000,
+    "canScrollTo": false,
+    "elementDescriptors": []
+  },
+  {
     "eventType": "VIEW_CLICKED",
-    "timestamp": 7000,
+    "timestamp": 1729255010000,
+    "actionCode": -1,
+    "delayTime": 500,
+    "canScrollTo": false,
     "elementDescriptors": [
       {
         "className": "android.view.View",
@@ -40,8 +63,19 @@
     ]
   },
   {
+    "eventType": "DELAYED_MESSAGE_POSTED",
+    "timestamp": 1729255011000,
+    "actionCode": -1,
+    "delayTime": 1500,
+    "canScrollTo": false,
+    "elementDescriptors": []
+  },
+  {
     "eventType": "VIEW_CLICKED",
-    "timestamp": 9000,
+    "timestamp": 1729255013000,
+    "actionCode": -1,
+    "delayTime": 500,
+    "canScrollTo": false,
     "elementDescriptors": [
       {
         "className": "android.view.View",
