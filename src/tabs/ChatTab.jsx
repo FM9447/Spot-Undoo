@@ -83,26 +83,6 @@ export default function ChatTab({ location, setLocation, settings }) {
   const [modificationMsg, setModificationMsg] = useState('');
   const [isLiveGpsActive, setIsLiveGpsActive] = useState(false);
 
-  // Auto-detect stops reached via GPS (< 250m)
-  useEffect(() => {
-    if (!location?.lat || !location?.lon) return;
-    const currentStops = plans[activePlanIdx]?.stops || [];
-    const newlyReached = [];
-    currentStops.forEach((stop) => {
-      const sLat = stop.lat || stop.data?.lat;
-      const sLng = stop.lng || stop.data?.lng;
-      if (sLat && sLng) {
-        const d = haversineKm(location.lat, location.lon, sLat, sLng);
-        if (d <= 0.25) { // within 250 meters
-          newlyReached.push(stop.id || stop.name);
-        }
-      }
-    });
-    if (newlyReached.length > 0) {
-      setVisitedStopIds((prev) => Array.from(new Set([...prev, ...newlyReached])));
-    }
-  }, [location?.lat, location?.lon, activePlanIdx, plans]);
-
   const syncLiveGps = () => {
     if (!navigator.geolocation) {
       alert('GPS is not supported on this device');
@@ -961,6 +941,26 @@ If user requests adding budget (e.g. "1000 rs more"), set addedBudget.`;
       }
     } catch {}
   }, [plans]);
+
+  // Auto-detect stops reached via GPS (< 250m)
+  useEffect(() => {
+    if (!location?.lat || !location?.lon || !plans) return;
+    const currentStops = plans[activePlanIdx]?.stops || [];
+    const newlyReached = [];
+    currentStops.forEach((stop) => {
+      const sLat = stop.lat || stop.data?.lat;
+      const sLng = stop.lng || stop.data?.lng;
+      if (sLat && sLng) {
+        const d = haversineKm(location.lat, location.lon, sLat, sLng);
+        if (d <= 0.25) { // within 250 meters
+          newlyReached.push(stop.id || stop.name);
+        }
+      }
+    });
+    if (newlyReached.length > 0) {
+      setVisitedStopIds((prev) => Array.from(new Set([...prev, ...newlyReached])));
+    }
+  }, [location?.lat, location?.lon, activePlanIdx, plans]);
 
   // When city changes from dropdown
   const handleCityChange = (key) => {
