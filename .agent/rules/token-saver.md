@@ -1,7 +1,7 @@
 ---
 trigger: always_on
 ---
-- Be ultra-concise. Do not repeat file contents in chat.
-- NEVER read, scan, or delete ./ollama_models/.
-- Once src/data/placesSeed.js is created, NEVER read it again; only import it.
-- Never inspect node_modules or package-lock.json.
+- Keep responses ultra-concise. Do not write long explanations after editing files.
+- Once `src/data/placesSeed.js` is created, NEVER read or output its contents again to save context tokens.
+- Never read `node_modules`, `dist`, or `package-lock.json`.
+- Build everything in clean, modular React + Tailwind files with zero external database dependencies.

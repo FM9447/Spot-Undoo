@@ -129,12 +129,26 @@ export default function Header({ location, setLocation, settings, setSettings, g
             {/* Ollama URL */}
             <div className="space-y-1.5">
               <label className="text-[11px] font-black uppercase tracking-wider text-black flex items-center gap-1">
-                <Globe size={12} /> Ollama URL
+                <Globe size={12} /> Ollama URL (Local or DigitalOcean)
               </label>
               <input
                 value={settings.baseUrl}
                 onChange={(e) => setSettings({ ...settings, baseUrl: e.target.value })}
                 placeholder="http://localhost:11434"
+                className="w-full bg-white border-[2px] border-black rounded-xl px-3 py-2.5 text-xs font-bold text-black outline-none shadow-[0_2px_0_0_#000000]"
+              />
+            </div>
+
+            {/* ElevenLabs API Key */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-black uppercase tracking-wider text-black flex items-center gap-1">
+                🎙️ ElevenLabs Voice Key (Optional)
+              </label>
+              <input
+                type="password"
+                defaultValue={localStorage.getItem('spot_undoo_elevenlabs_key') || ''}
+                onChange={(e) => localStorage.setItem('spot_undoo_elevenlabs_key', e.target.value.trim())}
+                placeholder="xi-api-key for Audio Guides"
                 className="w-full bg-white border-[2px] border-black rounded-xl px-3 py-2.5 text-xs font-bold text-black outline-none shadow-[0_2px_0_0_#000000]"
               />
             </div>

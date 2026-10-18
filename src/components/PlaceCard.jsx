@@ -1,5 +1,7 @@
-import { Star, MapPin, Clock, IndianRupee } from 'lucide-react';
+import { useState } from 'react';
+import { Star, MapPin, Clock, IndianRupee, Volume2, VolumeX, Loader2 } from 'lucide-react';
 import { roadDistanceKm, getTransit } from '../utils/plannerMath';
+import { playAudioGuide, stopAudioGuide } from '../utils/audioGuide';
 import ImageCarousel from './ImageCarousel';
 
 const CATEGORY_COLORS = {
@@ -11,8 +13,32 @@ const CATEGORY_COLORS = {
 };
 
 export default function PlaceCard({ place, userLat, userLon }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isAudioLoading, setIsAudioLoading] = useState(false);
   const dist = roadDistanceKm(userLat, userLon, place.lat, place.lng);
   const transit = getTransit(dist);
+
+  const toggleAudio = () => {
+    if (isPlaying) {
+      stopAudioGuide();
+      setIsPlaying(false);
+      setIsAudioLoading(false);
+    } else {
+      setIsAudioLoading(true);
+      const text = `${place.name}. ${place.category}. ${place.spendTime} minutes average visit. ${place.review}`;
+      playAudioGuide(
+        text,
+        () => {
+          setIsAudioLoading(false);
+          setIsPlaying(true);
+        },
+        () => {
+          setIsPlaying(false);
+          setIsAudioLoading(false);
+        }
+      );
+    }
+  };
 
   const photos = place.photos && place.photos.length > 0
     ? place.photos
@@ -54,16 +80,35 @@ export default function PlaceCard({ place, userLat, userLon }) {
 
       <div className="p-3 space-y-2">
         <div className="flex items-start justify-between gap-1">
-          <h3 className="font-semibold text-sm text-white leading-tight">{place.name}</h3>
-          <a
-            href={`https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLon}&destination=${place.lat},${place.lng}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Open in Google Maps"
-            className="shrink-0 p-1 bg-white/5 hover:bg-emerald-500/20 text-gray-400 hover:text-emerald-400 rounded-lg transition"
-          >
-            <MapPin size={14} />
-          </a>
+          <h3 className="font-semibold text-sm text-white leading-tight flex-1">{place.name}</h3>
+          <div className="flex items-center gap-1 shrink-0">
+            <button
+              onClick={toggleAudio}
+              title={isPlaying ? "Stop Audio Guide" : "Listen to Audio Guide"}
+              className={`p-1 rounded-lg transition border ${
+                isPlaying
+                  ? 'bg-purple-500/30 text-purple-300 border-purple-500/50 animate-pulse'
+                  : 'bg-white/5 hover:bg-purple-500/20 text-gray-400 hover:text-purple-300 border-white/10'
+              }`}
+            >
+              {isAudioLoading ? (
+                <Loader2 size={14} className="animate-spin text-purple-400" />
+              ) : isPlaying ? (
+                <VolumeX size={14} className="text-purple-300" />
+              ) : (
+                <Volume2 size={14} />
+              )}
+            </button>
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLon}&destination=${place.lat},${place.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open in Google Maps"
+              className="p-1 bg-white/5 hover:bg-emerald-500/20 text-gray-400 hover:text-emerald-400 rounded-lg transition border border-white/10"
+            >
+              <MapPin size={14} />
+            </a>
+          </div>
         </div>
 
         <div className="grid grid-cols-3 gap-1">

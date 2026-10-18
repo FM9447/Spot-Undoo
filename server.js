@@ -210,8 +210,53 @@ app.get('/api/places', async (req, res) => {
   }
 });
 
+// ElevenLabs Audio Guide Text-to-Speech
+app.post('/api/audio/tts', async (req, res) => {
+  try {
+    const { text, voiceId = '21m00Tcm4TlvDq8ikWAM' } = req.body;
+    const apiKey = req.headers['x-elevenlabs-key'] || process.env.ELEVENLABS_API_KEY;
+
+    if (!text) {
+      return res.status(400).json({ error: 'Text is required for TTS' });
+    }
+
+    if (!apiKey) {
+      return res.status(503).json({ error: 'No ElevenLabs API key configured' });
+    }
+
+    const elevenRes = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
+      method: 'POST',
+      headers: {
+        'xi-api-key': apiKey,
+        'Content-Type': 'application/json',
+        'Accept': 'audio/mpeg',
+      },
+      body: JSON.stringify({
+        text,
+        model_id: 'eleven_multilingual_v2',
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 0.75,
+        },
+      }),
+    });
+
+    if (!elevenRes.ok) {
+      const errText = await elevenRes.text();
+      return res.status(elevenRes.status).json({ error: `ElevenLabs error: ${errText}` });
+    }
+
+    const audioBuffer = await elevenRes.arrayBuffer();
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.send(Buffer.from(audioBuffer));
+  } catch (err) {
+    console.error('TTS error:', err);
+    res.status(500).json({ error: 'Failed to synthesize speech' });
+  }
+});
+
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', db: !!db, time: new Date() });
+  res.json({ status: 'ok', db: !!db, elevenlabs: !!process.env.ELEVENLABS_API_KEY, time: new Date() });
 });
 
 // Serve frontend static build if dist directory exists
