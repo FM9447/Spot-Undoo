@@ -121,6 +121,12 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
     return getKeralaRideAvailability(checkLat, checkLng, checkName);
   }, [originMode, activeHub, destLat, destLng, destName]);
 
+  // Active origin coordinates and Uber URLs
+  const originLat = originMode === 'live' && userLat ? userLat : activeHub.lat;
+  const originLng = originMode === 'live' && userLon ? userLon : activeHub.lng;
+  const uberWebUrl = `https://m.uber.com/ul/?action=setPickup&pickup[latitude]=${originLat}&pickup[longitude]=${originLng}&pickup[nickname]=${encodeURIComponent(currentOriginName)}&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLng}&dropoff[nickname]=${encodeURIComponent(destName)}`;
+  const uberAppScheme = `uber://?action=setPickup&pickup[latitude]=${originLat}&pickup[longitude]=${originLng}&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLng}&dropoff[nickname]=${encodeURIComponent(destName)}`;
+
   // Dynamic Kerala ride calculation engine
   const rideOptions = useMemo(() => {
     const d = distKm;
@@ -217,8 +223,8 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
         basePrice: Math.round((22 + d * 10.5) * peakFactor),
         etaMins: Math.max(3, Math.ceil(d * 2.3)),
         available: true,
-        appScheme: `uber://?action=setPickup&pickup=my_location&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLng}&dropoff[nickname]=${encodeURIComponent(destName)}`,
-        webUrl: `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLng}&dropoff[nickname]=${encodeURIComponent(destName)}`,
+        appScheme: uberAppScheme,
+        webUrl: uberWebUrl,
         tag: 'Affordable Solo',
       });
       options.push({
@@ -231,8 +237,8 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
         basePrice: Math.round((30 + Math.max(0, d - 1.5) * 18) * peakFactor),
         etaMins: Math.max(4, Math.ceil(d * 2.8)),
         available: true,
-        appScheme: `uber://?action=setPickup&pickup=my_location&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLng}&dropoff[nickname]=${encodeURIComponent(destName)}`,
-        webUrl: `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLng}&dropoff[nickname]=${encodeURIComponent(destName)}`,
+        appScheme: uberAppScheme,
+        webUrl: uberWebUrl,
         tag: 'App Meter Auto',
       });
       options.push({
@@ -245,8 +251,8 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
         basePrice: Math.round((70 + d * 21) * peakFactor),
         etaMins: Math.max(6, Math.ceil(d * 3.2)),
         available: true,
-        appScheme: `uber://?action=setPickup&pickup=my_location&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLng}&dropoff[nickname]=${encodeURIComponent(destName)}`,
-        webUrl: `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLng}&dropoff[nickname]=${encodeURIComponent(destName)}`,
+        appScheme: uberAppScheme,
+        webUrl: uberWebUrl,
         tag: 'AC & Luggage',
       });
     } else {
@@ -303,7 +309,7 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
     }
 
     return options;
-  }, [distKm, destLat, destLng, destName, availability, activeHub]);
+  }, [distKm, destLat, destLng, destName, availability, activeHub, uberAppScheme, uberWebUrl]);
 
   // Sorted and filtered options
   const displayedOptions = useMemo(() => {
@@ -495,6 +501,33 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
           </div>
         )}
 
+        {/* Live Uber Web Estimator Bar (Opens real-time official Uber website quote without login) */}
+        {!availability.noAppCabs && (
+          <div className="mx-3 mt-2 px-3 py-2 bg-gradient-to-r from-neutral-900 to-black text-white border-[2px] border-black rounded-xl flex items-center justify-between shadow-[0_2px_0_0_#000000]">
+            <div className="flex items-center gap-2 min-w-0 pr-2">
+              <span className="text-lg">🌐</span>
+              <div className="min-w-0">
+                <div className="text-[10px] font-black text-[#FFE500] leading-tight flex items-center gap-1">
+                  <span>Uber Live Web Estimate</span>
+                  <span className="bg-emerald-500 text-black text-[7.5px] font-black px-1 rounded">No Login</span>
+                </div>
+                <div className="text-[9px] font-bold text-gray-300 truncate">
+                  View real-time surge pricing & cars on m.uber.com
+                </div>
+              </div>
+            </div>
+            <a
+              href={uberWebUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 bg-[#FFE500] hover:bg-yellow-400 text-black text-[10px] font-black px-2.5 py-1.5 rounded-lg border border-black flex items-center gap-1 transition shadow-[0_1px_0_0_#000000] active:translate-y-0.5 cursor-pointer"
+            >
+              <span>Live Quote</span>
+              <ExternalLink size={10} strokeWidth={3} />
+            </a>
+          </div>
+        )}
+
         {/* Filter Pills */}
         <div className="p-2.5 bg-[#F4F6F9] border-b-[2px] border-black flex gap-1.5 overflow-x-auto scrollbar-none">
           {[
@@ -628,11 +661,19 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
                 </div>
                 <div className="flex items-start gap-1">
                   <CheckCircle2 size={11} className="text-emerald-600 shrink-0 mt-0.5" />
+                  <span><b>Uber Live Web (No Login):</b> Tap <b>Live Quote</b> above to open Uber's official mobile web calculator (<code>m.uber.com</code>) with your pickup & dropoff coordinates pinned. You get Uber's live surge and dynamic price without signing in.</span>
+                </div>
+                <div className="flex items-start gap-1">
+                  <CheckCircle2 size={11} className="text-emerald-600 shrink-0 mt-0.5" />
+                  <span><b>Why Not Direct Server Scraping?</b> Uber protects background HTTP requests with Cloudflare bot challenges (HTTP 406), and Rapido discontinued public web booking (mobile app only via OTP). Linking directly to their official web/app guarantees 100% genuine pricing.</span>
+                </div>
+                <div className="flex items-start gap-1">
+                  <CheckCircle2 size={11} className="text-emerald-600 shrink-0 mt-0.5" />
                   <span><b>Government Meter Precision:</b> Auto rates use the official <b>Kerala Motor Vehicles Department (MVD)</b> legal meter tariff: ₹30 minimum (1.5 km) + ₹15/km (+50% night charge 10pm–5am).</span>
                 </div>
                 <div className="flex items-start gap-1">
                   <CheckCircle2 size={11} className="text-emerald-600 shrink-0 mt-0.5" />
-                  <span><b>Town Truth:</b> Neither Uber nor Rapido offer open third-party live driver socket APIs; furthermore, they do not operate in non-metro towns like Pattambi. Spot-Undoo displays verified Kerala stand options so you never get stranded.</span>
+                  <span><b>Town Truth:</b> In non-metro areas like Pattambi/Shoranur where app cabs don't operate, Spot-Undoo displays verified Kerala stand options so you never get stranded.</span>
                 </div>
               </div>
             )}
