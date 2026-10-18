@@ -94,101 +94,6 @@ export default function ChatTab({ location, setLocation, settings }) {
   const [modificationMsg, setModificationMsg] = useState('');
   const [isLiveGpsActive, setIsLiveGpsActive] = useState(false);
 
-  // Trail measurement refs & state
-  const trailContainerRef = useRef(null);
-  const [trailDimensions, setTrailDimensions] = useState({ width: 360, height: 600 });
-  const [measuredPath, setMeasuredPath] = useState([]);
-
-  const measureTrail = useCallback(() => {
-    if (!trailContainerRef.current) return;
-    const container = trailContainerRef.current;
-    const cRect = container.getBoundingClientRect();
-    const w = container.clientWidth || 360;
-    const h = Math.max(container.scrollHeight, container.clientHeight) || 600;
-    setTrailDimensions({ width: w, height: h });
-
-    const startEl = container.querySelector('.trail-start-node');
-    const endEl = container.querySelector('.trail-end-node');
-    const pinEls = container.querySelectorAll('.trail-card-pin');
-
-    let p0 = startEl ? {
-      x: startEl.getBoundingClientRect().left - cRect.left + startEl.getBoundingClientRect().width / 2,
-      y: startEl.getBoundingClientRect().top - cRect.top + container.scrollTop + startEl.getBoundingClientRect().height / 2,
-    } : { x: 30, y: 30 };
-
-    const points = [];
-    pinEls.forEach((pin, idx) => {
-      const r = pin.getBoundingClientRect();
-      points.push({
-        x: r.left - cRect.left + r.width / 2,
-        y: r.top - cRect.top + container.scrollTop + r.height / 2,
-        idx,
-      });
-    });
-
-    let pEnd = endEl ? {
-      x: endEl.getBoundingClientRect().left - cRect.left + endEl.getBoundingClientRect().width / 2,
-      y: endEl.getBoundingClientRect().top - cRect.top + container.scrollTop + 10,
-    } : { x: w / 2, y: h - 30 };
-
-    const segments = [];
-    const currentStops = plans[activePlanIdx]?.stops || [];
-    if (points.length > 0) {
-      // Start -> Pin 0: Flowing S-curve
-      const dy0 = points[0].y - p0.y;
-      const isFirstVisited = visitedStopIds.includes(currentStops[0]?.id || currentStops[0]?.name);
-      segments.push({
-        d: `M ${p0.x} ${p0.y} C ${p0.x} ${p0.y + dy0 * 0.55}, ${points[0].x} ${points[0].y - dy0 * 0.55}, ${points[0].x} ${points[0].y}`,
-        isVisited: isFirstVisited,
-      });
-
-      // Sequential Pin i -> Pin i+1: Organic vertical-tangent S-curves with NO kinks or zigzags
-      for (let i = 0; i < points.length - 1; i++) {
-        const curr = points[i];
-        const next = points[i + 1];
-        const dy = next.y - curr.y;
-        const isNextVisited = visitedStopIds.includes(currentStops[i + 1]?.id || currentStops[i + 1]?.name);
-        segments.push({
-          d: `M ${curr.x} ${curr.y} C ${curr.x} ${curr.y + dy * 0.55}, ${next.x} ${next.y - dy * 0.55}, ${next.x} ${next.y}`,
-          isVisited: isNextVisited,
-        });
-      }
-
-      // Last Pin -> Safe Return
-      const last = points[points.length - 1];
-      const dyEnd = pEnd.y - last.y;
-      const allStopsVisited = currentStops.length > 0 && currentStops.every((s) => visitedStopIds.includes(s.id || s.name));
-      segments.push({
-        d: `M ${last.x} ${last.y} C ${last.x} ${last.y + dyEnd * 0.55}, ${pEnd.x} ${pEnd.y - dyEnd * 0.55}, ${pEnd.x} ${pEnd.y}`,
-        isVisited: allStopsVisited,
-      });
-    }
-
-    setMeasuredPath(segments);
-  }, [plans, activePlanIdx, visitedStopIds]);
-
-  useEffect(() => {
-    if (viewState !== 'trail' || mapViewMode !== 'trail') return;
-    measureTrail();
-    const t1 = setTimeout(measureTrail, 60);
-    const t2 = setTimeout(measureTrail, 250);
-    const t3 = setTimeout(measureTrail, 600);
-
-    let ro;
-    if (trailContainerRef.current && window.ResizeObserver) {
-      ro = new ResizeObserver(() => measureTrail());
-      ro.observe(trailContainerRef.current);
-    }
-    window.addEventListener('resize', measureTrail);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      if (ro) ro.disconnect();
-      window.removeEventListener('resize', measureTrail);
-    };
-  }, [viewState, mapViewMode, activePlanIdx, plans, visitedStopIds, measureTrail]);
-
   const syncLiveGps = () => {
     if (!navigator.geolocation) {
       alert('GPS is not supported on this device');
@@ -1047,6 +952,101 @@ If user requests adding budget (e.g. "1000 rs more"), set addedBudget.`;
       }
     } catch {}
   }, [plans]);
+
+  // Trail measurement refs & state
+  const trailContainerRef = useRef(null);
+  const [trailDimensions, setTrailDimensions] = useState({ width: 360, height: 600 });
+  const [measuredPath, setMeasuredPath] = useState([]);
+
+  const measureTrail = useCallback(() => {
+    if (!trailContainerRef.current) return;
+    const container = trailContainerRef.current;
+    const cRect = container.getBoundingClientRect();
+    const w = container.clientWidth || 360;
+    const h = Math.max(container.scrollHeight, container.clientHeight) || 600;
+    setTrailDimensions({ width: w, height: h });
+
+    const startEl = container.querySelector('.trail-start-node');
+    const endEl = container.querySelector('.trail-end-node');
+    const pinEls = container.querySelectorAll('.trail-card-pin');
+
+    let p0 = startEl ? {
+      x: startEl.getBoundingClientRect().left - cRect.left + startEl.getBoundingClientRect().width / 2,
+      y: startEl.getBoundingClientRect().top - cRect.top + container.scrollTop + startEl.getBoundingClientRect().height / 2,
+    } : { x: 30, y: 30 };
+
+    const points = [];
+    pinEls.forEach((pin, idx) => {
+      const r = pin.getBoundingClientRect();
+      points.push({
+        x: r.left - cRect.left + r.width / 2,
+        y: r.top - cRect.top + container.scrollTop + r.height / 2,
+        idx,
+      });
+    });
+
+    let pEnd = endEl ? {
+      x: endEl.getBoundingClientRect().left - cRect.left + endEl.getBoundingClientRect().width / 2,
+      y: endEl.getBoundingClientRect().top - cRect.top + container.scrollTop + 10,
+    } : { x: w / 2, y: h - 30 };
+
+    const segments = [];
+    const currentStops = plans[activePlanIdx]?.stops || [];
+    if (points.length > 0) {
+      // Start -> Pin 0: Flowing S-curve
+      const dy0 = points[0].y - p0.y;
+      const isFirstVisited = visitedStopIds.includes(currentStops[0]?.id || currentStops[0]?.name);
+      segments.push({
+        d: `M ${p0.x} ${p0.y} C ${p0.x} ${p0.y + dy0 * 0.55}, ${points[0].x} ${points[0].y - dy0 * 0.55}, ${points[0].x} ${points[0].y}`,
+        isVisited: isFirstVisited,
+      });
+
+      // Sequential Pin i -> Pin i+1: Organic vertical-tangent S-curves with NO kinks or zigzags
+      for (let i = 0; i < points.length - 1; i++) {
+        const curr = points[i];
+        const next = points[i + 1];
+        const dy = next.y - curr.y;
+        const isNextVisited = visitedStopIds.includes(currentStops[i + 1]?.id || currentStops[i + 1]?.name);
+        segments.push({
+          d: `M ${curr.x} ${curr.y} C ${curr.x} ${curr.y + dy * 0.55}, ${next.x} ${next.y - dy * 0.55}, ${next.x} ${next.y}`,
+          isVisited: isNextVisited,
+        });
+      }
+
+      // Last Pin -> Safe Return
+      const last = points[points.length - 1];
+      const dyEnd = pEnd.y - last.y;
+      const allStopsVisited = currentStops.length > 0 && currentStops.every((s) => visitedStopIds.includes(s.id || s.name));
+      segments.push({
+        d: `M ${last.x} ${last.y} C ${last.x} ${last.y + dyEnd * 0.55}, ${pEnd.x} ${pEnd.y - dyEnd * 0.55}, ${pEnd.x} ${pEnd.y}`,
+        isVisited: allStopsVisited,
+      });
+    }
+
+    setMeasuredPath(segments);
+  }, [plans, activePlanIdx, visitedStopIds]);
+
+  useEffect(() => {
+    if (viewState !== 'trail' || mapViewMode !== 'trail') return;
+    measureTrail();
+    const t1 = setTimeout(measureTrail, 60);
+    const t2 = setTimeout(measureTrail, 250);
+    const t3 = setTimeout(measureTrail, 600);
+
+    let ro;
+    if (trailContainerRef.current && window.ResizeObserver) {
+      ro = new ResizeObserver(() => measureTrail());
+      ro.observe(trailContainerRef.current);
+    }
+    window.addEventListener('resize', measureTrail);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      if (ro) ro.disconnect();
+      window.removeEventListener('resize', measureTrail);
+    };
+  }, [viewState, mapViewMode, activePlanIdx, plans, visitedStopIds, measureTrail]);
 
   // Auto-detect stops reached via GPS (< 250m)
   useEffect(() => {
