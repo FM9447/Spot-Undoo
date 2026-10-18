@@ -8,20 +8,38 @@ app.use(cors());
 app.use(express.json({ limit: '5mb' }));
 
 const MONGODB_URI = process.env.MONGODB_URI || '';
-if (!MONGODB_URI) {
-  console.error('❌ MONGODB_URI not set in .env');
-  process.exit(1);
-}
 
-const client = new MongoClient(MONGODB_URI);
+let client;
 let db;
 
-client.connect().then(() => {
+async function getDb() {
+  if (db) return db;
+  if (!MONGODB_URI) {
+    console.warn('⚠️ MONGODB_URI not set');
+    return null;
+  }
+  if (!client) {
+    client = new MongoClient(MONGODB_URI);
+  }
+  await client.connect();
   db = client.db('spot_undo');
-  console.log('✅ Connected to MongoDB Atlas (spot_undo)');
-}).catch(err => {
-  console.error('❌ MongoDB connection error:', err);
-  process.exit(1);
+  return db;
+}
+
+if (MONGODB_URI) {
+  getDb().then(() => console.log('✅ Connected to MongoDB Atlas (spot_undo)')).catch(err => console.error('MongoDB connection error:', err));
+}
+
+// Ensure DB is connected for serverless invocations
+app.use(async (req, res, next) => {
+  if (!db && MONGODB_URI) {
+    try {
+      await getDb();
+    } catch (e) {
+      console.warn('DB connect error in middleware:', e.message);
+    }
+  }
+  next();
 });
 
 // User Registration
@@ -285,6 +303,10 @@ if (fs.existsSync(distPath)) {
 }
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 spot-undoo Backend running on http://0.0.0.0:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 spot-undoo Backend running on http://0.0.0.0:${PORT}`);
+  });
+}
+
+export default app;
