@@ -24,7 +24,7 @@ export default function ExploreTab({ location, setLocation }) {
   const [activeCategory, setActiveCategory] = useState('All Spots');
   const [selectedCityFilter, setSelectedCityFilter] = useState('All Cities');
   const [searchQuery, setSearchQuery] = useState('');
-  const [viewMode, setViewMode] = useState('cartoon'); // 'cartoon' | 'osm' | 'grid'
+  const [viewMode, setViewMode] = useState('osm'); // 'osm' (Map default) | 'cartoon' | 'grid'
   const [selectedSpot, setSelectedSpot] = useState(null);
   const [bookmarkedIds, setBookmarkedIds] = useState([]);
   const [userRating, setUserRating] = useState(5);
@@ -337,28 +337,28 @@ export default function ExploreTab({ location, setLocation }) {
           })}
         </div>
 
-        {/* View Switcher: Cartoon | Live OSM | Grid */}
+        {/* View Switcher: Map (Default) | Canvas | Grid */}
         <div className="shrink-0 flex items-center bg-white border-[2px] border-black rounded-full p-0.5 shadow-[0_2px_0_0_#000000]">
+          <button
+            onClick={() => setViewMode('osm')}
+            className={`px-2.5 py-1 rounded-full text-xs font-black transition cursor-pointer ${
+              viewMode === 'osm' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
+            }`}
+          >
+            🗺️ Map
+          </button>
           <button
             onClick={() => setViewMode('cartoon')}
             className={`px-2 py-1 rounded-full text-xs font-black transition cursor-pointer ${
-              viewMode === 'cartoon' ? 'bg-[#0B3BF4] text-white' : 'text-gray-700 hover:text-black'
+              viewMode === 'cartoon' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
             }`}
           >
             🎨 Canvas
           </button>
           <button
-            onClick={() => setViewMode('osm')}
-            className={`px-2 py-1 rounded-full text-xs font-black transition cursor-pointer ${
-              viewMode === 'osm' ? 'bg-[#0B3BF4] text-white' : 'text-gray-700 hover:text-black'
-            }`}
-          >
-            🗺️ Live OSM
-          </button>
-          <button
             onClick={() => setViewMode('grid')}
             className={`px-2 py-1 rounded-full text-xs font-black transition cursor-pointer ${
-              viewMode === 'grid' ? 'bg-[#0B3BF4] text-white' : 'text-gray-700 hover:text-black'
+              viewMode === 'grid' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
             }`}
           >
             📱 Grid

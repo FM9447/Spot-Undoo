@@ -111,59 +111,96 @@ export default function InteractiveMap({
         className: 'custom-spot-marker',
         html: `
           <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+            <!-- Square Polaroid Card -->
             <div style="
-              display: flex;
-              align-items: center;
-              gap: 6px;
+              position: relative;
+              width: 64px;
               background: #ffffff;
-              border: 2.5px solid #000000;
-              border-radius: 16px;
-              padding: 3px 8px 3px 3px;
-              box-shadow: ${isSelected ? '0 4px 0 0 #0B3BF4' : '0 3px 0 0 #000000'};
-              transform: ${isSelected ? 'scale(1.12)' : 'scale(1)'};
-              transition: transform 0.15s ease;
+              border: 2px solid #000000;
+              border-radius: 12px;
+              padding: 3px 3px 2px 3px;
+              box-shadow: ${isSelected ? '0 4px 0 0 #0B3BF4' : '0 2.5px 0 0 #000000'};
+              transform: ${isSelected ? 'scale(1.18)' : 'scale(1)'};
+              transition: transform 0.15s ease, box-shadow 0.15s ease;
               cursor: pointer;
-              white-space: nowrap;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
             ">
-              ${showRoute ? `
+              <!-- Top Red Push-Pin with Number -->
+              <div style="
+                position: absolute;
+                top: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 18px;
+                height: 18px;
+                border-radius: 9999px;
+                background: ${isSelected ? '#EF4444' : (showRoute ? '#0B3BF4' : '#EF4444')};
+                border: 1.5px solid #000000;
+                color: #ffffff;
+                font-size: 9px;
+                font-weight: 900;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 1px 0 0 rgba(0,0,0,0.4);
+                z-index: 10;
+              ">
+                ${idx + 1}
+              </div>
+
+              <!-- Square Photo Frame -->
+              <div style="
+                width: 56px;
+                height: 44px;
+                border-radius: 8px;
+                overflow: hidden;
+                border: 1px solid #000000;
+                margin-top: 5px;
+                background: #f1f5f9;
+              ">
+                <img
+                  src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                />
+              </div>
+
+              <!-- Polaroid Bottom Chin -->
+              <div style="width: 100%; text-align: center; margin-top: 2px; line-height: 1.15; padding: 0 1px;">
                 <div style="
-                  width: 22px;
-                  height: 22px;
-                  border-radius: 9999px;
-                  background-color: ${isSelected ? '#EF4444' : '#0B3BF4'};
-                  color: #ffffff;
-                  border: 2px solid #000000;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-size: 11px;
+                  font-size: 8px;
                   font-weight: 900;
-                  flex-shrink: 0;
-                  box-shadow: 0 1px 0 0 #000;
+                  color: #000000;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
                 ">
-                  ${idx + 1}
+                  ${spot.name}
                 </div>
-              ` : ''}
-              <img src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}" style="width: 28px; height: 28px; border-radius: 10px; object-fit: cover; border: 1.5px solid #000;" />
-              <div style="display: flex; flex-direction: column; line-height: 1.15; max-width: 140px; overflow: hidden;">
-                <span style="font-size: 11px; font-weight: 900; color: #000000; overflow: hidden; text-overflow: ellipsis;">${spot.name}</span>
-                <span style="font-size: 9px; font-weight: 800; color: ${priceText === 'FREE' ? '#059669' : '#D97706'};">
-                  ${priceText} • ★${spot.rating || 4.7}
-                </span>
+                <div style="
+                  font-size: 7px;
+                  font-weight: 800;
+                  color: ${priceText === 'FREE' ? '#059669' : '#D97706'};
+                ">
+                  ${priceText}
+                </div>
               </div>
             </div>
+
+            <!-- Bottom Pointer Needle -->
             <div style="
               width: 0;
               height: 0;
-              border-left: 6px solid transparent;
-              border-right: 6px solid transparent;
-              border-top: 6px solid #000000;
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+              border-top: 5px solid #000000;
               margin-top: -1px;
             "></div>
           </div>
         `,
-        iconSize: [showRoute ? 170 : 150, 44],
-        iconAnchor: [showRoute ? 85 : 75, 44],
+        iconSize: [64, 76],
+        iconAnchor: [32, 76],
       });
 
       const marker = L.marker([spot.lat, spot.lng], { icon: spotIcon }).addTo(map);
@@ -176,7 +213,7 @@ export default function InteractiveMap({
       markersRef.current.push(marker);
     });
 
-    // Draw route polyline with cartoon double-stroke casing
+    // Draw route polyline with cartoon double-stroke casing (only when showRoute is enabled)
     if (showRoute && routeLatLngs.length > 1) {
       if (userLocation && userLocation.lat && userLocation.lon) {
         // Complete the loop back to starting hub
@@ -209,6 +246,14 @@ export default function InteractiveMap({
         const bounds = innerPolyline.getBounds();
         if (bounds.isValid()) {
           map.fitBounds(bounds, { padding: [55, 55], maxZoom: 15 });
+        }
+      } catch {}
+    } else if (!showRoute && routeLatLngs.length > 0) {
+      // Explore Mode: No route, smoothly fit bounds to show all spots in region
+      try {
+        const bounds = L.latLngBounds(routeLatLngs);
+        if (bounds.isValid()) {
+          map.fitBounds(bounds, { padding: [45, 45], maxZoom: 14 });
         }
       } catch {}
     }
