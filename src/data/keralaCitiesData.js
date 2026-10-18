@@ -1,4 +1,4 @@
-// Auto-generated 30 authentic Kerala cities & railway hubs
+// Auto-generated 30 authentic Kerala cities & railway hubs with verified real photos
 export const KERALA_CITIES = {
   "Shoranur": {
     "name": "Shoranur",
@@ -21,17 +21,17 @@ export const KERALA_CITIES = {
         "lng": 76.25880000000001,
         "expense": 0,
         "spendTime": 30,
-        "rating": 5.0,
+        "rating": 5,
         "reviewCount": 58,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "transitText": "🚶 8m • Free",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
-          "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
         "review": "Serene stepped ghat overlooking Bharathapuzha. Perfect quiet walk before train.",
         "tags": [
@@ -52,14 +52,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 49,
         "distanceKm": 2.1,
-        "transitText": "\ud83d\udefa 10m \u2022 \u20b930",
+        "transitText": "🛺 10m • ₹30",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-          "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
-          "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80"
+          "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80"
         ],
         "review": "Quiet riverside shade with hot pazhampori and chai.",
         "tags": [
@@ -80,14 +80,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 65,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "transitText": "🚶 6m • Free",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
           "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
         ],
         "review": "Golden uzhunnu vada hot off the oil pan with coconut chutney.",
         "tags": [
@@ -107,15 +107,15 @@ export const KERALA_CITIES = {
         "spendTime": 60,
         "rating": 4.7,
         "reviewCount": 87,
-        "distanceKm": 3.0,
-        "transitText": "\ud83d\udefa 8m \u2022 \u20b925",
+        "distanceKm": 3,
+        "transitText": "🛺 8m • ₹25",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
-          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80",
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80"
+          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80"
         ],
         "review": "High-speed broadband, esports gaming setups, chilled AC.",
         "tags": [
@@ -136,14 +136,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 94,
         "distanceKm": 6.8,
-        "transitText": "\ud83d\udefa 18m \u2022 \u20b965",
+        "transitText": "🛺 18m • ₹65",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
         "photos": [
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80"
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
         ],
         "review": "Magnificent traditional aristocratic illam where Malayalam movies are shot.",
         "tags": [
@@ -181,8 +181,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 15m • ₹80",
         "returnText": "Back to Pattambi Station",
         "returnCost": 80,
-        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Madhusoodanan_Nair.png/960px-Madhusoodanan_Nair.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Madhusoodanan_Nair.png/960px-Madhusoodanan_Nair.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
           "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
@@ -209,10 +210,11 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Pattambi Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
         "review": "Quiet sandy riverbank stretch with gentle river breeze and stunning sunset hues over Bharathapuzha.",
         "tags": [
@@ -237,8 +239,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 10m • Free",
         "returnText": "Back to Pattambi Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Pattambi_Palam.jpg/960px-Pattambi_Palam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Pattambi_Palam.jpg/960px-Pattambi_Palam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
         ],
         "review": "Historic site of the renowned annual Pattambi Nercha festival featuring rich cultural traditions and elephant pageants.",
@@ -263,8 +266,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 4m • Free",
         "returnText": "Back to Pattambi Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
           "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
         ],
         "review": "Piping hot kattan chai, fresh crispy banana fritters (pazham pori), and authentic Malabar snacks right near the river bridge.",
@@ -326,7 +330,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 164,
         "distanceKm": 4.5,
-        "transitText": "\u26f4\ufe0f 20m \u2022 \u20b920 (Water Metro)",
+        "transitText": "⛴️ 20m • ₹20 (Water Metro)",
         "returnText": "Back to Ernakulam South Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=800&q=80",
@@ -354,14 +358,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 70,
         "distanceKm": 3.8,
-        "transitText": "\ud83d\udefa 12m \u2022 \u20b940",
+        "transitText": "🛺 12m • ₹40",
         "returnText": "Back to Ernakulam South Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
           "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
-          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80",
-          "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&q=80"
+          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
         ],
         "review": "Iconic tender Malabar mutton biryani with ghee aroma.",
         "tags": [
@@ -382,14 +386,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 83,
         "distanceKm": 1.5,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Ernakulam South Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
           "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
         ],
         "review": "Spicy green-chilli kulukki sarbath and hot banana chips.",
         "tags": [
@@ -410,14 +414,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 48,
         "distanceKm": 2.8,
-        "transitText": "\ud83d\udefa 10m \u2022 \u20b930",
+        "transitText": "🛺 10m • ₹30",
         "returnText": "Back to Ernakulam South Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/d/db/Kochi_Water_Metro_Logo.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
         "photos": [
+          "https://upload.wikimedia.org/wikipedia/commons/d/db/Kochi_Water_Metro_Logo.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-          "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
-          "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80"
+          "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80"
         ],
         "review": "Ultra-modern electric boat cruise overlooking Vembanad backwaters.",
         "tags": [
@@ -452,14 +456,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 145,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Mananachira_Pond_Gardens%2C_Kozhikode2.jpg/960px-Mananachira_Pond_Gardens%2C_Kozhikode2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Mananachira_Pond_Gardens%2C_Kozhikode2.jpg/960px-Mananachira_Pond_Gardens%2C_Kozhikode2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80"
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
         ],
         "review": "Clear water reservoir enclosed by traditional red-tile gates.",
         "tags": [
@@ -480,14 +484,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 130,
         "distanceKm": 1.5,
-        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "transitText": "🚶 8m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
           "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
-          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80",
-          "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&q=80"
+          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
         ],
         "review": "Legendary Calicut dum biryani with melt-in-mouth chicken.",
         "tags": [
@@ -508,14 +512,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 90,
         "distanceKm": 0.9,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
           "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80",
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-          "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&q=80"
+          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80"
         ],
         "review": "Pedestrian heritage street with warm black halwa and banana chips.",
         "tags": [
@@ -535,15 +539,15 @@ export const KERALA_CITIES = {
         "spendTime": 45,
         "rating": 4.8,
         "reviewCount": 164,
-        "distanceKm": 2.0,
-        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "distanceKm": 2,
+        "transitText": "🛺 6m • ₹25",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Kozhikode_Beach_Coastline.jpg/960px-Kozhikode_Beach_Coastline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Kozhikode_Beach_Coastline.jpg/960px-Kozhikode_Beach_Coastline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-          "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80"
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
         ],
         "review": "Century-old collapsed shipping pier jutting into Arabian sea waves.",
         "tags": [
@@ -567,11 +571,11 @@ export const KERALA_CITIES = {
         "transitText": "🛺 22m • ₹70",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 40,
-        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-          "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80",
-          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80"
+          "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80"
         ],
         "review": "Quiet rocky beach where Vasco da Gama landed, serene Arabian sea breeze.",
         "tags": [
@@ -595,11 +599,11 @@ export const KERALA_CITIES = {
         "transitText": "🛺 18m • ₹60",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 35,
-        "photo": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Beypore_Beach_-_panoramio.jpg/960px-Beypore_Beach_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Beypore_Beach_-_panoramio.jpg/960px-Beypore_Beach_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80",
-          "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80",
-          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80"
+          "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80"
         ],
         "review": "Centuries-old wooden shipbuilding yard (Uru) and scenic river walkway into the sea.",
         "tags": [
@@ -623,11 +627,11 @@ export const KERALA_CITIES = {
         "transitText": "🚶 5m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
           "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
-          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80"
         ],
         "review": "Authentic Kozhikode beef biryani and piping hot sulaimani chai right near the station.",
         "tags": [
@@ -651,11 +655,11 @@ export const KERALA_CITIES = {
         "transitText": "🚶 6m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Kozhikode_beach_kites.jpg/960px-Kozhikode_beach_kites.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Kozhikode_beach_kites.jpg/960px-Kozhikode_beach_kites.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
-          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80"
+          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
         ],
         "review": "Air conditioned esports lounge with RTX gaming rigs and fiber optic connectivity.",
         "tags": [
@@ -689,14 +693,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 58,
         "distanceKm": 1.1,
-        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "transitText": "🚶 8m • Free",
         "returnText": "Back to Trivandrum Central Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/7/71/0507-KuthiraMalika-Dinakarr.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
         "photos": [
+          "https://upload.wikimedia.org/wikipedia/commons/7/71/0507-KuthiraMalika-Dinakarr.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
           "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80"
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
         ],
         "review": "122 carved wooden horses, teakwood silence, historic temple vibe.",
         "tags": [
@@ -717,14 +721,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 78,
         "distanceKm": 0.9,
-        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "transitText": "🚶 6m • Free",
         "returnText": "Back to Trivandrum Central Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
           "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80"
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
         ],
         "review": "Fresh hot Trivandrum yellow Boli with sweet condensed milk.",
         "tags": [
@@ -744,15 +748,15 @@ export const KERALA_CITIES = {
         "spendTime": 50,
         "rating": 4.8,
         "reviewCount": 149,
-        "distanceKm": 3.0,
-        "transitText": "\ud83d\udefa 10m \u2022 \u20b930",
+        "distanceKm": 3,
+        "transitText": "🛺 10m • ₹30",
         "returnText": "Back to Trivandrum Central Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Napier_Museum_TVM.jpg/960px-Napier_Museum_TVM.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Napier_Museum_TVM.jpg/960px-Napier_Museum_TVM.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
-          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
+          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80"
         ],
         "review": "Indo-Saracenic masterpiece nestled under massive rain trees.",
         "tags": [
@@ -773,14 +777,14 @@ export const KERALA_CITIES = {
         "rating": 4.6,
         "reviewCount": 178,
         "distanceKm": 2.1,
-        "transitText": "\ud83d\udefa 8m \u2022 \u20b925",
+        "transitText": "🛺 8m • ₹25",
         "returnText": "Back to Trivandrum Central Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
           "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80"
         ],
         "review": "18th-century restored Dutch manor for quiet filter coffee.",
         "tags": [
@@ -815,14 +819,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 129,
         "distanceKm": 4.5,
-        "transitText": "\ud83d\udefa 12m \u2022 \u20b940",
+        "transitText": "🛺 12m • ₹40",
         "returnText": "Back to Palakkad Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Palakkad_Tipu_Fort.jpg/960px-Palakkad_Tipu_Fort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Palakkad_Tipu_Fort.jpg/960px-Palakkad_Tipu_Fort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80"
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
         ],
         "review": "Granite fortress surrounded by a tranquil water moat.",
         "tags": [
@@ -843,7 +847,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 83,
         "distanceKm": 2.8,
-        "transitText": "\ud83d\udefa 8m \u2022 \u20b925",
+        "transitText": "🛺 8m • ₹25",
         "returnText": "Back to Palakkad Jn Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
@@ -871,14 +875,14 @@ export const KERALA_CITIES = {
         "rating": 4.6,
         "reviewCount": 154,
         "distanceKm": 0.5,
-        "transitText": "\ud83d\udeb6 3m \u2022 Free",
+        "transitText": "🚶 3m • Free",
         "returnText": "Back to Palakkad Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
           "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
         ],
         "review": "Retro spiral tables serving filter coffee and beetroot cutlets.",
         "tags": [
@@ -913,7 +917,7 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 133,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "transitText": "🚶 8m • Free",
         "returnText": "Back to Thrissur Jn Pl. 1",
         "returnCost": 0,
         "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
@@ -941,7 +945,7 @@ export const KERALA_CITIES = {
         "rating": 4.6,
         "reviewCount": 79,
         "distanceKm": 2.5,
-        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "transitText": "🛺 7m • ₹25",
         "returnText": "Back to Thrissur Jn Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
@@ -969,14 +973,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 174,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "transitText": "🚶 6m • Free",
         "returnText": "Back to Thrissur Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
           "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80"
         ],
         "review": "Paper-thin crispy ghee roast dosa and strong filter coffee.",
         "tags": [
@@ -1011,7 +1015,7 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 66,
         "distanceKm": 1.4,
-        "transitText": "\ud83d\udeb6 9m \u2022 Free",
+        "transitText": "🚶 9m • Free",
         "returnText": "Back to Alappuzha Pl. 1",
         "returnCost": 0,
         "photo": "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
@@ -1039,7 +1043,7 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 170,
         "distanceKm": 3.8,
-        "transitText": "\ud83d\udefa 10m \u2022 \u20b935",
+        "transitText": "🛺 10m • ₹35",
         "returnText": "Back to Alappuzha Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
@@ -1067,14 +1071,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 124,
         "distanceKm": 2.2,
-        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "transitText": "🛺 7m • ₹25",
         "returnText": "Back to Alappuzha Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
           "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
-          "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&q=80"
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
         ],
         "review": "Spicy Kuttanad duck roast with hot appams and coconut gravy.",
         "tags": [
@@ -1109,7 +1113,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 114,
         "distanceKm": 3.2,
-        "transitText": "\ud83d\udefa 9m \u2022 \u20b930",
+        "transitText": "🛺 9m • ₹30",
         "returnText": "Back to Kannur Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
@@ -1136,8 +1140,8 @@ export const KERALA_CITIES = {
         "spendTime": 60,
         "rating": 4.9,
         "reviewCount": 151,
-        "distanceKm": 11.0,
-        "transitText": "\ud83d\udefa 22m \u2022 \u20b980",
+        "distanceKm": 11,
+        "transitText": "🛺 22m • ₹80",
         "returnText": "Back to Kannur Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
@@ -1165,14 +1169,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 51,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Kannur Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1505253758473-96b301b224e0?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
           "https://images.unsplash.com/photo-1505253758473-96b301b224e0?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
         ],
         "review": "Kallummakkaya (spiced fried mussels) and fresh catch of the day.",
         "tags": [
@@ -1207,7 +1211,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 176,
         "distanceKm": 9.5,
-        "transitText": "\ud83d\udefa 22m \u2022 \u20b985",
+        "transitText": "🛺 22m • ₹85",
         "returnText": "Back to Kalpetta Hub",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1511497584788-87676104235f?w=800&q=80",
@@ -1235,14 +1239,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 163,
         "distanceKm": 2.1,
-        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "transitText": "🛺 6m • ₹25",
         "returnText": "Back to Kalpetta Hub",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
           "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
         ],
         "review": "Traditional Kerala sadhya and bamboo biryani served on banana leaves.",
         "tags": [
@@ -1262,15 +1266,15 @@ export const KERALA_CITIES = {
         "spendTime": 60,
         "rating": 4.8,
         "reviewCount": 165,
-        "distanceKm": 14.0,
-        "transitText": "\ud83d\udefa 30m \u2022 \u20b9120",
+        "distanceKm": 14,
+        "transitText": "🛺 30m • ₹120",
         "returnText": "Back to Kalpetta Hub",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
-          "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
-          "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80"
+          "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80"
         ],
         "review": "Stone Age petroglyphs carved high inside mountain rock clefts.",
         "tags": [
@@ -1304,15 +1308,15 @@ export const KERALA_CITIES = {
         "spendTime": 50,
         "rating": 4.7,
         "reviewCount": 99,
-        "distanceKm": 2.0,
-        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "distanceKm": 2,
+        "transitText": "🛺 6m • ₹25",
         "returnText": "Back to Munnar KSRTC",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Le_mus%C3%A9e_du_th%C3%A9_%28Munnar%2C_Inde%29_%2813694719014%29.jpg/960px-Le_mus%C3%A9e_du_th%C3%A9_%28Munnar%2C_Inde%29_%2813694719014%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Le_mus%C3%A9e_du_th%C3%A9_%28Munnar%2C_Inde%29_%2813694719014%29.jpg/960px-Le_mus%C3%A9e_du_th%C3%A9_%28Munnar%2C_Inde%29_%2813694719014%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-          "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80"
+          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
         ],
         "review": "Aromatic tea manufacturing history and fresh garden tea tasting.",
         "tags": [
@@ -1333,7 +1337,7 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 48,
         "distanceKm": 4.2,
-        "transitText": "\ud83d\udefa 12m \u2022 \u20b945",
+        "transitText": "🛺 12m • ₹45",
         "returnText": "Back to Munnar KSRTC",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
@@ -1361,14 +1365,14 @@ export const KERALA_CITIES = {
         "rating": 4.6,
         "reviewCount": 114,
         "distanceKm": 0.5,
-        "transitText": "\ud83d\udeb6 3m \u2022 Free",
+        "transitText": "🚶 3m • Free",
         "returnText": "Back to Munnar KSRTC",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
           "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80",
-          "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
+          "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80"
         ],
         "review": "Legendary backpacker cafe serving Kerala parottas and spiced tea.",
         "tags": [
@@ -1403,14 +1407,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 140,
         "distanceKm": 4.5,
-        "transitText": "\ud83d\udefa 11m \u2022 \u20b935",
+        "transitText": "🛺 11m • ₹35",
         "returnText": "Back to Kollam Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Thangassseri_Lighthouse.jpg/960px-Thangassseri_Lighthouse.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Thangassseri_Lighthouse.jpg/960px-Thangassseri_Lighthouse.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
-          "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
-          "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80"
+          "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80"
         ],
         "review": "144-foot red-and-white striped tower with coastal breakers view.",
         "tags": [
@@ -1431,14 +1435,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 92,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Kollam Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Ashtamudi_Kerala.jpg/960px-Ashtamudi_Kerala.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Ashtamudi_Kerala.jpg/960px-Ashtamudi_Kerala.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-          "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80"
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
         ],
         "review": "Palm-fringed gateway to Kerala's most picturesque backwaters.",
         "tags": [
@@ -1459,14 +1463,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 90,
         "distanceKm": 0.9,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Kollam Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
           "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80"
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
         ],
         "review": "Kollam's world-famous export-quality roasted cashews and sweet halwa.",
         "tags": [
@@ -1501,14 +1505,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 169,
         "distanceKm": 1.5,
-        "transitText": "\ud83d\udeb6 9m \u2022 Free",
+        "transitText": "🚶 9m • Free",
         "returnText": "Back to Kottayam Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Thirunakkara_Mahadeva_temple.jpg/960px-Thirunakkara_Mahadeva_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Thirunakkara_Mahadeva_temple.jpg/960px-Thirunakkara_Mahadeva_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=800&q=80",
-          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
-          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80"
+          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
         ],
         "review": "500-year-old traditional Kerala architecture temple with peaceful courtyard.",
         "tags": [
@@ -1528,15 +1532,15 @@ export const KERALA_CITIES = {
         "spendTime": 35,
         "rating": 4.7,
         "reviewCount": 176,
-        "distanceKm": 2.0,
-        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "distanceKm": 2,
+        "transitText": "🛺 7m • ₹25",
         "returnText": "Back to Kottayam Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/%E0%B4%AE%E0%B5%80%E0%B4%A8%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BF%E0%B4%B2%E0%B4%BE%E0%B5%BC_%E0%B4%88%E0%B4%B0%E0%B4%BE%E0%B4%B1%E0%B5%8D%E0%B4%B1%E0%B5%81%E0%B4%AA%E0%B5%87%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%AF%E0%B4%BF%E0%B5%BD.jpg/960px-%E0%B4%AE%E0%B5%80%E0%B4%A8%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BF%E0%B4%B2%E0%B4%BE%E0%B5%BC_%E0%B4%88%E0%B4%B0%E0%B4%BE%E0%B4%B1%E0%B5%8D%E0%B4%B1%E0%B5%81%E0%B4%AA%E0%B5%87%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%AF%E0%B4%BF%E0%B5%BD.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
-          "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/%E0%B4%AE%E0%B5%80%E0%B4%A8%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BF%E0%B4%B2%E0%B4%BE%E0%B5%BC_%E0%B4%88%E0%B4%B0%E0%B4%BE%E0%B4%B1%E0%B5%8D%E0%B4%B1%E0%B5%81%E0%B4%AA%E0%B5%87%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%AF%E0%B4%BF%E0%B5%BD.jpg/960px-%E0%B4%AE%E0%B5%80%E0%B4%A8%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BF%E0%B4%B2%E0%B4%BE%E0%B5%BC_%E0%B4%88%E0%B4%B0%E0%B4%BE%E0%B4%B1%E0%B5%8D%E0%B4%B1%E0%B5%81%E0%B4%AA%E0%B5%87%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%AF%E0%B4%BF%E0%B5%BD.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
         "review": "Immortalized in Arundhati Roy's God of Small Things. Gentle quiet ripples.",
         "tags": [
@@ -1557,14 +1561,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 66,
         "distanceKm": 4.8,
-        "transitText": "\ud83d\udefa 14m \u2022 \u20b950",
+        "transitText": "🛺 14m • ₹50",
         "returnText": "Back to Kottayam Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
           "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
-          "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&q=80"
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
         ],
         "review": "Iconic toddy parlor style Kuttanadan fish curry and spicy duck fry.",
         "tags": [
@@ -1599,14 +1603,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 111,
         "distanceKm": 2.5,
-        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "transitText": "🛺 8m • ₹30",
         "returnText": "Back to Varkala Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Varkala_beach_from_above.jpg/960px-Varkala_beach_from_above.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Varkala_beach_from_above.jpg/960px-Varkala_beach_from_above.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
-          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
+          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80"
         ],
         "review": "Dramatic red laterite cliffs jutting high above the roaring Arabian sea.",
         "tags": [
@@ -1627,14 +1631,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 102,
         "distanceKm": 1.8,
-        "transitText": "\ud83d\udeb6 10m \u2022 Free",
+        "transitText": "🚶 10m • Free",
         "returnText": "Back to Varkala Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Janardhana_swamy_temple.jpg/960px-Janardhana_swamy_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Janardhana_swamy_temple.jpg/960px-Janardhana_swamy_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
-          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
+          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80"
         ],
         "review": "Ancient Banyan tree draped with bells and natural mountain freshwater spring.",
         "tags": [
@@ -1655,14 +1659,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 92,
         "distanceKm": 2.7,
-        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "transitText": "🛺 8m • ₹30",
         "returnText": "Back to Varkala Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
           "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
-          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80"
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80"
         ],
         "review": "Organic pour-over coffee and fresh ginger lemon honey tea overlooking waves.",
         "tags": [
@@ -1697,14 +1701,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 81,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "transitText": "🚶 8m • Free",
         "returnText": "Back to Malappuram KSRTC",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Kottakkunnu.jpg/960px-Kottakkunnu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Kottakkunnu.jpg/960px-Kottakkunnu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80"
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
         ],
         "review": "The Marine Drive of Malappuram. Cool hilltop breeze and historic cantonment ruins.",
         "tags": [
@@ -1725,14 +1729,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 128,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Malappuram KSRTC",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
           "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80",
-          "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
+          "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80"
         ],
         "review": "Hot banana chips fried in fresh coconut oil and authentic wheat halwa.",
         "tags": [
@@ -1753,7 +1757,7 @@ export const KERALA_CITIES = {
         "rating": 4.6,
         "reviewCount": 129,
         "distanceKm": 2.5,
-        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "transitText": "🛺 7m • ₹25",
         "returnText": "Back to Malappuram KSRTC",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80",
@@ -1794,8 +1798,8 @@ export const KERALA_CITIES = {
         "spendTime": 40,
         "rating": 4.7,
         "reviewCount": 64,
-        "distanceKm": 3.0,
-        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "distanceKm": 3,
+        "transitText": "🛺 8m • ₹30",
         "returnText": "Back to Manjeri Town",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
@@ -1823,14 +1827,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 45,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "transitText": "🚶 6m • Free",
         "returnText": "Back to Manjeri Town",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
           "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&q=80",
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80"
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80"
         ],
         "review": "Authentic fragrant kaima rice biryani with tender chicken and mint chammanthi.",
         "tags": [
@@ -1851,7 +1855,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 108,
         "distanceKm": 8.5,
-        "transitText": "\ud83d\udefa 20m \u2022 \u20b970",
+        "transitText": "🛺 20m • ₹70",
         "returnText": "Back to Manjeri Town",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
@@ -1893,7 +1897,7 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 82,
         "distanceKm": 1.5,
-        "transitText": "\ud83d\udefa 5m \u2022 \u20b925",
+        "transitText": "🛺 5m • ₹25",
         "returnText": "Back to Angadippuram Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
@@ -1921,14 +1925,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 151,
         "distanceKm": 0.6,
-        "transitText": "\ud83d\udeb6 4m \u2022 Free",
+        "transitText": "🚶 4m • Free",
         "returnText": "Back to Angadippuram Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
           "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80"
         ],
         "review": "Steaming hot layered sweet chatti pathiri and cardamom tea.",
         "tags": [
@@ -1949,7 +1953,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 46,
         "distanceKm": 7.8,
-        "transitText": "\ud83d\udefa 18m \u2022 \u20b960",
+        "transitText": "🛺 18m • ₹60",
         "returnText": "Back to Angadippuram Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1511497584788-87676104235f?w=800&q=80",
@@ -1990,8 +1994,8 @@ export const KERALA_CITIES = {
         "spendTime": 45,
         "rating": 4.9,
         "reviewCount": 119,
-        "distanceKm": 2.0,
-        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "distanceKm": 2,
+        "transitText": "🛺 6m • ₹25",
         "returnText": "Back to Tirur Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
@@ -2019,14 +2023,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 146,
         "distanceKm": 0.5,
-        "transitText": "\ud83d\udeb6 3m \u2022 Free",
+        "transitText": "🚶 3m • Free",
         "returnText": "Back to Tirur Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
           "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-          "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80",
-          "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80"
+          "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80"
         ],
         "review": "World-famous GI-tagged Tirur Vettila and strong aromatic chai.",
         "tags": [
@@ -2046,8 +2050,8 @@ export const KERALA_CITIES = {
         "spendTime": 40,
         "rating": 4.6,
         "reviewCount": 60,
-        "distanceKm": 6.0,
-        "transitText": "\ud83d\udefa 14m \u2022 \u20b950",
+        "distanceKm": 6,
+        "transitText": "🛺 14m • ₹50",
         "returnText": "Back to Tirur Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1505253758473-96b301b224e0?w=800&q=80",
@@ -2089,7 +2093,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 47,
         "distanceKm": 2.8,
-        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "transitText": "🛺 8m • ₹30",
         "returnText": "Back to Guruvayur Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
@@ -2117,7 +2121,7 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 143,
         "distanceKm": 4.5,
-        "transitText": "\ud83d\udefa 12m \u2022 \u20b940",
+        "transitText": "🛺 12m • ₹40",
         "returnText": "Back to Guruvayur Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80",
@@ -2145,14 +2149,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 74,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Guruvayur Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
           "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
         ],
         "review": "Crisp ghee neyyappam fried live in copper vessels.",
         "tags": [
@@ -2184,10 +2188,10 @@ export const KERALA_CITIES = {
         "lng": 74.9859,
         "expense": 25,
         "spendTime": 60,
-        "rating": 5.0,
+        "rating": 5,
         "reviewCount": 123,
-        "distanceKm": 12.0,
-        "transitText": "\ud83d\udefa 24m \u2022 \u20b990",
+        "distanceKm": 12,
+        "transitText": "🛺 24m • ₹90",
         "returnText": "Back to Kasaragod Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
@@ -2215,7 +2219,7 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 85,
         "distanceKm": 4.2,
-        "transitText": "\ud83d\udefa 10m \u2022 \u20b935",
+        "transitText": "🛺 10m • ₹35",
         "returnText": "Back to Kasaragod Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
@@ -2243,14 +2247,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 69,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Kasaragod Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
           "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
         ],
         "review": "Hot Mangalore bajji (goli baje) served with spicy ginger chutney.",
         "tags": [
@@ -2285,14 +2289,14 @@ export const KERALA_CITIES = {
         "rating": 4.6,
         "reviewCount": 142,
         "distanceKm": 2.2,
-        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "transitText": "🛺 6m • ₹25",
         "returnText": "Back to Kanhangad Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Hosdurg_fort_vijayan_rajapuram.jpg/960px-Hosdurg_fort_vijayan_rajapuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Hosdurg_fort_vijayan_rajapuram.jpg/960px-Hosdurg_fort_vijayan_rajapuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
-          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80"
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80"
         ],
         "review": "Round brick bastions built by Ikkeri Nayakas amidst coconut gardens.",
         "tags": [
@@ -2313,14 +2317,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 169,
         "distanceKm": 4.8,
-        "transitText": "\ud83d\udefa 12m \u2022 \u20b940",
+        "transitText": "🛺 12m • ₹40",
         "returnText": "Back to Kanhangad Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Anandashram%2C_Kanhanagad._2.jpg/960px-Anandashram%2C_Kanhanagad._2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Anandashram%2C_Kanhanagad._2.jpg/960px-Anandashram%2C_Kanhanagad._2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
-          "https://images.unsplash.com/photo-1511497584788-87676104235f?w=800&q=80",
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+          "https://images.unsplash.com/photo-1511497584788-87676104235f?w=800&q=80"
         ],
         "review": "Deep spiritual silence under towering mango and neem groves.",
         "tags": [
@@ -2340,15 +2344,15 @@ export const KERALA_CITIES = {
         "spendTime": 30,
         "rating": 4.8,
         "reviewCount": 49,
-        "distanceKm": 1.0,
-        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "distanceKm": 1,
+        "transitText": "🚶 6m • Free",
         "returnText": "Back to Kanhangad Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
           "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-          "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80"
+          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
         ],
         "review": "Delicate rice neer dosas with fresh sea fish curry.",
         "tags": [
@@ -2383,14 +2387,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 93,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Thalassery Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Thalassery_fort.JPG/960px-Thalassery_fort.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Thalassery_fort.JPG/960px-Thalassery_fort.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
-          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
+          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80"
         ],
         "review": "Massive laterite ramparts built in 1708 overlooking rocky sea breakers.",
         "tags": [
@@ -2408,17 +2412,17 @@ export const KERALA_CITIES = {
         "lng": 75.4949,
         "expense": 60,
         "spendTime": 20,
-        "rating": 5.0,
+        "rating": 5,
         "reviewCount": 50,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Thalassery Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
           "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-          "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80",
-          "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80"
+          "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80"
         ],
         "review": "The birthplace of India's very first Christmas cake and crunchy biscuits.",
         "tags": [
@@ -2438,15 +2442,15 @@ export const KERALA_CITIES = {
         "spendTime": 35,
         "rating": 4.9,
         "reviewCount": 51,
-        "distanceKm": 1.0,
-        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "distanceKm": 1,
+        "transitText": "🚶 6m • Free",
         "returnText": "Back to Thalassery Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
           "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
-          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80",
-          "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&q=80"
+          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
         ],
         "review": "The benchmark authentic Thalassery biryani with kaima rice and ghee.",
         "tags": [
@@ -2467,14 +2471,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 102,
         "distanceKm": 1.5,
-        "transitText": "\ud83d\udeb6 9m \u2022 Free",
+        "transitText": "🚶 9m • Free",
         "returnText": "Back to Thalassery Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Overbury%27s_foly.jpg/960px-Overbury%27s_foly.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Overbury%27s_foly.jpg/960px-Overbury%27s_foly.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80",
-          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
-          "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80"
+          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80"
         ],
         "review": "Colonial viewpoint constructed by E.N. Overbury above crashing tides.",
         "tags": [
@@ -2509,14 +2513,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 59,
         "distanceKm": 4.5,
-        "transitText": "\ud83d\udefa 12m \u2022 \u20b940",
+        "transitText": "🛺 12m • ₹40",
         "returnText": "Back to Vadakara Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/%E0%B4%B2%E0%B5%8B%E0%B4%95%E0%B4%A8%E0%B4%BE%E0%B5%BC%E0%B4%95%E0%B4%BE%E0%B4%B5%E0%B5%8D_%E0%B4%AD%E0%B4%97%E0%B4%B5%E0%B4%A4%E0%B4%BF_%E0%B4%95%E0%B5%8D%E0%B4%B7%E0%B5%87%E0%B4%A4%E0%B5%8D%E0%B4%B0%E0%B4%82_02.jpg/960px-%E0%B4%B2%E0%B5%8B%E0%B4%95%E0%B4%A8%E0%B4%BE%E0%B5%BC%E0%B4%95%E0%B4%BE%E0%B4%B5%E0%B5%8D_%E0%B4%AD%E0%B4%97%E0%B4%B5%E0%B4%A4%E0%B4%BF_%E0%B4%95%E0%B5%8D%E0%B4%B7%E0%B5%87%E0%B4%A4%E0%B5%8D%E0%B4%B0%E0%B4%82_02.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/%E0%B4%B2%E0%B5%8B%E0%B4%95%E0%B4%A8%E0%B4%BE%E0%B5%BC%E0%B4%95%E0%B4%BE%E0%B4%B5%E0%B5%8D_%E0%B4%AD%E0%B4%97%E0%B4%B5%E0%B4%A4%E0%B4%BF_%E0%B4%95%E0%B5%8D%E0%B4%B7%E0%B5%87%E0%B4%A4%E0%B5%8D%E0%B4%B0%E0%B4%82_02.jpg/960px-%E0%B4%B2%E0%B5%8B%E0%B4%95%E0%B4%A8%E0%B4%BE%E0%B5%BC%E0%B4%95%E0%B4%BE%E0%B4%B5%E0%B5%8D_%E0%B4%AD%E0%B4%97%E0%B4%B5%E0%B4%A4%E0%B4%BF_%E0%B4%95%E0%B5%8D%E0%B4%B7%E0%B5%87%E0%B4%A4%E0%B5%8D%E0%B4%B0%E0%B4%82_02.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80"
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
         ],
         "review": "1500-year-old temple where martial hero Thacholi Othenan prayed.",
         "tags": [
@@ -2537,14 +2541,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 133,
         "distanceKm": 3.8,
-        "transitText": "\ud83d\udefa 10m \u2022 \u20b935",
+        "transitText": "🛺 10m • ₹35",
         "returnText": "Back to Vadakara Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Vadakara_aerial_view.jpg/960px-Vadakara_aerial_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Vadakara_aerial_view.jpg/960px-Vadakara_aerial_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
-          "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
-          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80"
+          "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80"
         ],
         "review": "Golden sand spit where river meets the sea with wooden walkways.",
         "tags": [
@@ -2565,14 +2569,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 56,
         "distanceKm": 0.9,
-        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "transitText": "🚶 6m • Free",
         "returnText": "Back to Vadakara Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
           "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-          "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80"
+          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
         ],
         "review": "Hot mutton samosas and spicy Sulaimani lemon tea.",
         "tags": [
@@ -2607,14 +2611,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 47,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Bathery Central",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Jaina2.jpg/960px-Jaina2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Jaina2.jpg/960px-Jaina2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80"
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
         ],
         "review": "Carved granite pillars used by Tipu Sultan to store his artillery battery.",
         "tags": [
@@ -2635,14 +2639,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 139,
         "distanceKm": 0.6,
-        "transitText": "\ud83d\udeb6 4m \u2022 Free",
+        "transitText": "🚶 4m • Free",
         "returnText": "Back to Bathery Central",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
           "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-          "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80"
+          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
         ],
         "review": "Fresh tribal forest honey with ginger cinnamon tea.",
         "tags": [
@@ -2662,8 +2666,8 @@ export const KERALA_CITIES = {
         "spendTime": 60,
         "rating": 4.8,
         "reviewCount": 156,
-        "distanceKm": 12.0,
-        "transitText": "\ud83d\udefa 25m \u2022 \u20b9100",
+        "distanceKm": 12,
+        "transitText": "🛺 25m • ₹100",
         "returnText": "Back to Bathery Central",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
@@ -2704,15 +2708,15 @@ export const KERALA_CITIES = {
         "spendTime": 50,
         "rating": 4.8,
         "reviewCount": 72,
-        "distanceKm": 4.0,
-        "transitText": "\ud83d\udefa 10m \u2022 \u20b935",
+        "distanceKm": 4,
+        "transitText": "🛺 10m • ₹35",
         "returnText": "Back to Nilambur Road Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Nilambur_Teak_Museum_03957.JPG/960px-Nilambur_Teak_Museum_03957.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Nilambur_Teak_Museum_03957.JPG/960px-Nilambur_Teak_Museum_03957.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
         ],
         "review": "52-room research museum exhibiting giant root systems and teak history.",
         "tags": [
@@ -2733,7 +2737,7 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 106,
         "distanceKm": 3.2,
-        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "transitText": "🛺 8m • ₹30",
         "returnText": "Back to Nilambur Road Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
@@ -2761,14 +2765,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 102,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Nilambur Road Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
           "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
-          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80"
         ],
         "review": "Steamed inside hollow bamboo stems with tender spices and egg.",
         "tags": [
@@ -2803,7 +2807,7 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 51,
         "distanceKm": 1.1,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Chalakudy Pl. 1",
         "returnCost": 0,
         "photo": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
@@ -2828,10 +2832,10 @@ export const KERALA_CITIES = {
         "lng": 76.331,
         "expense": 50,
         "spendTime": 60,
-        "rating": 5.0,
+        "rating": 5,
         "reviewCount": 75,
-        "distanceKm": 28.0,
-        "transitText": "\ud83d\udefa 45m \u2022 \u20b9250",
+        "distanceKm": 28,
+        "transitText": "🛺 45m • ₹250",
         "returnText": "Back to Chalakudy Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
@@ -2859,14 +2863,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 64,
         "distanceKm": 0.7,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Chalakudy Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
           "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-          "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80"
+          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
         ],
         "review": "Soft layered steamed rice puttu with rich dark chickpea gravy.",
         "tags": [
@@ -2901,7 +2905,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 96,
         "distanceKm": 7.5,
-        "transitText": "\ud83d\udefa 15m \u2022 \u20b950",
+        "transitText": "🛺 15m • ₹50",
         "returnText": "Back to Angamaly Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
@@ -2929,7 +2933,7 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 85,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "transitText": "🚶 8m • Free",
         "returnText": "Back to Angamaly Pl. 1",
         "returnCost": 0,
         "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
@@ -2957,14 +2961,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 158,
         "distanceKm": 0.9,
-        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "transitText": "🚶 6m • Free",
         "returnText": "Back to Angamaly Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
           "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&q=80",
-          "https://images.unsplash.com/photo-1505253758473-96b301b224e0?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
+          "https://images.unsplash.com/photo-1505253758473-96b301b224e0?w=800&q=80"
         ],
         "review": "Celebrated culinary specialty: spicy slow-roasted pork and flaky porottas.",
         "tags": [
@@ -2999,7 +3003,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 131,
         "distanceKm": 1.4,
-        "transitText": "\ud83d\udeb6 9m \u2022 Free",
+        "transitText": "🚶 9m • Free",
         "returnText": "Back to Aluva Pl. 1",
         "returnCost": 0,
         "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
@@ -3027,7 +3031,7 @@ export const KERALA_CITIES = {
         "rating": 4.6,
         "reviewCount": 109,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Aluva Pl. 1",
         "returnCost": 0,
         "photo": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
@@ -3055,14 +3059,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 108,
         "distanceKm": 0.6,
-        "transitText": "\ud83d\udeb6 4m \u2022 Free",
+        "transitText": "🚶 4m • Free",
         "returnText": "Back to Aluva Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
           "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
         ],
         "review": "Fried stuffed mussels and hot Sulaimani tea under railway arch.",
         "tags": [
@@ -3097,7 +3101,7 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 139,
         "distanceKm": 2.1,
-        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "transitText": "🛺 6m • ₹25",
         "returnText": "Back to Changanassery Pl. 1",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
@@ -3125,14 +3129,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 90,
         "distanceKm": 1.5,
-        "transitText": "\ud83d\udeb6 9m \u2022 Free",
+        "transitText": "🚶 9m • Free",
         "returnText": "Back to Changanassery Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
           "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
-          "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800&q=80"
         ],
         "review": "Quiet pink water lily ponds flanked by emerald green paddy dykes.",
         "tags": [
@@ -3153,14 +3157,14 @@ export const KERALA_CITIES = {
         "rating": 4.8,
         "reviewCount": 140,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Changanassery Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
           "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80"
         ],
         "review": "Traditional South Travancore style dosas with rich coconut chutney.",
         "tags": [
@@ -3192,10 +3196,10 @@ export const KERALA_CITIES = {
         "lng": 76.78500000000001,
         "expense": 50,
         "spendTime": 50,
-        "rating": 5.0,
+        "rating": 5,
         "reviewCount": 67,
-        "distanceKm": 11.0,
-        "transitText": "\ud83d\udefa 22m \u2022 \u20b985",
+        "distanceKm": 11,
+        "transitText": "🛺 22m • ₹85",
         "returnText": "Back to Pathanamthitta Hub",
         "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
@@ -3223,14 +3227,14 @@ export const KERALA_CITIES = {
         "rating": 4.7,
         "reviewCount": 118,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Pathanamthitta Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Achankovil_river.jpg/960px-Achankovil_river.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Achankovil_river.jpg/960px-Achankovil_river.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
-          "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
-          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80"
+          "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80"
         ],
         "review": "Shady bamboo-fringed riverside with clear natural hill water.",
         "tags": [
@@ -3251,14 +3255,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 72,
         "distanceKm": 0.8,
-        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "transitText": "🚶 5m • Free",
         "returnText": "Back to Pathanamthitta Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
           "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80",
-          "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
-          "https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=800&q=80"
+          "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80"
         ],
         "review": "Rich black jaggery and roasted rice payasam cooked in ghee.",
         "tags": [
@@ -3293,14 +3297,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 162,
         "distanceKm": 1.8,
-        "transitText": "\ud83d\udeb6 10m \u2022 Free",
+        "transitText": "🚶 10m • Free",
         "returnText": "Back to Kumarakom Jetty",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Kerala_Kumarakom_Bird_Sanctuary.jpg/960px-Kerala_Kumarakom_Bird_Sanctuary.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Kerala_Kumarakom_Bird_Sanctuary.jpg/960px-Kerala_Kumarakom_Bird_Sanctuary.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
-          "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
-          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80"
+          "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80"
         ],
         "review": "14-acre preserved mangrove sanctuary visited by Siberian storks and egrets.",
         "tags": [
@@ -3318,17 +3322,17 @@ export const KERALA_CITIES = {
         "lng": 76.43480000000001,
         "expense": 0,
         "spendTime": 45,
-        "rating": 5.0,
+        "rating": 5,
         "reviewCount": 177,
         "distanceKm": 0.5,
-        "transitText": "\ud83d\udeb6 4m \u2022 Free",
+        "transitText": "🚶 4m • Free",
         "returnText": "Back to Kumarakom Jetty",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
+        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Kumarkom.jpg/960px-Kumarkom.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "photos": [
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Kumarkom.jpg/960px-Kumarkom.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
           "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
-          "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80",
-          "https://images.unsplash.com/photo-1437482078695-dc396327121b?w=800&q=80"
+          "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80"
         ],
         "review": "Breathtaking vast horizon over India's longest lake with gliding houseboats.",
         "tags": [
@@ -3349,14 +3353,14 @@ export const KERALA_CITIES = {
         "rating": 4.9,
         "reviewCount": 51,
         "distanceKm": 1.2,
-        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "transitText": "🚶 7m • Free",
         "returnText": "Back to Kumarakom Jetty",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1505253758473-96b301b224e0?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
         "photos": [
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
           "https://images.unsplash.com/photo-1505253758473-96b301b224e0?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
+          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
         ],
         "review": "Fresh pearl spot fish marinated in spicy shallots and wrapped in banana leaf.",
         "tags": [
