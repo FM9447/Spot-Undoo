@@ -25,7 +25,8 @@ export const getBackendUrl = () => {
 };
 
 export const getGroqApiKey = () => {
-  return import.meta.env?.VITE_GROQ_API_KEY || '';
+  // Client requests route securely through backend proxy to prevent key exposure
+  return '';
 };
 
 export const getOllamaUrl = () => {

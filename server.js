@@ -8,11 +8,15 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { MongoClient, ObjectId } from 'mongodb';
 
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '5mb' }));
 
 const MONGODB_URI = process.env.MONGODB_URI || '';
+const JWT_SECRET = process.env.JWT_SECRET || 'spot_undoo_kerala_secure_jwt_secret_2026';
 
 let client;
 let db;
@@ -47,12 +51,38 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// User Registration with Profile Avatar
-app.post('/api/auth/register', async (req, res) => {
+// In-memory sliding rate limiter for authentication to prevent brute force
+const authAttempts = new Map();
+function rateLimitAuth(req, res, next) {
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
+  const now = Date.now();
+  const windowMs = 5 * 60 * 1000; // 5 minutes
+  const maxAttempts = 10;
+
+  const record = authAttempts.get(ip) || { count: 0, resetTime: now + windowMs };
+  if (now > record.resetTime) {
+    record.count = 1;
+    record.resetTime = now + windowMs;
+  } else {
+    record.count++;
+  }
+  authAttempts.set(ip, record);
+
+  if (record.count > maxAttempts) {
+    const waitSecs = Math.ceil((record.resetTime - now) / 1000);
+    return res.status(429).json({
+      error: `Too many login attempts. Please wait ${waitSecs} seconds before trying again.`,
+    });
+  }
+  next();
+}
+
+// User Registration with Bcrypt Password Hashing and JWT
+app.post('/api/auth/register', rateLimitAuth, async (req, res) => {
   try {
     const { name, email, password, avatar } = req.body;
-    if (!name || !email || !password) {
-      return res.status(400).json({ error: 'Name, email, and password required' });
+    if (!name || !email || !password || typeof password !== 'string' || password.length < 4) {
+      return res.status(400).json({ error: 'Name, valid email, and password (min 4 characters) required' });
     }
     const cleanEmail = email.toLowerCase().trim();
     const existing = await db.collection('users').findOne({ email: cleanEmail });
@@ -60,14 +90,20 @@ app.post('/api/auth/register', async (req, res) => {
       return res.status(409).json({ error: 'Email already registered' });
     }
     const defaultAvatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(cleanEmail)}`;
+    const hashedPassword = await bcrypt.hash(password, 10);
     const userDoc = {
       name: name.trim(),
       email: cleanEmail,
-      password, // in real production you would hash with bcrypt
+      password: hashedPassword,
       avatar: avatar || defaultAvatar,
       createdAt: new Date(),
     };
     const result = await db.collection('users').insertOne(userDoc);
+    const token = jwt.sign(
+      { id: result.insertedId.toString(), email: cleanEmail, name: userDoc.name },
+      JWT_SECRET,
+      { expiresIn: '14d' }
+    );
     res.json({
       success: true,
       user: {
@@ -76,7 +112,7 @@ app.post('/api/auth/register', async (req, res) => {
         email: userDoc.email,
         avatar: userDoc.avatar,
       },
-      token: Buffer.from(`${cleanEmail}:${userDoc.name}`).toString('base64'),
+      token,
     });
   } catch (e) {
     console.error('Registration failed:', e);
@@ -84,19 +120,39 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
-// User Login with Profile Avatar
-app.post('/api/auth/login', async (req, res) => {
+// User Login with Bcrypt Verification & Automatic Legacy Migration
+app.post('/api/auth/login', rateLimitAuth, async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) {
+    if (!email || !password || typeof password !== 'string') {
       return res.status(400).json({ error: 'Email and password required' });
     }
     const cleanEmail = email.toLowerCase().trim();
     const user = await db.collection('users').findOne({ email: cleanEmail });
-    if (!user || user.password !== password) {
+    if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
+
+    let isMatch = false;
+    if (user.password && user.password.startsWith('$2')) {
+      isMatch = await bcrypt.compare(password, user.password);
+    } else if (user.password === password) {
+      // Legacy plaintext migration: upgrade to bcrypt hash
+      isMatch = true;
+      const upgradedHash = await bcrypt.hash(password, 10);
+      await db.collection('users').updateOne({ _id: user._id }, { $set: { password: upgradedHash } });
+    }
+
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
     const defaultAvatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(cleanEmail)}`;
+    const token = jwt.sign(
+      { id: user._id.toString(), email: user.email, name: user.name },
+      JWT_SECRET,
+      { expiresIn: '14d' }
+    );
     res.json({
       success: true,
       user: {
@@ -105,7 +161,7 @@ app.post('/api/auth/login', async (req, res) => {
         email: user.email,
         avatar: user.avatar || defaultAvatar,
       },
-      token: Buffer.from(`${cleanEmail}:${user.name}`).toString('base64'),
+      token,
     });
   } catch (e) {
     console.error('Login failed:', e);

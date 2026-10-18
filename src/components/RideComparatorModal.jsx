@@ -343,17 +343,31 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
   // Deep launch ride handler
   const handleBookRide = (ride) => {
     if (!ride.available) {
-      window.open(`https://www.google.com/maps/search/?api=1&query=auto+stand+near+${encodeURIComponent(destName)}`, '_blank');
+      window.open(`https://www.google.com/maps/search/?api=1&query=auto+stand+near+${encodeURIComponent(destName)}`, '_blank', 'noopener,noreferrer');
       return;
     }
-    const startTime = Date.now();
-    window.location.href = ride.appScheme;
-
-    setTimeout(() => {
-      if (Date.now() - startTime < 1200) {
-        window.open(ride.webUrl, '_blank', 'noopener,noreferrer');
+    const ALLOWED_SCHEMES = ['uber:', 'rapido:', 'https:'];
+    const isSafeScheme = (uri) => {
+      try {
+        const parsed = new URL(uri);
+        return ALLOWED_SCHEMES.includes(parsed.protocol);
+      } catch {
+        return ALLOWED_SCHEMES.some((s) => uri.startsWith(s));
       }
-    }, 500);
+    };
+
+    if (ride.appScheme && isSafeScheme(ride.appScheme)) {
+      const startTime = Date.now();
+      window.location.href = ride.appScheme;
+
+      setTimeout(() => {
+        if (Date.now() - startTime < 1200 && ride.webUrl && isSafeScheme(ride.webUrl)) {
+          window.open(ride.webUrl, '_blank', 'noopener,noreferrer');
+        }
+      }, 500);
+    } else if (ride.webUrl && isSafeScheme(ride.webUrl)) {
+      window.open(ride.webUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (
