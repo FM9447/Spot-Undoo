@@ -1703,23 +1703,23 @@ Return JSON in this format:
               </div>
             </div>
           ) : (
-            /* VIEW MODE 2: Scrollable Neo-Brutalist Trail Canvas (Calibrated for ~3 initial Polaroid cards + scroll) */
-            <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[500px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
+            /* VIEW MODE 2: Scrollable Neo-Brutalist Trail Canvas (Calibrated for ~3 compact Polaroid cards + scroll) */
+            <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[460px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
               {/* Dynamic Trail SVG Line: Starts at circular START at top, terminates at END at bottom */}
               {(() => {
                 const stops = currentPlan.stops || [];
                 const stopsCount = stops.length;
-                const stepGap = 160;
+                const stepGap = 138;
                 const stopNodes = stops.map((_, sIdx) => {
                   const isLeft = sIdx % 2 === 0;
                   return {
                     cx: isLeft ? 26 : 330,
-                    cy: 135 + sIdx * stepGap,
+                    cy: 120 + sIdx * stepGap,
                     idx: sIdx,
                   };
                 });
 
-                const endCy = stopsCount === 0 ? 90 : 80 + stopsCount * stepGap + 14;
+                const endCy = stopsCount === 0 ? 90 : 70 + stopsCount * stepGap + 14;
                 const endPoint = { cx: 180, cy: endCy };
                 const svgHeight = endCy + 70;
 
@@ -1927,39 +1927,39 @@ Return JSON in this format:
                           {/* Left Number Waypoint Circle */}
                           <div
                             onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`w-7 h-7 rounded-full border-[2px] font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition cursor-pointer hover:scale-105 active:scale-95 ${
+                            className={`w-6 h-6 rounded-full border-[2px] font-black text-[11px] flex items-center justify-center shrink-0 shadow-[0_1.5px_0_0_#000000] transition cursor-pointer hover:scale-105 active:scale-95 ${
                               isReached
                                 ? 'bg-[#E5E7EB] text-gray-600 border-gray-400'
                                 : 'bg-[#0B3BF4] text-white border-black'
                             }`}
                           >
-                            {isReached ? <Check size={14} className="text-gray-700" strokeWidth={3} /> : sIdx + 1}
+                            {isReached ? <Check size={12} className="text-gray-700" strokeWidth={3} /> : sIdx + 1}
                           </div>
 
-                          {/* Polaroid Snapshot Card (With 3D Red Push-Pin) */}
+                          {/* Compact Polaroid Snapshot Card */}
                           <div
                             onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`relative rounded-2xl p-2 pt-3 pb-2.5 shadow-[0_4px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[215px] w-full -rotate-1 hover:rotate-0 ${
+                            className={`relative rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[175px] w-full -rotate-1 hover:rotate-0 ${
                               isReached
-                                ? 'bg-white/85 border-[2px] border-gray-400 opacity-80'
-                                : 'bg-white border-[2.5px] border-black'
+                                ? 'bg-white/85 border-[1.8px] border-gray-400 opacity-80'
+                                : 'bg-white border-[2px] border-black'
                             }`}
                           >
                             {/* Realistic 3D Red Push-Pin Pinned at Top Center */}
-                            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
+                            <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
                               <div
-                                className={`w-4 h-4 rounded-full border-[1.5px] shadow-[0_2px_0_0_rgba(0,0,0,0.35)] flex items-center justify-center ${
+                                className={`w-3.5 h-3.5 rounded-full border-[1.2px] shadow-[0_1.5px_0_0_rgba(0,0,0,0.35)] flex items-center justify-center ${
                                   isReached
                                     ? 'bg-gradient-to-br from-gray-300 to-gray-500 border-gray-600'
                                     : 'bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-black ring-1 ring-red-300/60'
                                 }`}
                               >
-                                <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
+                                <div className="w-1 h-1 rounded-full bg-white/70" />
                               </div>
                             </div>
 
-                            {/* Polaroid Photo Frame (Upper Area) */}
-                            <div className="relative w-full h-24 rounded-lg overflow-hidden border-[1.5px] border-black mb-1.5 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                            {/* Polaroid Photo Frame */}
+                            <div className="relative w-full h-20 rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                               <img
                                 src={stop.photo || currentCity.spots[0]?.photo}
                                 alt={stop.name}
@@ -1969,61 +1969,61 @@ Return JSON in this format:
                               />
                               <div className="absolute top-1 right-1">
                                 {isReached ? (
-                                  <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[7px] px-1.5 py-0.5 rounded uppercase">
+                                  <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[6.5px] px-1 py-0.2 rounded uppercase">
                                     VISITED
                                   </span>
                                 ) : (
-                                  <span className="bg-[#F59E0B] border border-black text-black font-black text-[7px] px-1.5 py-0.5 rounded uppercase shadow-[0_1px_0_0_#000000]">
+                                  <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] px-1 py-0.2 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
                                     {stop.badge || stop.category || 'SPOT'}
                                   </span>
                                 )}
                               </div>
                             </div>
 
-                            {/* Polaroid Bottom Chin (Classic white footer) */}
+                            {/* Polaroid Bottom Chin */}
                             <div className="px-0.5 space-y-0.5">
-                              <div className="font-black text-[11px] text-black truncate leading-tight">
+                              <div className="font-black text-[10px] text-black truncate leading-tight">
                                 {stop.name}
                               </div>
-                              <div className={`text-[10px] font-bold flex items-center justify-between ${isReached ? 'text-gray-500' : 'text-emerald-700'}`}>
+                              <div className={`text-[9px] font-bold flex items-center justify-between ${isReached ? 'text-gray-500' : 'text-emerald-700'}`}>
                                 <span>{stop.costText || (stop.expense === 0 ? 'Free' : `₹${stop.expense}`) + ` • ${stop.spendTime || 30}m`}</span>
                                 <span className="flex items-center gap-0.5">{stop.rating || stop.data?.rating || 5} ⭐</span>
                               </div>
-                              <div className="text-[9px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                                <span className="truncate">
-                                  📍 {distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}km`} away` : (stop.distanceText || '0.8 km away')}
+                              <div className="text-[8.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                                <span className="truncate max-w-[125px]">
+                                  📍 {distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}km`}` : (stop.distanceText || '0.8 km')}
                                 </span>
-                                <span className={isReached ? 'text-gray-400 font-black text-[10px]' : 'text-[#0B3BF4] font-black text-[10px]'}>↗</span>
+                                <span className={isReached ? 'text-gray-400 font-black text-[9px]' : 'text-[#0B3BF4] font-black text-[9px]'}>↗</span>
                               </div>
                             </div>
                           </div>
                         </div>
                       ) : (
                         <div className="flex items-center justify-end gap-2 pr-0.5">
-                          {/* Polaroid Snapshot Card (Right-Aligned With 3D Red Push-Pin) */}
+                          {/* Compact Polaroid Snapshot Card (Right-Aligned) */}
                           <div
                             onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`relative rounded-2xl p-2 pt-3 pb-2.5 shadow-[0_4px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[215px] w-full rotate-1 hover:rotate-0 ${
+                            className={`relative rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[175px] w-full rotate-1 hover:rotate-0 ${
                               isReached
-                                ? 'bg-white/85 border-[2px] border-gray-400 opacity-80'
-                                : 'bg-white border-[2.5px] border-black'
+                                ? 'bg-white/85 border-[1.8px] border-gray-400 opacity-80'
+                                : 'bg-white border-[2px] border-black'
                             }`}
                           >
                             {/* Realistic 3D Red Push-Pin Pinned at Top Center */}
-                            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
+                            <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
                               <div
-                                className={`w-4 h-4 rounded-full border-[1.5px] shadow-[0_2px_0_0_rgba(0,0,0,0.35)] flex items-center justify-center ${
+                                className={`w-3.5 h-3.5 rounded-full border-[1.2px] shadow-[0_1.5px_0_0_rgba(0,0,0,0.35)] flex items-center justify-center ${
                                   isReached
                                     ? 'bg-gradient-to-br from-gray-300 to-gray-500 border-gray-600'
                                     : 'bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-black ring-1 ring-red-300/60'
                                 }`}
                               >
-                                <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
+                                <div className="w-1 h-1 rounded-full bg-white/70" />
                               </div>
                             </div>
 
-                            {/* Polaroid Photo Frame (Upper Area) */}
-                            <div className="relative w-full h-24 rounded-lg overflow-hidden border-[1.5px] border-black mb-1.5 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                            {/* Polaroid Photo Frame */}
+                            <div className="relative w-full h-20 rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                               <img
                                 src={stop.photo || currentCity.spots[1]?.photo}
                                 alt={stop.name}
@@ -2033,31 +2033,31 @@ Return JSON in this format:
                               />
                               <div className="absolute top-1 right-1">
                                 {isReached ? (
-                                  <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[7px] px-1.5 py-0.5 rounded uppercase">
+                                  <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[6.5px] px-1 py-0.2 rounded uppercase">
                                     VISITED
                                   </span>
                                 ) : (
-                                  <span className="bg-[#F59E0B] border border-black text-black font-black text-[7px] px-1.5 py-0.5 rounded uppercase shadow-[0_1px_0_0_#000000]">
+                                  <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] px-1 py-0.2 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
                                     {stop.badge || stop.category || 'SPOT'}
                                   </span>
                                 )}
                               </div>
                             </div>
 
-                            {/* Polaroid Bottom Chin (Classic white footer) */}
+                            {/* Polaroid Bottom Chin */}
                             <div className="px-0.5 space-y-0.5">
-                              <div className="font-black text-[11px] text-black truncate leading-tight">
+                              <div className="font-black text-[10px] text-black truncate leading-tight">
                                 {stop.name}
                               </div>
-                              <div className={`text-[10px] font-bold flex items-center justify-between ${isReached ? 'text-gray-500' : 'text-emerald-700'}`}>
+                              <div className={`text-[9px] font-bold flex items-center justify-between ${isReached ? 'text-gray-500' : 'text-emerald-700'}`}>
                                 <span>{stop.costText || (stop.expense === 0 ? 'Free' : `₹${stop.expense}`) + ` • ${stop.spendTime || 30}m`}</span>
                                 <span className="flex items-center gap-0.5">{stop.rating || stop.data?.rating || 5} ⭐</span>
                               </div>
-                              <div className="text-[9px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                                <span className="truncate">
-                                  📍 {distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}km`} away` : (stop.distanceText || '0.8 km away')}
+                              <div className="text-[8.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                                <span className="truncate max-w-[125px]">
+                                  📍 {distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}km`}` : (stop.distanceText || '0.8 km')}
                                 </span>
-                                <span className={isReached ? 'text-gray-400 font-black text-[10px]' : 'text-[#0B3BF4] font-black text-[10px]'}>↗</span>
+                                <span className={isReached ? 'text-gray-400 font-black text-[9px]' : 'text-[#0B3BF4] font-black text-[9px]'}>↗</span>
                               </div>
                             </div>
                           </div>
@@ -2065,13 +2065,13 @@ Return JSON in this format:
                           {/* Right Number Waypoint Circle */}
                           <div
                             onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`w-7 h-7 rounded-full border-[2px] font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition cursor-pointer hover:scale-105 active:scale-95 ${
+                            className={`w-6 h-6 rounded-full border-[2px] font-black text-[11px] flex items-center justify-center shrink-0 shadow-[0_1.5px_0_0_#000000] transition cursor-pointer hover:scale-105 active:scale-95 ${
                               isReached
                                 ? 'bg-[#E5E7EB] text-gray-600 border-gray-400'
                                 : 'bg-[#0B3BF4] text-white border-black'
                             }`}
                           >
-                            {isReached ? <Check size={14} className="text-gray-700" strokeWidth={3} /> : sIdx + 1}
+                            {isReached ? <Check size={12} className="text-gray-700" strokeWidth={3} /> : sIdx + 1}
                           </div>
                         </div>
                       )}

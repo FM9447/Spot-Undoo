@@ -405,59 +405,53 @@ export default function ExploreTab({ location, setLocation }) {
                 return (
                   <div
                     key={spot.id || spot.name}
-                    className={`flex ${isLeft ? 'justify-start' : 'justify-end pr-1'}`}
+                    className={`flex ${isLeft ? 'justify-start pl-2' : 'justify-end pr-2'}`}
                   >
                     <div
                       onClick={() => setSelectedSpot(spot)}
-                      className={`bg-white border-[2px] border-black rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer transition hover:scale-[1.02] max-w-[265px] relative ${
-                        isSelected ? 'border-[#0B3BF4] ring-2 ring-[#0B3BF4]' : ''
-                      }`}
+                      className={`relative bg-white border-[2px] border-black rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[175px] w-full ${
+                        isLeft ? '-rotate-1 hover:rotate-0' : 'rotate-1 hover:rotate-0'
+                      } ${isSelected ? 'ring-2 ring-[#0B3BF4]' : ''}`}
                     >
-                      {spot.badge && (
-                        <div className="w-3 h-3 rounded-full bg-amber-400 border border-black absolute -top-1.5 -left-1.5" />
-                      )}
-                      {isLeft ? (
-                        <>
-                          <img
-                            src={spot.photo || spot.photos?.[0]}
-                            alt={spot.name}
-                            className="w-16 h-16 rounded-xl border-[1.5px] border-black object-cover shrink-0"
-                          />
-                          <div className="leading-tight min-w-0">
-                            <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="font-black text-[13px] text-black truncate leading-snug">{spot.name}</span>
-                              {spot.badge && (
-                                <span className="bg-[#F59E0B] border border-black text-black font-black text-[8px] px-1.5 py-0.5 rounded uppercase shrink-0 leading-none">
-                                  {spot.badge}
-                                </span>
-                              )}
-                            </div>
-                            <div className="text-[12px] font-bold text-emerald-700 mt-0.5">
-                              {spot.expense === 0 ? 'Free' : `₹${spot.expense}`} • {spot.rating || 4.8} ⭐
-                            </div>
-                            <div className="text-[11px] font-semibold text-gray-500 mt-0.5">
-                              📍 {spot.distanceKm ? `${spot.distanceKm} km away` : spot.transitText || 'Near station'}
-                            </div>
+                      {/* Realistic 3D Red Push-Pin Pinned at Top Center */}
+                      <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
+                        <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-[1.2px] border-black shadow-[0_1.5px_0_0_rgba(0,0,0,0.35)] ring-1 ring-red-300/60 flex items-center justify-center">
+                          <div className="w-1 h-1 rounded-full bg-white/70" />
+                        </div>
+                      </div>
+
+                      {/* Photo Frame */}
+                      <div className="relative w-full h-20 rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                        <img
+                          src={spot.photo || spot.photos?.[0]}
+                          alt={spot.name}
+                          className="w-full h-full object-cover"
+                        />
+                        {spot.badge && (
+                          <div className="absolute top-1 right-1">
+                            <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] px-1 py-0.2 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
+                              {spot.badge}
+                            </span>
                           </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="leading-tight text-right flex-1 min-w-0">
-                            <div className="font-black text-[13px] text-black truncate leading-snug">{spot.name}</div>
-                            <div className="text-[12px] font-bold text-emerald-700 mt-0.5">
-                              {spot.expense === 0 ? 'Free' : `₹${spot.expense}`} • {spot.rating || 4.8} ⭐
-                            </div>
-                            <div className="text-[11px] font-semibold text-gray-500 mt-0.5">
-                              📍 {spot.distanceKm ? `${spot.distanceKm} km away` : spot.transitText || 'Near station'}
-                            </div>
-                          </div>
-                          <img
-                            src={spot.photo || spot.photos?.[0]}
-                            alt={spot.name}
-                            className="w-16 h-16 rounded-xl border-[1.5px] border-black object-cover shrink-0"
-                          />
-                        </>
-                      )}
+                        )}
+                      </div>
+
+                      {/* Polaroid Bottom Chin */}
+                      <div className="px-0.5 space-y-0.5">
+                        <div className="font-black text-[10px] text-black truncate leading-tight">
+                          {spot.name}
+                        </div>
+                        <div className="text-[9px] font-bold text-emerald-700 flex items-center justify-between">
+                          <span>{spot.expense === 0 ? 'Free' : `₹${spot.expense}`}</span>
+                          <span className="flex items-center gap-0.5">{spot.rating || 4.8} ⭐</span>
+                        </div>
+                        <div className="text-[8.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                          <span className="truncate max-w-[125px]">
+                            📍 {spot.distanceKm ? `${spot.distanceKm} km` : spot.transitText || 'Near station'}
+                          </span>
+                          <span className="text-[#0B3BF4] font-black text-[9px]">↗</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );
@@ -496,25 +490,52 @@ export default function ExploreTab({ location, setLocation }) {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {filteredSpots.map((spot) => (
+          <div className="grid grid-cols-2 gap-3 pt-2">
+            {filteredSpots.map((spot, idx) => (
               <div
                 key={spot.id || spot.name}
                 onClick={() => setSelectedSpot(spot)}
-                className="bg-white border-[2.5px] border-black rounded-2xl p-3 shadow-[0_3px_0_0_#000000] flex gap-3 cursor-pointer hover:bg-gray-50 transition"
+                className={`relative bg-white border-[2px] border-black rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition w-full ${
+                  idx % 2 === 0 ? '-rotate-1 hover:rotate-0' : 'rotate-1 hover:rotate-0'
+                }`}
               >
-                <img
-                  src={spot.photo || spot.photos?.[0]}
-                  alt={spot.name}
-                  className="w-20 h-20 rounded-xl border-[1.5px] border-black object-cover shrink-0"
-                />
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-black text-[13px] text-black truncate leading-snug">{spot.name}</h4>
-                  <div className="text-[12px] font-bold text-emerald-600 mt-1">
-                    {spot.expense === 0 ? 'Free' : `₹${spot.expense}`} • {spot.rating || 4.8} ⭐
+                {/* 3D Red Push-Pin */}
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
+                  <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-[1.2px] border-black shadow-[0_1.5px_0_0_rgba(0,0,0,0.35)] ring-1 ring-red-300/60 flex items-center justify-center">
+                    <div className="w-1 h-1 rounded-full bg-white/70" />
                   </div>
-                  <div className="text-[11px] text-gray-500 mt-1 line-clamp-2 leading-snug">
-                    {spot.review}
+                </div>
+
+                {/* Photo Frame */}
+                <div className="relative w-full h-22 rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                  <img
+                    src={spot.photo || spot.photos?.[0]}
+                    alt={spot.name}
+                    className="w-full h-full object-cover"
+                  />
+                  {spot.badge && (
+                    <div className="absolute top-1 right-1">
+                      <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] px-1 py-0.2 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
+                        {spot.badge}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Polaroid Chin */}
+                <div className="px-0.5 space-y-0.5">
+                  <div className="font-black text-[10px] text-black truncate leading-tight">
+                    {spot.name}
+                  </div>
+                  <div className="text-[9px] font-bold text-emerald-700 flex items-center justify-between">
+                    <span>{spot.expense === 0 ? 'Free' : `₹${spot.expense}`}</span>
+                    <span className="flex items-center gap-0.5">{spot.rating || 4.8} ⭐</span>
+                  </div>
+                  <div className="text-[8.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                    <span className="truncate max-w-[125px]">
+                      📍 {spot.distanceKm ? `${spot.distanceKm} km` : spot.transitText || 'Near station'}
+                    </span>
+                    <span className="text-[#0B3BF4] font-black text-[9px]">↗</span>
                   </div>
                 </div>
               </div>
