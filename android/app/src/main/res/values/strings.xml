@@ -4,4 +4,5 @@
     <string name="title_activity_main">Spot Undoo</string>
     <string name="package_name">com.spotundoo.app</string>
     <string name="custom_url_scheme">com.spotundoo.app</string>
+    <string name="server_client_id">745674728664-c9mj0c8bglu1dhuq5bmvt3m404io9n5n.apps.googleusercontent.com</string>
 </resources>

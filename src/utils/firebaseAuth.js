@@ -2,10 +2,13 @@ import { initializeApp, getApps } from 'firebase/app';
 import {
   getAuth,
   signInWithPopup,
+  signInWithCredential,
   GoogleAuthProvider,
   signInAnonymously as firebaseSignInAnonymously,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
+import { Capacitor } from '@capacitor/core';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { getBackendUrl } from './apiConfig';
 
 const firebaseConfig = {
@@ -23,16 +26,26 @@ export const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 
+// Initialize native GoogleAuth on Android/iOS
+try {
+  GoogleAuth.initialize({
+    clientId: '745674728664-c9mj0c8bglu1dhuq5bmvt3m404io9n5n.apps.googleusercontent.com',
+    scopes: ['profile', 'email'],
+    grantOfflineAccess: true,
+  });
+} catch {}
+
 /**
  * Sync Firebase user with backend to get JWT and store in localStorage
  */
 async function syncWithBackend(fbUser, isAnonymous = false) {
   const backendUrl = getBackendUrl();
+  const uid = fbUser.uid || fbUser.id;
   const payload = {
-    uid: fbUser.uid,
-    email: fbUser.email || `anon_${fbUser.uid.slice(0, 8)}@spotundoo.test`,
-    name: fbUser.displayName || (isAnonymous ? 'Anonymous Tester' : 'Explorer'),
-    avatar: fbUser.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(fbUser.uid)}`,
+    uid,
+    email: fbUser.email || `anon_${String(uid || '').slice(0, 8)}@spotundoo.test`,
+    name: fbUser.displayName || fbUser.name || (isAnonymous ? 'Anonymous Tester' : 'Explorer'),
+    avatar: fbUser.photoURL || fbUser.imageUrl || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(uid || 'user')}`,
     isAnonymous: !!isAnonymous,
   };
 
@@ -55,21 +68,46 @@ async function syncWithBackend(fbUser, isAnonymous = false) {
 
   // Fallback for offline or direct client execution
   const fallbackUser = {
-    id: fbUser.uid,
+    id: payload.uid,
     name: payload.name,
     email: payload.email,
     avatar: payload.avatar,
     isAnonymous: !!isAnonymous,
   };
-  localStorage.setItem('jwt', `fb_token_${fbUser.uid}`);
+  localStorage.setItem('jwt', `fb_token_${payload.uid}`);
   localStorage.setItem('currentUser', JSON.stringify(fallbackUser));
   return fallbackUser;
 }
 
 /**
- * Sign in with Google (Firebase)
+ * Sign in with Google (Native bottom-sheet on Android, Popup on Web)
  */
 export async function signInWithGoogle() {
+  if (Capacitor.isNativePlatform()) {
+    try {
+      const googleUser = await GoogleAuth.signIn();
+      if (googleUser?.authentication?.idToken) {
+        try {
+          const credential = GoogleAuthProvider.credential(googleUser.authentication.idToken);
+          const fbRes = await signInWithCredential(auth, credential);
+          return await syncWithBackend(fbRes.user, false);
+        } catch (e) {
+          console.warn('Firebase credential sync warning:', e);
+        }
+      }
+      return await syncWithBackend({
+        uid: googleUser.id,
+        email: googleUser.email,
+        displayName: googleUser.name || `${googleUser.givenName || ''} ${googleUser.familyName || ''}`.trim(),
+        photoURL: googleUser.imageUrl,
+      }, false);
+    } catch (nativeErr) {
+      console.warn('Native Google sign in error:', nativeErr);
+      throw nativeErr;
+    }
+  }
+
+  // Web Browser fallback
   const result = await signInWithPopup(auth, googleProvider);
   return await syncWithBackend(result.user, false);
 }
@@ -86,6 +124,11 @@ export async function signInAnonymously() {
  * Sign out
  */
 export async function logoutUser() {
+  try {
+    if (Capacitor.isNativePlatform()) {
+      await GoogleAuth.signOut();
+    }
+  } catch {}
   try {
     await firebaseSignOut(auth);
   } catch {}
