@@ -119,9 +119,6 @@ export function getRealSpotPhoto(spot) {
     }
   }
 
-  // 5. Trigger validated Wikipedia search in background if not already queried
-  fetchWikipediaValidatedPhoto(spot.name, spot.cityName || spot.area);
-
   // Return existing photo if distinct, or verified regional landscape
   return spot.photo || 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg';
 }
@@ -167,52 +164,4 @@ export function getRealSpotPhotos(spot) {
 
   const list = [primary, ...secondary.filter((p) => p !== primary)];
   return list.slice(0, 3);
-}
-
-/**
- * Searches Wikipedia and strictly verifies the article title matches the spot name.
- * Prevents wrong landmark cross-pollution (e.g. Napier Museum getting Jatayu photo).
- */
-async function fetchWikipediaValidatedPhoto(spotName, cityName) {
-  if (!spotName || typeof window === 'undefined') return;
-  const cleanName = spotName.replace(/\(.*?\)/g, '').trim();
-  const nameKey = cleanName.toLowerCase();
-  const cacheKey = `spot_photo_${(spotName || '').toLowerCase().trim()}`;
-
-  if (photoMemoryCache.has(cacheKey)) return;
-
-  try {
-    const searchQuery = `${cleanName} ${cityName || 'Kerala'}`;
-    const url = `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(
-      searchQuery
-    )}&gsrlimit=3&prop=pageimages&pithumbsize=960&format=json&origin=*`;
-
-    const res = await fetch(url);
-    if (!res.ok) return;
-    const data = await res.json();
-    const pages = Object.values(data.query?.pages || {});
-
-    // STRICT VALIDATION: Check each result to ensure the title actually belongs to the searched spot!
-    const nameTokens = nameKey.split(/\s+/).filter((t) => t.length > 3);
-    for (const page of pages) {
-      if (!page?.thumbnail?.source) continue;
-      const titleLower = (page.title || '').toLowerCase();
-
-      // Does the title contain at least one significant token of the spot name?
-      const isMatch = nameTokens.some((tok) => titleLower.includes(tok));
-      if (isMatch) {
-        const validatedUrl = page.thumbnail.source;
-        photoMemoryCache.set(cacheKey, validatedUrl);
-        try { localStorage.setItem(cacheKey, validatedUrl); } catch {}
-
-        // Notify UI to re-render with genuine photo
-        window.dispatchEvent(
-          new CustomEvent('spotundoo_photo_resolved', {
-            detail: { name: spotName, photo: validatedUrl },
-          })
-        );
-        return;
-      }
-    }
-  } catch {}
 }

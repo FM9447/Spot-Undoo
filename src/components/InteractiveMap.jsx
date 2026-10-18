@@ -181,6 +181,10 @@ export default function InteractiveMap({
       markersRef.current.push(userMarker);
     }
 
+    const prevSpotsKey = spots.map((s) => s.id || s.name).join(',');
+    const shouldFitBounds = prevSpotsKeyRef.current !== prevSpotsKey;
+    prevSpotsKeyRef.current = prevSpotsKey;
+
     const viewBounds = map.getBounds ? map.getBounds().pad(0.35) : null;
 
     // Spot Markers with Dynamic Multi-Level Zoom Scaling & Viewport Culling
