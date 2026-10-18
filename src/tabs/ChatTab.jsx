@@ -849,6 +849,8 @@ Return JSON in this format:
       setViewState('trail');
       savePlanToDatabase(dynamicPlans, currentCity);
     } finally {
+      // Ensure smooth, delightful loading experience so animated progress segments fill gracefully
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       setLoading(false);
     }
   };
@@ -1192,31 +1194,49 @@ Return JSON in this format:
             })}
           </div>
 
-          {/* Trail Map Canvas */}
-          <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] min-h-[460px] overflow-hidden">
+          {/* Trail Map Canvas (Scrollable with Dynamic Multi-Stop Path) */}
+          <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] min-h-[480px] max-h-[78vh] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
             {/* Dynamic Trail SVG Line: Starts at START at top, terminates at END at bottom */}
             {(() => {
-              const stopsCount = (currentPlan.stops || []).length;
-              let pathD = "M 240 42 C 150 55, 45 105, 85 155 C 125 205, 180 230, 180 260";
-              let endPoint = { cx: 180, cy: 260 };
-              let node2 = null;
-              let node3 = null;
+              const stops = currentPlan.stops || [];
+              const stopsCount = stops.length;
+              const stopNodes = stops.map((_, sIdx) => {
+                const isLeft = sIdx % 2 === 0;
+                return {
+                  cx: isLeft ? 85 : 245,
+                  cy: 145 + sIdx * 115,
+                  idx: sIdx,
+                };
+              });
 
-              if (stopsCount === 2) {
-                pathD = "M 240 42 C 150 55, 45 105, 85 150 C 130 205, 190 215, 245 270 C 275 320, 210 350, 180 375";
-                endPoint = { cx: 180, cy: 375 };
-                node2 = { cx: 245, cy: 270 };
-              } else if (stopsCount >= 3) {
-                pathD = "M 240 42 C 150 50, 45 95, 85 140 C 130 195, 190 205, 245 250 C 285 290, 180 320, 85 355 C 20 390, 120 435, 180 460";
-                endPoint = { cx: 180, cy: 460 };
-                node2 = { cx: 245, cy: 250 };
-                node3 = { cx: 85, cy: 355 };
+              const endCy = 145 + stopsCount * 115;
+              const endPoint = { cx: 180, cy: endCy };
+              const svgHeight = endCy + 35;
+
+              // Build smooth curved path through all stops
+              let pathD = `M 240 42`;
+              if (stopNodes.length > 0) {
+                pathD += ` C 160 50, 45 90, ${stopNodes[0].cx} ${stopNodes[0].cy}`;
+                for (let i = 0; i < stopNodes.length - 1; i++) {
+                  const curr = stopNodes[i];
+                  const next = stopNodes[i + 1];
+                  const midY = (curr.cy + next.cy) / 2;
+                  const c1x = curr.cx > next.cx ? curr.cx - 60 : curr.cx + 60;
+                  const c2x = next.cx < curr.cx ? next.cx - 50 : next.cx + 50;
+                  pathD += ` C ${c1x} ${midY - 10}, ${c2x} ${midY + 10}, ${next.cx} ${next.cy}`;
+                }
+                const last = stopNodes[stopNodes.length - 1];
+                const lastMidY = (last.cy + endCy) / 2;
+                const cLastX = last.cx > 180 ? 275 : 35;
+                pathD += ` C ${cLastX} ${lastMidY}, 180 ${endCy - 20}, ${endPoint.cx} ${endPoint.cy}`;
+              } else {
+                pathD += ` C 180 80, 180 180, ${endPoint.cx} ${endPoint.cy}`;
               }
 
               return (
                 <svg
                   className="absolute inset-0 w-full h-full pointer-events-none"
-                  viewBox="0 0 360 520"
+                  viewBox={`0 0 360 ${svgHeight}`}
                   preserveAspectRatio="none"
                 >
                   <defs>
@@ -1254,39 +1274,18 @@ Return JSON in this format:
                   {/* Start Waypoint Node (Top right at Start Station) */}
                   <circle cx="240" cy="42" r="5.5" fill="#0B3BF4" stroke="#090D16" strokeWidth="2" />
 
-                  {/* Stop 1 Waypoint */}
-                  <circle
-                    cx="85"
-                    cy={stopsCount >= 3 ? 140 : stopsCount === 2 ? 150 : 155}
-                    r="6.5"
-                    fill={visitedStopIds.length > 0 ? '#10B981' : '#06B6D4'}
-                    stroke="#090D16"
-                    strokeWidth="2"
-                  />
-
-                  {/* Stop 2 Waypoint (if present) */}
-                  {node2 && (
+                  {/* Dynamic Waypoint Nodes for all Stops */}
+                  {stopNodes.map((node, i) => (
                     <circle
-                      cx={node2.cx}
-                      cy={node2.cy}
+                      key={i}
+                      cx={node.cx}
+                      cy={node.cy}
                       r="6.5"
-                      fill={visitedStopIds.length > 1 ? '#10B981' : '#06B6D4'}
+                      fill={visitedStopIds.length > i ? '#10B981' : '#06B6D4'}
                       stroke="#090D16"
                       strokeWidth="2"
                     />
-                  )}
-
-                  {/* Stop 3 Waypoint (if present) */}
-                  {node3 && (
-                    <circle
-                      cx={node3.cx}
-                      cy={node3.cy}
-                      r="6.5"
-                      fill={visitedStopIds.length > 2 ? '#10B981' : '#06B6D4'}
-                      stroke="#090D16"
-                      strokeWidth="2"
-                    />
-                  )}
+                  ))}
 
                   {/* END Waypoint Node placed right at the top of the END location box at the bottom */}
                   <circle cx={endPoint.cx} cy={endPoint.cy} r="7" fill="#F59E0B" stroke="#090D16" strokeWidth="2.5" />

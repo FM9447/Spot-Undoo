@@ -5,14 +5,14 @@ export default function SpotUndooLoadingScreen({
   subtitle = "Finding little detours near you...",
   hubName = null,
 }) {
-  const [pulseIndex, setPulseIndex] = useState(3);
+  const [activeStep, setActiveStep] = useState(1);
 
-  // Smooth animated progression across the 6 segments
+  // Smoothly step 1 -> 2 -> 3 -> 4 -> 5 -> 6 and repeat
   useEffect(() => {
-    const interval = setInterval(() => {
-      setPulseIndex((prev) => (prev >= 6 ? 1 : prev + 1));
-    }, 450);
-    return () => clearInterval(interval);
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev >= 6 ? 1 : prev + 1));
+    }, 400);
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -28,17 +28,23 @@ export default function SpotUndooLoadingScreen({
         </div>
 
         {/* 6-Segmented Pill Progress Capsule */}
-        <div className="w-60 bg-white border-[2.5px] border-black rounded-full p-1.5 flex items-center gap-1.5 shadow-[0_3px_0_0_#000000]">
+        <div className="w-64 bg-white border-[2.5px] border-black rounded-full p-1.5 flex items-center gap-1.5 shadow-[0_3px_0_0_#000000]">
           {[0, 1, 2, 3, 4, 5].map((idx) => {
-            const isFilled = idx < pulseIndex;
-            let barColor = 'bg-[#F1F5F9]';
+            const isFilled = idx < activeStep;
+            const isLeading = idx === activeStep - 1;
+
+            let bgColor = '#E2E8F0'; // Default empty segment color
             if (isFilled) {
-              barColor = idx === 3 ? 'bg-[#F59E0B]' : 'bg-[#0B3BF4]';
+              bgColor = idx === 3 ? '#F59E0B' : '#0B3BF4'; // Segment 3 is amber, others electric blue
             }
+
             return (
               <div
                 key={idx}
-                className={`h-4.5 rounded-full flex-1 transition-colors duration-250 ${barColor}`}
+                style={{ backgroundColor: bgColor, height: '18px' }}
+                className={`rounded-full flex-1 transition-all duration-300 shadow-[inset_0_1px_1px_rgba(0,0,0,0.15)] ${
+                  isLeading ? 'scale-105 ring-1 ring-black/20' : ''
+                }`}
               />
             );
           })}
