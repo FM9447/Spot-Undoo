@@ -1735,24 +1735,44 @@ Return JSON in this format:
                 const endPoint = { cx: 180, cy: endCy };
                 const svgHeight = endCy + 70;
 
-                // Build smooth curved path through all stops
-                let pathD = `M 240 18`;
+                // Build individual curved segments so visited sections become grey & white
+                const segments = [];
                 if (stopNodes.length > 0) {
-                  pathD += ` C 140 22, 26 55, ${stopNodes[0].cx} ${stopNodes[0].cy}`;
+                  // Segment 0: Station Hub -> Stop 0
+                  const isFirstVisited = visitedStopIds.includes(stops[0]?.id || stops[0]?.name);
+                  segments.push({
+                    d: `M 240 18 C 140 22, 26 55, ${stopNodes[0].cx} ${stopNodes[0].cy}`,
+                    isVisited: isFirstVisited,
+                  });
+
+                  // Stop i -> Stop i+1
                   for (let i = 0; i < stopNodes.length - 1; i++) {
                     const curr = stopNodes[i];
                     const next = stopNodes[i + 1];
                     const midY = (curr.cy + next.cy) / 2;
                     const c1x = curr.cx > next.cx ? curr.cx - 60 : curr.cx + 60;
                     const c2x = next.cx < curr.cx ? next.cx - 50 : next.cx + 50;
-                    pathD += ` C ${c1x} ${midY - 10}, ${c2x} ${midY + 10}, ${next.cx} ${next.cy}`;
+                    const isNextVisited = visitedStopIds.includes(stops[i + 1]?.id || stops[i + 1]?.name);
+                    segments.push({
+                      d: `M ${curr.cx} ${curr.cy} C ${c1x} ${midY - 10}, ${c2x} ${midY + 10}, ${next.cx} ${next.cy}`,
+                      isVisited: isNextVisited,
+                    });
                   }
+
+                  // Last Stop -> Final Destination Safe Return
                   const last = stopNodes[stopNodes.length - 1];
                   const lastMidY = (last.cy + endCy) / 2;
                   const cLastX = last.cx > 180 ? 250 : 110;
-                  pathD += ` C ${cLastX} ${lastMidY}, 180 ${endCy - 15}, ${endPoint.cx} ${endPoint.cy}`;
+                  const allStopsVisited = stops.length > 0 && stops.every((s) => visitedStopIds.includes(s.id || s.name));
+                  segments.push({
+                    d: `M ${last.cx} ${last.cy} C ${cLastX} ${lastMidY}, 180 ${endCy - 15}, ${endPoint.cx} ${endPoint.cy}`,
+                    isVisited: allStopsVisited,
+                  });
                 } else {
-                  pathD += ` C 180 30, 180 60, ${endPoint.cx} ${endPoint.cy}`;
+                  segments.push({
+                    d: `M 180 30 C 180 30, 180 60, ${endPoint.cx} ${endPoint.cy}`,
+                    isVisited: false,
+                  });
                 }
 
                 return (
@@ -1772,42 +1792,49 @@ Return JSON in this format:
                       </filter>
                     </defs>
 
-                    {/* Outer casing: Sleek Dark Slate Border */}
-                    <path
-                      d={pathD}
-                      fill="none"
-                      stroke="#090D16"
-                      strokeWidth="9"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-
-                    {/* Inner Path: Electric Sky-Blue / Neon Cyan */}
-                    <path
-                      d={pathD}
-                      fill="none"
-                      stroke="url(#neonCyanGlow)"
-                      strokeWidth="4.5"
-                      strokeDasharray="9 5"
-                      strokeLinecap="round"
-                      filter="url(#trailGlow)"
-                    />
+                    {/* Segment rendering: Visited = Grey & White, Upcoming = Deep Slate & Electric Cyan */}
+                    {segments.map((seg, sIdx) => (
+                      <g key={sIdx}>
+                        {/* Outer Casing */}
+                        <path
+                          d={seg.d}
+                          fill="none"
+                          stroke={seg.isVisited ? '#9CA3AF' : '#090D16'}
+                          strokeWidth={seg.isVisited ? '8' : '9'}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        {/* Inner Line */}
+                        <path
+                          d={seg.d}
+                          fill="none"
+                          stroke={seg.isVisited ? '#FFFFFF' : 'url(#neonCyanGlow)'}
+                          strokeWidth={seg.isVisited ? '4' : '4.5'}
+                          strokeDasharray={seg.isVisited ? '7 6' : '9 5'}
+                          strokeLinecap="round"
+                          filter={seg.isVisited ? undefined : 'url(#trailGlow)'}
+                        />
+                      </g>
+                    ))}
 
                     {/* Start Waypoint Node (Top right at Start Station) */}
                     <circle cx="240" cy="18" r="5.5" fill="#0B3BF4" stroke="#090D16" strokeWidth="2" />
 
-                    {/* Dynamic Waypoint Nodes for all Stops */}
-                    {stopNodes.map((node, i) => (
-                      <circle
-                        key={i}
-                        cx={node.cx}
-                        cy={node.cy}
-                        r="6"
-                        fill={visitedStopIds.length > i ? '#10B981' : '#06B6D4'}
-                        stroke="#090D16"
-                        strokeWidth="2"
-                      />
-                    ))}
+                    {/* Dynamic Waypoint Nodes: Visited = White circle with grey border; Unvisited = Cyan */}
+                    {stopNodes.map((node, i) => {
+                      const isReached = visitedStopIds.includes(stops[i]?.id || stops[i]?.name);
+                      return (
+                        <circle
+                          key={i}
+                          cx={node.cx}
+                          cy={node.cy}
+                          r="6"
+                          fill={isReached ? '#FFFFFF' : '#06B6D4'}
+                          stroke={isReached ? '#9CA3AF' : '#090D16'}
+                          strokeWidth="2.5"
+                        />
+                      );
+                    })}
 
                     {/* END Waypoint Node placed exactly at the top center of the SAFE RETURN box */}
                     <circle cx={endPoint.cx} cy={endPoint.cy} r="6" fill="#F59E0B" stroke="#090D16" strokeWidth="2" />
@@ -1870,7 +1897,11 @@ Return JSON in this format:
                     <div key={sIdx} className="space-y-1">
                       {/* Transit pill & GPS Check-in badge above card */}
                       <div className={`flex items-center gap-1.5 ${isLeft ? 'justify-start pl-10' : 'justify-end pr-10'}`}>
-                        <span className="bg-[#FEF3C7] border-[1.5px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-black shadow-[0_1px_0_0_#000000]">
+                        <span className={`border-[1.5px] rounded-full px-2.5 py-0.5 text-[10px] font-black shadow-[0_1px_0_0_#000000] ${
+                          isReached
+                            ? 'bg-[#F3F4F6] border-gray-300 text-gray-500'
+                            : 'bg-[#FEF3C7] border-black text-black'
+                        }`}>
                           {stop.transitPill || '🚶 8m • Free'}
                         </span>
 
@@ -1878,19 +1909,19 @@ Return JSON in this format:
                         <button
                           type="button"
                           onClick={() => toggleCheckIn(stopId)}
-                          className={`text-[9px] font-black px-2 py-0.5 rounded-full border border-black flex items-center gap-1 shadow-[0_1px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer ${
+                          className={`text-[9px] font-black px-2 py-0.5 rounded-full border flex items-center gap-1 shadow-[0_1px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer ${
                             isReached
-                              ? 'bg-emerald-500 text-white border-emerald-700'
+                              ? 'bg-[#E5E7EB] text-gray-700 border-gray-400'
                               : isNearby
                               ? 'bg-emerald-100 text-emerald-900 border-emerald-600 animate-pulse'
-                              : 'bg-white text-gray-700 hover:bg-gray-100'
+                              : 'bg-white text-gray-700 border-black hover:bg-gray-100'
                           }`}
                           title="Click to check in or mark reached"
                         >
                           {isReached ? (
                             <>
-                              <Check size={9} strokeWidth={3} />
-                              <span>Reached</span>
+                              <Check size={9} strokeWidth={3} className="text-gray-700" />
+                              <span>Visited</span>
                             </>
                           ) : isNearby ? (
                             <>
@@ -1909,31 +1940,37 @@ Return JSON in this format:
                       {isLeft ? (
                         <div className="flex items-center gap-2.5">
                           <div
-                            className={`w-7 h-7 rounded-full border-[2px] border-black font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
-                              isReached ? 'bg-emerald-500 text-white' : 'bg-[#0B3BF4] text-white'
+                            className={`w-7 h-7 rounded-full border-[2px] font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
+                              isReached
+                                ? 'bg-[#E5E7EB] text-gray-600 border-gray-400'
+                                : 'bg-[#0B3BF4] text-white border-black'
                             }`}
                           >
-                            {isReached ? <Check size={14} strokeWidth={3} /> : sIdx + 1}
+                            {isReached ? <Check size={14} className="text-gray-700" strokeWidth={3} /> : sIdx + 1}
                           </div>
                           <div
                             onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`bg-white border-[2.5px] rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-98 transition flex-1 max-w-[250px] ${
-                              isReached ? 'border-emerald-600 bg-emerald-50/50 ring-2 ring-emerald-400/40' : 'border-black'
+                            className={`rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-98 transition flex-1 max-w-[250px] ${
+                              isReached
+                                ? 'bg-white/80 border-[2px] border-gray-400 opacity-80'
+                                : 'bg-white border-[2.5px] border-black'
                             }`}
                           >
                             <img
                               src={stop.photo || currentCity.spots[0]?.photo}
                               alt={stop.name}
                               style={{ width: '48px', height: '48px' }}
-                              className="w-12 h-12 rounded-xl border-[1.5px] border-black object-cover shrink-0 shadow-[0_1px_0_0_#000000]"
+                              className={`w-12 h-12 rounded-xl border-[1.5px] object-cover shrink-0 shadow-[0_1px_0_0_#000000] ${
+                                isReached ? 'border-gray-400 grayscale contrast-110 opacity-75' : 'border-black'
+                              }`}
                             />
                             <div className="leading-tight overflow-hidden flex-1 min-w-0">
                               <div className="flex items-center gap-1">
-                                <span className="font-black text-xs text-black truncate leading-snug">
+                                <span className={`font-black text-xs truncate leading-snug ${isReached ? 'text-gray-600' : 'text-black'}`}>
                                   {stop.name}
                                 </span>
                                 {isReached ? (
-                                  <span className="bg-emerald-500 text-white font-black text-[7px] px-1.5 py-0.5 rounded uppercase shrink-0">
+                                  <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[7px] px-1.5 py-0.5 rounded uppercase shrink-0">
                                     VISITED
                                   </span>
                                 ) : stop.badge ? (
@@ -1942,9 +1979,9 @@ Return JSON in this format:
                                   </span>
                                 ) : null}
                               </div>
-                              <div className="text-[11px] font-bold text-emerald-700 mt-1 flex items-center justify-between">
+                              <div className={`text-[11px] mt-1 flex items-center justify-between ${isReached ? 'text-gray-500 font-semibold' : 'text-emerald-700 font-bold'}`}>
                                 <span>{stop.costText || 'Free • 30m'}</span>
-                                <span className="text-[#0B3BF4] font-black text-[10px]">↗</span>
+                                <span className={isReached ? 'text-gray-400 font-black text-[10px]' : 'text-[#0B3BF4] font-black text-[10px]'}>↗</span>
                               </div>
                             </div>
                           </div>
@@ -1953,14 +1990,16 @@ Return JSON in this format:
                         <div className="flex items-center justify-end gap-2.5 pr-1">
                           <div
                             onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`bg-white border-[2.5px] rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-98 transition flex-1 max-w-[250px] ${
-                              isReached ? 'border-emerald-600 bg-emerald-50/50 ring-2 ring-emerald-400/40' : 'border-black'
+                            className={`rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-98 transition flex-1 max-w-[250px] ${
+                              isReached
+                                ? 'bg-white/80 border-[2px] border-gray-400 opacity-80'
+                                : 'bg-white border-[2.5px] border-black'
                             }`}
                           >
                             <div className="leading-tight text-right flex-1 overflow-hidden min-w-0">
                               <div className="flex items-center justify-end gap-1">
                                 {isReached ? (
-                                  <span className="bg-emerald-500 text-white font-black text-[7px] px-1.5 py-0.5 rounded uppercase shrink-0">
+                                  <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[7px] px-1.5 py-0.5 rounded uppercase shrink-0">
                                     VISITED
                                   </span>
                                 ) : stop.badge ? (
@@ -1968,12 +2007,12 @@ Return JSON in this format:
                                     {stop.badge}
                                   </span>
                                 ) : null}
-                                <span className="font-black text-xs text-black truncate leading-snug">
+                                <span className={`font-black text-xs truncate leading-snug ${isReached ? 'text-gray-600' : 'text-black'}`}>
                                   {stop.name}
                                 </span>
                               </div>
-                              <div className="text-[11px] font-bold text-emerald-700 mt-1 flex items-center justify-between">
-                                <span className="text-[#0B3BF4] font-black text-[10px]">↗</span>
+                              <div className={`text-[11px] mt-1 flex items-center justify-between ${isReached ? 'text-gray-500 font-semibold' : 'text-emerald-700 font-bold'}`}>
+                                <span className={isReached ? 'text-gray-400 font-black text-[10px]' : 'text-[#0B3BF4] font-black text-[10px]'}>↗</span>
                                 <span>{stop.costText || 'Free • 30m'}</span>
                               </div>
                             </div>
@@ -1981,15 +2020,19 @@ Return JSON in this format:
                               src={stop.photo || currentCity.spots[1]?.photo}
                               alt={stop.name}
                               style={{ width: '48px', height: '48px' }}
-                              className="w-12 h-12 rounded-xl border-[1.5px] border-black object-cover shrink-0 shadow-[0_1px_0_0_#000000]"
+                              className={`w-12 h-12 rounded-xl border-[1.5px] object-cover shrink-0 shadow-[0_1px_0_0_#000000] ${
+                                isReached ? 'border-gray-400 grayscale contrast-110 opacity-75' : 'border-black'
+                              }`}
                             />
                           </div>
                           <div
-                            className={`w-7 h-7 rounded-full border-[2px] border-black font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
-                              isReached ? 'bg-emerald-500 text-white' : 'bg-[#0B3BF4] text-white'
+                            className={`w-7 h-7 rounded-full border-[2px] font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
+                              isReached
+                                ? 'bg-[#E5E7EB] text-gray-600 border-gray-400'
+                                : 'bg-[#0B3BF4] text-white border-black'
                             }`}
                           >
-                            {isReached ? <Check size={14} strokeWidth={3} /> : sIdx + 1}
+                            {isReached ? <Check size={14} className="text-gray-700" strokeWidth={3} /> : sIdx + 1}
                           </div>
                         </div>
                       )}
