@@ -231,313 +231,439 @@ export default function ChatTab({ location, setLocation, settings }) {
       };
     };
 
-    // 0a. Check for TIME INCREASE ("got one more hour", "have 2 more hours", "extra hour", "add 1 hr", "1 more hour", "more time")
-    const isTimeAdd =
-      /(?:got|have|add|give|with|extra)?\s*(\d+|one|two|three|four)?\s*(?:more|extra)?\s*(?:hour|hr|time)s?(?:\s*(?:more|extra))?/i.test(lower) ||
-      /more time/i.test(lower);
+    let llmHandled = false;
+    let isRemoveAction = false;
 
-    if (isTimeAdd && !lower.includes('faster') && !lower.includes('short') && !lower.includes('quick') && !lower.includes('delay')) {
-      let addHrs = 1;
-      const numMatch = lower.match(/(\d+)\s*(?:hour|hr)/i);
-      if (numMatch) {
-        addHrs = parseInt(numMatch[1]);
-      } else if (lower.includes('two') || lower.includes('2')) addHrs = 2;
-      else if (lower.includes('three') || lower.includes('3')) addHrs = 3;
-      else if (lower.includes('four') || lower.includes('4')) addHrs = 4;
+    // STEP 1: Attempt LLM-Powered Conversational Reasoning (ChatGPT / Qwen intelligence)
+    try {
+      const topSpotsList = candidatePool
+        .slice(0, 18)
+        .map((c, i) => `${i + 1}. "${c.name}" (${c.category}, ₹${c.expense || 0}, ${c.spendTime || 30}m)`)
+        .join('\n');
+      const currentList = currentStops
+        .map((s, i) => `${i + 1}. "${s.name}" (${s.costText || ''})`)
+        .join('\n');
 
-      setAvailableTimeHrs((prev) => Math.min(8, prev + addHrs));
-      updatedReturnTime = incrementTime(updatedReturnTime, addHrs);
+      const llmPrompt = `You are a ChatGPT-level intelligent Kerala travel AI copilot at ${currentCity.displayName}.
+Current user itinerary (${currentStops.length} stops):
+${currentList || '(Empty route)'}
 
-      // Add spot(s) to fill the extra hour
-      const unusedCandidates = candidatePool.filter(
-        (c) => !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === c.name.toLowerCase())
+Local candidate spots available:
+${topSpotsList}
+
+User natural request: "${promptToUse}"
+
+Analyze what the user wants to accomplish. They can ask ANY conversational instruction:
+- Remove specific or all spots ("skip river ghat", "don't want crowds", "remove everything")
+- Add specific spots or types ("add Kappad beach", "want some authentic tea & snack", "add 3 spots")
+- Swap or replace places ("change the first place to something quiet")
+- Remove specific or all spots ("skip river ghat", "don't want crowds", "remove everything")
+- Add specific spots or types ("add Kappad beach", "want some authentic tea & snack", "add 3 spots")
+- Swap or replace places ("change the first place to something quiet")
+- Shift time or speed up ("we have an extra hour", "make it 30 mins faster", "got 2 more hours")
+- Adjust budget ("got ₹1000 more", "budget friendly", "cut expenses")
+- Change vibe or constraints ("it's raining so indoor AC spots only")
+
+Return JSON with this exact structure:
+{
+  "reason": "1 short conversational sentence explaining what was updated",
+  "returnTime": "${updatedReturnTime}",
+  "addedHours": 0,
+  "addedBudget": 0,
+  "stopNames": ["Exact", "names", "of", "all", "stops", "that", "should", "be", "in", "the", "final", "route. Empty array [] if clearing all"]
+}
+If user requests adding time (e.g. "got 1 more hour"), calculate new returnTime and set addedHours.
+If user requests adding budget (e.g. "1000 rs more"), set addedBudget.`;
+
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('LLM Timeout')), 8500)
       );
-      const toAdd = unusedCandidates.slice(0, Math.min(addHrs, unusedCandidates.length));
-      if (toAdd.length === 0 && candidatePool.length > 0) {
-        toAdd.push(candidatePool[modifiedStops.length % candidatePool.length]);
+      const res = await Promise.race([
+        ollamaChat({
+          baseUrl: settings.baseUrl || 'http://localhost:11434',
+          model: settings.model || 'spot-undo-qwen',
+          messages: [{ role: 'user', content: llmPrompt }],
+        }),
+        timeoutPromise,
+      ]);
+
+      if (res && Array.isArray(res.stopNames)) {
+        if (res.addedHours && !isNaN(Number(res.addedHours))) {
+          setAvailableTimeHrs((prev) => Math.min(12, prev + Number(res.addedHours)));
+        }
+        if (res.addedBudget && !isNaN(Number(res.addedBudget))) {
+          setMaxBudget((prev) => prev + Number(res.addedBudget));
+        }
+
+        const newStops = [];
+        for (const name of res.stopNames) {
+          const nLower = (name || '').toLowerCase().trim();
+          if (!nLower) continue;
+
+          // Match from currentStops or candidatePool
+          const matched =
+            currentStops.find(
+              (s) =>
+                (s.name || '').toLowerCase() === nLower ||
+                (s.name || '').toLowerCase().includes(nLower) ||
+                nLower.includes((s.name || '').toLowerCase())
+            ) ||
+            candidatePool.find(
+              (c) =>
+                (c.name || '').toLowerCase() === nLower ||
+                (c.name || '').toLowerCase().includes(nLower) ||
+                nLower.includes((c.name || '').toLowerCase())
+            ) ||
+            candidatePool.find((c) => {
+              const words = (c.name || '').toLowerCase().split(/\s+/).filter((w) => w.length >= 4);
+              return words.some((w) => nLower.includes(w));
+            });
+
+          if (matched) {
+            newStops.push(createStopObject(matched.data || matched, newStops.length, 'AI CO-PILOT'));
+          } else {
+            newStops.push(
+              createStopObject(
+                {
+                  id: `custom-${Date.now()}-${newStops.length}`,
+                  name: name,
+                  category: 'Hidden Spots',
+                  badge: 'CUSTOM',
+                  expense: 20,
+                  spendTime: 35,
+                  transitText: '🛺 8m • ₹25',
+                  photo: currentCity.spots[0]?.photo,
+                  lat: currentCity.hub.lat + 0.005,
+                  lng: currentCity.hub.lng + 0.005,
+                },
+                newStops.length,
+                'CUSTOM'
+              )
+            );
+          }
+        }
+
+        modifiedStops = newStops;
+        actionReason = res.reason || `Adapted route to "${promptToUse}"`;
+        if (res.returnTime) updatedReturnTime = res.returnTime;
+        llmHandled = true;
       }
-
-      toAdd.forEach((cand) => {
-        modifiedStops.push(createStopObject(cand, modifiedStops.length, 'EXTRA HOUR'));
-      });
-
-      actionReason = `⏰ Added ${addHrs} hr! Pushed safe return to ${updatedReturnTime} & added ${toAdd.map((c) => c.name).join(', ')}`;
+    } catch (llmErr) {
+      console.warn('Local LLM plan modifier fallback to fast heuristic engine:', llmErr);
     }
 
-    // 0b. Check for BUDGET INCREASE ("1000 rs more", "got 1000 rs more", "have 1000 rs", "add 500 budget", "₹1000 more")
-    const isBudgetAdd =
-      /(?:got|have|add|increase|extra|more)?\s*(?:₹|rs\.?|inr)?\s*(\d+)\s*(?:rs|rupees|more|inr|bucks)?(?:\s*(?:more|extra))?/i.test(lower) ||
-      /more budget|more money|can spend more/i.test(lower);
+    // STEP 2: Instant Fast Heuristic Fallback (if offline or LLM takes > 4.5s)
+    if (!llmHandled) {
+      // 0a. Check for TIME INCREASE ("got one more hour", "have 2 more hours", "extra hour", "add 1 hr", "1 more hour", "more time")
+      const isTimeAdd =
+        /(?:got|have|add|give|with|extra)?\s*(\d+|one|two|three|four)?\s*(?:more|extra)?\s*(?:hour|hr|time)s?(?:\s*(?:more|extra))?/i.test(lower) ||
+        /more time/i.test(lower);
 
-    if (isBudgetAdd && !lower.includes('cut') && !lower.includes('cheap') && !lower.includes('reduce') && !lower.includes('free')) {
-      const bMatch = lower.match(/(\d+)/);
-      const addAmount = bMatch ? parseInt(bMatch[1]) : 500;
+      if (isTimeAdd && !lower.includes('faster') && !lower.includes('short') && !lower.includes('quick') && !lower.includes('delay')) {
+        let addHrs = 1;
+        const numMatch = lower.match(/(\d+)\s*(?:hour|hr)/i);
+        if (numMatch) {
+          addHrs = parseInt(numMatch[1]);
+        } else if (lower.includes('two') || lower.includes('2')) addHrs = 2;
+        else if (lower.includes('three') || lower.includes('3')) addHrs = 3;
+        else if (lower.includes('four') || lower.includes('4')) addHrs = 4;
 
-      setMaxBudget((prev) => prev + addAmount);
+        setAvailableTimeHrs((prev) => Math.min(8, prev + addHrs));
+        updatedReturnTime = incrementTime(updatedReturnTime, addHrs);
 
-      // Unlock high-value or new spot
-      const candidate =
-        candidatePool.find(
-          (c) =>
-            (c.expense || 0) > 0 &&
-            !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === c.name.toLowerCase())
-        ) ||
-        candidatePool.find(
+        // Add spot(s) to fill the extra hour
+        const unusedCandidates = candidatePool.filter(
           (c) => !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === c.name.toLowerCase())
-        ) ||
-        candidatePool[1];
+        );
+        const toAdd = unusedCandidates.slice(0, Math.min(addHrs, unusedCandidates.length));
+        if (toAdd.length === 0 && candidatePool.length > 0) {
+          toAdd.push(candidatePool[modifiedStops.length % candidatePool.length]);
+        }
 
-      if (candidate) {
-        modifiedStops.push(createStopObject(candidate, modifiedStops.length, 'UNLOCKED'));
-        actionReason = `💰 Added ₹${addAmount} budget! Added ${candidate.name} (₹${candidate.expense || 0})`;
-      } else {
-        actionReason = `💰 Max budget increased by ₹${addAmount}`;
+        toAdd.forEach((cand) => {
+          modifiedStops.push(createStopObject(cand, modifiedStops.length, 'EXTRA HOUR'));
+        });
+
+        actionReason = `⏰ Added ${addHrs} hr! Pushed safe return to ${updatedReturnTime} & added ${toAdd.map((c) => c.name).join(', ')}`;
       }
-    }
 
-    // 1. Universal Removal & Exclusion Intent Detection
-    const isRemove =
-      /\b(?:remove|drop|delete|cut|leave|skip|cancel|omit|exclude|discard|clear|wipe|strip|erase|dump|toss)\b/i.test(lower) ||
-      /\b(?:take|get)\s*(?:out|away|rid|off)\b/i.test(lower) ||
-      /\b(?:leave\s*out)\b/i.test(lower) ||
-      /\b(?:no\s*need|don'?t\s*want|do\s*not\s*want|not\s*interested|without|avoid|hate|dislike)\b/i.test(lower) ||
-      /\b(?:don'?t\s*include|do\s*not\s*include|can\s*we\s*not|no\s*more)\b/i.test(lower) ||
-      /\b(?:minus|\-|less|reduce|fewer)\s*(\d+|one|two|three|four|all)?\s*(?:place|spot|stop)s?\b/i.test(lower) ||
-      /^(?:no|skip|drop|del|rm)\s+/i.test(lower.trim());
+      // 0b. Check for BUDGET INCREASE ("1000 rs more", "got 1000 rs more", "have 1000 rs", "add 500 budget", "₹1000 more")
+      const isBudgetAdd =
+        /(?:got|have|add|increase|extra|more)?\s*(?:₹|rs\.?|inr)?\s*(\d+)\s*(?:rs|rupees|more|inr|bucks)?(?:\s*(?:more|extra))?/i.test(lower) ||
+        /more budget|more money|can spend more/i.test(lower);
 
-    const isAdd =
-      !isRemove &&
-      (/\b(?:add|include|put|want|swap|replace|insert|attach)\b/i.test(lower) ||
-       /^(?:add|put|give)\s+/i.test(lower.trim()));
+      if (isBudgetAdd && !lower.includes('cut') && !lower.includes('cheap') && !lower.includes('reduce') && !lower.includes('free')) {
+        const bMatch = lower.match(/(\d+)/);
+        const addAmount = bMatch ? parseInt(bMatch[1]) : 500;
 
-    if (isRemove) {
-      if (/\b(?:all|everything|entire|whole)\b/i.test(lower)) {
-        modifiedStops = [];
-        actionReason = 'Cleared all stops from route';
-      } else if (/\b(?:1st|first|start|beginning)\b/i.test(lower)) {
-        const removed = modifiedStops.shift();
-        actionReason = `Dropped 1st stop (${removed?.name || 'first stop'})`;
-      } else if (/\b(?:2nd|second)\b/i.test(lower)) {
-        const removed = modifiedStops.splice(1, 1);
-        actionReason = `Dropped 2nd stop (${removed[0]?.name || 'second stop'})`;
-      } else if (/\b(?:3rd|third)\b/i.test(lower)) {
-        const removed = modifiedStops.splice(2, 1);
-        actionReason = `Dropped 3rd stop (${removed[0]?.name || 'third stop'})`;
-      } else if (/\b(?:4th|fourth)\b/i.test(lower)) {
-        const removed = modifiedStops.splice(3, 1);
-        actionReason = `Dropped 4th stop (${removed[0]?.name || 'fourth stop'})`;
-      } else if (/\b(?:last|end|final)\b/i.test(lower)) {
-        const removed = modifiedStops.pop();
-        actionReason = `Dropped last stop (${removed?.name || 'last stop'})`;
-      } else {
-        // Check if user specifically named or referenced a stop in modifiedStops
-        let matchIdx = -1;
-        for (let i = 0; i < modifiedStops.length; i++) {
-          const sName = (modifiedStops[i].name || '').toLowerCase();
-          if (lower.includes(sName)) {
-            matchIdx = i;
+        setMaxBudget((prev) => prev + addAmount);
+
+        // Unlock high-value or new spot
+        const candidate =
+          candidatePool.find(
+            (c) =>
+              (c.expense || 0) > 0 &&
+              !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === c.name.toLowerCase())
+          ) ||
+          candidatePool.find(
+            (c) => !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === c.name.toLowerCase())
+          ) ||
+          candidatePool[1];
+
+        if (candidate) {
+          modifiedStops.push(createStopObject(candidate, modifiedStops.length, 'UNLOCKED'));
+          actionReason = `💰 Added ₹${addAmount} budget! Added ${candidate.name} (₹${candidate.expense || 0})`;
+        } else {
+          actionReason = `💰 Max budget increased by ₹${addAmount}`;
+        }
+      }
+
+      // 1. Universal Removal & Exclusion Intent Detection
+      const isRemove =
+        /\b(?:remove|drop|delete|cut|leave|skip|cancel|omit|exclude|discard|clear|wipe|strip|erase|dump|toss)\b/i.test(lower) ||
+        /\b(?:take|get)\s*(?:out|away|rid|off)\b/i.test(lower) ||
+        /\b(?:leave\s*out)\b/i.test(lower) ||
+        /\b(?:no\s*need|don'?t\s*want|do\s*not\s*want|not\s*interested|without|avoid|hate|dislike)\b/i.test(lower) ||
+        /\b(?:don'?t\s*include|do\s*not\s*include|can\s*we\s*not|no\s*more)\b/i.test(lower) ||
+        /\b(?:minus|\-|less|reduce|fewer)\s*(\d+|one|two|three|four|all)?\s*(?:place|spot|stop)s?\b/i.test(lower) ||
+        /^(?:no|skip|drop|del|rm)\s+/i.test(lower.trim());
+
+      isRemoveAction = isRemove;
+
+      const isAdd =
+        !isRemove &&
+        (/\b(?:add|include|put|want|swap|replace|insert|attach)\b/i.test(lower) ||
+         /^(?:add|put|give)\s+/i.test(lower.trim()));
+
+      if (isRemove) {
+        if (/\b(?:all|everything|entire|whole)\b/i.test(lower)) {
+          modifiedStops = [];
+          actionReason = 'Cleared all stops from route';
+        } else if (/\b(?:1st|first|start|beginning)\b/i.test(lower)) {
+          const removed = modifiedStops.shift();
+          actionReason = `Dropped 1st stop (${removed?.name || 'first stop'})`;
+        } else if (/\b(?:2nd|second)\b/i.test(lower)) {
+          const removed = modifiedStops.splice(1, 1);
+          actionReason = `Dropped 2nd stop (${removed[0]?.name || 'second stop'})`;
+        } else if (/\b(?:3rd|third)\b/i.test(lower)) {
+          const removed = modifiedStops.splice(2, 1);
+          actionReason = `Dropped 3rd stop (${removed[0]?.name || 'third stop'})`;
+        } else if (/\b(?:4th|fourth)\b/i.test(lower)) {
+          const removed = modifiedStops.splice(3, 1);
+          actionReason = `Dropped 4th stop (${removed[0]?.name || 'fourth stop'})`;
+        } else if (/\b(?:last|end|final)\b/i.test(lower)) {
+          const removed = modifiedStops.pop();
+          actionReason = `Dropped last stop (${removed?.name || 'last stop'})`;
+        } else {
+          // Check if user specifically named or referenced a stop in modifiedStops
+          let matchIdx = -1;
+          for (let i = 0; i < modifiedStops.length; i++) {
+            const sName = (modifiedStops[i].name || '').toLowerCase();
+            if (lower.includes(sName)) {
+              matchIdx = i;
+              break;
+            }
+            // Match significant words from stop name
+            const words = sName
+              .replace(/[^\w\s]/g, '')
+              .split(/\s+/)
+              .filter((w) => !['and', 'the', 'walk', 'park', 'spot', 'lane', 'view', 'step', 'steps', 'road', 'near', 'hotel', 'restaurant'].includes(w) && w.length >= 3);
+            if (words.some((w) => lower.includes(w))) {
+              matchIdx = i;
+              break;
+            }
+          }
+
+          if (matchIdx !== -1) {
+            const removed = modifiedStops.splice(matchIdx, 1);
+            actionReason = `Removed ${removed[0]?.name}`;
+          } else if (modifiedStops.length > 0) {
+            // Parse numerical count if any ("remove 2 places", "drop two spots", "minus 3")
+            const numWords = { one: 1, two: 2, three: 3, four: 4, five: 5, both: 2, a: 1, 'an': 1 };
+            const cMatch = lower.match(/\b(?:remove|drop|delete|cut|skip|omit|minus|less)\s*(\d+|one|two|three|four|five|both|a|an)?\b/i);
+            let countToRemove = 1;
+            if (cMatch && cMatch[1]) {
+              const parsed = parseInt(cMatch[1]);
+              countToRemove = !isNaN(parsed) ? parsed : (numWords[cMatch[1].toLowerCase()] || 1);
+            }
+
+            const removedNames = [];
+            for (let i = 0; i < countToRemove && modifiedStops.length > 0; i++) {
+              const rem = modifiedStops.pop();
+              if (rem?.name) removedNames.push(rem.name);
+            }
+
+            actionReason =
+              removedNames.length > 1
+                ? `Removed ${removedNames.length} stops (${removedNames.join(', ')})`
+                : `Removed ${removedNames[0] || 'place'}`;
+          }
+        }
+      }
+
+      // 2. Check for explicit ADD commands or category keywords ("add kappad beach", "add a specific place", "add 10 more", "add tea spot", etc.)
+      if (
+        (isAdd && !isTimeAdd && !isBudgetAdd) ||
+        lower.includes('tea') ||
+        lower.includes('chai') ||
+        lower.includes('snack') ||
+        lower.includes('food') ||
+        lower.includes('beach') ||
+        lower.includes('fort') ||
+        lower.includes('game') ||
+        /add.*(?:place|spot)/i.test(lower)
+      ) {
+        // Check for count (e.g. "add 10 more", "add 3 spots", "add 5 places")
+        const countMatch =
+          lower.match(/(?:add|include|put|more)?\s*(\d+)\s*(?:more|places|spots|stops)?/i) ||
+          lower.match(/(\d+)\s*(?:more|places|spots|stops)/i);
+        const countToAdd = countMatch && parseInt(countMatch[1]) > 0 ? Math.min(15, parseInt(countMatch[1])) : 1;
+
+        // 1. Check if user specified a named spot from candidatePool
+        let specificCandidate = null;
+        const sortedPool = [...candidatePool].sort((a, b) => b.name.length - a.name.length);
+
+        for (const cand of sortedPool) {
+          const cLower = cand.name.toLowerCase();
+          // Exact full name match
+          if (lower.includes(cLower)) {
+            specificCandidate = cand;
             break;
           }
-          // Match significant words from stop name
-          const words = sName
+          // Distinctive words (length >= 4, excluding generic words)
+          const words = cLower
             .replace(/[^\w\s]/g, '')
             .split(/\s+/)
-            .filter((w) => !['and', 'the', 'walk', 'park', 'spot', 'lane', 'view', 'step', 'steps', 'road', 'near', 'hotel', 'restaurant'].includes(w) && w.length >= 3);
-          if (words.some((w) => lower.includes(w))) {
-            matchIdx = i;
+            .filter((w) => !['and', 'the', 'walk', 'park', 'spot', 'lane', 'view', 'step', 'steps', 'road', 'near', 'hotel', 'restaurant'].includes(w) && w.length >= 4);
+
+          if (words.length > 0 && words.some((w) => lower.includes(w))) {
+            specificCandidate = cand;
             break;
           }
         }
 
-        if (matchIdx !== -1) {
-          const removed = modifiedStops.splice(matchIdx, 1);
-          actionReason = `Removed ${removed[0]?.name}`;
-        } else if (modifiedStops.length > 0) {
-          // Parse numerical count if any ("remove 2 places", "drop two spots", "minus 3")
-          const numWords = { one: 1, two: 2, three: 3, four: 4, five: 5, both: 2, a: 1, 'an': 1 };
-          const cMatch = lower.match(/\b(?:remove|drop|delete|cut|skip|omit|minus|less)\s*(\d+|one|two|three|four|five|both|a|an)?\b/i);
-          let countToRemove = 1;
-          if (cMatch && cMatch[1]) {
-            const parsed = parseInt(cMatch[1]);
-            countToRemove = !isNaN(parsed) ? parsed : (numWords[cMatch[1].toLowerCase()] || 1);
+        if (specificCandidate) {
+          const alreadyIn = modifiedStops.some(
+            (ms) => (ms.name || '').toLowerCase() === specificCandidate.name.toLowerCase()
+          );
+          if (!alreadyIn) {
+            modifiedStops.push(createStopObject(specificCandidate, modifiedStops.length, 'ADDED SPOT'));
+            actionReason = (actionReason ? actionReason + ' & added ' : 'Added ') + specificCandidate.name;
+          } else {
+            actionReason = `${specificCandidate.name} is already in your trail!`;
           }
-
-          const removedNames = [];
-          for (let i = 0; i < countToRemove && modifiedStops.length > 0; i++) {
-            const rem = modifiedStops.pop();
-            if (rem?.name) removedNames.push(rem.name);
-          }
-
-          actionReason =
-            removedNames.length > 1
-              ? `Removed ${removedNames.length} stops (${removedNames.join(', ')})`
-              : `Removed ${removedNames[0] || 'place'}`;
-        }
-      }
-    }
-
-    // 2. Check for explicit ADD commands or category keywords ("add kappad beach", "add a specific place", "add 10 more", "add tea spot", etc.)
-    if (
-      (isAdd && !isTimeAdd && !isBudgetAdd) ||
-      lower.includes('tea') ||
-      lower.includes('chai') ||
-      lower.includes('snack') ||
-      lower.includes('food') ||
-      lower.includes('beach') ||
-      lower.includes('fort') ||
-      lower.includes('game') ||
-      /add.*(?:place|spot)/i.test(lower)
-    ) {
-      // Check for count (e.g. "add 10 more", "add 3 spots", "add 5 places")
-      const countMatch =
-        lower.match(/(?:add|include|put|more)?\s*(\d+)\s*(?:more|places|spots|stops)?/i) ||
-        lower.match(/(\d+)\s*(?:more|places|spots|stops)/i);
-      const countToAdd = countMatch && parseInt(countMatch[1]) > 0 ? Math.min(15, parseInt(countMatch[1])) : 1;
-
-      // 1. Check if user specified a named spot from candidatePool
-      let specificCandidate = null;
-      const sortedPool = [...candidatePool].sort((a, b) => b.name.length - a.name.length);
-
-      for (const cand of sortedPool) {
-        const cLower = cand.name.toLowerCase();
-        // Exact full name match
-        if (lower.includes(cLower)) {
-          specificCandidate = cand;
-          break;
-        }
-        // Distinctive words (length >= 4, excluding generic words)
-        const words = cLower
-          .replace(/[^\w\s]/g, '')
-          .split(/\s+/)
-          .filter((w) => !['and', 'the', 'walk', 'park', 'spot', 'lane', 'view', 'step', 'steps', 'road', 'near', 'hotel', 'restaurant'].includes(w) && w.length >= 4);
-
-        if (words.length > 0 && words.some((w) => lower.includes(w))) {
-          specificCandidate = cand;
-          break;
-        }
-      }
-
-      if (specificCandidate) {
-        const alreadyIn = modifiedStops.some(
-          (ms) => (ms.name || '').toLowerCase() === specificCandidate.name.toLowerCase()
-        );
-        if (!alreadyIn) {
-          modifiedStops.push(createStopObject(specificCandidate, modifiedStops.length, 'ADDED SPOT'));
-          actionReason = (actionReason ? actionReason + ' & added ' : 'Added ') + specificCandidate.name;
         } else {
-          actionReason = `${specificCandidate.name} is already in your trail!`;
-        }
-      } else {
-        // Multi-add or generic add (e.g. "add a specific place", "add 10 more", "add a snack spot")
-        const addedList = [];
-        for (let i = 0; i < countToAdd; i++) {
-          const candidate =
-            candidatePool.find((s) => {
-              const sLower = s.name.toLowerCase();
-              const catLower = (s.category || '').toLowerCase();
-              const alreadyIn = modifiedStops.some(
-                (ms) =>
-                  (ms.name || '').toLowerCase() === sLower ||
-                  (ms.name || '').toLowerCase().includes(sLower)
-              );
-              if (alreadyIn) return false;
+          // Multi-add or generic add (e.g. "add a specific place", "add 10 more", "add a snack spot")
+          const addedList = [];
+          for (let i = 0; i < countToAdd; i++) {
+            const candidate =
+              candidatePool.find((s) => {
+                const sLower = s.name.toLowerCase();
+                const catLower = (s.category || '').toLowerCase();
+                const alreadyIn = modifiedStops.some(
+                  (ms) =>
+                    (ms.name || '').toLowerCase() === sLower ||
+                    (ms.name || '').toLowerCase().includes(sLower)
+                );
+                if (alreadyIn) return false;
 
-              if (lower.includes('tea') || lower.includes('chai'))
-                return sLower.includes('chai') || sLower.includes('tea') || catLower.includes('food');
-              if (
-                lower.includes('food') ||
-                lower.includes('snack') ||
-                lower.includes('vada') ||
-                lower.includes('biryani')
-              )
-                return catLower.includes('food') || sLower.includes('vada');
-              if (lower.includes('beach')) return sLower.includes('beach');
-              if (lower.includes('fort') || lower.includes('heritage'))
-                return sLower.includes('fort') || catLower.includes('hidden');
-              if (lower.includes('game') || lower.includes('gaming')) return catLower.includes('gaming');
+                if (lower.includes('tea') || lower.includes('chai'))
+                  return sLower.includes('chai') || sLower.includes('tea') || catLower.includes('food');
+                if (
+                  lower.includes('food') ||
+                  lower.includes('snack') ||
+                  lower.includes('vada') ||
+                  lower.includes('biryani')
+                )
+                  return catLower.includes('food') || sLower.includes('vada');
+                if (lower.includes('beach')) return sLower.includes('beach');
+                if (lower.includes('fort') || lower.includes('heritage'))
+                  return sLower.includes('fort') || catLower.includes('hidden');
+                if (lower.includes('game') || lower.includes('gaming')) return catLower.includes('gaming');
 
-              return true;
-            }) ||
-            candidatePool.find(
-              (s) =>
-                !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === s.name.toLowerCase())
-            ) || {
-              id: `gen-${currentCity.name}-${Date.now()}-${i}`,
-              name: `${currentCity.name} Local Spot #${modifiedStops.length + 1}`,
-              category: 'Hidden Spots',
-              badge: 'EXPLORE',
-              expense: 20,
-              spendTime: 35,
-              transitText: '🛺 8m • ₹25',
-              photo: currentCity.spots[i % currentCity.spots.length]?.photo,
-              lat: currentCity.hub.lat + (Math.random() - 0.5) * 0.02,
-              lng: currentCity.hub.lng + (Math.random() - 0.5) * 0.02,
-            };
+                return true;
+              }) ||
+              candidatePool.find(
+                (s) =>
+                  !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === s.name.toLowerCase())
+              ) || {
+                id: `gen-${currentCity.name}-${Date.now()}-${i}`,
+                name: `${currentCity.name} Local Spot #${modifiedStops.length + 1}`,
+                category: 'Hidden Spots',
+                badge: 'EXPLORE',
+                expense: 20,
+                spendTime: 35,
+                transitText: '🛺 8m • ₹25',
+                photo: currentCity.spots[i % currentCity.spots.length]?.photo,
+                lat: currentCity.hub.lat + (Math.random() - 0.5) * 0.02,
+                lng: currentCity.hub.lng + (Math.random() - 0.5) * 0.02,
+              };
 
-          if (candidate) {
-            modifiedStops.push(createStopObject(candidate, modifiedStops.length, 'ADDED SPOT'));
-            addedList.push(candidate.name);
+            if (candidate) {
+              modifiedStops.push(createStopObject(candidate, modifiedStops.length, 'ADDED SPOT'));
+              addedList.push(candidate.name);
+            }
+          }
+
+          if (addedList.length > 0) {
+            actionReason =
+              (actionReason ? actionReason + ' & added ' : 'Added ') +
+              (addedList.length === 1
+                ? addedList[0]
+                : `${addedList.length} spots (${addedList.slice(0, 2).join(', ')}${
+                    addedList.length > 2 ? ` +${addedList.length - 2} more` : ''
+                  })`);
           }
         }
-
-        if (addedList.length > 0) {
-          actionReason =
-            (actionReason ? actionReason + ' & added ' : 'Added ') +
-            (addedList.length === 1
-              ? addedList[0]
-              : `${addedList.length} spots (${addedList.slice(0, 2).join(', ')}${
-                  addedList.length > 2 ? ` +${addedList.length - 2} more` : ''
-                })`);
-        }
       }
-    }
 
-    // 3. Shorter / Faster / Delay requests
-    if (
-      lower.includes('faster') ||
-      lower.includes('short') ||
-      lower.includes('delay') ||
-      lower.includes('quick') ||
-      lower.includes('hurry')
-    ) {
-      if (modifiedStops.length > 1) {
-        const dropped = modifiedStops.pop();
-        actionReason = `Dropped furthest stop (${dropped?.name}) to guarantee 30m faster return`;
-      } else {
-        const fastestSpot = [...candidatePool].sort(
-          (a, b) => (a.spendTime || 30) - (b.spendTime || 30)
-        )[0];
-        if (fastestSpot) {
-          modifiedStops = [createStopObject(fastestSpot, 0, 'FASTEST')];
-          actionReason = `Switched to fastest local stop (${fastestSpot.name}, ${fastestSpot.spendTime || 30}m)`;
-        }
-      }
-    }
-
-    // 4. Budget cuts
-    if (
-      lower.includes('budget') &&
-      (lower.includes('cut') ||
-        lower.includes('cheap') ||
-        lower.includes('reduce') ||
-        lower.includes('less'))
-    ) {
-      const freeSpot = candidatePool.find((s) => (s.expense || 0) === 0);
+      // 3. Shorter / Faster / Delay requests
       if (
-        freeSpot &&
-        !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === freeSpot.name.toLowerCase())
+        lower.includes('faster') ||
+        lower.includes('short') ||
+        lower.includes('delay') ||
+        lower.includes('quick') ||
+        lower.includes('hurry')
       ) {
-        modifiedStops = [createStopObject(freeSpot, 0, 'FREE GEM'), ...modifiedStops.slice(0, 1)];
+        if (modifiedStops.length > 1) {
+          const dropped = modifiedStops.pop();
+          actionReason = `Dropped furthest stop (${dropped?.name}) to guarantee 30m faster return`;
+        } else {
+          const fastestSpot = [...candidatePool].sort(
+            (a, b) => (a.spendTime || 30) - (b.spendTime || 30)
+          )[0];
+          if (fastestSpot) {
+            modifiedStops = [createStopObject(fastestSpot, 0, 'FASTEST')];
+            actionReason = `Switched to fastest local stop (${fastestSpot.name}, ${fastestSpot.spendTime || 30}m)`;
+          }
+        }
       }
-      modifiedStops.sort((a, b) => (a.expense || 0) - (b.expense || 0));
-      actionReason = 'Prioritized free & low-cost stops to cut budget';
-    }
 
-    // Safety check: if modifiedStops is empty and user was not explicitly removing, populate with first available spot
-    if (modifiedStops.length === 0 && !isRemove && candidatePool.length > 0) {
-      const fallback = candidatePool[0];
-      modifiedStops = [createStopObject(fallback, 0, 'ACTIVE')];
-      if (!actionReason) actionReason = `Updated route to ${fallback.name}`;
+      // 4. Budget cuts
+      if (
+        lower.includes('budget') &&
+        (lower.includes('cut') ||
+          lower.includes('cheap') ||
+          lower.includes('reduce') ||
+          lower.includes('less'))
+      ) {
+        const freeSpot = candidatePool.find((s) => (s.expense || 0) === 0);
+        if (
+          freeSpot &&
+          !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === freeSpot.name.toLowerCase())
+        ) {
+          modifiedStops = [createStopObject(freeSpot, 0, 'FREE GEM'), ...modifiedStops.slice(0, 1)];
+        }
+        modifiedStops.sort((a, b) => (a.expense || 0) - (b.expense || 0));
+        actionReason = 'Prioritized free & low-cost stops to cut budget';
+      }
+
+      // Safety check: if modifiedStops is empty and user was not explicitly removing, populate with first available spot
+      if (modifiedStops.length === 0 && !isRemoveAction && candidatePool.length > 0) {
+        const fallback = candidatePool[0];
+        modifiedStops = [createStopObject(fallback, 0, 'ACTIVE')];
+        if (!actionReason) actionReason = `Updated route to ${fallback.name}`;
+      }
     }
 
     // Renumber steps
