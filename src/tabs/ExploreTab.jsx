@@ -1,12 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Search, MapPin, Navigation2, Star, Bookmark, MessageSquare, X, Compass, ExternalLink, Globe } from 'lucide-react';
 import { KERALA_CITIES } from '../data/keralaCitiesData';
+import { haversineKm } from '../utils/plannerMath';
 import InteractiveMap from '../components/InteractiveMap';
 import ImageCarousel from '../components/ImageCarousel';
 import { getBackendUrl } from '../utils/apiConfig';
 
 const CATEGORIES = ['All Spots', '💎 Hidden Spots', 'Food', 'Gaming & Chill', 'Night'];
 const CITIES_LIST = ['All Cities', 'Shoranur', 'Kochi', 'Calicut', 'Palakkad', 'Trivandrum', 'Kollam', 'Wayanad'];
+
+const TRAIL_DOODLES = [
+  { icon: '🌴', title: 'Coastal Palms', desc: 'Arabian Sea Breeze', tag: 'COASTAL' },
+  { icon: '☕', title: 'Chai Kadai', desc: 'Fresh Elaichi Chai', tag: 'LOCAL SPOT' },
+  { icon: '⛵', title: 'Nila Houseboat', desc: 'Backwater Basin', tag: 'WATERWAYS' },
+  { icon: '⛰️', title: 'Western Ghats', desc: 'Misty Hill Ridge', tag: 'HIGHLANDS' },
+  { icon: '🛺', title: 'Local Rickshaw', desc: 'Scenic Alley Route', tag: 'TRANSIT' },
+  { icon: '📷', title: 'Scenic Viewpoint', desc: 'Golden Hour Snapshot', tag: 'VIEWPOINT' },
+  { icon: '🧭', title: 'Navigator Dial', desc: 'N 10°14′ E 76°12′', tag: 'WAYPOINT' },
+  { icon: '🌿', title: 'Forest Canopy', desc: 'Hidden Wilderness', tag: 'NATURE' },
+];
 
 export default function ExploreTab({ location, setLocation }) {
   const [activeCategory, setActiveCategory] = useState('All Spots');
@@ -19,6 +31,11 @@ export default function ExploreTab({ location, setLocation }) {
   const [userReviewText, setUserReviewText] = useState('');
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
   const [communityReviews, setCommunityReviews] = useState([]);
+
+  // Trail measurement refs & state
+  const trailContainerRef = useRef(null);
+  const [trailDimensions, setTrailDimensions] = useState({ width: 360, height: 600 });
+  const [measuredPath, setMeasuredPath] = useState([]);
 
   // Merge all spots across all cities + user uploaded spots
   const userSpots = JSON.parse(localStorage.getItem('userSpots') || '[]');
@@ -130,6 +147,85 @@ export default function ExploreTab({ location, setLocation }) {
     return matchesCity && matchesCat && matchesSearch;
   });
 
+  // Dynamically measure actual red push-pin positions from DOM so the path is 100% on the pin
+  const measureTrail = useCallback(() => {
+    if (!trailContainerRef.current) return;
+    const container = trailContainerRef.current;
+    const cRect = container.getBoundingClientRect();
+    const w = container.clientWidth || 360;
+    const h = Math.max(container.scrollHeight, container.clientHeight) || 600;
+    setTrailDimensions({ width: w, height: h });
+
+    const startEl = container.querySelector('.trail-start-node');
+    const endEl = container.querySelector('.trail-end-node');
+    const pinEls = container.querySelectorAll('.trail-card-pin');
+
+    let p0 = startEl ? {
+      x: startEl.getBoundingClientRect().left - cRect.left + startEl.getBoundingClientRect().width / 2,
+      y: startEl.getBoundingClientRect().top - cRect.top + container.scrollTop + startEl.getBoundingClientRect().height / 2,
+    } : { x: 30, y: 30 };
+
+    const points = [];
+    pinEls.forEach((pin, idx) => {
+      const r = pin.getBoundingClientRect();
+      points.push({
+        x: r.left - cRect.left + r.width / 2,
+        y: r.top - cRect.top + container.scrollTop + r.height / 2,
+        idx,
+      });
+    });
+
+    let pEnd = endEl ? {
+      x: endEl.getBoundingClientRect().left - cRect.left + endEl.getBoundingClientRect().width / 2,
+      y: endEl.getBoundingClientRect().top - cRect.top + container.scrollTop + 10,
+    } : { x: w / 2, y: h - 30 };
+
+    const segments = [];
+    if (points.length > 0) {
+      // Start -> Pin 0: Flowing S-curve
+      const dy0 = points[0].y - p0.y;
+      segments.push(`M ${p0.x} ${p0.y} C ${p0.x} ${p0.y + dy0 * 0.55}, ${points[0].x} ${points[0].y - dy0 * 0.55}, ${points[0].x} ${points[0].y}`);
+
+      // Sequential Pin i -> Pin i+1: Organic vertical-tangent S-curves with NO kinks or zigzags
+      for (let i = 0; i < points.length - 1; i++) {
+        const curr = points[i];
+        const next = points[i + 1];
+        const dy = next.y - curr.y;
+        segments.push(`M ${curr.x} ${curr.y} C ${curr.x} ${curr.y + dy * 0.55}, ${next.x} ${next.y - dy * 0.55}, ${next.x} ${next.y}`);
+      }
+
+      // Last Pin -> End Terminal Box
+      const last = points[points.length - 1];
+      const dyEnd = pEnd.y - last.y;
+      segments.push(`M ${last.x} ${last.y} C ${last.x} ${last.y + dyEnd * 0.55}, ${pEnd.x} ${pEnd.y - dyEnd * 0.55}, ${pEnd.x} ${pEnd.y}`);
+    }
+
+    setMeasuredPath(segments);
+  }, []);
+
+  // Recalculate whenever view, filter, or spot count changes
+  useEffect(() => {
+    if (viewMode !== 'cartoon') return;
+    measureTrail();
+    const t1 = setTimeout(measureTrail, 60);
+    const t2 = setTimeout(measureTrail, 250);
+    const t3 = setTimeout(measureTrail, 600);
+
+    let ro;
+    if (trailContainerRef.current && window.ResizeObserver) {
+      ro = new ResizeObserver(() => measureTrail());
+      ro.observe(trailContainerRef.current);
+    }
+    window.addEventListener('resize', measureTrail);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      if (ro) ro.disconnect();
+      window.removeEventListener('resize', measureTrail);
+    };
+  }, [viewMode, filteredSpots.length, selectedCityFilter, activeCategory, measureTrail]);
+
   // Reset selectedSpot only if currently viewed spot is filtered out (do not auto-open)
   useEffect(() => {
     if (selectedSpot) {
@@ -149,7 +245,6 @@ export default function ExploreTab({ location, setLocation }) {
     const local = JSON.parse(localStorage.getItem(`reviews_${spotKey}`) || '[]');
     setCommunityReviews(local);
 
-    // Also fetch reviews saved in MongoDB
     fetch(`${getBackendUrl()}/api/reviews?spotId=${encodeURIComponent(spotKey)}&spotName=${encodeURIComponent(selectedSpot.name || '')}`)
       .then((r) => r.json())
       .then((mongoReviews) => {
@@ -215,7 +310,7 @@ export default function ExploreTab({ location, setLocation }) {
           </button>
         </div>
 
-        {/* City Select Dropdown (Requested feature) */}
+        {/* City Select Dropdown */}
         <div className="flex items-center gap-2 bg-[#F4F6F9] border-[2px] border-black rounded-xl px-2.5 py-1.5 shadow-[0_1.5px_0_0_#000000]">
           <MapPin size={14} className="text-[#0B3BF4] shrink-0" strokeWidth={2.5} />
           <select
@@ -332,104 +427,108 @@ export default function ExploreTab({ location, setLocation }) {
           selectedSpot={selectedSpot}
           onSelectSpot={setSelectedSpot}
           userLocation={location}
+          height="540px"
         />
       ) : viewMode === 'cartoon' ? (
-        <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[520px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
-          {/* Dynamic Trail SVG Line: Sequential dotted line connecting Start -> Pin 1 -> Pin 2 -> Pin 3 -> End */}
-          {(() => {
-            const spotsCount = filteredSpots.length;
-            const stepGap = 160;
-            const stopNodes = filteredSpots.map((_, sIdx) => {
-              const isLeft = sIdx % 2 === 0;
-              return {
-                cx: isLeft ? 90 : 270,
-                cy: 82 + sIdx * stepGap,
-                idx: sIdx,
-              };
-            });
+        <div
+          ref={trailContainerRef}
+          className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[520px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
+        >
+          {/* Dynamic Illustrated Background Canvas: Topographic Contours & Pure Dotted Trail Curves */}
+          <svg
+            className="absolute inset-0 w-full pointer-events-none"
+            style={{ height: `${trailDimensions.height}px` }}
+            width={trailDimensions.width}
+            height={trailDimensions.height}
+          >
+            <defs>
+              <pattern id="trailGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <circle cx="20" cy="20" r="0.8" fill="#CBD5E1" opacity="0.6" />
+              </pattern>
+            </defs>
 
-            const endCy = spotsCount === 0 ? 80 : 82 + spotsCount * stepGap - 10;
-            const endPoint = { cx: 180, cy: endCy };
-            const svgHeight = endCy + 60;
+            {/* Subtle Map Coordinates Dot Grid */}
+            <rect width="100%" height="100%" fill="url(#trailGrid)" />
 
-            const segments = [];
-            if (stopNodes.length > 0) {
-              // Segment 0: Circular Start -> Pin 1
-              segments.push(`M 28 24 C 28 55, 90 40, ${stopNodes[0].cx} ${stopNodes[0].cy}`);
-
-              // Sequential Segments: Pin i -> Pin i+1 (1 connects to 2, 2 connects to 3, etc.)
-              for (let i = 0; i < stopNodes.length - 1; i++) {
-                const curr = stopNodes[i];
-                const next = stopNodes[i + 1];
-                const c1x = curr.cx === 90 ? 150 : 210;
-                const c2x = next.cx === 270 ? 210 : 150;
-                segments.push(
-                  `M ${curr.cx} ${curr.cy} C ${c1x} ${curr.cy + 55}, ${c2x} ${next.cy - 55}, ${next.cx} ${next.cy}`
-                );
-              }
-
-              // Last Stop Pin -> End Terminal Box
-              const last = stopNodes[stopNodes.length - 1];
-              const cLastX = last.cx === 90 ? 120 : 240;
-              segments.push(
-                `M ${last.cx} ${last.cy} C ${cLastX} ${last.cy + 45}, 180 ${endCy - 20}, ${endPoint.cx} ${endPoint.cy}`
-              );
-            } else {
-              segments.push(`M 180 24 C 180 40, 180 60, ${endPoint.cx} ${endPoint.cy}`);
-            }
-
-            return (
-              <svg
-                className="absolute inset-0 w-full pointer-events-none"
-                style={{ height: `${svgHeight}px` }}
-                viewBox={`0 0 360 ${svgHeight}`}
-                preserveAspectRatio="none"
-              >
-                {/* Pure Dotted Path */}
-                {segments.map((d, sIdx) => (
+            {/* Topographic Contour Lines Across Background to fill empty canvas */}
+            {Array.from({ length: Math.ceil(trailDimensions.height / 220) + 1 }).map((_, cIdx) => {
+              const yBase = cIdx * 220 + 80;
+              return (
+                <g key={cIdx} opacity="0.45">
                   <path
-                    key={sIdx}
-                    d={d}
+                    d={`M 0 ${yBase} Q ${trailDimensions.width * 0.25} ${yBase - 35}, ${trailDimensions.width * 0.5} ${yBase + 25} T ${trailDimensions.width} ${yBase - 15}`}
                     fill="none"
-                    stroke="#0B3BF4"
-                    strokeWidth="3.5"
-                    strokeDasharray="6 6"
-                    strokeLinecap="round"
+                    stroke="#CBD5E1"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 6"
                   />
-                ))}
+                  <text
+                    x={trailDimensions.width - 45}
+                    y={yBase - 8}
+                    fill="#94A3B8"
+                    fontSize="7"
+                    fontWeight="800"
+                    fontFamily="monospace"
+                  >
+                    {cIdx * 35 + 20}m
+                  </text>
+                  <path
+                    d={`M 0 ${yBase + 110} Q ${trailDimensions.width * 0.35} ${yBase + 140}, ${trailDimensions.width * 0.7} ${yBase + 85} T ${trailDimensions.width} ${yBase + 120}`}
+                    fill="none"
+                    stroke="#E2E8F0"
+                    strokeWidth="1.2"
+                  />
+                </g>
+              );
+            })}
 
-                {/* Start Waypoint Node (at Start circle) */}
-                <circle cx="28" cy="24" r="5" fill="#10B981" stroke="#000000" strokeWidth="2" />
+            {/* Pure Dotted Path Running Directly Through All Red Push-Pins */}
+            {measuredPath.map((d, sIdx) => (
+              <path
+                key={sIdx}
+                d={d}
+                fill="none"
+                stroke="#0B3BF4"
+                strokeWidth="3.5"
+                strokeDasharray="6 6"
+                strokeLinecap="round"
+              />
+            ))}
+          </svg>
 
-                {/* End Destination Node */}
-                <circle cx={endPoint.cx} cy={endPoint.cy} r="5" fill="#F59E0B" stroke="#000000" strokeWidth="2" />
-              </svg>
-            );
-          })()}
-
-          {/* Floating Top Control: Start Emblem & Live Explore */}
+          {/* Floating Top Control: Start Emblem & Current Location Barometer */}
           <div className="relative z-10 flex items-center justify-between mb-3 px-0.5">
             <div className="flex items-center gap-2 min-w-0">
-              <div className="w-11 h-11 rounded-full bg-[#10B981] border-[2.5px] border-black flex flex-col items-center justify-center shadow-[0_2px_0_0_#000000] text-white shrink-0">
-                <span className="text-[8.5px] font-black uppercase tracking-wider leading-none">START</span>
-                <span className="text-[9.5px] font-black leading-none mt-0.5 text-emerald-100">HUB</span>
+              <div className="trail-start-node w-11 h-11 rounded-full bg-[#10B981] border-[2.5px] border-black flex flex-col items-center justify-center shadow-[0_2px_0_0_#000000] text-white shrink-0">
+                <span className="text-[8px] font-black uppercase tracking-wider leading-none">START</span>
+                <span className="text-[9px] font-black leading-none mt-0.5 text-emerald-100">HUB</span>
               </div>
               <div className="bg-white border-[2px] border-black rounded-2xl px-3 py-1.5 text-xs font-black text-black shadow-[0_2px_0_0_#000000] truncate">
-                <span>📍 {selectedCityFilter} Trail</span>
+                <span>📍 {selectedCityFilter} • {filteredSpots.length} Spots</span>
               </div>
             </div>
 
-            <button
-              onClick={() => setSelectedSpot(filteredSpots[0] || allSpots[0])}
-              className="bg-white border-[2px] border-black rounded-full px-2.5 py-1 flex items-center gap-1.5 text-[10px] font-black shadow-[0_2px_0_0_#000000] hover:bg-emerald-50 active:translate-y-0.5 shrink-0"
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-ping" />
-              <span>Live Explore</span>
-              <Navigation2 size={11} className="text-[#0B3BF4] fill-[#0B3BF4]" />
-            </button>
+            <div className="flex items-center gap-1.5 shrink-0">
+              <button
+                onClick={() => setViewMode('osm')}
+                className="bg-white border-[2px] border-black rounded-full px-2.5 py-1 flex items-center gap-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] hover:bg-gray-50 active:translate-y-0.5 transition"
+                title="View on Interactive Map"
+              >
+                <span>🗺️</span>
+                <span>Map</span>
+              </button>
+              <button
+                onClick={() => setSelectedSpot(filteredSpots[0] || allSpots[0])}
+                className="bg-white border-[2px] border-black rounded-full px-2.5 py-1 flex items-center gap-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] hover:bg-emerald-50 active:translate-y-0.5 transition"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-ping" />
+                <span>Explore</span>
+                <Navigation2 size={10} className="text-[#0B3BF4] fill-[#0B3BF4]" />
+              </button>
+            </div>
           </div>
 
-          {/* Dynamic Pin Callout Cards (Vertical Adventure Flow) */}
+          {/* Dynamic Pin Callout Cards with Illustrated Landmark Stickers in Empty Spaces */}
           {filteredSpots.length === 0 ? (
             <div className="relative z-10 py-16 text-center space-y-2">
               <div className="text-3xl">🔍</div>
@@ -455,14 +554,17 @@ export default function ExploreTab({ location, setLocation }) {
               {filteredSpots.map((spot, idx) => {
                 const isLeft = idx % 2 === 0;
                 const isSelected = selectedSpot?.id === spot.id || selectedSpot?.name === spot.name;
-                return (
-                  <div
-                    key={spot.id || spot.name}
-                    className={`w-1/2 flex flex-col items-center ${isLeft ? '' : 'ml-auto'}`}
-                  >
+                const doodle = TRAIL_DOODLES[idx % TRAIL_DOODLES.length];
+                const spotLat = spot.lat || 10.7606;
+                const spotLng = spot.lng || 76.2711;
+                const distKm = location?.lat ? haversineKm(location.lat, location.lon, spotLat, spotLng) : null;
+
+                // Card component
+                const spotCard = (
+                  <div className="w-[48%] flex flex-col items-center">
                     {/* Category pill directly above card */}
                     <div className="flex items-center gap-1 mb-2">
-                      <span className="border-[1.5px] border-black rounded-full px-2 py-0.5 text-[9px] font-black bg-[#FEF3C7] text-black shadow-[0_1px_0_0_#000000]">
+                      <span className="border-[1.5px] border-black rounded-full px-2 py-0.5 text-[8.5px] font-black bg-[#FEF3C7] text-black shadow-[0_1px_0_0_#000000]">
                         {spot.category || 'Spot'}
                       </span>
                     </div>
@@ -470,13 +572,13 @@ export default function ExploreTab({ location, setLocation }) {
                     {/* Compact Polaroid Snapshot Card: Pinned right onto the dotted path */}
                     <div
                       onClick={() => setSelectedSpot(spot)}
-                      className={`relative bg-white border-[2px] border-black rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition w-[155px] ${
+                      className={`relative bg-white border-[2px] border-black rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[155px] w-full ${
                         isLeft ? '-rotate-1 hover:rotate-0' : 'rotate-1 hover:rotate-0'
                       } ${isSelected ? 'ring-2 ring-[#0B3BF4]' : ''}`}
                     >
-                      {/* 3D Push-Pin with Number Pinned Directly on the Dotted Trail Path */}
+                      {/* 3D Push-Pin with Number Pinned Exactly on the Dotted Trail Path */}
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
-                        <div className="w-5 h-5 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-[1.5px] border-black shadow-[0_2px_0_0_rgba(0,0,0,0.4)] ring-1 ring-red-300/60 flex items-center justify-center font-black text-[10px] text-white">
+                        <div className="trail-card-pin w-5 h-5 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-[1.5px] border-black shadow-[0_2px_0_0_rgba(0,0,0,0.4)] ring-1 ring-red-300/60 flex items-center justify-center font-black text-[10px] text-white">
                           {idx + 1}
                         </div>
                       </div>
@@ -486,6 +588,7 @@ export default function ExploreTab({ location, setLocation }) {
                         <img
                           src={spot.photo || spot.photos?.[0]}
                           alt={spot.name}
+                          onLoad={measureTrail}
                           className="w-full h-full object-cover"
                         />
                         {spot.badge && (
@@ -497,23 +600,80 @@ export default function ExploreTab({ location, setLocation }) {
                         )}
                       </div>
 
-                      {/* Polaroid Bottom Chin */}
+                      {/* Polaroid Bottom Chin with location details and direct Map jump */}
                       <div className="px-0.5 space-y-0.5">
                         <div className="font-black text-[10px] text-black truncate leading-tight">
                           {spot.name}
                         </div>
-                        <div className="text-[8.5px] font-bold text-emerald-700 flex items-center justify-between">
+
+                        {/* Location area & landmark */}
+                        <div className="text-[8px] font-bold text-gray-600 truncate flex items-center gap-0.5">
+                          <span>📍</span>
+                          <span className="truncate">{spot.area ? `${spot.area}, ${spot.cityName || ''}` : (spot.cityName || 'Kerala')}</span>
+                        </div>
+
+                        <div className="text-[8.5px] font-bold text-emerald-700 flex items-center justify-between pt-0.5">
                           <span>{spot.expense === 0 ? 'Free' : `₹${spot.expense}`}</span>
                           <span className="flex items-center gap-0.5">{spot.rating || 4.8} ⭐</span>
                         </div>
-                        <div className="text-[8px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                          <span className="truncate max-w-[110px]">
-                            📍 {spot.distanceKm ? `${spot.distanceKm} km` : spot.transitText || 'Near station'}
+
+                        {/* Bottom Bar: Live Distance + Direct Map View Button */}
+                        <div className="text-[7.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                          <span className="truncate max-w-[85px]">
+                            {distKm !== null ? `${distKm.toFixed(1)} km` : spot.transitText || 'Near station'}
                           </span>
-                          <span className="text-[#0B3BF4] font-black text-[8.5px]">↗</span>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedSpot(spot);
+                              setViewMode('osm');
+                            }}
+                            className="bg-[#0B3BF4] text-white text-[7.5px] font-black px-1.5 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-blue-700 active:translate-y-0.5 cursor-pointer"
+                            title="View on Map"
+                          >
+                            Map ↗
+                          </button>
                         </div>
                       </div>
                     </div>
+                  </div>
+                );
+
+                // Illustrated Adventure Sticker rendered in the empty opposite half
+                const doodleSticker = (
+                  <div className="w-[48%] flex justify-center py-2 pointer-events-none select-none">
+                    <div className={`bg-white/85 border-[1.5px] border-black/25 rounded-2xl p-2.5 shadow-[0_2px_0_0_rgba(0,0,0,0.06)] flex items-center gap-2 max-w-[155px] w-full ${
+                      isLeft ? 'rotate-1' : '-rotate-1'
+                    }`}>
+                      <span className="text-xl shrink-0">{doodle.icon}</span>
+                      <div className="leading-tight overflow-hidden">
+                        <div className="text-[7px] font-black uppercase tracking-wider text-[#0B3BF4]">
+                          {doodle.tag} • KM {(idx * 1.4 + 0.6).toFixed(1)}
+                        </div>
+                        <div className="font-black text-[9px] text-black truncate">{doodle.title}</div>
+                        <div className="text-[7.5px] font-semibold text-gray-500 truncate">{doodle.desc}</div>
+                      </div>
+                    </div>
+                  </div>
+                );
+
+                return (
+                  <div
+                    key={spot.id || spot.name}
+                    className="relative flex items-center justify-between gap-1"
+                  >
+                    {isLeft ? (
+                      <>
+                        {spotCard}
+                        {doodleSticker}
+                      </>
+                    ) : (
+                      <>
+                        {doodleSticker}
+                        {spotCard}
+                      </>
+                    )}
                   </div>
                 );
               })}
@@ -522,7 +682,7 @@ export default function ExploreTab({ location, setLocation }) {
 
           {/* Bottom Safe Return / End Terminal Banner */}
           <div className="relative z-10 mt-4 mb-1">
-            <div className="bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-2.5 px-3 flex items-center justify-between shadow-[0_3px_0_0_#000000]">
+            <div className="trail-end-node bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-2.5 px-3 flex items-center justify-between shadow-[0_3px_0_0_#000000]">
               <div className="flex items-center gap-2">
                 <span className="w-6 h-6 rounded-full bg-black text-amber-400 font-black text-xs flex items-center justify-center shrink-0">
                   🏁
