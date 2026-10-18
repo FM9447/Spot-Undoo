@@ -3,108 +3,187 @@
 Spot-Undoo Fine-Tuning Pipeline with Tinker (Thinking Machines Lab)
 ===================================================================
 Uses the official Tinker SDK (`tinker-0.34.0`) to fine-tune open-weight
-Qwen 2.5 on 1,500 curated All-India & Kerala Micro-Travel training samples.
+Qwen/Qwen3.5-4B LoRA on curated Kerala & All-India Micro-Travel training samples.
 
 Hacktoberfest Track: "Best Use of Tinker" ($200 prize category)
 
 Usage:
   export TINKER_API_KEY="tml-your-api-key-here"
-  python3 training/train_tinker.py
+  python3 training/train_tinker.py [--steps 30] [--batch-size 2] [--lr 2e-5]
 """
 
 import os
 import sys
 import json
+import time
+import argparse
 from pathlib import Path
 
 DATASET_PATH = Path(__file__).parent / "spot_undo_train.jsonl"
 BASE_MODEL = "Qwen/Qwen3.5-4B"
-FALLBACK_MODEL = "thinkingmachines/Inkling-Small"
 
-def check_dataset():
+def parse_args():
+    parser = argparse.ArgumentParser(description="Tinker LoRA Fine-Tuning for Spot-Undoo")
+    parser.add_argument("--steps", type=int, default=30, help="Number of training steps to run (default: 30)")
+    parser.add_argument("--batch-size", type=int, default=2, help="Batch size per step (default: 2)")
+    parser.add_argument("--lr", type=float, default=2e-5, help="Learning rate (default: 2e-5)")
+    parser.add_argument("--rank", type=int, default=32, help="LoRA rank (default: 32)")
+    parser.add_argument("--save-every", type=int, default=15, help="Save checkpoint every N steps")
+    parser.add_argument("--checkpoint-name", type=str, default="spot-undoo-kerala-qwen3.5", help="Checkpoint name")
+    return parser.parse_args()
+
+def load_dataset(limit=None):
     if not DATASET_PATH.exists():
         print(f"❌ Dataset not found at {DATASET_PATH}")
         sys.exit(1)
     
-    count = 0
+    samples = []
     with open(DATASET_PATH, "r", encoding="utf-8") as f:
-        for _ in f:
-            count += 1
-    print(f"✅ Found {count} high-quality ChatML training pairs in {DATASET_PATH.name}")
-    return count
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            samples.append(json.loads(line))
+            if limit and len(samples) >= limit:
+                break
+    return samples
 
 def main():
+    args = parse_args()
     print("=" * 65)
     print("🌴 Spot-Undoo: Tinker (Thinking Machines) Multi-City Fine-Tuning")
     print("=" * 65)
 
-    sample_count = check_dataset()
+    samples = load_dataset()
+    print(f"✅ Loaded {len(samples)} ChatML training samples from {DATASET_PATH.name}")
+
     api_key = os.environ.get("TINKER_API_KEY", "").strip()
+    if not api_key:
+        api_key = input("\nEnter your TINKER_API_KEY (starts with tml-...): ").strip()
 
     if not api_key:
-        print("\n⚠️ TINKER_API_KEY is not set.")
-        print("Note: Thinking Machines API keys begin with 'tml-'.")
-        print("If you have a Hacktoberfest promo code (e.g. 948605855886999552), redeem it at:")
-        print("👉 https://tinker.thinkingmachines.ai to generate your tml-... key.")
-        user_input = input("\nEnter your TINKER_API_KEY (or press Enter for validation dry-run): ").strip()
-        if user_input:
-            api_key = user_input
+        print("❌ TINKER_API_KEY is required to run remote GPU fine-tuning.")
+        sys.exit(1)
 
-    # Ensure prefix check
-    if api_key and not api_key.startswith("tml-"):
-        print(f"\nℹ️ Note: Input '{api_key}' does not start with 'tml-'.")
-        print("Attempting with 'tml-' prefix...")
+    if not api_key.startswith("tml-"):
         api_key = f"tml-{api_key}"
 
-    print(f"\n🚀 Fine-Tuning Configuration:")
+    print(f"\n🚀 Training Parameters:")
     print(f"   • Base Model: {BASE_MODEL}")
-    print(f"   • Dataset Size: {sample_count} samples across 20 major Indian city hubs")
-    print(f"   • Adaptation Method: Low-Rank Adaptation (LoRA rank=32, train_attn=True, train_mlp=True)")
-    print(f"   • Target Efficiency: Ultra-low latency for mobile Edge AI execution")
-
-    if not api_key or api_key == "tml-":
-        print("\n✨ Validation Dry-Run Succeeded!")
-        print(f"   Dataset {DATASET_PATH.name} ({sample_count} pairs) is fully verified and ready.")
-        print("\nTo launch live GPU training with your Tinker key:")
-        print("   export TINKER_API_KEY='tml-your_key'")
-        print("   python3 training/train_tinker.py")
-        return
+    print(f"   • LoRA Rank: {args.rank}")
+    print(f"   • Total Steps: {args.steps}")
+    print(f"   • Batch Size: {args.batch_size}")
+    print(f"   • Learning Rate: {args.lr}")
+    print(f"   • Target Checkpoint: {args.checkpoint_name}")
 
     import tinker
+    from tinker import types
+
     try:
-        print(f"\n📡 Connecting to Thinking Machines Lab with key: {api_key[:8]}...")
+        print(f"\n📡 Connecting to Thinking Machines Lab...")
         service_client = tinker.ServiceClient(api_key=api_key)
         
-        print(f"⚡ Creating LoRA Training Client for {BASE_MODEL}...")
+        print(f"⚡ Provisioning LoRA training session on remote GPU cluster for {BASE_MODEL}...")
         training_client = service_client.create_lora_training_client(
             base_model=BASE_MODEL,
-            rank=32,
+            rank=args.rank,
             train_attn=True,
             train_mlp=True,
-            user_metadata={"project": "spot-undoo-kerala-all-india"}
+            user_metadata={"project": "spot-undoo", "region": "kerala-30-cities"}
         )
-        print("🎉 Successfully initialized Tinker Training Client on remote GPU cluster!")
-        print(f"   Console URL: {service_client.get_console_url()}")
         
-        # Stream samples
-        print(f"\n⏳ Submitting training batches from {DATASET_PATH.name}...")
-        batch_count = 0
-        with open(DATASET_PATH, "r", encoding="utf-8") as f:
-            for line in f:
-                row = json.loads(line)
-                batch_count += 1
-                if batch_count % 100 == 0:
-                    print(f"   • Processed {batch_count}/{sample_count} samples...")
-        
-        print(f"✅ Successfully ingested all {batch_count} samples into training pipeline.")
-        print("✨ Model fine-tuning submitted to Thinking Machines cloud!")
+        console_url = training_client.get_console_url()
+        print(f"🎉 Training session initialized!")
+        print(f"🔗 Console Dashboard: {console_url}")
 
-    except tinker.AuthenticationError as e:
-        print(f"\n❌ Tinker Authentication Error: {e}")
-        print("👉 Please log into https://tinker.thinkingmachines.ai with your account,")
-        print("   redeem your promo code under Billing, and generate a valid 'tml-...' API key.")
+        print("\n⏳ Fetching tokenizer...")
+        tokenizer = training_client.get_tokenizer()
+        print("✅ Tokenizer ready.")
+
+        # Prepare SFT training samples
+        print(f"\n⚙️ Preparing batches for {args.steps} steps...")
+        sample_idx = 0
+        total_tokens = 0
+        start_time = time.time()
+
+        for step in range(1, args.steps + 1):
+            batch_data = []
+            step_tokens = 0
+
+            for _ in range(args.batch_size):
+                item = samples[sample_idx % len(samples)]
+                sample_idx += 1
+
+                messages = item.get("messages", [])
+                if len(messages) < 3:
+                    continue
+
+                prompt_text = tokenizer.apply_chat_template(messages[:2], tokenize=False, add_generation_prompt=True)
+                prompt_tokens = tokenizer.encode(prompt_text)
+                
+                full_text = tokenizer.apply_chat_template(messages, tokenize=False)
+                full_tokens = tokenizer.encode(full_text)
+
+                if len(full_tokens) <= len(prompt_tokens):
+                    continue
+
+                # Causal next-token prediction: predict target_tokens from model_input
+                model_input = types.ModelInput.from_ints(full_tokens[:-1])
+                target_tokens = full_tokens[1:]
+                
+                # SFT Mask: zero out loss on prompt tokens, train only on assistant response
+                prompt_len = len(prompt_tokens)
+                weights = [0.0 if i < (prompt_len - 1) else 1.0 for i in range(len(target_tokens))]
+                step_tokens += sum(weights)
+
+                batch_data.append(types.Datum(
+                    model_input=model_input,
+                    loss_fn_inputs={"target_tokens": target_tokens, "weights": weights}
+                ))
+
+            if not batch_data:
+                continue
+
+            # Forward + Backward Pass
+            fwd_future = training_client.forward_backward(batch_data, "cross_entropy")
+            # Optimizer Step (AdamW)
+            optim_future = training_client.optim_step(adam_params=types.AdamParams(learning_rate=args.lr))
+
+            fwd_res = fwd_future.result()
+            _ = optim_future.result()
+
+            loss_sum = fwd_res.metrics.get("loss:sum", 0.0)
+            avg_loss = loss_sum / max(1.0, step_tokens)
+            total_tokens += int(step_tokens)
+
+            elapsed = time.time() - start_time
+            print(f"   [Step {step:02d}/{args.steps:02d}] Loss: {avg_loss:.4f} | Tokens: {int(step_tokens)} (Cumulative: {total_tokens:,}) | Elapsed: {elapsed:.1f}s")
+
+            # Periodic checkpoint save
+            if step % args.save_every == 0 and step < args.steps:
+                chk_name = f"{args.checkpoint_name}-step-{step}"
+                print(f"   💾 Saving intermediate checkpoint '{chk_name}' to Tinker...")
+                save_future = training_client.save_state(name=chk_name)
+                save_res = save_future.result()
+                print(f"   ✅ Saved: {save_res.path}")
+
+        # Final Checkpoint Save
+        print(f"\n💾 Saving final LoRA weights '{args.checkpoint_name}'...")
+        final_save_future = training_client.save_state(name=args.checkpoint_name)
+        final_res = final_save_future.result()
+        print(f"🎉 Final Checkpoint Saved Successfully: {final_res.path}")
+
+        print("\n" + "=" * 65)
+        print("🏆 Spot-Undoo Fine-Tuning Complete!")
+        print(f"   • Total Steps: {args.steps}")
+        print(f"   • Total Trained Tokens: {total_tokens:,}")
+        print(f"   • Dashboard URL: {console_url}")
+        print(f"   • Remote Checkpoint: {final_res.path}")
+        print("=" * 65)
+
     except Exception as e:
-        print(f"\n⚠️ Tinker API returned: {e}")
+        print(f"\n⚠️ Tinker Training Error: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
