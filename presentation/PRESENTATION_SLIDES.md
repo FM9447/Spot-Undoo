@@ -98,10 +98,16 @@ This document provides the slide-by-slide content and speaker notes aligned with
 
 ## 📽️ Slide 8: Project Roadmap & Future Scope
 - **Phase 1 (Completed for Hackathon)**:
-  - [x] 7 Kerala Hubs & 70 curated spots.
-  - [x] Local Qwen 2.5 3B edge inference (2.39s warm response).
-  - [x] MongoDB Atlas cloud persistence for UGC and reviews.
-  - [x] Native Android package & installable PWA.
+  - [x] All-Kerala coverage (14 districts, 70+ hubs, 400+ spots).
+  - [x] Local Qwen 2.5 3B edge inference + Groq Qwen 3.8 27B + Gemini Flash.
+  - [x] Strict Zero-Duplicate Itinerary Generation with Termination Sanitizer.
+  - [x] 60fps OpenStreetMap with Avada Themes (Standard, Dark, Cartoon, Voyager).
+  - [x] 100m Proximity Guard with interactive place preview popup.
+  - [x] Native Android Google Sign-In (`@codetrix-studio/capacitor-google-auth`).
+  - [x] Multimodal Ride Hailing Comparator (Uber, Rapido, Ola).
+  - [x] ElevenLabs Multilingual Voice Audio Guide.
+  - [x] MongoDB Atlas cloud persistence for UGC, reviews, and itineraries.
+  - [x] Native Android APK (`SpotUndoo-v1.0.apk`) & installable PWA.
 - **Phase 2 (Future Roadmap)**:
   - [ ] **Offline Vector Search (Qdrant/Chroma)**: Pure offline semantic query matching.
   - [ ] **Native Malayalam Audio Guide**: Spoken guides powered by Piper TTS & Whisper ASR.
