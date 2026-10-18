@@ -4,6 +4,7 @@ import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { haversineKm } from '../utils/plannerMath';
 import InteractiveMap from '../components/InteractiveMap';
 import ImageCarousel from '../components/ImageCarousel';
+import RideComparatorModal from '../components/RideComparatorModal';
 import { getBackendUrl } from '../utils/apiConfig';
 
 const CATEGORIES = ['All Spots', '💎 Hidden Spots', 'Food', 'Gaming & Chill', 'Night'];
@@ -29,6 +30,7 @@ export default function ExploreTab({ location, setLocation }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState('osm'); // 'osm' (Map default) | 'cartoon' | 'grid'
   const [selectedSpot, setSelectedSpot] = useState(null);
+  const [rideDestination, setRideDestination] = useState(null);
   const [bookmarkedIds, setBookmarkedIds] = useState([]);
   const [userRating, setUserRating] = useState(5);
   const [userReviewText, setUserReviewText] = useState('');
@@ -899,23 +901,37 @@ export default function ExploreTab({ location, setLocation }) {
                           <span className="flex items-center gap-0.5">{spot.rating || 4.8} ⭐</span>
                         </div>
 
-                        {/* Bottom Bar: Live Distance + Direct Map View Button */}
+                        {/* Bottom Bar: Live Distance + Direct Map View & Rides Buttons */}
                         <div className="text-[7.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                          <span className="truncate max-w-[85px]">
+                          <span className="truncate max-w-[65px]">
                             {distKm !== null ? `${distKm.toFixed(1)} km` : spot.transitText || 'Near station'}
                           </span>
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedSpot(spot);
-                              setViewMode('osm');
-                            }}
-                            className="bg-[#0B3BF4] text-white text-[7.5px] font-black px-1.5 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-blue-700 active:translate-y-0.5 cursor-pointer"
-                            title="View on Map"
-                          >
-                            Map ↗
-                          </button>
+                          <div className="flex items-center gap-1">
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setRideDestination(spot);
+                              }}
+                              className="bg-[#FFE500] text-black text-[7px] font-black px-1.5 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-yellow-400 active:translate-y-0.5 cursor-pointer flex items-center gap-0.5"
+                              title="Compare Uber, Rapido & Auto fares"
+                            >
+                              <span>🛺</span>
+                              <span>Rides</span>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedSpot(spot);
+                                setViewMode('osm');
+                              }}
+                              className="bg-[#0B3BF4] text-white text-[7px] font-black px-1.5 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-blue-700 active:translate-y-0.5 cursor-pointer"
+                              title="View on Map"
+                            >
+                              Map ↗
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1049,10 +1065,21 @@ export default function ExploreTab({ location, setLocation }) {
                     <span className="flex items-center gap-0.5">{spot.rating || 4.8} ⭐</span>
                   </div>
                   <div className="text-[8.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                    <span className="truncate max-w-[125px]">
+                    <span className="truncate max-w-[95px]">
                       📍 {spot.distanceKm ? `${spot.distanceKm} km` : spot.transitText || 'Near station'}
                     </span>
-                    <span className="text-[#0B3BF4] font-black text-[9px]">↗</span>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setRideDestination(spot);
+                      }}
+                      className="bg-[#FFE500] text-black text-[7px] font-black px-1.5 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-yellow-400 active:translate-y-0.5 cursor-pointer flex items-center gap-0.5 shrink-0"
+                      title="Compare Uber, Rapido & Auto fares"
+                    >
+                      <span>🛺</span>
+                      <span>Rides</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1134,6 +1161,22 @@ export default function ExploreTab({ location, setLocation }) {
               </div>
             </div>
           </div>
+
+          {/* Multimodal Ride Hailing Comparator (Uber, Rapido, Ola) Button */}
+          <button
+            type="button"
+            onClick={() => setRideDestination(selectedSpot)}
+            className="w-full bg-[#FFE500] hover:bg-[#FACC15] border-[2.5px] border-black rounded-2xl py-2.5 px-3 font-black text-xs text-black shadow-[0_3px_0_0_#000000] flex items-center justify-between active:translate-y-0.5 transition cursor-pointer"
+          >
+            <div className="flex items-center gap-2">
+              <span className="text-base">🛺</span>
+              <span className="tracking-tight uppercase">Compare Uber, Rapido & Autos</span>
+            </div>
+            <div className="flex items-center gap-1 text-[10px] font-black bg-white px-2 py-0.5 rounded-lg border border-black shadow-[0_1px_0_0_#000000]">
+              <span>Fast Fares</span>
+              <span>→</span>
+            </div>
+          </button>
 
           {/* Community Quote Box */}
           <div className="border-[1.5px] border-black rounded-2xl p-3 bg-[#FFFDF5] text-xs font-semibold text-black leading-relaxed flex items-start gap-2 shadow-[0_1px_0_0_#000000]">
@@ -1271,19 +1314,28 @@ export default function ExploreTab({ location, setLocation }) {
 
           {/* Action Row */}
           <div className="flex items-center gap-2 pt-1">
+            <button
+              type="button"
+              onClick={() => setRideDestination(selectedSpot)}
+              className="bg-[#FFE500] hover:bg-[#FACC15] border-[2.5px] border-black rounded-2xl py-3 px-3 font-black text-xs text-black shadow-[0_3px_0_0_#000000] flex items-center justify-center gap-1.5 active:translate-y-0.5 transition cursor-pointer"
+              title="Compare Uber, Rapido, and Ola Auto"
+            >
+              <span className="text-base">🛺</span>
+              <span>Rides</span>
+            </button>
             <a
-              href={`https://www.google.com/maps/dir/?api=1&origin=${location.lat},${location.lon}&destination=${selectedSpot.lat},${selectedSpot.lng}`}
+              href={`https://www.google.com/maps/dir/?api=1&origin=${location?.lat || 10.7606},${location?.lon || 76.2711}&destination=${selectedSpot.lat},${selectedSpot.lng}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-3 px-4 font-black text-sm text-black shadow-[0_3px_0_0_#000000] flex items-center justify-center gap-1.5 hover:bg-amber-400 active:translate-y-0.5 transition text-center"
+              className="flex-1 bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-3 px-3 font-black text-xs text-black shadow-[0_3px_0_0_#000000] flex items-center justify-center gap-1.5 hover:bg-amber-400 active:translate-y-0.5 transition text-center"
             >
-              <MapPin size={16} strokeWidth={2.5} />
-              <span>Open in Google Maps</span>
-              <ExternalLink size={13} strokeWidth={2.5} />
+              <MapPin size={15} strokeWidth={2.5} />
+              <span>Google Maps</span>
+              <ExternalLink size={12} strokeWidth={2.5} />
             </a>
             <button
               onClick={() => toggleBookmark(selectedSpot.id || selectedSpot.name)}
-              className={`w-12 h-12 border-[2.5px] border-black rounded-2xl flex items-center justify-center shadow-[0_3px_0_0_#000000] active:translate-y-0.5 transition ${
+              className={`w-12 h-12 border-[2.5px] border-black rounded-2xl flex items-center justify-center shadow-[0_3px_0_0_#000000] active:translate-y-0.5 transition shrink-0 ${
                 bookmarkedIds.includes(selectedSpot.id || selectedSpot.name)
                   ? 'bg-[#0B3BF4] text-white'
                   : 'bg-white text-black hover:bg-gray-100'
@@ -1296,6 +1348,15 @@ export default function ExploreTab({ location, setLocation }) {
         </div>
       </div>
     )}
+
+      {/* Multimodal Ride Hailing Comparator (Uber, Rapido, Ola) Modal */}
+      <RideComparatorModal
+        isOpen={!!rideDestination}
+        onClose={() => setRideDestination(null)}
+        destination={rideDestination}
+        userLat={location?.lat || 10.7606}
+        userLon={location?.lon || 76.2711}
+      />
     </div>
   );
 }
