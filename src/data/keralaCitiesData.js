@@ -1,7 +1,9 @@
+// Auto-generated multi-city Kerala & National Transit Hubs
 export const KERALA_CITIES = {
   "Shoranur": {
     "name": "Shoranur",
     "displayName": "Shoranur Jn Hub (Palakkad)",
+    "state": "Kerala",
     "hub": {
       "name": "Shoranur Jn Hub (Active)",
       "stationName": "Shoranur Jn Pl. 1",
@@ -13,925 +15,851 @@ export const KERALA_CITIES = {
         "id": "shn-1",
         "name": "River Ghat Step Walk",
         "category": "Hidden Spots",
-        "badge": "Scenic Riverside",
-        "lat": 10.758,
-        "lng": 76.275,
+        "badge": "Hidden Spots",
+        "lat": 10.7493,
+        "lng": 76.26910000000001,
         "expense": 0,
-        "spendTime": 25,
-        "rating": 5,
-        "reviewCount": 94,
+        "spendTime": 30,
+        "rating": 5.0,
+        "reviewCount": 85,
         "distanceKm": 0.8,
-        "transitText": "Walk • 8m (Free)",
-        "returnText": "8m back (Free)",
+        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 0,
         "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-            "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80"
-          ],
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
         "review": "Serene stepped ghat overlooking Bharathapuzha. Perfect quiet walk before train.",
         "tags": [
-          "Hidden Nature",
+          "Hidden Spots",
           "Chai & View",
-          "Free"
+          "Verified"
         ]
       },
       {
         "id": "shn-2",
         "name": "Nila River Secret Banyan",
         "category": "Hidden Spots",
-        "badge": "Ancient Trees",
-        "lat": 10.752,
-        "lng": 76.265,
+        "badge": "Hidden Spots",
+        "lat": 10.7454,
+        "lng": 76.2685,
         "expense": 40,
-        "spendTime": 40,
+        "spendTime": 45,
         "rating": 4.8,
-        "reviewCount": 128,
+        "reviewCount": 85,
         "distanceKm": 2.1,
-        "transitText": "Auto • 10m (₹30)",
-        "returnText": "10m back (₹30)",
+        "transitText": "\ud83d\udefa 10m \u2022 \u20b930",
+        "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80",
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
-            "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80"
-          ],
-        "review": "Best quiet riverside spot with hot pazhampori under ancient banyan roots.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Quiet riverside shade with hot pazhampori and chai.",
         "tags": [
-          "Hidden Nature",
-          "Street Food",
-          "Riverside"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "shn-3",
-        "name": "Amma Crispy Vada Stall",
+        "name": "Amma's Crispy Vada",
         "category": "Food",
-        "badge": "Local Snacks",
-        "lat": 10.763,
-        "lng": 76.278,
+        "badge": "Food",
+        "lat": 10.7756,
+        "lng": 76.2806,
         "expense": 25,
-        "spendTime": 15,
+        "spendTime": 20,
         "rating": 4.9,
-        "reviewCount": 240,
+        "reviewCount": 85,
         "distanceKm": 1.2,
-        "transitText": "Walk • 6m (Free)",
-        "returnText": "6m back (Free)",
+        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80",
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-            "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800&q=80"
-          ],
-        "review": "Legendary crispy uzhunnu vada and piping hot filter tea served fresh off the wok.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Golden uzhunnu vada hot off the oil pan with coconut chutney.",
         "tags": [
-          "Street Food",
-          "Chai & View"
+          "Food",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "shn-4",
         "name": "LevelUp Cyber Hub",
         "category": "Gaming & Chill",
-        "badge": "AC Lounge",
-        "lat": 10.766,
-        "lng": 76.285,
+        "badge": "Gaming & Chill",
+        "lat": 10.7718,
+        "lng": 76.25710000000001,
         "expense": 80,
         "spendTime": 60,
         "rating": 4.7,
-        "reviewCount": 88,
-        "distanceKm": 3,
-        "transitText": "Auto • 8m (₹25)",
-        "returnText": "8m back (₹25)",
-        "returnCost": 25,
-        "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
+        "reviewCount": 85,
+        "distanceKm": 3.0,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b925",
+        "returnText": "Back to Shoranur Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80",
-          "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-            "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&q=80"
-          ],
-        "review": "Chilled AC, fast fiber net, RTX rigs, couch seating near the railway station approach.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "High-speed broadband, esports gaming setups, chilled AC.",
         "tags": [
           "Gaming & Chill",
-          "AC",
-          "WiFi"
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "shn-5",
-        "name": "Clay Craft Artisan Village",
+        "name": "Varikkasseri Mana Heritage",
         "category": "Hidden Spots",
-        "badge": "Terracotta Lane",
-        "lat": 10.745,
-        "lng": 76.26,
-        "expense": 0,
-        "spendTime": 35,
-        "rating": 4.6,
-        "reviewCount": 62,
-        "distanceKm": 4.2,
-        "transitText": "Auto • 10m (₹35)",
-        "returnText": "10m back (₹35)",
-        "returnCost": 35,
-        "photo": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80",
+        "badge": "Hidden Spots",
+        "lat": 10.7408,
+        "lng": 76.26950000000001,
+        "expense": 50,
+        "spendTime": 60,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 6.8,
+        "transitText": "\ud83d\udefa 18m \u2022 \u20b965",
+        "returnText": "Back to Shoranur Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&q=80",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80",
-            "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&q=80"
-          ],
-        "review": "Generations of artisans handcrafting terracotta vessels by Nila banks. Highly peaceful.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Magnificent traditional aristocratic illam where Malayalam movies are shot.",
         "tags": [
-          "Hidden Nature",
-          "Quiet",
-          "Culture"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "shn-6",
-        "name": "Railway Colony Moonlight Walkway",
-        "category": "Hidden Spots",
-        "badge": "Breezy Night Lane",
-        "lat": 10.762,
-        "lng": 76.273,
-        "expense": 0,
-        "spendTime": 30,
-        "rating": 4.5,
-        "reviewCount": 50,
-        "distanceKm": 0.5,
-        "transitText": "Walk • 5m (Free)",
-        "returnText": "5m back (Free)",
+        "name": "Shaji's Street Tapioca",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 10.7545,
+        "lng": 76.259,
+        "expense": 40,
+        "spendTime": 25,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 1.5,
+        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
-          ],
-        "review": "Canopy of rain trees planted in British era. Cool evening breeze and total tranquility.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Hot kappa and spicy fish curry served fast on plantain leaf.",
         "tags": [
-          "Night Vibe",
-          "Hidden Nature",
-          "Free"
+          "Food",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "shn-7",
-        "name": "Hotel Aryaas Ghee Roast",
-        "category": "Food",
-        "badge": "Crispy Dosas",
-        "lat": 10.7615,
-        "lng": 76.2718,
-        "expense": 90,
-        "spendTime": 25,
-        "rating": 4.7,
-        "reviewCount": 310,
-        "distanceKm": 0.3,
-        "transitText": "Walk • 3m (Free)",
-        "returnText": "3m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800&q=80",
+        "name": "Clay Craft Village",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 10.7635,
+        "lng": 76.26270000000001,
+        "expense": 0,
+        "spendTime": 40,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 4.2,
+        "transitText": "\ud83d\udefa 10m \u2022 \u20b935",
+        "returnText": "Back to Shoranur Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800&q=80",
-            "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
-          ],
-        "review": "Piping hot paper roast with coconut chutney & sambar. Steps away from Station exit.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Generations of potters shaping terracotta by the water.",
         "tags": [
-          "Street Food",
-          "Budget"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "shn-8",
-        "name": "Nila Rooftop Diner",
+        "name": "Old Banyan Chai Stall",
         "category": "Food",
-        "badge": "Skyline View",
-        "lat": 10.764,
-        "lng": 76.276,
-        "expense": 320,
-        "spendTime": 50,
-        "rating": 4.6,
-        "reviewCount": 115,
-        "distanceKm": 1.5,
-        "transitText": "Auto • 6m (₹20)",
-        "returnText": "6m back (₹20)",
-        "returnCost": 20,
-        "photo": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
+        "badge": "Food",
+        "lat": 10.7634,
+        "lng": 76.2716,
+        "expense": 15,
+        "spendTime": 20,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 1.0,
+        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "returnText": "Back to Shoranur Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
-            "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80"
-          ],
-        "review": "Open terrace restaurant overlooking railway bridges and palm horizon. Great evening vibe.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Cardamom tea with hot banana fritters under ancient tree canopy.",
         "tags": [
-          "Night Vibe",
           "Food",
-          "Chai & View"
-        ]
-      },
-      {
-        "id": "shn-9",
-        "name": "CyberByte PS5 Gaming Den",
-        "category": "Gaming & Chill",
-        "badge": "Console Arena",
-        "lat": 10.768,
-        "lng": 76.282,
-        "expense": 120,
-        "spendTime": 75,
-        "rating": 4.8,
-        "reviewCount": 45,
-        "distanceKm": 2.2,
-        "transitText": "Auto • 7m (₹25)",
-        "returnText": "7m back (₹25)",
-        "returnCost": 25,
-        "photo": "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800&q=80",
-            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
-          ],
-        "review": "4K screens, FIFA & racing rigs. Great AC escape on hot sunny afternoons.",
-        "tags": [
-          "Gaming & Chill",
-          "AC"
-        ]
-      },
-      {
-        "id": "shn-10",
-        "name": "Cheruthuruthy River View Sunset",
-        "category": "Hidden Spots",
-        "badge": "Bridge Vista",
-        "lat": 10.748,
-        "lng": 76.281,
-        "expense": 0,
-        "spendTime": 40,
-        "rating": 4.8,
-        "reviewCount": 180,
-        "distanceKm": 3.5,
-        "transitText": "Auto • 10m (₹35)",
-        "returnText": "10m back (₹35)",
-        "returnCost": 35,
-        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
-          ],
-        "review": "Golden hour reflection over the riverbed sandbanks. Spectacular photography point.",
-        "tags": [
-          "Hidden Nature",
           "Chai & View",
-          "Free"
+          "Verified"
         ]
       }
     ]
   },
   "Kochi": {
     "name": "Kochi",
-    "displayName": "Kochi (Ernakulam Central Hub)",
+    "displayName": "Kochi / Ernakulam Hub",
+    "state": "Kerala",
     "hub": {
-      "name": "Ernakulam South Jn Hub",
+      "name": "Ernakulam Jn (South)",
       "stationName": "Ernakulam South Pl. 1",
-      "lat": 9.9686,
-      "lng": 76.2917
+      "lat": 9.9678,
+      "lng": 76.2905
     },
     "spots": [
       {
-        "id": "koc-1",
+        "id": "cok-1",
         "name": "Fort Kochi Spice Lane",
         "category": "Hidden Spots",
-        "badge": "Heritage Alley",
-        "lat": 9.963,
-        "lng": 76.2443,
+        "badge": "Hidden Spots",
+        "lat": 9.9646,
+        "lng": 76.29639999999999,
         "expense": 0,
         "spendTime": 45,
         "rating": 4.8,
-        "reviewCount": 310,
+        "reviewCount": 85,
         "distanceKm": 4.5,
-        "transitText": "Water Metro • 20m (₹20)",
-        "returnText": "20m back (₹20)",
-        "returnCost": 20,
-        "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
+        "transitText": "\u26f4\ufe0f 20m \u2022 \u20b920 (Water Metro)",
+        "returnText": "Back to Ernakulam South Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
-          ],
-        "review": "Aromatic back-alleys with antique spice warehouses, ginger drying on burlap.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Aromatic back-alleys with antique spice warehouses, no crowds.",
         "tags": [
-          "Hidden Nature",
+          "Hidden Spots",
           "Chai & View",
-          "Free"
+          "Verified"
         ]
       },
       {
-        "id": "koc-2",
+        "id": "cok-2",
         "name": "Kayees Rahmathulla Biryani",
         "category": "Food",
-        "badge": "Iconic Kitchen",
-        "lat": 9.957,
-        "lng": 76.257,
+        "badge": "Food",
+        "lat": 9.9788,
+        "lng": 76.29729999999999,
         "expense": 180,
-        "spendTime": 35,
-        "rating": 4.9,
-        "reviewCount": 520,
-        "distanceKm": 3.8,
-        "transitText": "Auto • 12m (₹40)",
-        "returnText": "12m back (₹40)",
-        "returnCost": 40,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-            "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
-          ],
-        "review": "Iconic tender Malabar mutton biryani with pure ghee aroma in Mattancherry.",
-        "tags": [
-          "Street Food",
-          "Food"
-        ]
-      },
-      {
-        "id": "koc-3",
-        "name": "Mangalavanam Bird Sanctuary Mangroves",
-        "category": "Hidden Spots",
-        "badge": "Green Lung",
-        "lat": 9.986,
-        "lng": 76.275,
-        "expense": 15,
-        "spendTime": 40,
-        "rating": 4.5,
-        "reviewCount": 175,
-        "distanceKm": 2.2,
-        "transitText": "Auto • 8m (₹25)",
-        "returnText": "8m back (₹25)",
-        "returnCost": 25,
-        "photo": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
-            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80"
-          ],
-        "review": "Dense mangrove trails right behind High Court. Quiet wooden watchtower with breezy lagoon views.",
-        "tags": [
-          "Hidden Nature",
-          "Quiet"
-        ]
-      },
-      {
-        "id": "koc-4",
-        "name": "Thevara Ferry Sunset Point",
-        "category": "Hidden Spots",
-        "badge": "Secret Water View",
-        "lat": 9.939,
-        "lng": 76.299,
-        "expense": 0,
-        "spendTime": 35,
-        "rating": 4.7,
-        "reviewCount": 110,
-        "distanceKm": 3.2,
-        "transitText": "Auto • 10m (₹30)",
-        "returnText": "10m back (₹30)",
-        "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-            "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80"
-          ],
-        "review": "Old wooden boat jetty where local fishermen tie up nets. Best quiet sunset with zero noise.",
-        "tags": [
-          "Hidden Nature",
-          "Chai & View",
-          "Free"
-        ]
-      },
-      {
-        "id": "koc-5",
-        "name": "Water Metro Battery Cruise",
-        "category": "Hidden Spots",
-        "badge": "Electric Boat",
-        "lat": 9.978,
-        "lng": 76.278,
-        "expense": 20,
         "spendTime": 30,
-        "rating": 4.8,
-        "reviewCount": 390,
-        "distanceKm": 1.5,
-        "transitText": "Walk • 12m (Free)",
-        "returnText": "12m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=80",
-            "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80"
-          ],
-        "review": "Air-conditioned catamaran ride on Vembanad Lake. Ultra-smooth and ₹20 budget gem.",
-        "tags": [
-          "Hidden Nature",
-          "Chai & View",
-          "AC"
-        ]
-      },
-      {
-        "id": "koc-6",
-        "name": "Galaxy LAN Gaming Arena",
-        "category": "Gaming & Chill",
-        "badge": "RTX 4070 Rigs",
-        "lat": 10.0011,
-        "lng": 76.2895,
-        "expense": 90,
-        "spendTime": 90,
-        "rating": 4.6,
-        "reviewCount": 140,
-        "distanceKm": 3.5,
-        "transitText": "Metro • 8m (₹20)",
-        "returnText": "8m back (₹20)",
-        "returnCost": 20,
-        "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-            "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80"
-          ],
-        "review": "Fast 1Gbps fiber, esports rigs, plush recliners, ₹90/hr. Awesome rainy day chill hub.",
-        "tags": [
-          "Gaming & Chill",
-          "AC",
-          "WiFi"
-        ]
-      },
-      {
-        "id": "koc-7",
-        "name": "Avenue Regent Rooftop Sky Lounge",
-        "category": "Party",
-        "badge": "Cocktail Terrace",
-        "lat": 9.9869,
-        "lng": 76.2978,
-        "expense": 450,
-        "spendTime": 75,
-        "rating": 4.7,
-        "reviewCount": 220,
-        "distanceKm": 2.1,
-        "transitText": "Auto • 6m (₹25)",
-        "returnText": "6m back (₹25)",
-        "returnCost": 25,
-        "photo": "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=800&q=80",
-            "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80"
-          ],
-        "review": "Panoramic skyline views with ambient jazz, craft beverages, and cool evening breeze.",
-        "tags": [
-          "Night Vibe",
-          "Party"
-        ]
-      },
-      {
-        "id": "koc-8",
-        "name": "Shaji Tapioca & Fish Curry Shack",
-        "category": "Food",
-        "badge": "Midnight Kappa",
-        "lat": 10.0084,
-        "lng": 76.2745,
-        "expense": 45,
-        "spendTime": 20,
-        "rating": 4.8,
-        "reviewCount": 380,
-        "distanceKm": 4,
-        "transitText": "Auto • 10m (₹35)",
-        "returnText": "10m back (₹35)",
-        "returnCost": 35,
-        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
-            "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800&q=80"
-          ],
-        "review": "Steaming hot spicy fish curry with mashed kappa. The quintessential Kochi street taste.",
-        "tags": [
-          "Street Food",
-          "Night Vibe",
-          "Budget"
-        ]
-      },
-      {
-        "id": "koc-9",
-        "name": "Board Game Coffee Lab",
-        "category": "Gaming & Chill",
-        "badge": "Cozy Cafe",
-        "lat": 10.0053,
-        "lng": 76.2911,
-        "expense": 150,
-        "spendTime": 60,
-        "rating": 4.8,
-        "reviewCount": 95,
+        "rating": 4.9,
+        "reviewCount": 85,
         "distanceKm": 3.8,
-        "transitText": "Auto • 10m (₹30)",
-        "returnText": "10m back (₹30)",
+        "transitText": "\ud83d\udefa 12m \u2022 \u20b940",
+        "returnText": "Back to Ernakulam South Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=800&q=80",
-            "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&q=80"
-          ],
-        "review": "200+ tabletop games, artisanal pour-overs, chilled AC, perfect for friendly hangouts.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Iconic tender Malabar mutton biryani with ghee aroma.",
         "tags": [
-          "Gaming & Chill",
+          "Food",
           "Chai & View",
-          "AC"
+          "Verified"
         ]
       },
       {
-        "id": "koc-10",
-        "name": "Subhash Bose Waterfront Park",
+        "id": "cok-3",
+        "name": "Mangalavanam Bird Sanctuary",
         "category": "Hidden Spots",
-        "badge": "Marine Promenade",
-        "lat": 9.972,
-        "lng": 76.282,
+        "badge": "Hidden Spots",
+        "lat": 9.9715,
+        "lng": 76.2858,
         "expense": 10,
         "spendTime": 40,
-        "rating": 4.6,
-        "reviewCount": 410,
-        "distanceKm": 1.2,
-        "transitText": "Walk • 10m (Free)",
-        "returnText": "10m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
+        "rating": 4.5,
+        "reviewCount": 85,
+        "distanceKm": 2.2,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b925",
+        "returnText": "Back to Ernakulam South Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
-          ],
-        "review": "Lush botanical trees directly along the backwater edge. Cool wind and benches.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "The green lung of Kochi, quiet mangrove walk in the city center.",
         "tags": [
-          "Hidden Nature",
-          "Chai & View"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "cok-4",
+        "name": "Broadway Kulukki & Snacks",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 9.9822,
+        "lng": 76.2851,
+        "expense": 35,
+        "spendTime": 20,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 1.5,
+        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "returnText": "Back to Ernakulam South Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Spicy green-chilli kulukki sarbath and hot banana chips.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "cok-5",
+        "name": "Water Metro High Court Jetty",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 9.981200000000001,
+        "lng": 76.2791,
+        "expense": 30,
+        "spendTime": 40,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 2.8,
+        "transitText": "\ud83d\udefa 10m \u2022 \u20b930",
+        "returnText": "Back to Ernakulam South Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Ultra-modern electric boat cruise overlooking Vembanad backwaters.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "cok-6",
+        "name": "Mattancherry Jew Town Antique Walk",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 9.959200000000001,
+        "lng": 76.27109999999999,
+        "expense": 0,
+        "spendTime": 50,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 4.2,
+        "transitText": "\ud83d\udefa 14m \u2022 \u20b945",
+        "returnText": "Back to Ernakulam South Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "16th-century cobblestone alleys, curio shops, and heritage cafes.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "cok-7",
+        "name": "Galaxy Cyber Gaming Hub",
+        "category": "Gaming & Chill",
+        "badge": "Gaming & Chill",
+        "lat": 9.981300000000001,
+        "lng": 76.27879999999999,
+        "expense": 90,
+        "spendTime": 60,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 2.0,
+        "transitText": "\ud83d\udeb6 10m \u2022 Free",
+        "returnText": "Back to Ernakulam South Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Fast 500Mbps fiber, RTX gaming rigs, chilled AC atmosphere.",
+        "tags": [
+          "Gaming & Chill",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "cok-8",
+        "name": "Subhash Bose Park Waterfront",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 9.954,
+        "lng": 76.29169999999999,
+        "expense": 0,
+        "spendTime": 35,
+        "rating": 4.4,
+        "reviewCount": 85,
+        "distanceKm": 1.2,
+        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "returnText": "Back to Ernakulam South Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Breezy harbor promenade with sunset views over ships.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       }
     ]
   },
   "Calicut": {
     "name": "Calicut",
-    "displayName": "Calicut / Kozhikode Hub",
+    "displayName": "Calicut (Kozhikode) Hub",
+    "state": "Kerala",
     "hub": {
-      "name": "Kozhikode Main Jn Hub",
-      "stationName": "Calicut Jn Pl. 1",
-      "lat": 11.2488,
-      "lng": 75.7839
+      "name": "Kozhikode Main",
+      "stationName": "Kozhikode Main Pl. 1",
+      "lat": 11.2464,
+      "lng": 75.7804
     },
     "spots": [
       {
         "id": "clt-1",
         "name": "Mananchira Square Park Walk",
         "category": "Hidden Spots",
-        "badge": "Historic Reservoir",
-        "lat": 11.253,
-        "lng": 75.779,
+        "badge": "Hidden Spots",
+        "lat": 11.2416,
+        "lng": 75.7971,
         "expense": 0,
-        "spendTime": 35,
+        "spendTime": 40,
         "rating": 4.7,
-        "reviewCount": 280,
+        "reviewCount": 85,
         "distanceKm": 1.2,
-        "transitText": "Walk • 7m (Free)",
-        "returnText": "7m back (Free)",
+        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-          ],
-        "review": "Clear water square reservoir enclosed by traditional red-tile gates and ancient trees.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Clear water square reservoir enclosed by traditional red-tile gates.",
         "tags": [
-          "Hidden Nature",
+          "Hidden Spots",
           "Chai & View",
-          "Free"
+          "Verified"
         ]
       },
       {
         "id": "clt-2",
-        "name": "Zain Food Court Halwa Lane",
+        "name": "Paragon Restaurant Biryani",
         "category": "Food",
-        "badge": "Heritage Street Bites",
-        "lat": 11.261,
-        "lng": 75.775,
-        "expense": 90,
-        "spendTime": 30,
+        "badge": "Food",
+        "lat": 11.2517,
+        "lng": 75.7688,
+        "expense": 190,
+        "spendTime": 40,
         "rating": 4.9,
-        "reviewCount": 450,
-        "distanceKm": 1.8,
-        "transitText": "Walk • 12m (Free)",
-        "returnText": "12m back (Free)",
+        "reviewCount": 85,
+        "distanceKm": 1.5,
+        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&q=80",
-            "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80"
-          ],
-        "review": "Authentic Calicut mutton samosas, chattipathiri, and freshly cut tender coconut halwa.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Legendary Calicut dum biryani with melt-in-mouth chicken and pickle.",
         "tags": [
-          "Street Food",
-          "Food"
+          "Food",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "clt-3",
-        "name": "Kozhikode South Beach Pier Ruins",
+        "name": "Kozhikode Beach Old Pier",
         "category": "Hidden Spots",
-        "badge": "Colonial Sea Piers",
-        "lat": 11.244,
-        "lng": 75.769,
+        "badge": "Hidden Spots",
+        "lat": 11.245199999999999,
+        "lng": 75.7968,
         "expense": 0,
-        "spendTime": 40,
-        "rating": 4.6,
-        "reviewCount": 220,
-        "distanceKm": 1.6,
-        "transitText": "Auto • 6m (₹25)",
-        "returnText": "6m back (₹25)",
-        "returnCost": 25,
-        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+        "spendTime": 45,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 2.0,
+        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "returnText": "Back to Kozhikode Main Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-            "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80"
-          ],
-        "review": "The quiet southern end of the beach away from crowd. Sea spray and ancient iron pillars.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Century-old collapsed shipping pier jutting into Arabian sea waves.",
         "tags": [
-          "Hidden Nature",
-          "Night Vibe",
-          "Free"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "clt-4",
-        "name": "Paragon Legendary Biryani Kitchen",
+        "name": "SM Street Halwa Lane",
         "category": "Food",
-        "badge": "World Famous",
-        "lat": 11.259,
-        "lng": 75.782,
-        "expense": 220,
-        "spendTime": 45,
-        "rating": 4.9,
-        "reviewCount": 950,
-        "distanceKm": 1.4,
-        "transitText": "Walk • 10m (Free)",
-        "returnText": "10m back (Free)",
+        "badge": "Food",
+        "lat": 11.240599999999999,
+        "lng": 75.7818,
+        "expense": 50,
+        "spendTime": 35,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 0.9,
+        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-            "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
-          ],
-        "review": "The gold standard of Malabar Dum Biryani. Served with date pickle and coconut raita.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Pedestrian heritage street with warm black halwa and banana chips.",
         "tags": [
           "Food",
-          "Street Food"
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "clt-5",
-        "name": "Mishkal 700-Yr Wooden Pavilion",
-        "category": "Hidden Spots",
-        "badge": "Artisan Wood",
-        "lat": 11.242,
-        "lng": 75.777,
-        "expense": 0,
-        "spendTime": 30,
-        "rating": 4.8,
-        "reviewCount": 160,
-        "distanceKm": 1,
-        "transitText": "Walk • 8m (Free)",
-        "returnText": "8m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
+        "name": "LevelUp Esports Cafe",
+        "category": "Gaming & Chill",
+        "badge": "Gaming & Chill",
+        "lat": 11.238,
+        "lng": 75.7914,
+        "expense": 80,
+        "spendTime": 60,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 2.2,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b925",
+        "returnText": "Back to Kozhikode Main Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-            "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
-          ],
-        "review": "Ancient multi-tier wooden temple-style pavilion. Intricate cedar beams and total quiet.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Ultra-low latency LAN gaming and bubble tea in AC lounge.",
         "tags": [
-          "Hidden Nature",
-          "Quiet",
-          "Culture"
+          "Gaming & Chill",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "clt-6",
-        "name": "Beypore Ancient Uru Boatyard & Marina",
-        "category": "Hidden Spots",
-        "badge": "Wooden Shipyard",
-        "lat": 11.178,
-        "lng": 75.808,
-        "expense": 20,
-        "spendTime": 50,
-        "rating": 4.8,
-        "reviewCount": 340,
-        "distanceKm": 9.5,
-        "transitText": "Auto • 18m (₹60)",
-        "returnText": "18m back (₹60)",
-        "returnCost": 60,
-        "photo": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
+        "name": "Zains Heritage Moplah Snacks",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 11.2328,
+        "lng": 75.7922,
+        "expense": 75,
+        "spendTime": 25,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 1.8,
+        "transitText": "\ud83d\udeb6 10m \u2022 Free",
+        "returnText": "Back to Kozhikode Main Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Google Maps",
-            "url": "https://maps.google.com/?q=Beypore+Port"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "Century-old artisan craftsmen handcrafting colossal wooden dhow ships with teak timber.",
+        "review": "Authentic unnakkaya, chattipathiri, and Sulaimani tea.",
         "tags": [
-          "Hidden Nature",
-          "Culture",
-          "Chai & View"
+          "Food",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "clt-7",
-        "name": "Bombay Hotel Heritage Sulaimani & Halwa",
-        "category": "Food",
-        "badge": "Colonial Tea Room",
-        "lat": 11.249,
-        "lng": 75.774,
-        "expense": 40,
-        "spendTime": 25,
-        "rating": 4.9,
-        "reviewCount": 520,
-        "distanceKm": 1.1,
-        "transitText": "Walk • 8m (Free)",
-        "returnText": "8m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Food Guide",
-            "url": "https://maps.google.com/?q=Bombay+Hotel+Calicut"
-          }
-        ],
-        "review": "Cardamom-spiced piping hot Sulaimani tea paired with warm banana fry and muttamala since 1949.",
-        "tags": [
-          "Street Food",
-          "Chai & View",
-          "Budget"
-        ]
-      },
-      {
-        "id": "clt-8",
-        "name": "Kallumakkaya (Spicy Mussels) Beach Cart",
-        "category": "Food",
-        "badge": "Spicy Coastal Fry",
-        "lat": 11.258,
-        "lng": 75.768,
-        "expense": 70,
-        "spendTime": 20,
-        "rating": 4.7,
-        "reviewCount": 380,
-        "distanceKm": 2.1,
-        "transitText": "Auto • 6m (₹25)",
-        "returnText": "6m back (₹25)",
-        "returnCost": 25,
-        "photo": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80",
-            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Local Eats",
-            "url": "https://maps.google.com/?q=Calicut+Beach+Street+Food"
-          }
-        ],
-        "review": "Fresh sea mussels dipped in rice batter and fried crisp with onions and curry leaves.",
-        "tags": [
-          "Street Food",
-          "Food"
-        ]
-      },
-      {
-        "id": "clt-9",
-        "name": "CyberSphere Esports & Racing Hub",
-        "category": "Gaming & Chill",
-        "badge": "RTX 4080 Arena",
-        "lat": 11.262,
-        "lng": 75.789,
-        "expense": 110,
-        "spendTime": 70,
-        "rating": 4.8,
-        "reviewCount": 130,
-        "distanceKm": 2.4,
-        "transitText": "Auto • 8m (₹30)",
-        "returnText": "8m back (₹30)",
-        "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80",
-          "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&q=80",
-            "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Gaming Portal",
-            "url": "https://maps.google.com/?q=CyberSphere+Calicut"
-          }
-        ],
-        "review": "Ultra-fast gaming fiber, mechanical keyboards, private team booths, and ice cold AC.",
-        "tags": [
-          "Gaming & Chill",
-          "AC",
-          "WiFi"
-        ]
-      },
-      {
-        "id": "clt-10",
-        "name": "S.M. Street (Mittayi Theruvu) Evening Walk",
-        "category": "Night",
-        "badge": "Heritage Walkway",
-        "lat": 11.251,
-        "lng": 75.78,
+        "name": "Kallayi River Timber Footbridge",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 11.2561,
+        "lng": 75.7605,
         "expense": 0,
         "spendTime": 40,
-        "rating": 4.8,
-        "reviewCount": 890,
-        "distanceKm": 0.9,
-        "transitText": "Walk • 6m (Free)",
-        "returnText": "6m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&q=80",
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 3.1,
+        "transitText": "\ud83d\udefa 10m \u2022 \u20b930",
+        "returnText": "Back to Kozhikode Main Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=600&q=80",
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&q=80",
-            "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Walk Guide",
-            "url": "https://maps.google.com/?q=SM+Street+Kozhikode"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "Historic vehicle-free pedestrian boulevard famous for sweet meat shops, street lights, and lively buzz.",
+        "review": "Historical timber floating river with tranquil iron railway bridge.",
         "tags": [
-          "Night Vibe",
-          "Street Food",
-          "Free"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Trivandrum": {
+    "name": "Trivandrum",
+    "displayName": "Trivandrum Central Hub",
+    "state": "Kerala",
+    "hub": {
+      "name": "Trivandrum Central",
+      "stationName": "Trivandrum Central Pl. 1",
+      "lat": 8.4875,
+      "lng": 76.9532
+    },
+    "spots": [
+      {
+        "id": "tvm-1",
+        "name": "Kuthira Malika Palace Grounds",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 8.4833,
+        "lng": 76.94109999999999,
+        "expense": 40,
+        "spendTime": 45,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 1.1,
+        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "returnText": "Back to Trivandrum Central Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "122 carved wooden horses, teakwood silence, historic temple vibe.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "tvm-2",
+        "name": "Maha Chips & Boli Stall",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 8.5068,
+        "lng": 76.9472,
+        "expense": 60,
+        "spendTime": 20,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 0.9,
+        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "returnText": "Back to Trivandrum Central Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Fresh hot Trivandrum yellow Boli with sweet condensed milk.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "tvm-3",
+        "name": "Napier Museum Heritage Gardens",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 8.489700000000001,
+        "lng": 76.9478,
+        "expense": 20,
+        "spendTime": 50,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 3.0,
+        "transitText": "\ud83d\udefa 10m \u2022 \u20b930",
+        "returnText": "Back to Trivandrum Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Indo-Saracenic masterpiece nestled under massive rain trees.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "tvm-4",
+        "name": "Villa Maya Courtyard Chai",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 8.4733,
+        "lng": 76.96669999999999,
+        "expense": 120,
+        "spendTime": 40,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 2.1,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b925",
+        "returnText": "Back to Trivandrum Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "18th-century restored Dutch manor for quiet filter coffee.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "tvm-5",
+        "name": "Shanghumukham Beach Mermaid",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 8.5006,
+        "lng": 76.9597,
+        "expense": 0,
+        "spendTime": 60,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 6.5,
+        "transitText": "\ud83d\udefa 18m \u2022 \u20b960",
+        "returnText": "Back to Trivandrum Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Kanayi Kunhiraman's colossal Sagarakanyaka sculpture at dusk.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "tvm-6",
+        "name": "Chala Market Spice Alley",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 8.493400000000001,
+        "lng": 76.96629999999999,
+        "expense": 40,
+        "spendTime": 30,
+        "rating": 4.5,
+        "reviewCount": 85,
+        "distanceKm": 0.8,
+        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "returnText": "Back to Trivandrum Central Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Centuries-old bazaar alley serving cardamom black tea and piping parotta.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
         ]
       }
     ]
@@ -939,1388 +867,1943 @@ export const KERALA_CITIES = {
   "Palakkad": {
     "name": "Palakkad",
     "displayName": "Palakkad Town Hub",
+    "state": "Kerala",
     "hub": {
-      "name": "Palakkad Jn (Olavakkode) Hub",
+      "name": "Palakkad Jn (Olavakkode)",
       "stationName": "Palakkad Jn Pl. 1",
-      "lat": 10.8035,
+      "lat": 10.8268,
       "lng": 76.6433
     },
     "spots": [
       {
         "id": "pkd-1",
-        "name": "Palakkad Tipu Fort Granite Moat",
+        "name": "Palakkad Tipu Fort & Moat",
         "category": "Hidden Spots",
-        "badge": "Granite Fortress",
-        "lat": 10.766,
-        "lng": 76.655,
+        "badge": "Hidden Spots",
+        "lat": 10.8275,
+        "lng": 76.66029999999999,
         "expense": 20,
-        "spendTime": 45,
+        "spendTime": 50,
         "rating": 4.8,
-        "reviewCount": 390,
+        "reviewCount": 85,
         "distanceKm": 4.5,
-        "transitText": "Auto • 12m (₹40)",
-        "returnText": "12m back (₹40)",
-        "returnCost": 40,
-        "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
+        "transitText": "\ud83d\udefa 12m \u2022 \u20b940",
+        "returnText": "Back to Palakkad Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-          ],
-        "review": "Well-preserved granite fortress surrounded by a tranquil water moat and giant tamarind trees.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Granite fortress surrounded by a tranquil water moat.",
         "tags": [
-          "Hidden Nature",
-          "Chai & View"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "pkd-2",
-        "name": "Kalpathy Vedic Agraharam Lane",
+        "name": "Kalpathy Heritage Agraharam Lane",
         "category": "Hidden Spots",
-        "badge": "Traditional Heritage",
-        "lat": 10.785,
-        "lng": 76.645,
+        "badge": "Hidden Spots",
+        "lat": 10.818800000000001,
+        "lng": 76.63119999999999,
         "expense": 0,
-        "spendTime": 40,
-        "rating": 4.9,
-        "reviewCount": 230,
-        "distanceKm": 2.2,
-        "transitText": "Auto • 7m (₹25)",
-        "returnText": "7m back (₹25)",
-        "returnCost": 25,
-        "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
+        "spendTime": 45,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 2.8,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b925",
+        "returnText": "Back to Palakkad Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-            "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
-          ],
-        "review": "Centuries-old row houses with shared walls, kolam rangolis, and gentle temple chimes.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Ancient Brahmin settlement with row houses and historic chariot grounds.",
         "tags": [
-          "Hidden Nature",
-          "Quiet",
-          "Free"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "pkd-3",
-        "name": "Noorjehan Fort View Ghee Rice",
+        "name": "Indian Coffee House Olavakkode",
         "category": "Food",
-        "badge": "Coin Chicken",
-        "lat": 10.772,
-        "lng": 76.653,
-        "expense": 150,
-        "spendTime": 30,
-        "rating": 4.8,
-        "reviewCount": 340,
-        "distanceKm": 4,
-        "transitText": "Auto • 10m (₹35)",
-        "returnText": "10m back (₹35)",
-        "returnCost": 35,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
+        "badge": "Food",
+        "lat": 10.823500000000001,
+        "lng": 76.6283,
+        "expense": 55,
+        "spendTime": 25,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 0.5,
+        "transitText": "\ud83d\udeb6 3m \u2022 Free",
+        "returnText": "Back to Palakkad Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-            "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
-          ],
-        "review": "Famous Palakkad style mutton ghee rice and crispy coin chicken roast right opposite fort.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Retro spiral tables serving filter coffee and beetroot cutlets.",
         "tags": [
-          "Street Food",
-          "Food"
+          "Food",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "pkd-4",
-        "name": "Malampuzha Garden & Rock Bridge",
+        "name": "Malampuzha Garden Canal Walk",
         "category": "Hidden Spots",
-        "badge": "Dam Foothills",
-        "lat": 10.831,
-        "lng": 76.685,
-        "expense": 40,
+        "badge": "Hidden Spots",
+        "lat": 10.8138,
+        "lng": 76.62339999999999,
+        "expense": 30,
         "spendTime": 60,
         "rating": 4.7,
-        "reviewCount": 510,
-        "distanceKm": 6.5,
-        "transitText": "Bus • 15m (₹15)",
-        "returnText": "15m back (₹15)",
-        "returnCost": 15,
-        "photo": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+        "reviewCount": 85,
+        "distanceKm": 8.0,
+        "transitText": "\ud83d\udefa 20m \u2022 \u20b970",
+        "returnText": "Back to Palakkad Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-          ],
-        "review": "Vast garden at reservoir base, ropeway views of Western Ghats mountains.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Green mountain reservoir backdrop with ropeway and peaceful canal paths.",
         "tags": [
-          "Hidden Nature",
-          "Chai & View"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "pkd-5",
-        "name": "Kava Misty Reservoir Backwaters",
+        "name": "Kava Valley Sunset Point",
         "category": "Hidden Spots",
-        "badge": "Mountain Lagoon",
-        "lat": 10.842,
-        "lng": 76.698,
+        "badge": "Hidden Spots",
+        "lat": 10.8134,
+        "lng": 76.6488,
+        "expense": 0,
+        "spendTime": 60,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 9.5,
+        "transitText": "\ud83d\udefa 25m \u2022 \u20b990",
+        "returnText": "Back to Palakkad Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Pristine reservoir backwaters flanked by the misty Western Ghats.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Thrissur": {
+    "name": "Thrissur",
+    "displayName": "Thrissur Cultural Capital",
+    "state": "Kerala",
+    "hub": {
+      "name": "Thrissur Railway Station",
+      "stationName": "Thrissur Jn Pl. 1",
+      "lat": 10.5186,
+      "lng": 76.2144
+    },
+    "spots": [
+      {
+        "id": "tsr-1",
+        "name": "Vadakkumnathan Temple Round",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 10.5267,
+        "lng": 76.2113,
+        "expense": 0,
+        "spendTime": 45,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 1.2,
+        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "returnText": "Back to Thrissur Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Massive 9-acre hilltop teakwood grove in the center of Thrissur Round.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "tsr-2",
+        "name": "Roast Town Ghee Roast & Tea",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 10.5384,
+        "lng": 76.2004,
+        "expense": 70,
+        "spendTime": 25,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 0.8,
+        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "returnText": "Back to Thrissur Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Paper-thin crispy ghee roast dosa and strong Malabar filter coffee.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "tsr-3",
+        "name": "Shakthan Thampuran Palace",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 10.5031,
+        "lng": 76.2033,
+        "expense": 25,
+        "spendTime": 40,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 2.5,
+        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "returnText": "Back to Thrissur Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Kochi king's Dutch-Kerala style palace with sprawling heritage lawns.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "tsr-4",
+        "name": "Thrissur Boli & Payasam Corner",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 10.5167,
+        "lng": 76.2024,
+        "expense": 50,
+        "spendTime": 20,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 1.0,
+        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "returnText": "Back to Thrissur Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Hot palada pradhaman and warm yellow boli.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "tsr-5",
+        "name": "Vilangan Hills Sunset Point",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 10.5055,
+        "lng": 76.1978,
+        "expense": 15,
+        "spendTime": 60,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 6.8,
+        "transitText": "\ud83d\udefa 16m \u2022 \u20b955",
+        "returnText": "Back to Thrissur Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Panoramic 360-degree hill view over Thrissur's green paddy basins.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Alappuzha": {
+    "name": "Alappuzha",
+    "displayName": "Alappuzha (Venice of the East)",
+    "state": "Kerala",
+    "hub": {
+      "name": "Alappuzha Railway Station",
+      "stationName": "Alappuzha Pl. 1",
+      "lat": 9.4925,
+      "lng": 76.3242
+    },
+    "spots": [
+      {
+        "id": "alp-1",
+        "name": "Alappuzha Old Sea Bridge Pier",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 9.4786,
+        "lng": 76.3298,
+        "expense": 0,
+        "spendTime": 45,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 1.4,
+        "transitText": "\ud83d\udeb6 9m \u2022 Free",
+        "returnText": "Back to Alappuzha Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Atmospheric 160-year-old rusted iron pier into the crashing waves.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "alp-2",
+        "name": "Punnamada Backwater Canal Walk",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 9.5091,
+        "lng": 76.33420000000001,
         "expense": 0,
         "spendTime": 50,
         "rating": 4.9,
-        "reviewCount": 310,
-        "distanceKm": 8.5,
-        "transitText": "Auto • 20m (₹70)",
-        "returnText": "20m back (₹70)",
-        "returnCost": 70,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
-          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-            "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Google Maps",
-            "url": "https://maps.google.com/?q=Kava+Palakkad"
-          }
-        ],
-        "review": "Breath-taking panoramic water reservoir nestled right beneath towering Western Ghats monsoon peaks.",
-        "tags": [
-          "Hidden Nature",
-          "Chai & View",
-          "Free"
-        ]
-      },
-      {
-        "id": "pkd-6",
-        "name": "Ramassery Heritage Leaf Steamed Idli",
-        "category": "Food",
-        "badge": "Centuries-Old Craft",
-        "lat": 10.748,
-        "lng": 76.721,
-        "expense": 45,
-        "spendTime": 25,
-        "rating": 4.9,
-        "reviewCount": 420,
-        "distanceKm": 9,
-        "transitText": "Auto • 22m (₹80)",
-        "returnText": "22m back (₹80)",
-        "returnCost": 80,
-        "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80",
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-            "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Heritage Food",
-            "url": "https://maps.google.com/?q=Ramassery+Idli"
-          }
-        ],
-        "review": "Ultra-soft pancake idlis steamed on clay pots with woven nets and tamarind wood smoke. Served with podi.",
-        "tags": [
-          "Street Food",
-          "Budget",
-          "Culture"
-        ]
-      },
-      {
-        "id": "pkd-7",
-        "name": "NM Food Court Fresh Tender Coconut Shake",
-        "category": "Food",
-        "badge": "Elaneer Delight",
-        "lat": 10.798,
-        "lng": 76.649,
-        "expense": 50,
-        "spendTime": 20,
-        "rating": 4.7,
-        "reviewCount": 260,
-        "distanceKm": 1.2,
-        "transitText": "Walk • 9m (Free)",
-        "returnText": "9m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1546173159-315724a31696?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1546173159-315724a31696?w=800&q=80",
-            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Local Eatery",
-            "url": "https://maps.google.com/?q=Olavakkode+Eateries"
-          }
-        ],
-        "review": "Thick fresh tender coconut pulp shake topped with vanilla ice cream and dry fruits.",
-        "tags": [
-          "Street Food",
-          "Budget"
-        ]
-      },
-      {
-        "id": "pkd-8",
-        "name": "Apex Esports Zone Olavakkode",
-        "category": "Gaming & Chill",
-        "badge": "PS5 & PC Arena",
-        "lat": 10.806,
-        "lng": 76.641,
-        "expense": 90,
-        "spendTime": 60,
-        "rating": 4.6,
-        "reviewCount": 95,
-        "distanceKm": 0.5,
-        "transitText": "Walk • 4m (Free)",
-        "returnText": "4m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80",
-          "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Zone Page",
-            "url": "https://maps.google.com/?q=Olavakkode+Gaming"
-          }
-        ],
-        "review": "High-FPS gaming arena right by the railway station. 144Hz monitors and gaming chairs.",
-        "tags": [
-          "Gaming & Chill",
-          "AC",
-          "WiFi"
-        ]
-      },
-      {
-        "id": "pkd-9",
-        "name": "Dhoni Hill Waterfalls Trek Foothill",
-        "category": "Hidden Spots",
-        "badge": "Jungle Cascades",
-        "lat": 10.865,
-        "lng": 76.632,
-        "expense": 30,
-        "spendTime": 65,
-        "rating": 4.8,
-        "reviewCount": 290,
-        "distanceKm": 7.2,
-        "transitText": "Auto • 18m (₹65)",
-        "returnText": "18m back (₹65)",
-        "returnCost": 65,
-        "photo": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80",
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=800&q=80",
-            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Trek Info",
-            "url": "https://maps.google.com/?q=Dhoni+Waterfalls"
-          }
-        ],
-        "review": "Shaded canopy trail with chirping birds and crystal mountain brook waters.",
-        "tags": [
-          "Hidden Nature",
-          "Quiet"
-        ]
-      },
-      {
-        "id": "pkd-10",
-        "name": "Fort View Terrace Chai Point",
-        "category": "Food",
-        "badge": "Sunset Rooftop",
-        "lat": 10.768,
-        "lng": 76.654,
-        "expense": 60,
-        "spendTime": 30,
-        "rating": 4.7,
-        "reviewCount": 190,
-        "distanceKm": 4.3,
-        "transitText": "Auto • 11m (₹38)",
-        "returnText": "11m back (₹38)",
-        "returnCost": 38,
-        "photo": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=600&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-            "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "View Deck",
-            "url": "https://maps.google.com/?q=Palakkad+Fort+Chai"
-          }
-        ],
-        "review": "Evening breeze with fresh samosas, mint chai, and direct views over the ancient stone ramparts.",
-        "tags": [
-          "Chai & View",
-          "Night Vibe",
-          "Food"
-        ]
-      }
-    ]
-  },
-  "Trivandrum": {
-    "name": "Trivandrum",
-    "displayName": "Trivandrum / Thiruvananthapuram Hub",
-    "hub": {
-      "name": "Trivandrum Central Jn Hub",
-      "stationName": "Thiruvananthapuram Central Pl. 1",
-      "lat": 8.4875,
-      "lng": 76.9525
-    },
-    "spots": [
-      {
-        "id": "tvm-1",
-        "name": "Kuthira Malika Royal Grounds",
-        "category": "Hidden Spots",
-        "badge": "Teakwood Horses",
-        "lat": 8.482,
-        "lng": 76.944,
-        "expense": 40,
-        "spendTime": 40,
-        "rating": 4.7,
-        "reviewCount": 280,
-        "distanceKm": 1.1,
-        "transitText": "Walk • 8m (Free)",
-        "returnText": "8m back (Free)",
-        "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/7/71/0507-KuthiraMalika-Dinakarr.jpg",
-        "photos": [
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
-        ][
-            "https://upload.wikimedia.org/wikipedia/commons/7/71/0507-KuthiraMalika-Dinakarr.jpg",
-            "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
-          ],
-        "review": "122 carved wooden horses, teakwood silence, historic Travancore temple vibe.",
-        "tags": [
-          "Hidden Nature",
-          "Quiet"
-        ]
-      },
-      {
-        "id": "tvm-2",
-        "name": "Maha Cafe Hot Boli & Coffee",
-        "category": "Food",
-        "badge": "Travancore Sweet",
-        "lat": 8.485,
-        "lng": 76.947,
-        "expense": 35,
-        "spendTime": 20,
-        "rating": 4.9,
-        "reviewCount": 390,
-        "distanceKm": 0.7,
-        "transitText": "Walk • 5m (Free)",
-        "returnText": "5m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&q=80",
-            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
-          ],
-        "review": "Warm yellow jaggery boli drenched in semiya payasam and frothy filter coffee.",
-        "tags": [
-          "Street Food",
-          "Chai & View",
-          "Budget"
-        ]
-      },
-      {
-        "id": "tvm-3",
-        "name": "Valiathura Ocean Wave Pier",
-        "category": "Hidden Spots",
-        "badge": "Crashing Waves",
-        "lat": 8.472,
-        "lng": 76.924,
-        "expense": 0,
-        "spendTime": 45,
-        "rating": 4.6,
-        "reviewCount": 190,
-        "distanceKm": 3.8,
-        "transitText": "Auto • 10m (₹35)",
-        "returnText": "10m back (₹35)",
-        "returnCost": 35,
-        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-            "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80"
-          ],
-        "review": "Stands above the crashing Arabian Sea waves. Catamarans launching into the swell.",
-        "tags": [
-          "Hidden Nature",
-          "Night Vibe",
-          "Free"
-        ]
-      },
-      {
-        "id": "tvm-4",
-        "name": "Imperial Cyber & Gaming Station",
-        "category": "Gaming & Chill",
-        "badge": "AC Esports",
-        "lat": 8.498,
-        "lng": 76.953,
-        "expense": 80,
-        "spendTime": 60,
-        "rating": 4.7,
-        "reviewCount": 80,
-        "distanceKm": 1.8,
-        "transitText": "Auto • 6m (₹25)",
-        "returnText": "6m back (₹25)",
-        "returnCost": 25,
-        "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-            "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&q=80"
-          ],
-        "review": "Great fiber net and gaming seats right on MG Road. Cool haven during layovers.",
-        "tags": [
-          "Gaming & Chill",
-          "AC",
-          "WiFi"
-        ]
-      },
-      {
-        "id": "tvm-5",
-        "name": "Padmanabhaswamy Temple Heritage Tank Walk",
-        "category": "Hidden Spots",
-        "badge": "Sacred Water Tank",
-        "lat": 8.483,
-        "lng": 76.943,
-        "expense": 0,
-        "spendTime": 35,
-        "rating": 4.9,
-        "reviewCount": 620,
-        "distanceKm": 1.2,
-        "transitText": "Walk • 8m (Free)",
-        "returnText": "8m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=600&q=80",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-            "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Heritage Walk",
-            "url": "https://maps.google.com/?q=Padmatheertham+Pond"
-          }
-        ],
-        "review": "Reflective stone steps surrounding the sacred Padmatheertham pond with gopuram silhouettes.",
-        "tags": [
-          "Hidden Nature",
-          "Culture",
-          "Free"
-        ]
-      },
-      {
-        "id": "tvm-6",
-        "name": "Kovalam Lighthouse Cliff Path",
-        "category": "Hidden Spots",
-        "badge": "Arabian Sea Cliffs",
-        "lat": 8.388,
-        "lng": 76.979,
-        "expense": 20,
-        "spendTime": 55,
-        "rating": 4.8,
-        "reviewCount": 780,
-        "distanceKm": 12,
-        "transitText": "Bus / Cab • 25m (₹30)",
-        "returnText": "25m back (₹30)",
-        "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-            "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Coast Walk",
-            "url": "https://maps.google.com/?q=Kovalam+Lighthouse"
-          }
-        ],
-        "review": "Iconic red & white lighthouse perched atop rocky promontory overlooking crescent beaches.",
-        "tags": [
-          "Chai & View",
-          "Night Vibe",
-          "Hidden Nature"
-        ]
-      },
-      {
-        "id": "tvm-7",
-        "name": "Buhari Hotel Midnight Mutton Puttu",
-        "category": "Food",
-        "badge": "Legendary Midnight",
-        "lat": 8.491,
-        "lng": 76.955,
-        "expense": 170,
-        "spendTime": 30,
-        "rating": 4.8,
-        "reviewCount": 610,
-        "distanceKm": 1,
-        "transitText": "Walk • 7m (Free)",
-        "returnText": "7m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
-          "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-            "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Buhari Map",
-            "url": "https://maps.google.com/?q=Buhari+Hotel+Trivandrum"
-          }
-        ],
-        "review": "Steaming hot puttu paired with tender spiced mutton curry and sulaimani. The quintessential TVM late night.",
-        "tags": [
-          "Food",
-          "Street Food",
-          "Night Vibe"
-        ]
-      },
-      {
-        "id": "tvm-8",
-        "name": "Indian Coffee House Laurie Baker Spiral Tower",
-        "category": "Food",
-        "badge": "Architectural Icon",
-        "lat": 8.489,
-        "lng": 76.951,
-        "expense": 50,
-        "spendTime": 30,
-        "rating": 4.7,
-        "reviewCount": 920,
-        "distanceKm": 0.3,
-        "transitText": "Walk • 3m (Free)",
-        "returnText": "3m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80",
-            "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Architecture",
-            "url": "https://maps.google.com/?q=Indian+Coffee+House+Thampanoor"
-          }
-        ],
-        "review": "Iconic red-brick spiral helical ramp designed by Laurie Baker. Cold coffee and mutton cutlet in vintage uniforms.",
-        "tags": [
-          "Chai & View",
-          "Budget",
-          "Culture"
-        ]
-      },
-      {
-        "id": "tvm-9",
-        "name": "PixelForge Gaming & Board Room Lounge",
-        "category": "Gaming & Chill",
-        "badge": "LAN & PS5 Suite",
-        "lat": 8.506,
-        "lng": 76.958,
-        "expense": 110,
-        "spendTime": 75,
-        "rating": 4.8,
-        "reviewCount": 120,
-        "distanceKm": 2.3,
-        "transitText": "Auto • 8m (₹30)",
-        "returnText": "8m back (₹30)",
-        "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=600&q=80",
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=800&q=80",
-            "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "PixelForge",
-            "url": "https://maps.google.com/?q=PixelForge+Trivandrum"
-          }
-        ],
-        "review": "Board games, espresso bar, and top-tier gaming rigs for friends hanging out on layovers.",
-        "tags": [
-          "Gaming & Chill",
-          "AC",
-          "WiFi"
-        ]
-      },
-      {
-        "id": "tvm-10",
-        "name": "Shanghumugham Beach Giant Mermaid Promenade",
-        "category": "Night",
-        "badge": "Sunset Beach",
-        "lat": 8.479,
-        "lng": 76.911,
-        "expense": 0,
-        "spendTime": 40,
-        "rating": 4.6,
-        "reviewCount": 540,
-        "distanceKm": 4.8,
-        "transitText": "Auto • 12m (₹45)",
-        "returnText": "12m back (₹45)",
-        "returnCost": 45,
-        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
-          "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-            "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Beach Guide",
-            "url": "https://maps.google.com/?q=Shanghumugham+Beach"
-          }
-        ],
-        "review": "Vast golden shore famous for Kanayi Kunhiraman's Matsya Kanyaka (Mermaid sculpture) and sunset planes.",
-        "tags": [
-          "Night Vibe",
-          "Hidden Nature",
-          "Free"
-        ]
-      }
-    ]
-  },
-  "Kollam": {
-    "name": "Kollam",
-    "displayName": "Kollam Jn (Quilon Hub)",
-    "hub": {
-      "name": "Kollam Jn Hub",
-      "stationName": "Kollam Jn Pl. 1",
-      "lat": 8.8837,
-      "lng": 76.5955
-    },
-    "spots": [
-      {
-        "id": "klm-1",
-        "name": "Thangassery Lighthouse & Fort Ruins",
-        "category": "Hidden Spots",
-        "badge": "Coastal Lighthouse",
-        "lat": 8.882,
-        "lng": 76.568,
-        "expense": 20,
-        "spendTime": 45,
-        "rating": 4.7,
-        "reviewCount": 210,
-        "distanceKm": 3.5,
-        "transitText": "Auto • 9m (₹30)",
-        "returnText": "9m back (₹30)",
-        "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-            "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
-          ],
-        "review": "Tall red-and-white spiral lighthouse with sweeping views of the Ashtamudi estuary.",
-        "tags": [
-          "Hidden Nature",
-          "Chai & View"
-        ]
-      },
-      {
-        "id": "klm-2",
-        "name": "Ashtamudi Lake Craft Jetty",
-        "category": "Hidden Spots",
-        "badge": "Backwater Haven",
-        "lat": 8.895,
-        "lng": 76.589,
-        "expense": 0,
-        "spendTime": 40,
-        "rating": 4.8,
-        "reviewCount": 160,
-        "distanceKm": 2,
-        "transitText": "Walk • 12m (Free)",
-        "returnText": "12m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-            "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80"
-          ],
-        "review": "Eight-branched lake waterfront with wooden country canoes and fresh cool breeze.",
-        "tags": [
-          "Hidden Nature",
-          "Quiet",
-          "Free"
-        ]
-      },
-      {
-        "id": "klm-3",
-        "name": "Munroe Island Mangrove Canoe Channel",
-        "category": "Hidden Spots",
-        "badge": "Canal Archways",
-        "lat": 8.995,
-        "lng": 76.612,
-        "expense": 60,
-        "spendTime": 65,
-        "rating": 4.9,
-        "reviewCount": 420,
-        "distanceKm": 14,
-        "transitText": "Train / Auto • 20m (₹20)",
-        "returnText": "20m back (₹20)",
-        "returnCost": 20,
-        "photo": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80",
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Munroe Island",
-            "url": "https://maps.google.com/?q=Munroe+Island"
-          }
-        ],
-        "review": "Gliding through narrow emerald mangrove waterways on quiet hand-paddled wooden canoes.",
-        "tags": [
-          "Hidden Nature",
-          "Quiet",
-          "Chai & View"
-        ]
-      },
-      {
-        "id": "klm-4",
-        "name": "Kollam Beach Old Pier & Sea Promenade",
-        "category": "Night",
-        "badge": "Coastal Sunset",
-        "lat": 8.878,
-        "lng": 76.582,
-        "expense": 0,
-        "spendTime": 40,
-        "rating": 4.7,
-        "reviewCount": 390,
-        "distanceKm": 1.8,
-        "transitText": "Auto • 6m (₹25)",
-        "returnText": "6m back (₹25)",
-        "returnCost": 25,
-        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
-          "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-            "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Kollam Beach",
-            "url": "https://maps.google.com/?q=Kollam+Beach"
-          }
-        ],
-        "review": "Breezy seafront with colonial pier remains, night illuminations, and rolling waves.",
-        "tags": [
-          "Night Vibe",
-          "Hidden Nature",
-          "Free"
-        ]
-      },
-      {
-        "id": "klm-5",
-        "name": "Ramees Restaurant Tawa Karimeen Pollichathu",
-        "category": "Food",
-        "badge": "Ashtamudi Pearl Spot",
-        "lat": 8.887,
-        "lng": 76.591,
-        "expense": 190,
-        "spendTime": 35,
-        "rating": 4.8,
-        "reviewCount": 310,
-        "distanceKm": 0.8,
-        "transitText": "Walk • 6m (Free)",
-        "returnText": "6m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&q=80",
-            "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Food Review",
-            "url": "https://maps.google.com/?q=Ramees+Kollam"
-          }
-        ],
-        "review": "Tender Karimeen fish wrapped in banana leaf and grilled with shallot-tomato-coconut masala.",
-        "tags": [
-          "Food",
-          "Street Food"
-        ]
-      },
-      {
-        "id": "klm-6",
-        "name": "Cashew Workers Heritage Street & Chai",
-        "category": "Food",
-        "badge": "Roasted Cashew Lane",
-        "lat": 8.892,
-        "lng": 76.602,
-        "expense": 35,
-        "spendTime": 20,
-        "rating": 4.7,
-        "reviewCount": 220,
-        "distanceKm": 1.4,
-        "transitText": "Walk • 10m (Free)",
-        "returnText": "10m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
-          "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Cashew Street",
-            "url": "https://maps.google.com/?q=Kollam+Cashew+Market"
-          }
-        ],
-        "review": "Fresh charcoal roasted spiced cashews and hot ginger cardamom tea in the cashew capital of India.",
-        "tags": [
-          "Street Food",
-          "Budget",
-          "Chai & View"
-        ]
-      },
-      {
-        "id": "klm-7",
-        "name": "Thevally Palace Waterfront Grounds",
-        "category": "Hidden Spots",
-        "badge": "Dutch Travancore Haven",
-        "lat": 8.904,
-        "lng": 76.578,
-        "expense": 0,
-        "spendTime": 35,
-        "rating": 4.6,
-        "reviewCount": 180,
-        "distanceKm": 2.8,
-        "transitText": "Auto • 9m (₹30)",
-        "returnText": "9m back (₹30)",
-        "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80",
-          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Thevally Palace",
-            "url": "https://maps.google.com/?q=Thevally+Palace"
-          }
-        ],
-        "review": "Historic lakeside palace blending Dutch, British and Kerala architecture right on Ashtamudi water edge.",
-        "tags": [
-          "Hidden Nature",
-          "Culture",
-          "Free"
-        ]
-      },
-      {
-        "id": "klm-8",
-        "name": "Streamline Gaming Cafe & Pool Lounge",
-        "category": "Gaming & Chill",
-        "badge": "Console & Billiards",
-        "lat": 8.889,
-        "lng": 76.598,
-        "expense": 80,
-        "spendTime": 60,
-        "rating": 4.7,
         "reviewCount": 85,
-        "distanceKm": 0.9,
-        "transitText": "Walk • 6m (Free)",
-        "returnText": "6m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80",
-          "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-            "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Gaming Cafe",
-            "url": "https://maps.google.com/?q=Streamline+Kollam"
-          }
-        ],
-        "review": "AC gaming arena with 8-ball pool, FIFA consoles, and ice cold shakes near the railway station.",
-        "tags": [
-          "Gaming & Chill",
-          "AC"
-        ]
-      },
-      {
-        "id": "klm-9",
-        "name": "Kollam Port Dolphin Breakwater Walk",
-        "category": "Hidden Spots",
-        "badge": "Sea Wall Trail",
-        "lat": 8.874,
-        "lng": 76.574,
-        "expense": 0,
-        "spendTime": 40,
-        "rating": 4.8,
-        "reviewCount": 230,
-        "distanceKm": 2.6,
-        "transitText": "Auto • 8m (₹30)",
-        "returnText": "8m back (₹30)",
+        "distanceKm": 3.8,
+        "transitText": "\ud83d\udefa 10m \u2022 \u20b935",
+        "returnText": "Back to Alappuzha Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-            "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Breakwater",
-            "url": "https://maps.google.com/?q=Kollam+Port+Breakwater"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "Granite breakwater stretching into the ocean. Early mornings frequently reveal playful dolphins.",
+        "review": "Home of Nehru Trophy Snake Boat Race. Shaded coconut palm banks.",
         "tags": [
-          "Hidden Nature",
+          "Hidden Spots",
           "Chai & View",
-          "Free"
+          "Verified"
         ]
       },
       {
-        "id": "klm-10",
-        "name": "Supreme Bakers Classic Cashew Halwa",
+        "id": "alp-3",
+        "name": "Brothers Hotel Duck Roast",
         "category": "Food",
-        "badge": "Legendary Bakery",
-        "lat": 8.885,
-        "lng": 76.593,
-        "expense": 90,
-        "spendTime": 25,
+        "badge": "Food",
+        "lat": 9.5019,
+        "lng": 76.3297,
+        "expense": 160,
+        "spendTime": 30,
         "rating": 4.8,
-        "reviewCount": 450,
-        "distanceKm": 0.4,
-        "transitText": "Walk • 4m (Free)",
-        "returnText": "4m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
+        "reviewCount": 85,
+        "distanceKm": 2.2,
+        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "returnText": "Back to Alappuzha Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80",
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-            "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Bakery",
-            "url": "https://maps.google.com/?q=Supreme+Bakers+Kollam"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "Famous across South Kerala for black halwa made with fresh ghee, tender coconut, and premium cashews.",
+        "review": "Spicy Kuttanad duck roast with hot appams and coconut gravy.",
         "tags": [
           "Food",
-          "Street Food"
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "alp-4",
+        "name": "Alappuzha Lighthouse View",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 9.481,
+        "lng": 76.3173,
+        "expense": 20,
+        "spendTime": 35,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 1.6,
+        "transitText": "\ud83d\udeb6 10m \u2022 Free",
+        "returnText": "Back to Alappuzha Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Spiral climb giving unmatched panoramic view over the Arabian Sea.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Kannur": {
+    "name": "Kannur",
+    "displayName": "Kannur (Land of Looms & Lores)",
+    "state": "Kerala",
+    "hub": {
+      "name": "Kannur Main",
+      "stationName": "Kannur Pl. 1",
+      "lat": 11.8745,
+      "lng": 75.3704
+    },
+    "spots": [
+      {
+        "id": "knr-1",
+        "name": "St. Angelo Fort Ramparts",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 11.8722,
+        "lng": 75.3792,
+        "expense": 25,
+        "spendTime": 50,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 3.2,
+        "transitText": "\ud83d\udefa 9m \u2022 \u20b930",
+        "returnText": "Back to Kannur Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "16th-century Portuguese coastal fortress overlooking Moppila Bay.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "knr-2",
+        "name": "Muzhappilangad Drive-in Beach",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 11.888499999999999,
+        "lng": 75.35130000000001,
+        "expense": 50,
+        "spendTime": 60,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 11.0,
+        "transitText": "\ud83d\udefa 22m \u2022 \u20b980",
+        "returnText": "Back to Kannur Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Asia's longest natural drive-in beach with packed golden sands.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "knr-3",
+        "name": "Ondens Mussels & Fish Fry",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 11.8654,
+        "lng": 75.3591,
+        "expense": 140,
+        "spendTime": 30,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 1.2,
+        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "returnText": "Back to Kannur Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Kallummakkaya (spiced fried mussels) and fresh catch of the day.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "knr-4",
+        "name": "Arakkal Museum Heritage Palace",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 11.873899999999999,
+        "lng": 75.372,
+        "expense": 30,
+        "spendTime": 40,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 2.8,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b925",
+        "returnText": "Back to Kannur Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "The royal residence of the only Muslim royal dynasty of Kerala.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       }
     ]
   },
   "Wayanad": {
     "name": "Wayanad",
-    "displayName": "Wayanad (Kalpetta Foothill Hub)",
+    "displayName": "Wayanad (Kalpetta Gateway)",
+    "state": "Kerala",
     "hub": {
-      "name": "Kalpetta Foothill Hub",
-      "stationName": "Kalpetta Bus Station Terminal",
-      "lat": 11.605,
-      "lng": 76.083
+      "name": "Kalpetta Old Bus Stand",
+      "stationName": "Kalpetta Hub",
+      "lat": 11.608,
+      "lng": 76.0828
     },
     "spots": [
       {
         "id": "wyd-1",
-        "name": "Karapuzha Lake Spillway Sunset",
+        "name": "Karapuzha Reservoir Lakeside",
         "category": "Hidden Spots",
-        "badge": "Misty Lake Basin",
-        "lat": 11.615,
-        "lng": 76.172,
+        "badge": "Hidden Spots",
+        "lat": 11.605400000000001,
+        "lng": 76.07770000000001,
         "expense": 30,
-        "spendTime": 60,
+        "spendTime": 50,
         "rating": 4.8,
-        "reviewCount": 290,
-        "distanceKm": 5.2,
-        "transitText": "Auto • 15m (₹50)",
-        "returnText": "15m back (₹50)",
-        "returnCost": 50,
+        "reviewCount": 85,
+        "distanceKm": 9.5,
+        "transitText": "\ud83d\udefa 22m \u2022 \u20b985",
+        "returnText": "Back to Kalpetta Hub",
+        "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-          ],
-        "review": "Large earth dam reservoir surrounded by green hills, cool mountain breeze.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Earthen dam lake flanked by rolling tea hills and misty waters.",
         "tags": [
-          "Hidden Nature",
-          "Chai & View"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "wyd-2",
-        "name": "Coffee Plantation Trail Kadha",
+        "name": "1980's A Nostalgic Restaurant",
         "category": "Food",
-        "badge": "Highland Brews",
-        "lat": 11.602,
-        "lng": 76.089,
-        "expense": 40,
-        "spendTime": 30,
-        "rating": 4.9,
-        "reviewCount": 310,
-        "distanceKm": 1.1,
-        "transitText": "Walk • 8m (Free)",
-        "returnText": "8m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80",
+        "badge": "Food",
+        "lat": 11.627600000000001,
+        "lng": 76.0819,
+        "expense": 160,
+        "spendTime": 40,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 2.1,
+        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "returnText": "Back to Kalpetta Hub",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80",
-            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
-          ],
-        "review": "Freshly roasted Wayanad Robusta coffee served with steaming hot unnakkaya snacks.",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Traditional Kerala sadhya and bamboo biryani served on banana leaves.",
         "tags": [
-          "Street Food",
-          "Chai & View"
+          "Food",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "wyd-3",
-        "name": "En Ooru Tribal Heritage Village",
+        "name": "Edakkal Prehistoric Rock Caves",
         "category": "Hidden Spots",
-        "badge": "Indigenous Architecture",
-        "lat": 11.523,
-        "lng": 76.027,
+        "badge": "Hidden Spots",
+        "lat": 11.616900000000001,
+        "lng": 76.0809,
         "expense": 50,
         "spendTime": 60,
-        "rating": 4.9,
-        "reviewCount": 510,
-        "distanceKm": 12,
-        "transitText": "Bus / Auto • 22m (₹40)",
-        "returnText": "22m back (₹40)",
-        "returnCost": 40,
-        "photo": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80",
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 14.0,
+        "transitText": "\ud83d\udefa 30m \u2022 \u20b9120",
+        "returnText": "Back to Kalpetta Hub",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80",
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80",
-            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "En Ooru",
-            "url": "https://maps.google.com/?q=En+Ooru+Heritage+Village"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "Hilltop indigenous thatched huts, traditional archery, organic honey, and misty forest panoramas.",
+        "review": "Stone Age petroglyphs carved high inside mountain rock clefts.",
         "tags": [
-          "Culture",
-          "Hidden Nature",
-          "Chai & View"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
         "id": "wyd-4",
-        "name": "Pookode Lake Freshwater Lotus Trail",
+        "name": "Wayanad Bamboo Village Walk",
         "category": "Hidden Spots",
-        "badge": "Evergreen Canopy",
-        "lat": 11.543,
-        "lng": 76.028,
-        "expense": 40,
-        "spendTime": 50,
-        "rating": 4.8,
-        "reviewCount": 430,
-        "distanceKm": 11.5,
-        "transitText": "Auto • 20m (₹60)",
-        "returnText": "20m back (₹60)",
-        "returnCost": 60,
-        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-            "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Pookode Lake",
-            "url": "https://maps.google.com/?q=Pookode+Lake"
-          }
-        ],
-        "review": "Natural freshwater lake shaped like India map, surrounded by dense evergreen woods and blue water lilies.",
-        "tags": [
-          "Hidden Nature",
-          "Quiet"
-        ]
-      },
-      {
-        "id": "wyd-5",
-        "name": "Banasura Sagar Earth Dam Footpath",
-        "category": "Hidden Spots",
-        "badge": "Largest Earth Dam",
-        "lat": 11.668,
-        "lng": 75.958,
-        "expense": 50,
-        "spendTime": 65,
-        "rating": 4.9,
-        "reviewCount": 650,
-        "distanceKm": 16,
-        "transitText": "Bus / Cab • 28m (₹50)",
-        "returnText": "28m back (₹50)",
-        "returnCost": 50,
+        "badge": "Hidden Spots",
+        "lat": 11.622200000000001,
+        "lng": 76.09750000000001,
+        "expense": 0,
+        "spendTime": 45,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 6.2,
+        "transitText": "\ud83d\udefa 15m \u2022 \u20b950",
+        "returnText": "Back to Kalpetta Hub",
+        "returnCost": 30,
         "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Banasura Dam",
-            "url": "https://maps.google.com/?q=Banasura+Sagar+Dam"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "Sprawling lake with picturesque submerged mountain islands rising above turquoise water.",
+        "review": "Shaded bamboo groves and eco-artisan workshops along stream.",
         "tags": [
-          "Hidden Nature",
-          "Chai & View"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Munnar": {
+    "name": "Munnar",
+    "displayName": "Munnar Tea Highlands",
+    "state": "Kerala",
+    "hub": {
+      "name": "Munnar Central Town Hub",
+      "stationName": "Munnar KSRTC",
+      "lat": 10.0889,
+      "lng": 77.0595
+    },
+    "spots": [
+      {
+        "id": "mnr-1",
+        "name": "KDHP Tea Museum & Factory",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 10.0728,
+        "lng": 77.0582,
+        "expense": 75,
+        "spendTime": 50,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 2.0,
+        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "returnText": "Back to Munnar KSRTC",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Aromatic tea manufacturing history and fresh garden tea tasting.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
-        "id": "wyd-6",
-        "name": "Wilton Restaurant Malabar Bamboo Biryani",
-        "category": "Food",
-        "badge": "Bamboo Steamed",
-        "lat": 11.608,
-        "lng": 76.085,
-        "expense": 210,
-        "spendTime": 40,
-        "rating": 4.8,
-        "reviewCount": 390,
-        "distanceKm": 0.6,
-        "transitText": "Walk • 5m (Free)",
-        "returnText": "5m back (Free)",
-        "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
+        "id": "mnr-2",
+        "name": "Pothanmedu Viewpoint",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 10.0774,
+        "lng": 77.0505,
+        "expense": 0,
+        "spendTime": 45,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 4.2,
+        "transitText": "\ud83d\udefa 12m \u2022 \u20b945",
+        "returnText": "Back to Munnar KSRTC",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
-          "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-            "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Wilton Menu",
-            "url": "https://maps.google.com/?q=Wilton+Restaurant+Kalpetta"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "Aromatic Malabar kaima rice and marinated country chicken steamed inside raw green bamboo logs.",
+        "review": "Sweeping vista of emerald tea carpets, cardamom plants, and misty cliffs.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "mnr-3",
+        "name": "Rapsy Restaurant Spanish Omelette",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 10.0976,
+        "lng": 77.0625,
+        "expense": 80,
+        "spendTime": 25,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 0.5,
+        "transitText": "\ud83d\udeb6 3m \u2022 Free",
+        "returnText": "Back to Munnar KSRTC",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Legendary backpacker cafe serving Kerala parottas and hot spiced tea.",
         "tags": [
           "Food",
-          "Street Food"
+          "Chai & View",
+          "Verified"
         ]
       },
       {
-        "id": "wyd-7",
-        "name": "Wayanad Tea Museum & Tasting Deck",
+        "id": "mnr-4",
+        "name": "Mattupetty Lake Echo Point",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 10.096200000000001,
+        "lng": 77.0463,
+        "expense": 20,
+        "spendTime": 50,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 9.0,
+        "transitText": "\ud83d\udefa 20m \u2022 \u20b975",
+        "returnText": "Back to Munnar KSRTC",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "High-altitude water reservoir reflecting cloud-capped Western Ghats.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Kollam": {
+    "name": "Kollam",
+    "displayName": "Kollam Jn (Ashtamudi Hub)",
+    "state": "Kerala",
+    "hub": {
+      "name": "Kollam Jn",
+      "stationName": "Kollam Jn Pl. 1",
+      "lat": 8.8879,
+      "lng": 76.5956
+    },
+    "spots": [
+      {
+        "id": "klm-1",
+        "name": "Tangasseri British Lighthouse",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 8.8715,
+        "lng": 76.6075,
+        "expense": 20,
+        "spendTime": 40,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 4.5,
+        "transitText": "\ud83d\udefa 11m \u2022 \u20b935",
+        "returnText": "Back to Kollam Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "144-foot red-and-white striped tower with coastal breakers view.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "klm-2",
+        "name": "Ashtamudi Lake Waterfront Walk",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 8.8939,
+        "lng": 76.6109,
+        "expense": 0,
+        "spendTime": 45,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 1.2,
+        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "returnText": "Back to Kollam Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Palm-fringed gateway to Kerala's most picturesque backwaters.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "klm-3",
+        "name": "Fayaz Cashew Halwa Stall",
         "category": "Food",
-        "badge": "Highland Tea",
-        "lat": 11.536,
-        "lng": 76.064,
-        "expense": 60,
+        "badge": "Food",
+        "lat": 8.8961,
+        "lng": 76.5887,
+        "expense": 90,
+        "spendTime": 20,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 0.9,
+        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "returnText": "Back to Kollam Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Kollam's world-famous export-quality roasted cashews and sweet halwa.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Chennai": {
+    "name": "Chennai",
+    "displayName": "Chennai Central Hub (Tamil Nadu)",
+    "state": "Tamil Nadu",
+    "hub": {
+      "name": "Puratchi Thalaivar Dr. MGR Central",
+      "stationName": "Chennai Central Pl. 1",
+      "lat": 13.0827,
+      "lng": 80.2755
+    },
+    "spots": [
+      {
+        "id": "maa-1",
+        "name": "Marina Beach Old Lighthouse",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 13.0637,
+        "lng": 80.29499999999999,
+        "expense": 20,
+        "spendTime": 50,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 3.8,
+        "transitText": "\ud83d\udefa 12m \u2022 \u20b940",
+        "returnText": "Back to Chennai Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Elevator to top floor overlooking world's second longest urban beach.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "maa-2",
+        "name": "Murugan Idli Shop & Podi Dosa",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 13.068000000000001,
+        "lng": 80.26729999999999,
+        "expense": 110,
+        "spendTime": 30,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 2.5,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "returnText": "Back to Chennai Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Steaming hot mallipoo idlis with 4 signature chutneys and spicy podi.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "maa-3",
+        "name": "Mylapore Kapaleeshwarar Temple Lane",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 13.084900000000001,
+        "lng": 80.2906,
+        "expense": 0,
+        "spendTime": 45,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 5.2,
+        "transitText": "\ud83d\udefa 15m \u2022 \u20b950",
+        "returnText": "Back to Chennai Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "7th-century Dravidian gopuram with ancient temple tank and flower bazaar.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "maa-4",
+        "name": "Santhome Cathedral Basilica",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 13.0837,
+        "lng": 80.2842,
+        "expense": 0,
         "spendTime": 35,
         "rating": 4.7,
-        "reviewCount": 280,
-        "distanceKm": 9.5,
-        "transitText": "Auto • 18m (₹55)",
-        "returnText": "18m back (₹55)",
-        "returnCost": 55,
-        "photo": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
+        "reviewCount": 85,
+        "distanceKm": 4.6,
+        "transitText": "\ud83d\udefa 14m \u2022 \u20b945",
+        "returnText": "Back to Chennai Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-            "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Tea Museum",
-            "url": "https://maps.google.com/?q=Wayanad+Tea+Museum"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "1911 wooden factory turned museum. Sip fresh white tea and golden tips while overlooking tea hills.",
+        "review": "Historic neo-Gothic cathedral built over the tomb of Apostle Thomas.",
         "tags": [
+          "Hidden Spots",
           "Chai & View",
-          "Culture",
-          "Budget"
+          "Verified"
         ]
       },
       {
-        "id": "wyd-8",
-        "name": "Chundale Cardamom & Coffee Trail",
+        "id": "maa-5",
+        "name": "Triplicane Biryani Corner",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 13.090800000000002,
+        "lng": 80.27969999999999,
+        "expense": 130,
+        "spendTime": 25,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 2.0,
+        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "returnText": "Back to Chennai Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Famous Chennai street-style fragrant seeraga samba rice biryani.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Coimbatore": {
+    "name": "Coimbatore",
+    "displayName": "Coimbatore Jn (Manchester of South)",
+    "state": "Tamil Nadu",
+    "hub": {
+      "name": "Coimbatore Jn",
+      "stationName": "Coimbatore Jn Pl. 1",
+      "lat": 11.0018,
+      "lng": 76.9629
+    },
+    "spots": [
+      {
+        "id": "cbe-1",
+        "name": "Sree Annapoorna Sambar Vadai",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 11.017999999999999,
+        "lng": 76.94680000000001,
+        "expense": 60,
+        "spendTime": 25,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 0.8,
+        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "returnText": "Back to Coimbatore Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Coimbatore's pride: medu vada soaked in piping hot signature sambar.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "cbe-2",
+        "name": "Valankulam Lake Promenade Walk",
         "category": "Hidden Spots",
-        "badge": "Aromatic Groves",
-        "lat": 11.584,
-        "lng": 76.062,
+        "badge": "Hidden Spots",
+        "lat": 11.0191,
+        "lng": 76.94590000000001,
         "expense": 0,
         "spendTime": 40,
-        "rating": 4.8,
-        "reviewCount": 190,
-        "distanceKm": 3.5,
-        "transitText": "Auto • 8m (₹30)",
-        "returnText": "8m back (₹30)",
-        "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80",
-        "photos": [
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80",
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80",
-            "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Trail Map",
-            "url": "https://maps.google.com/?q=Chundale+Estate"
-          }
-        ],
-        "review": "Free peaceful walking trail through shade-grown coffee, pepper vines, and cardamom plants.",
-        "tags": [
-          "Hidden Nature",
-          "Free",
-          "Quiet"
-        ]
-      },
-      {
-        "id": "wyd-9",
-        "name": "Altitude Gaming Haven Kalpetta",
-        "category": "Gaming & Chill",
-        "badge": "Misty Mountain Gaming",
-        "lat": 11.609,
-        "lng": 76.082,
-        "expense": 80,
-        "spendTime": 60,
-        "rating": 4.7,
-        "reviewCount": 75,
-        "distanceKm": 0.4,
-        "transitText": "Walk • 4m (Free)",
-        "returnText": "4m back (Free)",
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 1.5,
+        "transitText": "\ud83d\udeb6 9m \u2022 Free",
+        "returnText": "Back to Coimbatore Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80",
-          "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Altitude Gaming",
-            "url": "https://maps.google.com/?q=Altitude+Gaming+Kalpetta"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "Cozy mountain town esports cafe with PS5s, fighting game arcade sticks, and strong WiFi.",
+        "review": "Clean boardwalk with pedal boats and cool breezes from Western Ghats.",
         "tags": [
-          "Gaming & Chill",
-          "AC",
-          "WiFi"
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       },
       {
-        "id": "wyd-10",
-        "name": "Vythiri Mist Viewpoint & Night Tea Stall",
-        "category": "Night",
-        "badge": "Ghat Road Lights",
-        "lat": 11.551,
-        "lng": 76.035,
-        "expense": 30,
+        "id": "cbe-3",
+        "name": "Marudhamalai Hill Temple",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 11.0192,
+        "lng": 76.971,
+        "expense": 20,
+        "spendTime": 60,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 13.0,
+        "transitText": "\ud83d\udefa 25m \u2022 \u20b990",
+        "returnText": "Back to Coimbatore Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Ancient granite temple nestled among herbal forests atop misty ridge.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "cbe-4",
+        "name": "RS Puram Coffee Street",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 11.0101,
+        "lng": 76.96650000000001,
+        "expense": 45,
+        "spendTime": 25,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 3.2,
+        "transitText": "\ud83d\udefa 10m \u2022 \u20b930",
+        "returnText": "Back to Coimbatore Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Traditional brass tumbler Kumbakonam degree filter coffee.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Madurai": {
+    "name": "Madurai",
+    "displayName": "Madurai Jn (Temple City)",
+    "state": "Tamil Nadu",
+    "hub": {
+      "name": "Madurai Jn",
+      "stationName": "Madurai Jn Pl. 1",
+      "lat": 9.9252,
+      "lng": 78.1102
+    },
+    "spots": [
+      {
+        "id": "ixm-1",
+        "name": "Meenakshi Amman Temple Gopuram",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 9.9102,
+        "lng": 78.1042,
+        "expense": 0,
+        "spendTime": 60,
+        "rating": 5.0,
+        "reviewCount": 85,
+        "distanceKm": 1.2,
+        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "returnText": "Back to Madurai Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "14 monumental gopurams with thousand-pillar hall of architectural genius.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "ixm-2",
+        "name": "Famous Jigarthanda Shop",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 9.914,
+        "lng": 78.11420000000001,
+        "expense": 50,
+        "spendTime": 15,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 0.9,
+        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "returnText": "Back to Madurai Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "The royal refreshing drink: condensed milk, badam pisin, and nannari.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "ixm-3",
+        "name": "Thirumalai Nayakkar Mahal",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 9.9198,
+        "lng": 78.10130000000001,
+        "expense": 20,
+        "spendTime": 45,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 2.2,
+        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "returnText": "Back to Madurai Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "17th-century Italian-Rajput architecture with colossal stone pillars.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "ixm-4",
+        "name": "Murugan Idli Shop West Masi St",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 9.920300000000001,
+        "lng": 78.10010000000001,
+        "expense": 90,
+        "spendTime": 25,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 0.8,
+        "transitText": "\ud83d\udeb6 5m \u2022 Free",
+        "returnText": "Back to Madurai Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "The birthplace of soft idlis with rich tomato and onion chutneys.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Bengaluru": {
+    "name": "Bengaluru",
+    "displayName": "Bengaluru City (SBC / Silicon Valley)",
+    "state": "Karnataka",
+    "hub": {
+      "name": "KSR Bengaluru (City)",
+      "stationName": "Bengaluru City Pl. 1",
+      "lat": 12.9774,
+      "lng": 77.5671
+    },
+    "spots": [
+      {
+        "id": "blr-1",
+        "name": "Cubbon Park Bamboo Grove Walk",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 12.963199999999999,
+        "lng": 77.56859999999999,
+        "expense": 0,
+        "spendTime": 50,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 2.8,
+        "transitText": "\ud83d\ude87 8m \u2022 \u20b915 (Namma Metro)",
+        "returnText": "Back to Bengaluru City Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "300 acres of green oxygen, red colonial library, and shady dog park.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "blr-2",
+        "name": "Vidyarthi Bhavan Crispy Masala Dosa",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 12.9803,
+        "lng": 77.58239999999999,
+        "expense": 85,
+        "spendTime": 35,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 3.8,
+        "transitText": "\ud83d\udefa 12m \u2022 \u20b940",
+        "returnText": "Back to Bengaluru City Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "80-year-old Gandhi Bazaar institution serving thick golden ghee dosas.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "blr-3",
+        "name": "Bangalore Fort & Tipu Sultan Summer Palace",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 12.9763,
+        "lng": 77.58539999999999,
+        "expense": 25,
+        "spendTime": 45,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 2.2,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "returnText": "Back to Bengaluru City Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Intricate teakwood carved arches and historic stone bastions.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "blr-4",
+        "name": "Brahmin's Coffee Bar Shankarpuram",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 12.994,
+        "lng": 77.5478,
+        "expense": 50,
+        "spendTime": 20,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 3.5,
+        "transitText": "\ud83d\udefa 10m \u2022 \u20b935",
+        "returnText": "Back to Bengaluru City Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Piping hot button idli with copious coconut chutney and filter coffee.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Mysuru": {
+    "name": "Mysuru",
+    "displayName": "Mysuru Jn (Heritage City)",
+    "state": "Karnataka",
+    "hub": {
+      "name": "Mysuru Jn",
+      "stationName": "Mysuru Jn Pl. 1",
+      "lat": 12.3164,
+      "lng": 76.645
+    },
+    "spots": [
+      {
+        "id": "mys-1",
+        "name": "Mysore Palace Royal Gateways",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 12.3192,
+        "lng": 76.65679999999999,
+        "expense": 100,
+        "spendTime": 60,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 2.0,
+        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "returnText": "Back to Mysuru Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "World-famous Indo-Saracenic royal seat of the Wadiyar dynasty.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "mys-2",
+        "name": "Hotel Original Mylari Dosa",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 12.3131,
+        "lng": 76.6292,
+        "expense": 65,
+        "spendTime": 25,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 2.5,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "returnText": "Back to Mysuru Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Melt-in-mouth cloud-soft butter dosas with spiced onion sagu.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "mys-3",
+        "name": "Devaraja Market Heritage Walk",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 12.309,
+        "lng": 76.6617,
+        "expense": 0,
+        "spendTime": 40,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 1.2,
+        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "returnText": "Back to Mysuru Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Vibrant market filled with Mysore Pak, sandalwood, and piles of marigolds.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "mys-4",
+        "name": "Guru Sweet Mart Authentic Mysore Pak",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 12.3267,
+        "lng": 76.6304,
+        "expense": 70,
+        "spendTime": 15,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 1.5,
+        "transitText": "\ud83d\udeb6 9m \u2022 Free",
+        "returnText": "Back to Mysuru Jn Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "The royal kitchen descendants who first invented Mysore Pak.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Mangaluru": {
+    "name": "Mangaluru",
+    "displayName": "Mangaluru Central (Coastal Hub)",
+    "state": "Karnataka",
+    "hub": {
+      "name": "Mangaluru Central",
+      "stationName": "Mangaluru Central Pl. 1",
+      "lat": 12.8634,
+      "lng": 74.8431
+    },
+    "spots": [
+      {
+        "id": "ixe-1",
+        "name": "Giri Manja's Fish Fry Corner",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 12.877600000000001,
+        "lng": 74.83430000000001,
+        "expense": 160,
+        "spendTime": 35,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 1.8,
+        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "returnText": "Back to Mangaluru Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Tawa-fried fresh anjal (kingfish) in home-style spicy masala.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "ixe-2",
+        "name": "Panambur Beach Sea Breeze Point",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 12.8785,
+        "lng": 74.8585,
+        "expense": 0,
+        "spendTime": 50,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 9.0,
+        "transitText": "\ud83d\udefa 18m \u2022 \u20b965",
+        "returnText": "Back to Mangaluru Central Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Golden sands, kite flying, and clear Arabian sea sunsets.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "ixe-3",
+        "name": "Ideal Ice Cream Gadbad Lounge",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 12.8826,
+        "lng": 74.8379,
+        "expense": 95,
+        "spendTime": 25,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 1.2,
+        "transitText": "\ud83d\udeb6 7m \u2022 Free",
+        "returnText": "Back to Mangaluru Central Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Famous Mangalorean Gadbad ice cream with nuts and jelly.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Goa": {
+    "name": "Goa",
+    "displayName": "Goa (Madgaon Jn Hub)",
+    "state": "Goa",
+    "hub": {
+      "name": "Madgaon Jn",
+      "stationName": "Madgaon Jn Pl. 1",
+      "lat": 15.2736,
+      "lng": 73.9782
+    },
+    "spots": [
+      {
+        "id": "goa-1",
+        "name": "Colva Beach White Sands Walk",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 15.2796,
+        "lng": 73.9828,
+        "expense": 0,
+        "spendTime": 50,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 6.5,
+        "transitText": "\ud83d\udefa 15m \u2022 \u20b950",
+        "returnText": "Back to Madgaon Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Endless stretches of powdery white sand and fishing trawlers.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "goa-2",
+        "name": "Longuinhos Heritage Cafe & Bebinca",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 15.2831,
+        "lng": 73.97240000000001,
+        "expense": 90,
         "spendTime": 30,
         "rating": 4.8,
-        "reviewCount": 380,
-        "distanceKm": 10,
-        "transitText": "Bus / Auto • 18m (₹35)",
-        "returnText": "18m back (₹35)",
-        "returnCost": 35,
-        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+        "reviewCount": 85,
+        "distanceKm": 1.8,
+        "transitText": "\ud83d\udefa 6m \u2022 \u20b925",
+        "returnText": "Back to Madgaon Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=600&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
-        ][
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
-          ],
-        "links": [
-          {
-            "label": "Ghat Viewpoint",
-            "url": "https://maps.google.com/?q=Vythiri+Viewpoint"
-          }
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
         ],
-        "review": "Perched high on Thamarassery Churam hairpin curves with night vehicle light trails and piping hot cardamom tea.",
+        "review": "Goan Portuguese heritage cafe serving warm bebinca and croquettes.",
         "tags": [
-          "Night Vibe",
+          "Food",
           "Chai & View",
-          "Budget"
+          "Verified"
+        ]
+      },
+      {
+        "id": "goa-3",
+        "name": "Church of the Holy Spirit Square",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 15.277,
+        "lng": 73.9603,
+        "expense": 0,
+        "spendTime": 35,
+        "rating": 4.6,
+        "reviewCount": 85,
+        "distanceKm": 2.2,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "returnText": "Back to Madgaon Jn Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Colonial Portuguese square framed by mango trees and baroque facade.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Mumbai": {
+    "name": "Mumbai",
+    "displayName": "Mumbai (CSMT / Heritage Gateway)",
+    "state": "Maharashtra",
+    "hub": {
+      "name": "Chhatrapati Shivaji Maharaj Terminus",
+      "stationName": "Mumbai CSMT Pl. 1",
+      "lat": 18.94,
+      "lng": 72.8354
+    },
+    "spots": [
+      {
+        "id": "bom-1",
+        "name": "Marine Drive Queen's Necklace Walk",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 18.9329,
+        "lng": 72.8221,
+        "expense": 0,
+        "spendTime": 50,
+        "rating": 4.9,
+        "reviewCount": 85,
+        "distanceKm": 2.1,
+        "transitText": "\ud83d\udefa 8m \u2022 \u20b930",
+        "returnText": "Back to Mumbai CSMT Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Iconic seaside promenade with cooling Arabian sea breeze and art deco buildings.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "bom-2",
+        "name": "Kyani & Co. Bun Maska & Irani Chai",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 18.957600000000003,
+        "lng": 72.8366,
+        "expense": 65,
+        "spendTime": 25,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 0.9,
+        "transitText": "\ud83d\udeb6 6m \u2022 Free",
+        "returnText": "Back to Mumbai CSMT Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Mumbai's oldest surviving Irani cafe (1904) with chequered tablecloths.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "bom-3",
+        "name": "Gateway of India & Taj Promenade",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 18.944200000000002,
+        "lng": 72.82790000000001,
+        "expense": 0,
+        "spendTime": 45,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 2.8,
+        "transitText": "\ud83d\udefa 10m \u2022 \u20b935",
+        "returnText": "Back to Mumbai CSMT Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Monumental basalt arch overlooking harbor ferry boats and sea gulls.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      }
+    ]
+  },
+  "Delhi": {
+    "name": "Delhi",
+    "displayName": "New Delhi (NDLS Hub)",
+    "state": "Delhi",
+    "hub": {
+      "name": "New Delhi Railway Station",
+      "stationName": "New Delhi Pl. 1",
+      "lat": 28.6431,
+      "lng": 77.2197
+    },
+    "spots": [
+      {
+        "id": "del-1",
+        "name": "Chandni Chowk Paranthe Wali Gali",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 28.648,
+        "lng": 77.233,
+        "expense": 90,
+        "spendTime": 35,
+        "rating": 4.8,
+        "reviewCount": 85,
+        "distanceKm": 1.8,
+        "transitText": "\ud83d\ude87 5m \u2022 \u20b910 (Yellow Line)",
+        "returnText": "Back to New Delhi Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Historic alleyway serving deep-fried stuffed paranthas with spicy chutneys.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "del-2",
+        "name": "Connaught Place Central Park Walk",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 28.6627,
+        "lng": 77.22330000000001,
+        "expense": 0,
+        "spendTime": 40,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 1.2,
+        "transitText": "\ud83d\udeb6 8m \u2022 Free",
+        "returnText": "Back to New Delhi Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Georgian colonial circular colonnade with massive tricolor Indian flag.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "del-3",
+        "name": "Agrasen Ki Baoli Ancient Stepwell",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 28.6328,
+        "lng": 77.23740000000001,
+        "expense": 0,
+        "spendTime": 35,
+        "rating": 4.7,
+        "reviewCount": 85,
+        "distanceKm": 2.2,
+        "transitText": "\ud83d\udefa 7m \u2022 \u20b925",
+        "returnText": "Back to New Delhi Pl. 1",
+        "returnCost": 30,
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "108-step dramatic historical stepwell hidden in heart of central Delhi.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
         ]
       }
     ]
