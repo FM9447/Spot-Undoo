@@ -4,6 +4,10 @@ export const getBackendUrl = () => {
       return import.meta.env.VITE_BACKEND_URL;
     }
     const host = window.location.hostname;
+    // In production on HTTPS (e.g. Hugging Face Spaces or custom domain), use same origin
+    if (window.location.protocol === 'https:') {
+      return window.location.origin;
+    }
     if (host && host !== 'localhost' && host !== '127.0.0.1') {
       return `http://${host}:4000`;
     }

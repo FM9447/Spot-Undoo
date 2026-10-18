@@ -1,8 +1,7 @@
 node_modules
 dist
 .git
-.env
+.gitignore
 ollama_models
-android
-.agent
-.agents
+.env
+.env.local
