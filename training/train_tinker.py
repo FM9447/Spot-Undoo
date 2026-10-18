@@ -18,7 +18,8 @@ import json
 from pathlib import Path
 
 DATASET_PATH = Path(__file__).parent / "spot_undo_train.jsonl"
-BASE_MODEL = "Qwen/Qwen2.5-3B-Instruct"
+BASE_MODEL = "Qwen/Qwen3.5-4B"
+FALLBACK_MODEL = "thinkingmachines/Inkling-Small"
 
 def check_dataset():
     if not DATASET_PATH.exists():
