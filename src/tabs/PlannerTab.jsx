@@ -5,6 +5,7 @@ import { ollamaChat } from '../utils/ollama';
 import { getBackendUrl } from '../utils/apiConfig';
 import { Loader2, BrainCircuit, IndianRupee, Clock, MapPin, Sparkles } from 'lucide-react';
 import SpotUndooLoadingScreen from '../components/SpotUndooLoadingScreen';
+import RideComparatorModal from '../components/RideComparatorModal';
 
 const MOODS = ['Chill', 'Street Food', 'Hidden Nature', 'Gaming', 'Party'];
 const MODES = ['Quick Free Time', 'Waiting for Train/Flight', 'Few Days Trip'];
@@ -18,6 +19,7 @@ export default function PlannerTab({ location, settings }) {
   const [loading, setLoading] = useState(false);
   const [plans, setPlans] = useState([]);
   const [error, setError] = useState('');
+  const [selectedStop, setSelectedStop] = useState(null);
 
   const toggleMood = (m) => setMoods((prev) => prev.includes(m) ? prev.filter((x) => x !== m) : [...prev, m]);
 
@@ -185,8 +187,18 @@ Return this JSON structure:
                   <div className="text-[10px] text-gray-500">↓</div>
                   <div className="text-xs text-gray-400 font-mono">{stop.leave || stop.leaveStr}</div>
                 </div>
-                <div className="flex-1 bg-white/5 rounded-xl p-2">
-                  <div className="font-medium text-sm text-white">{stop.name}</div>
+                <div className="flex-1 bg-white/5 rounded-xl p-2.5">
+                  <div className="flex items-start justify-between gap-1">
+                    <div className="font-medium text-sm text-white">{stop.name}</div>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedStop(stop)}
+                      className="text-[10px] font-bold bg-[#FFE500] hover:bg-yellow-300 text-black px-2 py-0.5 rounded-lg flex items-center gap-1 shrink-0 transition shadow-xs cursor-pointer"
+                      title="Compare Uber, Rapido, and Auto fares"
+                    >
+                      <span>🛺 Rides</span>
+                    </button>
+                  </div>
                   <div className="flex gap-2 mt-1">
                     <span className="text-[10px] text-blue-400">{stop.mode || stop.transit?.mode} ₹{stop.fare ?? stop.roundTripCost ?? 0}</span>
                     <span className="text-[10px] text-orange-400">Entry ₹{stop.expense ?? 0}</span>
@@ -211,6 +223,15 @@ Return this JSON structure:
           </div>
         </div>
       ))}
+
+      {/* Ride Comparison Modal */}
+      <RideComparatorModal
+        isOpen={!!selectedStop}
+        onClose={() => setSelectedStop(null)}
+        destination={selectedStop}
+        userLat={location.lat}
+        userLon={location.lon}
+      />
     </div>
   );
 }

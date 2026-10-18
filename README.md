@@ -101,6 +101,12 @@ Whether you have a 45-minute train layover at **Shoranur Junction**, an evening 
 - Full Capacitor-powered Android native build (`SpotUndoo-v1.0.apk`) and Progressive Web App (PWA).
 - Host backend & AI on a laptop; connect from any Android or iPhone on the same Wi-Fi network with dynamic backend network routing.
 
+### 7. 🛺 Multimodal Ride Hailing Comparator (Uber, Rapido & Ola)
+- **Real-Time Kerala Transit Fares**: Computes calibrated fares based on official Kerala motor vehicle transport meter rates and live distance.
+- **Multi-Platform Comparison**: Compare **Rapido Bike Taxi**, **Uber Moto**, **Uber Auto**, **Rapido Auto**, **Ola Auto**, and **Uber Go (AC Cab)** side-by-side.
+- **Smart Ranking Filters**: Rank transit options by *Lowest Fare* or *Fastest ETA*, or filter directly by *Bikes*, *Autos*, or *Cabs*.
+- **1-Tap Direct App Launch**: Clicking **"Go"** pre-fills the pickup and dropoff coordinates and directly launches the native **Uber** or **Rapido** app on the user's phone via deep link intent schemas.
+
 ---
 
 ## ⚡ Performance & Hardware Telemetry

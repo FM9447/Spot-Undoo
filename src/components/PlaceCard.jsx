@@ -3,6 +3,7 @@ import { Star, MapPin, Clock, IndianRupee, Volume2, VolumeX, Loader2 } from 'luc
 import { roadDistanceKm, getTransit } from '../utils/plannerMath';
 import { playAudioGuide, stopAudioGuide } from '../utils/audioGuide';
 import ImageCarousel from './ImageCarousel';
+import RideComparatorModal from './RideComparatorModal';
 
 const CATEGORY_COLORS = {
   'Hidden Spots': 'bg-emerald-500/20 text-emerald-400',
@@ -15,6 +16,7 @@ const CATEGORY_COLORS = {
 export default function PlaceCard({ place, userLat, userLon }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAudioLoading, setIsAudioLoading] = useState(false);
+  const [showRides, setShowRides] = useState(false);
   const dist = roadDistanceKm(userLat, userLon, place.lat, place.lng);
   const transit = getTransit(dist);
 
@@ -131,15 +133,35 @@ export default function PlaceCard({ place, userLat, userLon }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-1 bg-white/5 rounded-lg px-2 py-1">
-          <span className="text-[10px] text-gray-400">{transit.mode}</span>
-          <span className="text-[10px] text-white ml-auto">
-            {transit.cost === 0 ? '₹0' : `₹${transit.cost}`} · {transit.mins} min
-          </span>
-        </div>
+        {/* Interactive Ride Hailing Comparator (Uber, Rapido, Auto) */}
+        <button
+          type="button"
+          onClick={() => setShowRides(true)}
+          className="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 active:bg-white/15 rounded-xl px-2.5 py-1.5 transition border border-white/10 group cursor-pointer"
+          title="Compare Uber, Rapido, and Auto fares"
+        >
+          <div className="flex items-center gap-1.5 text-xs">
+            <span className="text-xs">🛺</span>
+            <span className="font-semibold text-white group-hover:text-[#FFE500] transition">Compare Rides</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
+            <span>{transit.mode} {transit.cost === 0 ? 'Free' : `₹${transit.cost}`}</span>
+            <span className="text-gray-400">· {transit.mins}m</span>
+            <span className="text-[#FFE500] text-xs font-bold">→</span>
+          </div>
+        </button>
 
         <p className="text-[11px] text-gray-400 italic leading-snug line-clamp-2">"{place.review}"</p>
       </div>
+
+      {/* Ride Comparison Modal */}
+      <RideComparatorModal
+        isOpen={showRides}
+        onClose={() => setShowRides(false)}
+        destination={place}
+        userLat={userLat}
+        userLon={userLon}
+      />
     </div>
   );
 }
