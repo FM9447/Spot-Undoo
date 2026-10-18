@@ -67,21 +67,42 @@ export default function PlannerTab({ location, settings }) {
       return (planList || []).map((p) => {
         const stopSeen = new Set();
         let runningCost = 0;
-        const cleanStops = (p.stops || []).filter((s) => {
+        let cleanStops = (p.stops || []).filter((s) => {
           const raw = (s.name || s.location || '').toLowerCase();
-          // Strip bracketed text and special chars to detect root duplicate
-          const k = raw.replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
-          if (!k || stopSeen.has(k)) return false;
+          const clean = raw
+            .replace(/^(return\s+to|back\s+to|heading\s+back\s+to|reach\s+back\s+to)\s+/i, '')
+            .replace(/\(.*?\)/g, '')
+            .replace(/[^a-z0-9]/g, '');
+          if (!clean || stopSeen.has(clean)) return false;
           // Substring duplicate detection for variations
           for (const existing of stopSeen) {
-            if (existing.length >= 6 && (k.includes(existing) || existing.includes(k))) {
+            if (existing.length >= 5 && (clean.includes(existing) || existing.includes(clean))) {
               return false;
             }
           }
-          stopSeen.add(k);
+          stopSeen.add(clean);
           runningCost += (s.fare || 0) + (s.expense || 0);
           return true;
         });
+
+        // Eliminate duplicate start & end or return leg
+        if (cleanStops.length > 1) {
+          const firstK = (cleanStops[0].name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+          const lastK = (cleanStops[cleanStops.length - 1].name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+          const lastRaw = (cleanStops[cleanStops.length - 1].name || '').toLowerCase();
+          if (
+            lastK === firstK ||
+            (firstK.length >= 6 && lastK.includes(firstK)) ||
+            (lastK.length >= 6 && firstK.includes(lastK)) ||
+            lastRaw.startsWith('return') ||
+            lastRaw.startsWith('back to') ||
+            lastRaw.includes('starting point') ||
+            lastRaw.includes('safe return')
+          ) {
+            cleanStops = cleanStops.slice(0, -1);
+          }
+        }
+
         return {
           ...p,
           stops: cleanStops,
@@ -94,9 +115,10 @@ export default function PlannerTab({ location, settings }) {
       if (candidates.length === 0) throw new Error('No candidates match your filters');
       const prompt = `You are a local Kerala travel planner. Based on these ${candidates.length} filtered spots (already within time and budget), create EXACTLY 3 travel plans as JSON.
 
-STRICT DEDUPLICATION & TIME RULES:
+STRICT DEDUPLICATION & TERMINATION RULES:
 1. NEVER REPEAT ANY PLACE. Every single stop across the ENTIRE itinerary must be a strictly unique location.
-2. DO NOT REPEAT PLACES JUST TO FILL EXTRA TIME OR BUDGET. If the user asked for 5 hours or high budget, but unique matching spots only take 2 or 3 hours, DO NOT add duplicate stops to fill time! Stop the plan once all unique spots are visited. Remaining time is leisure buffer.
+2. DO NOT ADD A RETURN STOP OR REPEAT THE FIRST SPOT AT THE END. The itinerary terminates at the final unique attraction. Do NOT append 'Return to [Start]', 'Back to [Start]', or any final leg that duplicates earlier spots.
+3. DO NOT REPEAT PLACES JUST TO FILL EXTRA TIME OR BUDGET. If the user asked for 5 hours or high budget, but unique matching spots only take 2 or 3 hours, DO NOT add duplicate stops to fill time! Stop the plan once all unique spots are visited. Remaining time is leisure buffer.
 
 User preferences: Mode=${mode}, Time=${timeHrs}hrs (usable=${usableTimeMins}min), Budget=₹${budget}, Moods=${[...moods, customMood].filter(Boolean).join(', ')}
 

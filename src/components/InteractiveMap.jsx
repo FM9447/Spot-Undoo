@@ -278,7 +278,7 @@ export default function InteractiveMap({
                   ${idx + 1}
                 </div>
                 <div style="width: 26px; height: 18px; border-radius: 5px; overflow: hidden; border: 1px solid #000; margin-top: 4px; background: #f1f5f9;">
-                  <img src="${spotPhoto}" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <img src="${spotPhoto}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=300&q=80';" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
               </div>
               <div style="width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid #000000; margin-top: -1px;"></div>
@@ -328,7 +328,7 @@ export default function InteractiveMap({
                   ${idx + 1}
                 </div>
                 <div style="width: 42px; height: 30px; border-radius: 6px; overflow: hidden; border: 1px solid #000; margin-top: 4px; background: #f1f5f9;">
-                  <img src="${spotPhoto}" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <img src="${spotPhoto}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=300&q=80';" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
                 <div style="width: 100%; text-align: center; margin-top: 1px; line-height: 1.1; padding: 0 1px;">
                   <div style="font-size: 7px; font-weight: 900; color: #000; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
@@ -386,7 +386,7 @@ export default function InteractiveMap({
                   ${idx + 1}
                 </div>
                 <div style="width: 58px; height: 44px; border-radius: 8px; overflow: hidden; border: 1.5px solid #000; margin-top: 5px; background: #f1f5f9;">
-                  <img src="${spotPhoto}" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <img src="${spotPhoto}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=300&q=80';" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
                 <div style="width: 100%; text-align: center; margin-top: 2px; line-height: 1.15; padding: 0 1px;">
                   <div style="font-size: 8px; font-weight: 900; color: #000; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
@@ -564,8 +564,8 @@ export default function InteractiveMap({
         <span className="text-red-600">N</span>
       </div>
 
-      {/* Floating GPS and Recenter Buttons */}
-      <div className="absolute bottom-4 right-4 z-[400] flex items-center gap-2">
+      {/* Floating GPS and Recenter Buttons (Lifted above mobile bottom navigation) */}
+      <div className="absolute bottom-20 right-3.5 z-[400] flex items-center gap-2">
         <button
           type="button"
           onClick={handleLocateGPS}

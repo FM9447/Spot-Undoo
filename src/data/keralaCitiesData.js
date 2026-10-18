@@ -200,9 +200,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Pattambi Station",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
+        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
         ],
         "review": "Quiet sandy riverbank stretch with gentle river breeze and stunning sunset hues over Bharathapuzha.",
         "tags": [
@@ -227,9 +227,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 10m • Free",
         "returnText": "Back to Pattambi Station",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Pattambi_Nercha_Festival.jpg/960px-Pattambi_Nercha_Festival.jpg",
+        "photo": "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800&q=80",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Pattambi_Nercha_Festival.jpg/960px-Pattambi_Nercha_Festival.jpg"
+          "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800&q=80"
         ],
         "review": "Historic site of the renowned annual Pattambi Nercha festival featuring rich cultural traditions and elephant pageants.",
         "tags": [

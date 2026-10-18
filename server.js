@@ -806,16 +806,44 @@ app.post('/api/ai/plan', async (req, res) => {
           const data = await groqRes.json();
           const rawContent = data.choices?.[0]?.message?.content || '{}';
           const parsed = JSON.parse(rawContent);
-          // Strict server-side stop deduplication: never allow repeat visits in any plan
+          // Strict server-side stop deduplication: never allow repeat visits or return duplicates in any plan
           if (Array.isArray(parsed?.plans)) {
             parsed.plans = parsed.plans.map((p) => {
               const seen = new Set();
-              const uniqueStops = (p.stops || []).filter((s) => {
-                const k = (s.name || s.location || '').toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
-                if (!k || seen.has(k)) return false;
-                seen.add(k);
+              let uniqueStops = (p.stops || []).filter((s) => {
+                const raw = (s.name || s.location || '').toLowerCase();
+                const clean = raw
+                  .replace(/^(return\s+to|back\s+to|heading\s+back\s+to|reach\s+back\s+to)\s+/i, '')
+                  .replace(/\(.*?\)/g, '')
+                  .replace(/[^a-z0-9]/g, '');
+                if (!clean || seen.has(clean)) return false;
+                for (const existing of seen) {
+                  if (existing.length >= 5 && (clean.includes(existing) || existing.includes(clean))) {
+                    return false;
+                  }
+                }
+                seen.add(clean);
                 return true;
               });
+
+              // Eliminate duplicate start & end or return leg
+              if (uniqueStops.length > 1) {
+                const firstK = (uniqueStops[0].name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                const lastK = (uniqueStops[uniqueStops.length - 1].name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                const lastRaw = (uniqueStops[uniqueStops.length - 1].name || '').toLowerCase();
+                if (
+                  lastK === firstK ||
+                  (firstK.length >= 6 && lastK.includes(firstK)) ||
+                  (lastK.length >= 6 && firstK.includes(lastK)) ||
+                  lastRaw.startsWith('return') ||
+                  lastRaw.startsWith('back to') ||
+                  lastRaw.includes('starting point') ||
+                  lastRaw.includes('safe return')
+                ) {
+                  uniqueStops.pop();
+                }
+              }
+
               return { ...p, stops: uniqueStops };
             });
           }
@@ -830,18 +858,46 @@ app.post('/api/ai/plan', async (req, res) => {
     // 2. Fallback to Google Gemini Flash
     if (process.env.GEMINI_API_KEY) {
       try {
-        const geminiPrompt = `${prompt}\n\nIMPORTANT: Return ONLY valid JSON with key "plans". Do not repeat any stop.`;
+        const geminiPrompt = `${prompt}\n\nIMPORTANT: Return ONLY valid JSON with key "plans". Do not repeat any stop. Do not add a return stop to the starting spot.`;
         const rawText = await callGeminiFlash(geminiPrompt, 'application/json');
         const parsed = JSON.parse(rawText);
         if (Array.isArray(parsed?.plans)) {
           parsed.plans = parsed.plans.map((p) => {
             const seen = new Set();
-            const uniqueStops = (p.stops || []).filter((s) => {
-              const k = (s.name || s.location || '').toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
-              if (!k || seen.has(k)) return false;
-              seen.add(k);
+            let uniqueStops = (p.stops || []).filter((s) => {
+              const raw = (s.name || s.location || '').toLowerCase();
+              const clean = raw
+                .replace(/^(return\s+to|back\s+to|heading\s+back\s+to|reach\s+back\s+to)\s+/i, '')
+                .replace(/\(.*?\)/g, '')
+                .replace(/[^a-z0-9]/g, '');
+              if (!clean || seen.has(clean)) return false;
+              for (const existing of seen) {
+                if (existing.length >= 5 && (clean.includes(existing) || existing.includes(clean))) {
+                  return false;
+                }
+              }
+              seen.add(clean);
               return true;
             });
+
+            // Eliminate duplicate start & end or return leg
+            if (uniqueStops.length > 1) {
+              const firstK = (uniqueStops[0].name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+              const lastK = (uniqueStops[uniqueStops.length - 1].name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+              const lastRaw = (uniqueStops[uniqueStops.length - 1].name || '').toLowerCase();
+              if (
+                lastK === firstK ||
+                (firstK.length >= 6 && lastK.includes(firstK)) ||
+                (lastK.length >= 6 && firstK.includes(lastK)) ||
+                lastRaw.startsWith('return') ||
+                lastRaw.startsWith('back to') ||
+                lastRaw.includes('starting point') ||
+                lastRaw.includes('safe return')
+              ) {
+                uniqueStops.pop();
+              }
+            }
+
             return { ...p, stops: uniqueStops };
           });
         }

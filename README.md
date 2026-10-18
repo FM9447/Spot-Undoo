@@ -86,25 +86,22 @@ Whether you have a 45-minute train layover at **Shoranur Junction**, an evening 
 - **Content Security Policy (CSP)**: Strict origins (`accounts.google.com`, `*.firebaseapp.com`, `openstreetmap.org`, `wikimedia.org`) with `nosniff` and `SAMEORIGIN` clickjacking protection.
 - **APK Release Obfuscation**: Android R8 / ProGuard code minification and resource shrinking enabled in `android/app/build.gradle` and `proguard-rules.pro`.
 
-### 4. 📍 Smart Location Engine & Google Maps Link Parser
+### 4. 📍 Smart Location Engine & 100m Proximity Guard
 - **Instant Coordinate Extraction**: Paste any Google Maps URL (including short links like `maps.app.goo.gl`, `@lat,lng`, `!3dlat!4dlng`, or `query=lat,lng`) to automatically extract coordinates and place titles.
 - **Auto-Fill Live GPS**: One-tap acquisition of live device coordinates, automatically generating a valid Google Maps search URL and detecting the nearest regional hub and landmark area.
-- **Duplication Safeguard**: Automatically warns when a spot is already recorded within a 100-meter radius.
+- **100-Meter Proximity Verification**: Interactive proximity safeguard that detects if a spot already exists within 100 meters, displaying a rich place preview popup with ratings, photos, and reviews to confirm before adding.
 
-### 5. 🎨 Dual Exploration Canvas & Neo-Brutalist Design
+### 5. 🎨 Dual Exploration Canvas & Neo-Brutalist Map Engine
 - **Neo-Brutalist Adventure Canvas**: Stylized, high-contrast river-road trail mapping each stop with duration chips and transit pills.
-- **Interactive OpenStreetMap Canvas**: Full GIS map with automatic zoom-centering, custom marker pins, and live GPS alignment.
-- **Dynamic Multi-Screen Layout**: Fluid responsive design that scales seamlessly from Android & iOS smartphones up to ultra-wide desktop displays with a centered Neo-brutalist navigation bar.
+- **High-Performance 60fps OpenStreetMap Canvas**: Full GIS map with dynamic multi-level zoom photo markers, viewport culling, and zero map lag.
+- **Avada Map Themes**: On-the-fly map switching between Standard OSM, Dark Mode, High-Contrast Neo-Brutalist, and Voyager.
+- **Verified Authentic Photography**: Contextual, high-resolution photography with automatic `onerror` CDN fallbacks so no spot ever shows broken icons or mismatched waterfalls.
 
-### 6. 🍃 MongoDB Atlas Cloud & Firebase Auth/Storage
-- **Authentication**: Seamless Google Sign-In, Firebase Anonymous test access, and bcrypt password hashing.
+### 6. 🍃 MongoDB Atlas Cloud & Native Google Auth
+- **Native Android Google Sign-In**: Powered by `@codetrix-studio/capacitor-google-auth` for seamless one-tap native account selection on Android without opening external browser windows.
 - **Community Hidden Spots**: Travelers can contribute new gems directly from their phone with photo uploads stored on Firebase Storage.
 - **Real-Time Ratings & Reviews**: Synced directly to a MongoDB Atlas cloud cluster.
 - **Saved Plan History**: Retrieve previously generated itineraries with a single tap.
-
-### 7. 📱 Android Native APK & PWA (Zero-Config Mobile LAN Access)
-- Full Capacitor-powered Android native build (`SpotUndoo-v1.0.apk`) and Progressive Web App (PWA).
-- Host backend & AI on a laptop; connect from any Android or iPhone on the same Wi-Fi network with dynamic backend network routing.
 
 ### 7. 🛺 Multimodal Ride Hailing Comparator (Uber, Rapido & Ola)
 - **Real-Time Kerala Transit Fares**: Computes calibrated fares based on official Kerala motor vehicle transport meter rates and live distance.
