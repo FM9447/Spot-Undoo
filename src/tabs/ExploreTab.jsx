@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Search, MapPin, Navigation2, Star, Bookmark, MessageSquare, X, Compass, ExternalLink, Globe, ChevronDown, Navigation, Check, Bell } from 'lucide-react';
 import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { haversineKm } from '../utils/plannerMath';
@@ -7,7 +7,7 @@ import ImageCarousel from '../components/ImageCarousel';
 import { getBackendUrl } from '../utils/apiConfig';
 
 const CATEGORIES = ['All Spots', '💎 Hidden Spots', 'Food', 'Gaming & Chill', 'Night'];
-const CITIES_LIST = ['Your Location', 'All Cities', 'Shoranur', 'Kochi', 'Calicut', 'Palakkad', 'Trivandrum', 'Kollam', 'Wayanad'];
+const CITIES_LIST = ['Your Location', 'All Cities', 'Shoranur', 'Pattambi', 'Kochi', 'Calicut', 'Palakkad', 'Trivandrum', 'Kollam', 'Wayanad'];
 
 const TRAIL_DOODLES = [
   { icon: '🌴', title: 'Coastal Palms', desc: 'Arabian Sea Breeze', tag: 'COASTAL' },
@@ -40,124 +40,145 @@ export default function ExploreTab({ location, setLocation }) {
   const [trailDimensions, setTrailDimensions] = useState({ width: 360, height: 600 });
   const [canvasTheme, setCanvasTheme] = useState('river'); // 'river' | 'road' | 'pinboard'
 
-  // Merge all spots across all cities + user uploaded spots
-  const userSpots = JSON.parse(localStorage.getItem('userSpots') || '[]');
-  const allCitySpots = Object.entries(KERALA_CITIES).flatMap(([key, city]) =>
-    city.spots.map((s) => ({ ...s, cityKey: key, cityName: city.name }))
-  );
-  const allSpots = [...allCitySpots, ...userSpots];
+  // Merge all spots across all cities + user uploaded spots (memoized to eliminate lag)
+  const allSpots = useMemo(() => {
+    let userSpots = [];
+    try {
+      userSpots = JSON.parse(localStorage.getItem('userSpots') || '[]');
+    } catch {}
+    const allCitySpots = Object.entries(KERALA_CITIES).flatMap(([key, city]) =>
+      (city.spots || []).map((s) => ({ ...s, cityKey: key, cityName: city.name }))
+    );
+    return [...allCitySpots, ...userSpots];
+  }, []);
 
-  // Filtering: strict category & city matches, plus search query
-  const filteredSpots = allSpots.filter((spot) => {
+  // Filtering: strict category & city matches, plus search query & instant distance caching
+  const filteredSpots = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
-    const matchesSearch =
-      !q ||
-      spot.name.toLowerCase().includes(q) ||
-      (spot.category || '').toLowerCase().includes(q) ||
-      (spot.badge || '').toLowerCase().includes(q) ||
-      (spot.cityName || '').toLowerCase().includes(q) ||
-      (spot.cityKey || '').toLowerCase().includes(q) ||
-      (spot.area || '').toLowerCase().includes(q) ||
-      (spot.review || '').toLowerCase().includes(q) ||
-      (spot.tags || []).some((t) => t.toLowerCase().includes(q));
-
-    const cityKeyLower = (spot.cityKey || '').toLowerCase();
-    const cityNameLower = (spot.cityName || '').toLowerCase();
-    const areaLower = (spot.area || '').toLowerCase();
-    const spotNameLower = (spot.name || '').toLowerCase();
     const filterLower = selectedCityFilter.toLowerCase();
 
-    let matchesCity = selectedCityFilter === 'All Cities' || selectedCityFilter === 'Your Location';
-    if (!matchesCity) {
-      if (filterLower === 'kochi') {
-        matchesCity =
-          cityKeyLower.includes('kochi') ||
-          cityNameLower.includes('kochi') ||
-          cityKeyLower.includes('ernakulam') ||
-          cityNameLower.includes('ernakulam') ||
-          areaLower.includes('kochi') ||
-          areaLower.includes('ernakulam') ||
-          spotNameLower.includes('kochi') ||
-          spotNameLower.includes('ernakulam') ||
-          spotNameLower.includes('mattancherry');
-      } else if (filterLower === 'calicut') {
-        matchesCity =
-          cityKeyLower.includes('calicut') ||
-          cityNameLower.includes('calicut') ||
-          cityKeyLower.includes('kozhikode') ||
-          cityNameLower.includes('kozhikode') ||
-          areaLower.includes('calicut') ||
-          areaLower.includes('kozhikode') ||
-          spotNameLower.includes('calicut') ||
-          spotNameLower.includes('kozhikode');
-      } else if (filterLower === 'trivandrum') {
-        matchesCity =
-          cityKeyLower.includes('trivandrum') ||
-          cityNameLower.includes('trivandrum') ||
-          cityKeyLower.includes('thiruvananthapuram') ||
-          cityNameLower.includes('thiruvananthapuram') ||
-          areaLower.includes('trivandrum') ||
-          areaLower.includes('thiruvananthapuram') ||
-          spotNameLower.includes('trivandrum') ||
-          spotNameLower.includes('thiruvananthapuram');
-      } else if (filterLower === 'palakkad') {
-        matchesCity =
-          cityKeyLower.includes('palakkad') ||
-          cityNameLower.includes('palakkad') ||
-          cityKeyLower.includes('olavakkode') ||
-          cityNameLower.includes('olavakkode') ||
-          areaLower.includes('palakkad') ||
-          areaLower.includes('olavakkode');
-      } else if (filterLower === 'shoranur') {
-        matchesCity =
-          cityKeyLower.includes('shoranur') ||
-          cityNameLower.includes('shoranur') ||
-          areaLower.includes('shoranur') ||
-          spotNameLower.includes('shoranur') ||
-          areaLower.includes('bharathapuzha');
-      } else if (filterLower === 'kollam') {
-        matchesCity =
-          cityKeyLower.includes('kollam') ||
-          cityNameLower.includes('kollam') ||
-          cityKeyLower.includes('quilon') ||
-          cityNameLower.includes('quilon') ||
-          areaLower.includes('kollam') ||
-          areaLower.includes('quilon');
-      } else if (filterLower === 'wayanad') {
-        matchesCity =
-          cityKeyLower.includes('wayanad') ||
-          cityNameLower.includes('wayanad') ||
-          cityKeyLower.includes('kalpetta') ||
-          cityNameLower.includes('kalpetta') ||
-          areaLower.includes('wayanad') ||
-          areaLower.includes('kalpetta');
-      } else {
-        matchesCity =
-          cityKeyLower.includes(filterLower) ||
-          cityNameLower.includes(filterLower) ||
-          areaLower.includes(filterLower);
+    const list = allSpots.filter((spot) => {
+      const matchesSearch =
+        !q ||
+        spot.name.toLowerCase().includes(q) ||
+        (spot.category || '').toLowerCase().includes(q) ||
+        (spot.badge || '').toLowerCase().includes(q) ||
+        (spot.cityName || '').toLowerCase().includes(q) ||
+        (spot.cityKey || '').toLowerCase().includes(q) ||
+        (spot.area || '').toLowerCase().includes(q) ||
+        (spot.review || '').toLowerCase().includes(q) ||
+        (spot.tags || []).some((t) => t.toLowerCase().includes(q));
+
+      const cityKeyLower = (spot.cityKey || '').toLowerCase();
+      const cityNameLower = (spot.cityName || '').toLowerCase();
+      const areaLower = (spot.area || '').toLowerCase();
+      const spotNameLower = (spot.name || '').toLowerCase();
+
+      let matchesCity = selectedCityFilter === 'All Cities' || selectedCityFilter === 'Your Location';
+      if (!matchesCity) {
+        if (filterLower === 'pattambi') {
+          matchesCity =
+            cityKeyLower.includes('pattambi') ||
+            cityNameLower.includes('pattambi') ||
+            areaLower.includes('pattambi') ||
+            spotNameLower.includes('pattambi') ||
+            spotNameLower.includes('rayiranellur') ||
+            spotNameLower.includes('ongallur');
+        } else if (filterLower === 'kochi') {
+          matchesCity =
+            cityKeyLower.includes('kochi') ||
+            cityNameLower.includes('kochi') ||
+            cityKeyLower.includes('ernakulam') ||
+            cityNameLower.includes('ernakulam') ||
+            areaLower.includes('kochi') ||
+            areaLower.includes('ernakulam') ||
+            spotNameLower.includes('kochi') ||
+            spotNameLower.includes('ernakulam') ||
+            spotNameLower.includes('mattancherry');
+        } else if (filterLower === 'calicut') {
+          matchesCity =
+            cityKeyLower.includes('calicut') ||
+            cityNameLower.includes('calicut') ||
+            cityKeyLower.includes('kozhikode') ||
+            cityNameLower.includes('kozhikode') ||
+            areaLower.includes('calicut') ||
+            areaLower.includes('kozhikode') ||
+            spotNameLower.includes('calicut') ||
+            spotNameLower.includes('kozhikode');
+        } else if (filterLower === 'trivandrum') {
+          matchesCity =
+            cityKeyLower.includes('trivandrum') ||
+            cityNameLower.includes('trivandrum') ||
+            cityKeyLower.includes('thiruvananthapuram') ||
+            cityNameLower.includes('thiruvananthapuram') ||
+            areaLower.includes('trivandrum') ||
+            areaLower.includes('thiruvananthapuram') ||
+            spotNameLower.includes('trivandrum') ||
+            spotNameLower.includes('thiruvananthapuram');
+        } else if (filterLower === 'palakkad') {
+          matchesCity =
+            cityKeyLower.includes('palakkad') ||
+            cityNameLower.includes('palakkad') ||
+            cityKeyLower.includes('olavakkode') ||
+            cityNameLower.includes('olavakkode') ||
+            areaLower.includes('palakkad') ||
+            areaLower.includes('olavakkode');
+        } else if (filterLower === 'shoranur') {
+          matchesCity =
+            cityKeyLower.includes('shoranur') ||
+            cityNameLower.includes('shoranur') ||
+            areaLower.includes('shoranur') ||
+            spotNameLower.includes('shoranur') ||
+            areaLower.includes('bharathapuzha');
+        } else if (filterLower === 'kollam') {
+          matchesCity =
+            cityKeyLower.includes('kollam') ||
+            cityNameLower.includes('kollam') ||
+            cityKeyLower.includes('quilon') ||
+            cityNameLower.includes('quilon') ||
+            areaLower.includes('kollam') ||
+            areaLower.includes('quilon');
+        } else if (filterLower === 'wayanad') {
+          matchesCity =
+            cityKeyLower.includes('wayanad') ||
+            cityNameLower.includes('wayanad') ||
+            cityKeyLower.includes('kalpetta') ||
+            cityNameLower.includes('kalpetta') ||
+            areaLower.includes('wayanad') ||
+            areaLower.includes('kalpetta');
+        } else {
+          matchesCity =
+            cityKeyLower.includes(filterLower) ||
+            cityNameLower.includes(filterLower) ||
+            areaLower.includes(filterLower);
+        }
       }
+
+      const catLower = (spot.category || '').toLowerCase();
+      const matchesCat =
+        activeCategory === 'All Spots' ||
+        (activeCategory === '💎 Hidden Spots' && (catLower.includes('hidden') || catLower.includes('scenic') || catLower.includes('nature'))) ||
+        (activeCategory === 'Food' && (catLower.includes('food') || catLower.includes('cafe') || catLower.includes('restaurant') || catLower.includes('bakery'))) ||
+        (activeCategory === 'Gaming & Chill' && (catLower.includes('gaming') || catLower.includes('chill') || catLower.includes('lan'))) ||
+        (activeCategory === 'Night' && (catLower.includes('night') || catLower.includes('party') || catLower.includes('club') || catLower.includes('pub')));
+
+      return matchesCity && matchesCat && matchesSearch;
+    });
+
+    // Zero-lag single-pass distance sort when Your Location is selected
+    if (selectedCityFilter === 'Your Location' && location?.lat && location?.lon) {
+      const uLat = location.lat;
+      const uLon = location.lon;
+      const withDist = list.map((s) => ({
+        spot: s,
+        dist: s.lat && s.lng ? haversineKm(uLat, uLon, s.lat, s.lng) : 9999,
+      }));
+      withDist.sort((a, b) => a.dist - b.dist);
+      return withDist.map((item) => item.spot);
     }
 
-    const catLower = (spot.category || '').toLowerCase();
-    const matchesCat =
-      activeCategory === 'All Spots' ||
-      (activeCategory === '💎 Hidden Spots' && (catLower.includes('hidden') || catLower.includes('scenic') || catLower.includes('nature'))) ||
-      (activeCategory === 'Food' && (catLower.includes('food') || catLower.includes('cafe') || catLower.includes('restaurant') || catLower.includes('bakery'))) ||
-      (activeCategory === 'Gaming & Chill' && (catLower.includes('gaming') || catLower.includes('chill') || catLower.includes('lan'))) ||
-      (activeCategory === 'Night' && (catLower.includes('night') || catLower.includes('party') || catLower.includes('club') || catLower.includes('pub')));
-
-    return matchesCity && matchesCat && matchesSearch;
-  });
-
-  // Prioritize nearest spots when Your Location is selected
-  if (selectedCityFilter === 'Your Location' && location?.lat && location?.lon) {
-    filteredSpots.sort((a, b) => {
-      const distA = a.lat && a.lng ? haversineKm(location.lat, location.lon, a.lat, a.lng) : 9999;
-      const distB = b.lat && b.lng ? haversineKm(location.lat, location.lon, b.lat, b.lng) : 9999;
-      return distA - distB;
-    });
-  }
+    return list;
+  }, [allSpots, searchQuery, selectedCityFilter, activeCategory, location?.lat, location?.lon]);
 
   // Measure container dimensions for responsive SVG canvas
   const measureCanvas = useCallback(() => {

@@ -40,16 +40,28 @@ export function nearestCityKey(lat, lon) {
 export async function acquireGPS({ onSuccess, onError }) {
   let resolved = false;
 
+  // 0. Instant Cache Hydration: if we have a recent GPS position (< 10 mins), resolve immediately
+  try {
+    const cached = JSON.parse(localStorage.getItem('spot_undoo_cached_gps') || 'null');
+    if (cached && cached.lat && cached.lon && (Date.now() - (cached.time || 0) < 600000)) {
+      onSuccess?.(cached);
+    }
+  } catch {}
+
   const resolve = (lat, lon, label) => {
     if (resolved) return;
     resolved = true;
     const cityKey = nearestCityKey(lat, lon);
     const city = KERALA_CITIES[cityKey];
     const finalLabel = label || (city ? `Near ${city.name}` : 'Live GPS');
-    onSuccess?.({ lat, lon, label: finalLabel, cityKey });
+    const result = { lat, lon, label: finalLabel, cityKey };
+    try {
+      localStorage.setItem('spot_undoo_cached_gps', JSON.stringify({ ...result, time: Date.now() }));
+    } catch {}
+    onSuccess?.(result);
   };
 
-  // 1. Try Native Capacitor Geolocation first (prompts on Android)
+  // 1. Try Native Capacitor Geolocation first (fast 3.5s timeout, allow cached location)
   try {
     const permStatus = await Geolocation.checkPermissions();
     if (permStatus.location !== 'granted') {
@@ -61,8 +73,8 @@ export async function acquireGPS({ onSuccess, onError }) {
 
     const pos = await Geolocation.getCurrentPosition({
       enableHighAccuracy: true,
-      timeout: 8000,
-      maximumAge: 5000,
+      timeout: 3500,
+      maximumAge: 30000,
     });
 
     if (pos && pos.coords) {

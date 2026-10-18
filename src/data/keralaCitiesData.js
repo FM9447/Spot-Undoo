@@ -154,6 +154,154 @@ export const KERALA_CITIES = {
       }
     ]
   },
+  "Pattambi": {
+    "name": "Pattambi",
+    "displayName": "Pattambi Hub (Palakkad)",
+    "state": "Kerala",
+    "district": "Palakkad",
+    "hub": {
+      "name": "Pattambi Station Hub",
+      "stationName": "Pattambi Railway Station (PTB)",
+      "lat": 10.8064,
+      "lng": 76.1884
+    },
+    "spots": [
+      {
+        "id": "ptb-1",
+        "name": "Rayiranellur Mala (Naranath Bhranthan Hill)",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 10.8521,
+        "lng": 76.1542,
+        "expense": 0,
+        "spendTime": 90,
+        "rating": 4.9,
+        "reviewCount": 84,
+        "distanceKm": 6.2,
+        "transitText": "🛺 15m • ₹80",
+        "returnText": "Back to Pattambi Station",
+        "returnCost": 80,
+        "photo": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+        ],
+        "review": "Legendary hilltop of folklore hero Naranath Bhranthan with sweeping views of the Bharathapuzha valley.",
+        "tags": [
+          "Hidden Spots",
+          "Panoramic View",
+          "Heritage",
+          "Verified"
+        ]
+      },
+      {
+        "id": "ptb-2",
+        "name": "Pattambi Nila Riverbank Sunset Point",
+        "category": "Hidden Spots",
+        "badge": "Scenic River",
+        "lat": 10.8032,
+        "lng": 76.1865,
+        "expense": 0,
+        "spendTime": 45,
+        "rating": 4.8,
+        "reviewCount": 62,
+        "distanceKm": 0.7,
+        "transitText": "🚶 8m • Free",
+        "returnText": "Back to Pattambi Station",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80",
+          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+        ],
+        "review": "Quiet sandy riverbank stretch with gentle river breeze and stunning sunset hues over Bharathapuzha.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Riverside",
+          "Verified"
+        ]
+      },
+      {
+        "id": "ptb-3",
+        "name": "Pattambi Nercha Heritage Ground",
+        "category": "Tourist",
+        "badge": "Cultural Heritage",
+        "lat": 10.8095,
+        "lng": 76.1912,
+        "expense": 0,
+        "spendTime": 40,
+        "rating": 4.7,
+        "reviewCount": 95,
+        "distanceKm": 0.9,
+        "transitText": "🚶 10m • Free",
+        "returnText": "Back to Pattambi Station",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
+        ],
+        "review": "Historic site of the renowned annual Pattambi Nercha festival featuring rich cultural traditions and elephant pageants.",
+        "tags": [
+          "Tourist",
+          "Heritage",
+          "Culture"
+        ]
+      },
+      {
+        "id": "ptb-4",
+        "name": "Nila Roadside Chai & Thattukada",
+        "category": "Food",
+        "badge": "Local Food",
+        "lat": 10.8078,
+        "lng": 76.1899,
+        "expense": 40,
+        "spendTime": 25,
+        "rating": 4.7,
+        "reviewCount": 78,
+        "distanceKm": 0.3,
+        "transitText": "🚶 4m • Free",
+        "returnText": "Back to Pattambi Station",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
+        ],
+        "review": "Piping hot kattan chai, fresh crispy banana fritters (pazham pori), and authentic Malabar snacks right near the river bridge.",
+        "tags": [
+          "Food",
+          "Street Food",
+          "Chai & Snack"
+        ]
+      },
+      {
+        "id": "ptb-5",
+        "name": "Ongallur Tali Heritage Temple",
+        "category": "Tourist",
+        "badge": "Ancient Architecture",
+        "lat": 10.8242,
+        "lng": 76.2235,
+        "expense": 0,
+        "spendTime": 50,
+        "rating": 4.8,
+        "reviewCount": 53,
+        "distanceKm": 4.2,
+        "transitText": "🛺 10m • ₹60",
+        "returnText": "Back to Pattambi Station",
+        "returnCost": 60,
+        "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
+        ],
+        "review": "Ancient laterite-stone shrine renowned for intricate wood sculptures and tranquil courtyards.",
+        "tags": [
+          "Tourist",
+          "Architecture",
+          "Ancient"
+        ]
+      }
+    ]
+  },
   "Kochi": {
     "name": "Kochi",
     "displayName": "Kochi / Ernakulam Hub",

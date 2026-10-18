@@ -1,6 +1,9 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 import { MongoClient, ObjectId } from 'mongodb';
 
 const app = express();
@@ -270,6 +273,64 @@ app.get('/api/places', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch places' });
   }
 });
+// Resolve Google Maps links (including short links maps.app.goo.gl and place links)
+app.post('/api/maps/resolve', async (req, res) => {
+  try {
+    const { url } = req.body;
+    if (!url) return res.status(400).json({ error: 'URL required' });
+
+    let finalUrl = url.trim();
+    if (finalUrl.includes('goo.gl') || finalUrl.includes('maps.app.goo.gl')) {
+      try {
+        const resp = await fetch(finalUrl, { method: 'HEAD', redirect: 'follow' });
+        if (resp.url) finalUrl = resp.url;
+      } catch (headErr) {
+        try {
+          const resp = await fetch(finalUrl, { method: 'GET', redirect: 'follow' });
+          if (resp.url) finalUrl = resp.url;
+        } catch {}
+      }
+    }
+
+    let lat = null, lng = null, placeName = null;
+
+    // Pattern 1: @lat,lng
+    const atMatch = finalUrl.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if (atMatch) {
+      lat = parseFloat(atMatch[1]);
+      lng = parseFloat(atMatch[2]);
+    }
+
+    // Pattern 2: !3dlat!4dlng
+    if (!lat) {
+      const dMatch = finalUrl.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+      if (dMatch) {
+        lat = parseFloat(dMatch[1]);
+        lng = parseFloat(dMatch[2]);
+      }
+    }
+
+    // Pattern 3: query=lat,lng or q=lat,lng or ll=lat,lng or search/lat,lng
+    if (!lat) {
+      const qMatch = finalUrl.match(/[?&/](?:query|q|ll|search)[=/](-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
+      if (qMatch) {
+        lat = parseFloat(qMatch[1]);
+        lng = parseFloat(qMatch[2]);
+      }
+    }
+
+    // Extract place name if present in URL
+    const placeMatch = finalUrl.match(/\/place\/([^/@?]+)/);
+    if (placeMatch) {
+      placeName = decodeURIComponent(placeMatch[1].replace(/\+/g, ' '));
+    }
+
+    res.json({ success: true, finalUrl, lat, lng, placeName });
+  } catch (err) {
+    console.error('Maps resolve error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // ElevenLabs Audio Guide Text-to-Speech
 app.post('/api/audio/tts', async (req, res) => {
@@ -432,11 +493,6 @@ app.get('/api/health', (req, res) => {
     time: new Date()
   });
 });
-
-// Serve frontend static build if dist directory exists
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -5,6 +5,7 @@ import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { getBackendUrl, getGroqApiKey } from '../utils/apiConfig';
 import { uploadImageToFirebase } from '../utils/firebaseStorage';
 import { haversineKm } from '../utils/plannerMath';
+import { nearestCityKey, acquireGPS } from '../utils/gps';
 
 const CATEGORIES = [
   { id: 'Hidden', label: '💎 Hidden' },
@@ -188,34 +189,88 @@ CRITICAL RULES:
     setGeneratingText(false);
   };
 
+  // Universal coordinate applier: syncs lat, lng, map link, and nearest Kerala city/area
+  const applyCoordinates = (newLat, newLng, placeTitle = '', updateMapLink = true) => {
+    const parsedLat = parseFloat(newLat);
+    const parsedLng = parseFloat(newLng);
+    if (isNaN(parsedLat) || isNaN(parsedLng)) return;
+
+    const roundedLat = Number(parsedLat.toFixed(5));
+    const roundedLng = Number(parsedLng.toFixed(5));
+    setLat(roundedLat);
+    setLng(roundedLng);
+
+    if (updateMapLink) {
+      setMapsLink(`https://www.google.com/maps/search/?api=1&query=${roundedLat},${roundedLng}`);
+    }
+
+    if (placeTitle && !spotName.trim()) {
+      setSpotName(placeTitle);
+    }
+
+    const cKey = nearestCityKey(roundedLat, roundedLng);
+    if (cKey && KERALA_CITIES[cKey]) {
+      setSelectedCityKey(cKey);
+      if (!specificArea || specificArea === 'Shoranur, Palakkad' || specificArea.includes(',')) {
+        setSpecificArea(KERALA_CITIES[cKey].displayName);
+      }
+    }
+  };
+
   // Maps link or coordinates parser
-  const handleMapsLinkChange = (val) => {
+  const handleMapsLinkChange = async (val) => {
     setMapsLink(val);
     setDuplicateError('');
-    if (!val.trim()) return;
+    if (!val || !val.trim()) return;
+
+    const trimmed = val.trim();
 
     // Pattern 1: Google Maps /@10.0234,76.3214
-    const atMatch = val.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    const atMatch = trimmed.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
     if (atMatch) {
-      setLat(parseFloat(atMatch[1]));
-      setLng(parseFloat(atMatch[2]));
+      applyCoordinates(parseFloat(atMatch[1]), parseFloat(atMatch[2]), '', false);
       return;
     }
 
-    // Pattern 2: q=10.0234,76.3214 or ll=10.0234,76.3214
-    const qMatch = val.match(/[?&](?:q|ll)=(-?\d+\.\d+),(-?\d+\.\d+)/);
+    // Pattern 2: !3d10.0234!4d76.3214
+    const dMatch = trimmed.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+    if (dMatch) {
+      applyCoordinates(parseFloat(dMatch[1]), parseFloat(dMatch[2]), '', false);
+      return;
+    }
+
+    // Pattern 3: query=10.0234,76.3214 or q=10.0234,76.3214 or search/10.0234,76.3214
+    const qMatch = trimmed.match(/[?&/](?:query|q|ll|search)[=/](-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
     if (qMatch) {
-      setLat(parseFloat(qMatch[1]));
-      setLng(parseFloat(qMatch[2]));
+      applyCoordinates(parseFloat(qMatch[1]), parseFloat(qMatch[2]), '', false);
       return;
     }
 
-    // Pattern 3: raw "10.0234, 76.3214"
-    const rawMatch = val.match(/(-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
-    if (rawMatch) {
-      setLat(parseFloat(rawMatch[1]));
-      setLng(parseFloat(rawMatch[2]));
+    // Pattern 4: raw coordinates "10.0234, 76.3214"
+    const rawMatch = trimmed.match(/(-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
+    if (rawMatch && !trimmed.includes('http')) {
+      applyCoordinates(parseFloat(rawMatch[1]), parseFloat(rawMatch[2]), '', false);
       return;
+    }
+
+    // Pattern 5: URL resolution via backend for short links (maps.app.goo.gl, goo.gl, etc.)
+    if (trimmed.includes('http') || trimmed.includes('goo.gl') || trimmed.includes('maps')) {
+      try {
+        const backendUrl = getBackendUrl();
+        const res = await fetch(`${backendUrl}/api/maps/resolve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: trimmed }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.lat && data.lng) {
+            applyCoordinates(data.lat, data.lng, data.placeName || '', false);
+          }
+        }
+      } catch (err) {
+        console.warn('Backend maps resolve failed:', err);
+      }
     }
   };
 
@@ -273,15 +328,12 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
     if (files.length === 0) return;
 
     // Auto-acquire current GPS location when photo is added
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setLat(Number(pos.coords.latitude.toFixed(5)));
-          setLng(Number(pos.coords.longitude.toFixed(5)));
-        },
-        () => {}
-      );
-    }
+    acquireGPS({
+      onSuccess: (pos) => {
+        applyCoordinates(pos.lat, pos.lon, '', true);
+      },
+      onError: () => {}
+    });
 
     const newPhotos = files.map((file) => ({
       url: URL.createObjectURL(file),
@@ -742,15 +794,12 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
             <button
               type="button"
               onClick={() => {
-                if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                      setLat(Number(pos.coords.latitude.toFixed(5)));
-                      setLng(Number(pos.coords.longitude.toFixed(5)));
-                    },
-                    () => alert('GPS access denied')
-                  );
-                }
+                acquireGPS({
+                  onSuccess: (pos) => {
+                    applyCoordinates(pos.lat, pos.lon, '', true);
+                  },
+                  onError: (err) => alert(err?.message || 'GPS access denied')
+                });
               }}
               className="text-[10px] font-black text-[#0B3BF4] hover:underline flex items-center gap-0.5 cursor-pointer"
             >

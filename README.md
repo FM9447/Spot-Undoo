@@ -69,9 +69,12 @@ Whether you have a 45-minute train layover at **Shoranur Junction**, an evening 
   - **Plan 2 (Ultra-Budget Saver)**: Prioritizes low-cost or free public spots and walking routes.
   - **Plan 3 (Hidden Gem Route)**: Focuses on heritage, off-beat trails, and local artisan spots.
 
-### 2. 🗺️ 7 Curated Kerala Hubs & 70 Verified Spots
+  - **Plan 3 (Hidden Gem Route)**: Focuses on heritage, off-beat trails, and local artisan spots.
+
+### 2. 🗺️ 8 Curated Kerala Hubs & 75+ Verified Spots
 - Comprehensive datasets with authentic photography, coordinate bounds, expense ratings, and local reviews across:
   - 🚆 **Shoranur Jn Hub** (Major railway junction & river basin)
+  - 🌾 **Pattambi Hub** (Rayiranellur Mala, Nila Riverbank, Nercha Ground, Ongallur Tali Temple)
   - 🌊 **Kochi / Ernakulam** (Fort Kochi alleys, Water Metro, Mattancherry)
   - 🍲 **Calicut / Kozhikode** (SM Street, Paragon, Beach food stalls)
   - 🏰 **Palakkad Town** (Fort, Malampuzha, Kava)
@@ -79,19 +82,24 @@ Whether you have a 45-minute train layover at **Shoranur Junction**, an evening 
   - ⚓ **Kollam Jn** (Ashtamudi Lake, Munroe Island, Thangassery)
   - ⛰️ **Wayanad / Kalpetta** (Tea estates, Chembra, Edakkal)
 
-### 3. 🎨 Dual Exploration Canvas
-- **Neo-Brutalist Adventure Canvas**: Stylized, playful river-road trail mapping each stop with duration chips and transit pills.
-- **Interactive OpenStreetMap Canvas**: Full Leaflet-powered GIS map with automatic zoom-centering, custom marker pins, and live GPS alignment.
+### 3. 📍 Smart Location Engine & Google Maps Link Parser
+- **Instant Coordinate Extraction**: Paste any Google Maps URL (including short links like `maps.app.goo.gl`, `@lat,lng`, `!3dlat!4dlng`, or `query=lat,lng`) to automatically extract coordinates and place titles.
+- **Auto-Fill Live GPS**: One-tap acquisition of live device coordinates, automatically generating a valid Google Maps search URL and detecting the nearest regional hub and landmark area.
+- **Duplication Safeguard**: Automatically warns when a spot is already recorded within a 100-meter radius.
 
-### 4. 🍃 MongoDB Atlas Cloud Integration
-- **Community Hidden Spots**: Travelers can contribute new gems directly from their phone.
+### 4. 🎨 Dual Exploration Canvas & Neo-Brutalist Design
+- **Neo-Brutalist Adventure Canvas**: Stylized, high-contrast river-road trail mapping each stop with duration chips and transit pills.
+- **Interactive OpenStreetMap Canvas**: Full GIS map with automatic zoom-centering, custom marker pins, and live GPS alignment.
+- **Dynamic Multi-Screen Layout**: Fluid responsive design that scales seamlessly from Android & iOS smartphones up to ultra-wide desktop displays with a centered Neo-brutalist navigation bar.
+
+### 5. 🍃 MongoDB Atlas Cloud & Firebase Storage
+- **Community Hidden Spots**: Travelers can contribute new gems directly from their phone with photo uploads stored on Firebase Storage.
 - **Real-Time Ratings & Reviews**: Synced directly to a MongoDB Atlas cloud cluster.
 - **Saved Plan History**: Retrieve previously generated itineraries with a single tap.
 
-### 5. 📱 Android & iOS PWA (Zero-Config Mobile LAN Access)
-- Full Progressive Web App (PWA) manifest with standalone display mode.
-- Host backend & AI on a laptop; connect from any Android or iPhone on the same Wi-Fi network at `http://<laptop-ip>:5173`.
-- Dynamic backend network routing automatically resolves the host laptop IP without hardcoding.
+### 6. 📱 Android Native APK & PWA (Zero-Config Mobile LAN Access)
+- Full Capacitor-powered Android native build (`SpotUndoo-v1.0.apk`) and Progressive Web App (PWA).
+- Host backend & AI on a laptop; connect from any Android or iPhone on the same Wi-Fi network with dynamic backend network routing.
 
 ---
 
@@ -259,6 +267,50 @@ The repository includes a complete training pipeline under the `training/` direc
   - Enable local auto-rickshaw drivers and homestay hosts to curate custom tourist trails and monetize them via micro-payments (UPI QR codes).
 - [ ] **Peer-to-Peer Mesh Sync (BLE / Wi-Fi Direct)**:
   - Enable backpackers without mobile signal in deep forest trails (Wayanad, Silent Valley) to sync spots and reviews peer-to-peer.
+
+---
+
+---
+
+## 🎃 Hacktoberfest 2026 & Open Source Guidelines
+
+Spot-Undoo is an official **Hacktoberfest 2026** open-source repository! We welcome first-time contributors, Kerala local explorers, designers, and systems developers.
+
+- **Topic Tags**: `hacktoberfest`, `kerala`, `edge-ai`, `qwen`, `mongodb-atlas`, `react`, `tailwind`, `capacitor`
+- **Good First Issues**:
+  - Adding authentic local spots, tea stalls, and hidden viewpoints for your district.
+  - Expanding multi-language translation and Malayalam UI support.
+  - Writing automated Vitest test cases for Haversine transit computations and Google Maps link parsing.
+
+### Contribution Workflow:
+1. Fork the repository on GitHub.
+2. Create your branch (`git checkout -b feature/kerala-gem-pattambi`).
+3. Commit with clean, concise messages following Conventional Commits (`feat: add Ongallur Tali Heritage Temple`).
+4. Ensure `npm run build` passes with zero errors.
+5. Submit your Pull Request with the `hacktoberfest-accepted` label.
+
+---
+
+## 🏆 Major League Hacking (MLH) Hackathon Submission
+
+Spot-Undoo is architected and entered for **MLH Hackathons** and developer tracks:
+
+| Track / Sponsor | Technology Utilized in Spot-Undoo |
+| :--- | :--- |
+| **Best Use of MongoDB Atlas** | Cloud cluster storage for community hidden spots, user-submitted reviews, and persisted itinerary history. |
+| **Edge AI & Open Source Models** | Local on-device Qwen 2.5:3B LLM inference via Ollama (`spot-undo-qwen`) with zero per-token cloud costs. |
+| **Ultra-Fast Cloud AI Fallback** | Groq API integration (Qwen 3.8 27B) delivering sub-500ms story and review polishing. |
+| **Multimodal Vision & Audio** | Canvas-resized Edge AI Vision verification and ElevenLabs Text-to-Speech audio guide generation. |
+| **DevRelay Platform Integration** | Automated session curation, community wisdom synthesis, and real-time event check-ins via DevRelay MCP. |
+
+---
+
+## ✍️ DEV (dev.to) Community & AI Transparency
+
+A detailed technical deep-dive article detailing the architecture of Spot-Undoo has been prepared for the DEV community:
+- **Title**: *Building Spot-Undoo: Privacy-First Edge AI & Local Micro-Travel Planning for Kerala*
+- **Key Themes**: Local Qwen inference on consumer GPUs, Haversine layover scheduling math, Neo-brutalist design systems in React & Tailwind, and zero-latency Android deployment.
+- **AI Transparency & Disclosure**: In strict compliance with DEV AI-disclosure guidelines, all AI assistance and local model usage (Ollama Qwen 2.5:3B, Groq Qwen 3.8, DevRelay tools) are explicitly documented and categorized under `some_ai`.
 
 ---
 
