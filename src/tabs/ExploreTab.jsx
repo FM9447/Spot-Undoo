@@ -31,6 +31,24 @@ export default function ExploreTab({ location, setLocation }) {
   const [viewMode, setViewMode] = useState('osm'); // 'osm' (Map default) | 'cartoon' | 'grid'
   const [selectedSpot, setSelectedSpot] = useState(null);
   const [rideDestination, setRideDestination] = useState(null);
+  const [spotToRestore, setSpotToRestore] = useState(null);
+
+  const handleOpenRides = (spot) => {
+    if (selectedSpot) {
+      setSpotToRestore(selectedSpot);
+      setSelectedSpot(null);
+    }
+    setRideDestination(spot);
+  };
+
+  const handleCloseRides = () => {
+    setRideDestination(null);
+    if (spotToRestore) {
+      setSelectedSpot(spotToRestore);
+      setSpotToRestore(null);
+    }
+  };
+
   const [bookmarkedIds, setBookmarkedIds] = useState([]);
   const [userRating, setUserRating] = useState(5);
   const [userReviewText, setUserReviewText] = useState('');
@@ -1165,7 +1183,7 @@ export default function ExploreTab({ location, setLocation }) {
           {/* Multimodal Ride Hailing Comparator (Uber, Rapido, Ola) Button */}
           <button
             type="button"
-            onClick={() => setRideDestination(selectedSpot)}
+            onClick={() => handleOpenRides(selectedSpot)}
             className="w-full bg-[#FFE500] hover:bg-[#FACC15] border-[2.5px] border-black rounded-2xl py-2.5 px-3 font-black text-xs text-black shadow-[0_3px_0_0_#000000] flex items-center justify-between active:translate-y-0.5 transition cursor-pointer"
           >
             <div className="flex items-center gap-2">
@@ -1316,7 +1334,7 @@ export default function ExploreTab({ location, setLocation }) {
           <div className="flex items-center gap-2 pt-1">
             <button
               type="button"
-              onClick={() => setRideDestination(selectedSpot)}
+              onClick={() => handleOpenRides(selectedSpot)}
               className="bg-[#FFE500] hover:bg-[#FACC15] border-[2.5px] border-black rounded-2xl py-3 px-3 font-black text-xs text-black shadow-[0_3px_0_0_#000000] flex items-center justify-center gap-1.5 active:translate-y-0.5 transition cursor-pointer"
               title="Compare Uber, Rapido, and Ola Auto"
             >
@@ -1352,7 +1370,7 @@ export default function ExploreTab({ location, setLocation }) {
       {/* Multimodal Ride Hailing Comparator (Uber, Rapido, Ola) Modal */}
       <RideComparatorModal
         isOpen={!!rideDestination}
-        onClose={() => setRideDestination(null)}
+        onClose={handleCloseRides}
         destination={rideDestination}
         userLat={location?.lat || 10.7606}
         userLon={location?.lon || 76.2711}

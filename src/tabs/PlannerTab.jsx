@@ -21,6 +21,23 @@ export default function PlannerTab({ location, settings }) {
   const [error, setError] = useState('');
   const [selectedStop, setSelectedStop] = useState(null);
 
+  const handleOpenStopRides = (stop) => {
+    const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
+    const all = [...places, ...stored];
+    const matched = all.find(
+      (p) => (p.name || '').toLowerCase() === (stop.name || '').toLowerCase()
+    ) || all.find(
+      (p) => (p.name || '').toLowerCase().includes((stop.name || '').toLowerCase())
+    ) || stop;
+
+    setSelectedStop({
+      ...stop,
+      name: stop.name || matched.name,
+      lat: stop.lat || matched.lat || location.lat,
+      lng: stop.lng || matched.lng || location.lon,
+    });
+  };
+
   const toggleMood = (m) => setMoods((prev) => prev.includes(m) ? prev.filter((x) => x !== m) : [...prev, m]);
 
   const generate = async () => {
@@ -192,7 +209,7 @@ Return this JSON structure:
                     <div className="font-medium text-sm text-white">{stop.name}</div>
                     <button
                       type="button"
-                      onClick={() => setSelectedStop(stop)}
+                      onClick={() => handleOpenStopRides(stop)}
                       className="text-[10px] font-bold bg-[#FFE500] hover:bg-yellow-300 text-black px-2 py-0.5 rounded-lg flex items-center gap-1 shrink-0 transition shadow-xs cursor-pointer"
                       title="Compare Uber, Rapido, and Auto fares"
                     >
