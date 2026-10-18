@@ -650,7 +650,7 @@ export default function ExploreTab({ location, setLocation }) {
                         <img
                           src={spot.photo || spot.photos?.[0]}
                           alt={spot.name}
-                          onLoad={measureTrail}
+                          onLoad={measureCanvas}
                           className="w-full h-full object-cover"
                         />
                         {spot.badge && (
