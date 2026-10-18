@@ -79,11 +79,53 @@ export default function ChatTab({ location, setLocation, settings }) {
   const [historyItems, setHistoryItems] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
 
-  // Live GPS Tracking & Interactive Plan Chat Modifier
+  // Live GPS Tracking & Auto Reached Detection
   const [visitedStopIds, setVisitedStopIds] = useState([]);
   const [chatModifierInput, setChatModifierInput] = useState('');
   const [isModifyingPlan, setIsModifyingPlan] = useState(false);
   const [modificationMsg, setModificationMsg] = useState('');
+  const [isLiveGpsActive, setIsLiveGpsActive] = useState(false);
+
+  // Auto-detect stops reached via GPS (< 250m)
+  useEffect(() => {
+    if (!location?.lat || !location?.lon) return;
+    const currentStops = plans[activePlanIdx]?.stops || [];
+    const newlyReached = [];
+    currentStops.forEach((stop) => {
+      const sLat = stop.lat || stop.data?.lat;
+      const sLng = stop.lng || stop.data?.lng;
+      if (sLat && sLng) {
+        const d = haversineKm(location.lat, location.lon, sLat, sLng);
+        if (d <= 0.25) { // within 250 meters
+          newlyReached.push(stop.id || stop.name);
+        }
+      }
+    });
+    if (newlyReached.length > 0) {
+      setVisitedStopIds((prev) => Array.from(new Set([...prev, ...newlyReached])));
+    }
+  }, [location?.lat, location?.lon, activePlanIdx, plans]);
+
+  const syncLiveGps = () => {
+    if (!navigator.geolocation) {
+      alert('GPS is not supported on this device');
+      return;
+    }
+    setIsLiveGpsActive(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const userLat = pos.coords.latitude;
+        const userLng = pos.coords.longitude;
+        setLocation({ lat: userLat, lon: userLng, label: 'Live GPS' });
+        setTimeout(() => setIsLiveGpsActive(false), 2000);
+      },
+      (err) => {
+        setIsLiveGpsActive(false);
+        console.warn('GPS sync error:', err);
+      },
+      { enableHighAccuracy: true, timeout: 8000 }
+    );
+  };
 
   // Searchable City Selector States
   const [citySearchQuery, setCitySearchQuery] = useState('');
@@ -1679,19 +1721,19 @@ Return JSON in this format:
               {(() => {
                 const stops = currentPlan.stops || [];
                 const stopsCount = stops.length;
-                const stepGap = 132;
+                const stepGap = 104;
                 const stopNodes = stops.map((_, sIdx) => {
                   const isLeft = sIdx % 2 === 0;
                   return {
                     cx: isLeft ? 26 : 330,
-                    cy: 122 + sIdx * stepGap,
+                    cy: 114 + sIdx * stepGap,
                     idx: sIdx,
                   };
                 });
 
-                const endCy = stopsCount === 0 ? 90 : 70 + stopsCount * stepGap + 18;
+                const endCy = stopsCount === 0 ? 90 : 60 + stopsCount * stepGap + 14;
                 const endPoint = { cx: 180, cy: endCy };
-                const svgHeight = endCy + 75;
+                const svgHeight = endCy + 70;
 
                 // Build smooth curved path through all stops
                 let pathD = `M 240 18`;
@@ -1773,11 +1815,23 @@ Return JSON in this format:
                 );
               })()}
 
-              {/* TOP HEADER: STARTING PLACE */}
+              {/* TOP HEADER: STARTING PLACE & GPS AUTO-SYNC */}
               <div className="relative z-10 flex items-center justify-between gap-1 mb-3 h-[36px]">
-                <div className="bg-[#FEF3C7] border-[2px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-amber-900 shadow-[0_2px_0_0_#000000] flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block" />
-                  <span>STARTING PLACE</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="bg-[#FEF3C7] border-[2px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-amber-900 shadow-[0_2px_0_0_#000000] flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block" />
+                    <span>STARTING PLACE</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={syncLiveGps}
+                    className="bg-white border-[1.5px] border-black rounded-full px-2 py-0.5 text-[10px] font-black text-emerald-800 shadow-[0_1.5px_0_0_#000000] flex items-center gap-1 hover:bg-emerald-50 active:translate-y-0.5 transition cursor-pointer"
+                    title="Detect reached locations on trail via GPS"
+                  >
+                    <Navigation size={10} className={isLiveGpsActive ? "text-emerald-500 animate-spin" : "text-[#0B3BF4]"} />
+                    <span>{isLiveGpsActive ? "Syncing..." : "Sync GPS"}</span>
+                  </button>
                 </div>
 
                 {/* START Station Pill */}
@@ -1790,8 +1844,8 @@ Return JSON in this format:
                 </div>
               </div>
 
-              {/* Dynamic Trail Steps with Live GPS Distance & Check-in (Spacious 132px spacing) */}
-              <div className="relative z-10 space-y-4">
+              {/* Dynamic Trail Steps with Live GPS Distance & Check-in */}
+              <div className="relative z-10 space-y-3">
                 {(currentPlan.stops || []).length === 0 && (
                   <div className="py-4 px-3 text-center bg-white/70 border-[2px] border-dashed border-gray-400 rounded-2xl shadow-[0_2px_0_0_#000000]">
                     <p className="text-xs font-black text-black">Route cleared</p>
@@ -1810,11 +1864,12 @@ Return JSON in this format:
                     ? haversineKm(location.lat, location.lon, stopLat, stopLng)
                     : null;
                   const distMeters = distKm !== null ? Math.round(distKm * 1000) : null;
+                  const isNearby = distMeters !== null && distMeters <= 250;
 
                   return (
-                    <div key={sIdx} className="space-y-1.5 pb-1">
+                    <div key={sIdx} className="space-y-1">
                       {/* Transit pill & GPS Check-in badge above card */}
-                      <div className={`flex items-center gap-1.5 ${isLeft ? 'justify-start pl-11' : 'justify-end pr-11'}`}>
+                      <div className={`flex items-center gap-1.5 ${isLeft ? 'justify-start pl-10' : 'justify-end pr-10'}`}>
                         <span className="bg-[#FEF3C7] border-[1.5px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-black shadow-[0_1px_0_0_#000000]">
                           {stop.transitPill || '🚶 8m • Free'}
                         </span>
@@ -1825,9 +1880,9 @@ Return JSON in this format:
                           onClick={() => toggleCheckIn(stopId)}
                           className={`text-[9px] font-black px-2 py-0.5 rounded-full border border-black flex items-center gap-1 shadow-[0_1px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer ${
                             isReached
-                              ? 'bg-emerald-500 text-white'
-                              : distMeters && distMeters < 300
-                              ? 'bg-emerald-100 text-emerald-800 animate-pulse'
+                              ? 'bg-emerald-500 text-white border-emerald-700'
+                              : isNearby
+                              ? 'bg-emerald-100 text-emerald-900 border-emerald-600 animate-pulse'
                               : 'bg-white text-gray-700 hover:bg-gray-100'
                           }`}
                           title="Click to check in or mark reached"
@@ -1837,10 +1892,15 @@ Return JSON in this format:
                               <Check size={9} strokeWidth={3} />
                               <span>Reached</span>
                             </>
+                          ) : isNearby ? (
+                            <>
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping inline-block" />
+                              <span>At Spot ({distMeters}m)</span>
+                            </>
                           ) : (
                             <>
                               <Navigation size={8} />
-                              <span>{distMeters ? `${distMeters}m away` : 'Check In'}</span>
+                              <span>{distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}km`} away` : 'Check In'}</span>
                             </>
                           )}
                         </button>
@@ -1857,14 +1917,15 @@ Return JSON in this format:
                           </div>
                           <div
                             onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`bg-white border-[2.5px] rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-102 transition flex-1 max-w-[280px] ${
-                              isReached ? 'border-emerald-600 ring-2 ring-emerald-400/30' : 'border-black'
+                            className={`bg-white border-[2.5px] rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-98 transition flex-1 max-w-[250px] ${
+                              isReached ? 'border-emerald-600 bg-emerald-50/50 ring-2 ring-emerald-400/40' : 'border-black'
                             }`}
                           >
                             <img
-                              src={stop.photo || currentCity.spots[0].photo}
+                              src={stop.photo || currentCity.spots[0]?.photo}
                               alt={stop.name}
-                              className="w-13 h-13 rounded-xl border-[1.5px] border-black object-cover shrink-0"
+                              style={{ width: '48px', height: '48px' }}
+                              className="w-12 h-12 rounded-xl border-[1.5px] border-black object-cover shrink-0 shadow-[0_1px_0_0_#000000]"
                             />
                             <div className="leading-tight overflow-hidden flex-1 min-w-0">
                               <div className="flex items-center gap-1">
@@ -1872,7 +1933,7 @@ Return JSON in this format:
                                   {stop.name}
                                 </span>
                                 {isReached ? (
-                                  <span className="bg-emerald-500 text-white font-black text-[7px] px-1 rounded uppercase shrink-0">
+                                  <span className="bg-emerald-500 text-white font-black text-[7px] px-1.5 py-0.5 rounded uppercase shrink-0">
                                     VISITED
                                   </span>
                                 ) : stop.badge ? (
@@ -1881,8 +1942,9 @@ Return JSON in this format:
                                   </span>
                                 ) : null}
                               </div>
-                              <div className="text-[11px] font-bold text-emerald-700 mt-1">
-                                {stop.costText || 'Free • 30m'} ↗
+                              <div className="text-[11px] font-bold text-emerald-700 mt-1 flex items-center justify-between">
+                                <span>{stop.costText || 'Free • 30m'}</span>
+                                <span className="text-[#0B3BF4] font-black text-[10px]">↗</span>
                               </div>
                             </div>
                           </div>
@@ -1891,14 +1953,14 @@ Return JSON in this format:
                         <div className="flex items-center justify-end gap-2.5 pr-1">
                           <div
                             onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`bg-white border-[2.5px] rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-102 transition flex-1 max-w-[280px] ${
-                              isReached ? 'border-emerald-600 ring-2 ring-emerald-400/30' : 'border-black'
+                            className={`bg-white border-[2.5px] rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-98 transition flex-1 max-w-[250px] ${
+                              isReached ? 'border-emerald-600 bg-emerald-50/50 ring-2 ring-emerald-400/40' : 'border-black'
                             }`}
                           >
                             <div className="leading-tight text-right flex-1 overflow-hidden min-w-0">
                               <div className="flex items-center justify-end gap-1">
                                 {isReached ? (
-                                  <span className="bg-emerald-500 text-white font-black text-[7px] px-1 rounded uppercase shrink-0">
+                                  <span className="bg-emerald-500 text-white font-black text-[7px] px-1.5 py-0.5 rounded uppercase shrink-0">
                                     VISITED
                                   </span>
                                 ) : stop.badge ? (
@@ -1910,14 +1972,16 @@ Return JSON in this format:
                                   {stop.name}
                                 </span>
                               </div>
-                              <div className="text-[11px] font-bold text-emerald-700 mt-1">
-                                {stop.costText || 'Free • 30m'} ↗
+                              <div className="text-[11px] font-bold text-emerald-700 mt-1 flex items-center justify-between">
+                                <span className="text-[#0B3BF4] font-black text-[10px]">↗</span>
+                                <span>{stop.costText || 'Free • 30m'}</span>
                               </div>
                             </div>
                             <img
                               src={stop.photo || currentCity.spots[1]?.photo}
                               alt={stop.name}
-                              className="w-13 h-13 rounded-xl border-[1.5px] border-black object-cover shrink-0"
+                              style={{ width: '48px', height: '48px' }}
+                              className="w-12 h-12 rounded-xl border-[1.5px] border-black object-cover shrink-0 shadow-[0_1px_0_0_#000000]"
                             />
                           </div>
                           <div
@@ -2032,10 +2096,17 @@ Return JSON in this format:
             )}
           </div>
 
-          {/* Selected Spot Bottom Sheet */}
+          {/* Selected Spot Popup Modal Overlay */}
           {selectedSpot && (
-            <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_5px_0_0_#000000] space-y-3 relative mt-2">
-              <div className="w-12 h-1 bg-black rounded-full mx-auto" />
+            <div
+              onClick={() => setSelectedSpot(null)}
+              className="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-3 animate-in fade-in duration-200"
+            >
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white border-[3px] border-black rounded-3xl p-4 shadow-[0_8px_0_0_#000000] w-full max-w-lg max-h-[88vh] overflow-y-auto space-y-3 relative"
+              >
+                <div className="w-12 h-1 bg-black/20 rounded-full mx-auto" />
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="bg-[#FEF3C7] border-[1.5px] border-black rounded-full px-2.5 py-0.5 text-xs font-black text-black">
@@ -2204,7 +2275,8 @@ Return JSON in this format:
                 </button>
               </div>
             </div>
-          )}
+          </div>
+        )}
         </div>
       )}
 

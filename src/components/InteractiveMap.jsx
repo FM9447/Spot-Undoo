@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Navigation, MapPin, Layers } from 'lucide-react';
+import { Navigation, MapPin } from 'lucide-react';
 
 export default function InteractiveMap({
   center = [10.7606, 76.2711],
@@ -12,11 +12,14 @@ export default function InteractiveMap({
   userLocation,
   showRoute = false,
   height = '480px',
+  onLocationFound,
 }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef([]);
   const polylineRef = useRef(null);
+  const gpsMarkerRef = useRef(null);
+  const [gpsLoading, setGpsLoading] = useState(false);
 
   // Initialize Map
   useEffect(() => {
@@ -189,6 +192,50 @@ export default function InteractiveMap({
     }
   };
 
+  // Live GPS tracking
+  const handleLocateGPS = () => {
+    if (!navigator.geolocation) {
+      alert('GPS is not supported by your browser');
+      return;
+    }
+    setGpsLoading(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setGpsLoading(false);
+        const { latitude, longitude } = pos.coords;
+        const map = mapInstanceRef.current;
+        if (!map) return;
+
+        if (gpsMarkerRef.current) gpsMarkerRef.current.remove();
+
+        const liveIcon = L.divIcon({
+          className: 'live-gps-marker',
+          html: `
+            <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;">
+              <div style="position: absolute; width: 32px; height: 32px; border-radius: 9999px; background-color: rgba(16, 185, 129, 0.35); animation: ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+              <div style="width: 18px; height: 18px; border-radius: 9999px; background-color: #10B981; border: 2.5px solid #ffffff; box-shadow: 0 0 10px #10B981;"></div>
+            </div>
+          `,
+          iconSize: [32, 32],
+          iconAnchor: [16, 16],
+        });
+
+        const m = L.marker([latitude, longitude], { icon: liveIcon })
+          .addTo(map)
+          .bindPopup('<b>📍 Your Live Location</b><br/>Real-time GPS Active');
+        gpsMarkerRef.current = m;
+
+        map.flyTo([latitude, longitude], 15, { duration: 0.8 });
+        onLocationFound?.({ lat: latitude, lon: longitude });
+      },
+      (err) => {
+        setGpsLoading(false);
+        console.warn('GPS location error:', err);
+      },
+      { enableHighAccuracy: true, timeout: 8000 }
+    );
+  };
+
   return (
     <div
       style={{ height }}
@@ -196,15 +243,28 @@ export default function InteractiveMap({
     >
       <div ref={mapRef} className="w-full h-full z-0" />
 
-      {/* Recenter Floating Button */}
-      <button
-        type="button"
-        onClick={handleRecenter}
-        className="absolute bottom-4 right-4 z-[400] bg-white border-[2px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] flex items-center gap-1.5 text-xs font-black active:translate-y-0.5 hover:bg-gray-50 transition cursor-pointer"
-      >
-        <Navigation size={14} className="text-[#0B3BF4]" strokeWidth={2.5} />
-        <span>Recenter</span>
-      </button>
+      {/* Floating GPS and Recenter Buttons */}
+      <div className="absolute bottom-4 right-4 z-[400] flex items-center gap-2">
+        <button
+          type="button"
+          onClick={handleLocateGPS}
+          disabled={gpsLoading}
+          className="bg-white border-[2px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] flex items-center gap-1.5 text-xs font-black active:translate-y-0.5 hover:bg-emerald-50 text-emerald-800 transition cursor-pointer"
+          title="Track Live GPS Location"
+        >
+          <span className={`w-2 h-2 rounded-full bg-emerald-500 inline-block ${gpsLoading ? 'animate-spin' : 'animate-ping'}`} />
+          <span>{gpsLoading ? 'Locating...' : 'My GPS'}</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleRecenter}
+          className="bg-white border-[2px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] flex items-center gap-1.5 text-xs font-black active:translate-y-0.5 hover:bg-gray-50 transition cursor-pointer"
+        >
+          <Navigation size={14} className="text-[#0B3BF4]" strokeWidth={2.5} />
+          <span>Recenter</span>
+        </button>
+      </div>
 
       {/* Attribution / OpenStreetMap pill */}
       <div className="absolute top-3 left-3 z-[400] bg-white/95 backdrop-blur border-[2px] border-black rounded-full px-2.5 py-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5">

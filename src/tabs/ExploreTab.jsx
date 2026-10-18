@@ -525,11 +525,18 @@ export default function ExploreTab({ location, setLocation }) {
         )
       )}
 
-      {/* 4. Selected-Place Bottom Sheet Modal (Exact match to Master Screenshot 1) */}
+      {/* 4. Selected-Place Popup Modal Overlay */}
       {selectedSpot && (
-        <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_5px_0_0_#000000] space-y-3 relative mt-2">
-          {/* Handle */}
-          <div className="w-12 h-1 bg-black rounded-full mx-auto" />
+        <div
+          onClick={() => setSelectedSpot(null)}
+          className="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-3 animate-in fade-in duration-200"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white border-[3px] border-black rounded-3xl p-4 shadow-[0_8px_0_0_#000000] w-full max-w-lg max-h-[88vh] overflow-y-auto space-y-3 relative"
+          >
+            {/* Handle */}
+            <div className="w-12 h-1 bg-black/20 rounded-full mx-auto" />
 
           {/* Top Bar: Badge + Rating + Close */}
           <div className="flex items-center justify-between">
@@ -751,7 +758,8 @@ export default function ExploreTab({ location, setLocation }) {
             </button>
           </div>
         </div>
-      )}
+      </div>
+    )}
     </div>
   );
 }
