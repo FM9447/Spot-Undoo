@@ -4,6 +4,7 @@ import SettingsModal from './SettingsModal';
 
 export default function Header({ location, setLocation, settings, setSettings, gpsStatus = 'idle', onRefreshGPS, onLogout }) {
   const [showSettings, setShowSettings] = useState(false);
+  const [timeStr, setTimeStr] = useState('');
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem('currentUser') || '{}');
@@ -11,6 +12,16 @@ export default function Header({ location, setLocation, settings, setSettings, g
       return {};
     }
   });
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTimeStr(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const syncUser = () => {
