@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Sparkles, MapPin, ExternalLink, Bookmark, Clock, ArrowRight, Loader2, Star, ArrowLeft, History, Check, X, Navigation, Send, CheckCircle2 } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Sparkles, MapPin, ExternalLink, Bookmark, Clock, ArrowRight, Loader2, Star, ArrowLeft, History, Check, X, Navigation, Send, CheckCircle2, Search, ChevronDown } from 'lucide-react';
 import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { ollamaChat } from '../utils/ollama';
 import ImageCarousel from '../components/ImageCarousel';
@@ -57,7 +57,34 @@ export default function ChatTab({ location, setLocation, settings }) {
   const [isModifyingPlan, setIsModifyingPlan] = useState(false);
   const [modificationMsg, setModificationMsg] = useState('');
 
+  // Searchable City Selector States
+  const [citySearchQuery, setCitySearchQuery] = useState('');
+  const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
+  const cityDropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (cityDropdownRef.current && !cityDropdownRef.current.contains(e.target)) {
+        setIsCityDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const currentCity = KERALA_CITIES[selectedCityKey] || KERALA_CITIES['Shoranur'];
+
+  const filteredCities = Object.entries(KERALA_CITIES).filter(([key, city]) => {
+    if (!citySearchQuery.trim()) return true;
+    const q = citySearchQuery.toLowerCase().trim();
+    return (
+      key.toLowerCase().includes(q) ||
+      (city.name && city.name.toLowerCase().includes(q)) ||
+      (city.displayName && city.displayName.toLowerCase().includes(q)) ||
+      (city.district && city.district.toLowerCase().includes(q)) ||
+      (city.hub?.stationName && city.hub.stationName.toLowerCase().includes(q))
+    );
+  });
 
   const toggleCheckIn = (stopIdentifier) => {
     setVisitedStopIds((prev) =>
@@ -863,23 +890,128 @@ Return JSON in this format:
 
           {/* Master Form Card */}
           <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-4">
-            {/* CITY / HUB SELECTOR (Requested Feature) */}
-            <div className="space-y-1.5">
+            {/* SEARCHABLE CITY / REGION HUB SELECTOR */}
+            <div className="space-y-1.5 relative" ref={cityDropdownRef}>
               <label className="text-[11px] font-black uppercase tracking-wider text-black flex items-center justify-between">
                 <span>SELECT CITY / REGION HUB</span>
                 <span className="text-[#0B3BF4] font-bold">📍 Active Pin</span>
               </label>
-              <select
-                value={selectedCityKey}
-                onChange={(e) => handleCityChange(e.target.value)}
-                className="w-full bg-[#F4F6F9] border-[2px] border-black rounded-2xl px-3 py-2.5 text-xs font-black text-black outline-none shadow-[0_2px_0_0_#000000] cursor-pointer"
+
+              {/* Trigger Button showing currently active city */}
+              <button
+                type="button"
+                onClick={() => setIsCityDropdownOpen((prev) => !prev)}
+                className="w-full bg-[#F4F6F9] border-[2px] border-black rounded-2xl px-3 py-2.5 text-xs font-black text-black outline-none shadow-[0_2px_0_0_#000000] flex items-center justify-between cursor-pointer hover:bg-gray-100 transition active:translate-y-0.5"
               >
-                {Object.entries(KERALA_CITIES).map(([key, city]) => (
-                  <option key={key} value={key}>
-                    {city.displayName}
-                  </option>
-                ))}
-              </select>
+                <div className="flex items-center gap-2 truncate text-left">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 inline-block ring-2 ring-emerald-300" />
+                  <span className="truncate">{currentCity.displayName}</span>
+                  {currentCity.district && (
+                    <span className="text-[9px] bg-black text-white px-1.5 py-0.5 rounded-full uppercase shrink-0 font-bold">
+                      {currentCity.district}
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-1.5 text-gray-500 shrink-0 ml-1">
+                  <Search size={13} className="text-gray-400" />
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-200 ${
+                      isCityDropdownOpen ? 'rotate-180 text-black' : ''
+                    }`}
+                  />
+                </div>
+              </button>
+
+              {/* Dropdown Panel with Search Bar & Filtered Cities List */}
+              {isCityDropdownOpen && (
+                <div className="absolute top-full left-0 right-0 mt-1.5 z-40 bg-white border-[2.5px] border-black rounded-2xl p-2.5 shadow-[0_6px_0_0_#000000] space-y-2 animate-in fade-in duration-150">
+                  {/* Search Input Field */}
+                  <div className="relative flex items-center">
+                    <Search
+                      size={14}
+                      className="absolute left-3 text-gray-400 pointer-events-none"
+                    />
+                    <input
+                      type="text"
+                      autoFocus
+                      value={citySearchQuery}
+                      onChange={(e) => setCitySearchQuery(e.target.value)}
+                      placeholder="Search city, district, or station..."
+                      className="w-full bg-[#F4F6F9] border-[1.5px] border-black rounded-xl pl-9 pr-8 py-2 text-xs font-bold text-black outline-none focus:ring-2 focus:ring-[#0B3BF4]/30 placeholder:text-gray-400"
+                    />
+                    {citySearchQuery && (
+                      <button
+                        type="button"
+                        onClick={() => setCitySearchQuery('')}
+                        className="absolute right-2.5 text-gray-400 hover:text-black p-0.5"
+                      >
+                        <X size={13} />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Filtered Cities Scrollable List */}
+                  <div className="max-h-56 overflow-y-auto space-y-1 pr-1 scrollbar-thin">
+                    {filteredCities.length === 0 ? (
+                      <div className="p-3 text-center text-xs font-bold text-gray-400">
+                        No Kerala cities found matching "{citySearchQuery}"
+                      </div>
+                    ) : (
+                      filteredCities.map(([key, city]) => {
+                        const isSelected = selectedCityKey === key;
+                        return (
+                          <button
+                            key={key}
+                            type="button"
+                            onClick={() => {
+                              handleCityChange(key);
+                              setIsCityDropdownOpen(false);
+                              setCitySearchQuery('');
+                            }}
+                            className={`w-full text-left px-2.5 py-2 rounded-xl text-xs font-bold flex items-center justify-between transition cursor-pointer ${
+                              isSelected
+                                ? 'bg-[#0B3BF4] text-white border border-black shadow-[0_1px_0_0_#000000]'
+                                : 'hover:bg-[#F4F6F9] text-black'
+                            }`}
+                          >
+                            <div className="truncate text-left">
+                              <div className="font-black flex items-center gap-1.5 truncate">
+                                <span className="truncate">{city.name}</span>
+                                {city.district && (
+                                  <span
+                                    className={`text-[8.5px] px-1.5 py-0.2 rounded-full uppercase font-bold shrink-0 ${
+                                      isSelected
+                                        ? 'bg-white text-black'
+                                        : 'bg-gray-200 text-gray-700'
+                                    }`}
+                                  >
+                                    {city.district}
+                                  </span>
+                                )}
+                              </div>
+                              <div
+                                className={`text-[10px] truncate mt-0.5 ${
+                                  isSelected ? 'text-blue-100' : 'text-gray-500'
+                                }`}
+                              >
+                                🚉 {city.hub.stationName}
+                              </div>
+                            </div>
+                            {isSelected && (
+                              <Check
+                                size={14}
+                                className="shrink-0 ml-1 text-white"
+                                strokeWidth={3}
+                              />
+                            )}
+                          </button>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Trip Context Mode */}
