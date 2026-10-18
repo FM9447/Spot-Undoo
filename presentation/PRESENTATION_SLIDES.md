@@ -1,4 +1,4 @@
-# 🎤 Spot-Undoo Hackathon Presentation Deck & Speaker Notes
+# 🎤 Spot-Undoo Presentation Deck & Product Guide
 
 This document provides the slide-by-slide content and speaker notes aligned with our updated project specifications.
 
@@ -8,7 +8,7 @@ This document provides the slide-by-slide content and speaker notes aligned with
 - **Title**: SPOT-UNDOO
 - **Subtitle**: Local-First AI Kerala Travel & Hidden-Spots Discovery Engine
 - **Badges**: 
-  - ⚡ Hackathon Build • Hacktoberfest 2026 / µLearn Hack Day
+  - ⚡ Local-First Edge AI Engine
   - 🧠 Powered by Local Qwen 2.5:3B (Edge Inference)
   - 🍃 MongoDB Atlas Cloud Cluster
   - 📱 Native Android & Installable PWA

@@ -231,7 +231,7 @@ Spot-Undoo includes a ready-to-deploy [`render.yaml`](./render.yaml) blueprint:
 3. Set your `MONGODB_URI` environment variable in the Render Dashboard.
 4. Render builds the React SPA and launches the Node/Express backend on a single unified URL with automatic SSL.
 
-### 2. 🦙 DigitalOcean Droplet LLM Node (Hacktoberfest Credit Ready)
+### 2. 🦙 DigitalOcean Droplet LLM Node (Remote Inference)
 Deploy Ollama with remote GPU/CPU acceleration on a DigitalOcean droplet:
 ```bash
 # SSH into your DigitalOcean Ubuntu Droplet
@@ -245,7 +245,6 @@ This script configures UFW firewall rules, installs Ollama, exposes port 11434 w
 docker build -t spot-undoo:latest .
 docker run -p 4000:4000 -e MONGODB_URI="your_mongodb_atlas_uri" spot-undoo:latest
 ```
-
 
 ---
 
@@ -276,50 +275,6 @@ The repository includes a complete training pipeline under the `training/` direc
 
 ---
 
----
-
-## 🎃 Hacktoberfest 2026 & Open Source Guidelines
-
-Spot-Undoo is an official **Hacktoberfest 2026** open-source repository! We welcome first-time contributors, Kerala local explorers, designers, and systems developers.
-
-- **Topic Tags**: `hacktoberfest`, `kerala`, `edge-ai`, `qwen`, `mongodb-atlas`, `react`, `tailwind`, `capacitor`
-- **Good First Issues**:
-  - Adding authentic local spots, tea stalls, and hidden viewpoints for your district.
-  - Expanding multi-language translation and Malayalam UI support.
-  - Writing automated Vitest test cases for Haversine transit computations and Google Maps link parsing.
-
-### Contribution Workflow:
-1. Fork the repository on GitHub.
-2. Create your branch (`git checkout -b feature/kerala-gem-pattambi`).
-3. Commit with clean, concise messages following Conventional Commits (`feat: add Ongallur Tali Heritage Temple`).
-4. Ensure `npm run build` passes with zero errors.
-5. Submit your Pull Request with the `hacktoberfest-accepted` label.
-
----
-
-## 🏆 Major League Hacking (MLH) Hackathon Submission
-
-Spot-Undoo is architected and entered for **MLH Hackathons** and developer tracks:
-
-| Track / Sponsor | Technology Utilized in Spot-Undoo |
-| :--- | :--- |
-| **Best Use of MongoDB Atlas** | Cloud cluster storage for community hidden spots, user-submitted reviews, and persisted itinerary history. |
-| **Edge AI & Open Source Models** | Local on-device Qwen 2.5:3B LLM inference via Ollama (`spot-undo-qwen`) with zero per-token cloud costs. |
-| **Ultra-Fast Cloud AI Fallback** | Groq API integration (Qwen 3.8 27B) delivering sub-500ms story and review polishing. |
-| **Multimodal Vision & Audio** | Canvas-resized Edge AI Vision verification and ElevenLabs Text-to-Speech audio guide generation. |
-| **DevRelay Platform Integration** | Automated session curation, community wisdom synthesis, and real-time event check-ins via DevRelay MCP. |
-
----
-
-## ✍️ DEV (dev.to) Community & AI Transparency
-
-A detailed technical deep-dive article detailing the architecture of Spot-Undoo has been prepared for the DEV community:
-- **Title**: *Building Spot-Undoo: Privacy-First Edge AI & Local Micro-Travel Planning for Kerala*
-- **Key Themes**: Local Qwen inference on consumer GPUs, Haversine layover scheduling math, Neo-brutalist design systems in React & Tailwind, and zero-latency Android deployment.
-- **AI Transparency & Disclosure**: In strict compliance with DEV AI-disclosure guidelines, all AI assistance and local model usage (Ollama Qwen 2.5:3B, Groq Qwen 3.8, DevRelay tools) are explicitly documented and categorized under `some_ai`.
-
----
-
 ## 🤝 Contributing
 
 Contributions are welcome! Whether it is adding new Kerala hidden spots, improving prompt engineering, or enhancing the mobile UI:
@@ -339,5 +294,5 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 ---
 
 <div align="center">
-Built with ❤️ for <b>Hacktoberfest 2026</b> & <b>µLearn Hack Day</b>
+Built with ❤️ for <b>Kerala Travelers & Micro-Explorers</b>
 </div>
