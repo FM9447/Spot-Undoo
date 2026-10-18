@@ -29,3 +29,5 @@ ollama_models/
 github token.txt
 *.gguf
 training/*.gguf
+__pycache__/
+*.pyc
