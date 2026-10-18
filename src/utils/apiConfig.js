@@ -1,3 +1,5 @@
+import { Capacitor } from '@capacitor/core';
+
 export const getBackendUrl = () => {
   if (typeof window !== 'undefined') {
     const custom = localStorage.getItem('spot_undoo_backend_url');
@@ -6,7 +8,7 @@ export const getBackendUrl = () => {
       return import.meta.env.VITE_BACKEND_URL;
     }
     // Check if running on Android/iOS Capacitor
-    const isNative = window.Capacitor?.isNativePlatform?.() || window.location.protocol === 'capacitor:';
+    const isNative = Capacitor.isNativePlatform() || window.location.protocol === 'capacitor:' || (window.location.hostname === 'localhost' && /Android/i.test(navigator.userAgent));
     if (isNative) {
       return 'http://192.168.1.44:4000';
     }
@@ -20,6 +22,10 @@ export const getBackendUrl = () => {
     }
   }
   return 'http://localhost:4000';
+};
+
+export const getGroqApiKey = () => {
+  return import.meta.env?.VITE_GROQ_API_KEY || '';
 };
 
 export const getOllamaUrl = () => {

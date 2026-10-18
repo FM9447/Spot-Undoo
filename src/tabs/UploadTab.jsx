@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Camera, Check, Pencil, Loader2, CheckCircle2, MapPin, Sparkles, Plus, Globe, Navigation, AlertTriangle } from 'lucide-react';
 import { ollamaChat, resizeImageToBase64 } from '../utils/ollama';
 import { KERALA_CITIES } from '../data/keralaCitiesData';
-import { getBackendUrl } from '../utils/apiConfig';
+import { getBackendUrl, getGroqApiKey } from '../utils/apiConfig';
 import { uploadImageToFirebase } from '../utils/firebaseStorage';
 import { haversineKm } from '../utils/plannerMath';
 
@@ -72,7 +72,46 @@ export default function UploadTab({ location, settings = {} }) {
     const cityStr = specificArea.trim() || selectedCityKey;
     const baseText = review.trim();
 
-    // 1. Try Backend Groq API first (Fast, high quality Qwen model)
+    // 1. Try Direct Groq API (High speed, zero-hop Qwen 3.8 27B from client)
+    const groqKey = getGroqApiKey();
+    if (groqKey) {
+      try {
+        const prompt = `You are a local Kerala travel explorer sharing a genuine community review for "${nameStr}" in ${cityStr} (${effectiveCategory}, approx ₹${avgCost || '50'}).
+User rough draft: "${baseText || 'Calm breezy spot with great local vibe'}".
+
+Task: Polish and transform this into a fresh, authentic 2-sentence community review strictly under 40 words.
+Include an insider tip (best time to visit, secret path, sunset angle, or nearby snack/chai stall).
+Random seed variation: ${Date.now() % 10000}.
+Return ONLY the review text without quotes, markdown, or greetings.`;
+
+        const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${groqKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'qwen/qwen3.8-27b',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.9,
+            max_tokens: 120,
+          }),
+        });
+        if (groqRes.ok) {
+          const data = await groqRes.json();
+          const story = data.choices?.[0]?.message?.content?.trim();
+          if (story) {
+            setReview(story.replace(/^["']|["']$/g, '').trim());
+            setGeneratingText(false);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Direct Groq enhance attempt failed:', err);
+      }
+    }
+
+    // 2. Try Backend Groq API endpoint
     try {
       const backendUrl = getBackendUrl();
       const res = await fetch(`${backendUrl}/api/ai/enhance-story`, {
@@ -98,14 +137,14 @@ export default function UploadTab({ location, settings = {} }) {
       console.warn('Backend enhance-story attempt failed:', err);
     }
 
-    // 2. Try Local Ollama if configured
+    // 3. Try Local Ollama if configured
     try {
       const prompt = `You are a local Kerala explorer writing a genuine community review for "${nameStr}" in ${cityStr} (${effectiveCategory}, approx ₹${avgCost}).
 User text draft in box: "${baseText || 'Peaceful spot with amazing vibes'}".
 Return JSON: {"story": "Enhance and polish the draft into 2 short, authentic sentences under 40 words like a local traveler with an insider tip (best time, path, or snack)."}`;
 
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout')), 3500)
+        setTimeout(() => reject(new Error('Timeout')), 3000)
       );
       const res = await Promise.race([
         ollamaChat({
@@ -125,15 +164,39 @@ Return JSON: {"story": "Enhance and polish the draft into 2 short, authentic sen
       console.warn('Ollama auto description fallback:', e);
     }
 
-    // 3. Dynamic smart generator if offline (produces fresh, varied reviews on every click)
-    const variations = [
-      `Skip the crowds and head to ${nameStr} in ${cityStr}! ${baseText ? baseText + '.' : 'Serene vibe with soothing breeze.'} Best visited around golden hour with fresh local chai nearby for under ₹${avgCost}.`,
-      `Underrated local gem in ${cityStr}! ${baseText ? baseText + '.' : 'Very few tourists know about this peaceful spot.'} Take the walking lane early morning for zero noise and great photo vantage points.`,
-      `Locals love ${nameStr}. ${baseText ? baseText + ' - truly worth the detour.' : 'Lush greenery and calm surroundings.'} Perfect 45-minute stop; don't miss the small snack stall down the street.`,
-      `A true hidden paradise in ${cityStr}. ${baseText ? baseText + '.' : 'Authentic Kerala charm without the commercial rush.'} Keep small cash ready for ₹${avgCost} entry or snacks; evening hours are magical.`
+    // 4. Dynamic multi-part smart generator if offline (never produces identical text)
+    const openers = [
+      `Skip the standard tourist trail and head to ${nameStr} in ${cityStr}!`,
+      `Such an underrated local gem in ${cityStr}.`,
+      `Locals love ${nameStr} for good reason.`,
+      `A true hidden sanctuary tucked away in ${cityStr}.`,
+      `Pure tranquility at ${nameStr} without the commercial rush.`,
+      `One of the most scenic pockets around ${cityStr}.`,
     ];
-    const picked = variations[Math.floor(Math.random() * variations.length)];
-    setReview(picked);
+    const middles = baseText
+      ? [
+          `${baseText} - honestly worth the detour.`,
+          `As they say: "${baseText}", and it truly delivers on that vibe.`,
+          `${baseText}. The atmosphere here hits differently in person.`,
+        ]
+      : [
+          `Lush surroundings and a cool soothing breeze throughout the day.`,
+          `Very few crowds know about this spot, making it ideal for peaceful photos.`,
+          `Authentic Kerala atmosphere with clean, relaxing surroundings.`,
+          `Great spot to unwind with friends or take a solo stroll.`,
+        ];
+    const tips = [
+      `Best visited around 5:30 PM for the golden hour; grab a hot chai nearby for under ₹${avgCost}.`,
+      `Take the narrow walking path to the right for the best vantage point with zero crowd.`,
+      `Small tea stall just 50 meters away serves incredible pazham pori and kattan chai.`,
+      `Arrive early morning before 8 AM for peaceful misty views and easy parking.`,
+      `Keep ₹${avgCost} small cash handy for local tea or entry; evening breeze here is magical.`,
+      `Don't miss the sunset view from the far edge — absolute postcard scenery.`,
+    ];
+
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const generatedReview = `${pick(openers)} ${pick(middles)} ${pick(tips)}`;
+    setReview(generatedReview);
     setGeneratingText(false);
   };
 
@@ -268,9 +331,6 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
       if (res && res.caption) {
         setAiCaption(`"${res.caption}"`);
       }
-      if (res && res.tip) {
-        setReview((prev) => (prev ? prev : res.tip));
-      }
     } catch {
       // Graceful fallback to verified tags
       setAiTags(['#Riverside', '#BudgetSnack', '#QuietVibe', '#KeralaGems']);
@@ -375,6 +435,13 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
 
     setPublishing(false);
     setPublished(true);
+    setSpotName('');
+    setReview('');
+    setMapsLink('');
+    setPhotoList([]);
+    setPhotoPreview(null);
+    setAiTags([]);
+    setAiCaption('');
     setTimeout(() => setPublished(false), 3500);
   };
 
@@ -836,7 +903,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
               onChange={(e) => setReview(e.target.value)}
               rows={3}
               placeholder="e.g. Best sunset view with zero crowd. Take the narrow mud path behind the banyan tree. Fresh chai stall nearby costs ₹10."
-              className="w-full text-xs font-semibold text-black bg-transparent outline-none resize-none leading-relaxed"
+              className="w-full text-xs font-semibold text-black bg-transparent outline-none resize-none leading-relaxed placeholder:text-gray-400 placeholder:italic placeholder:font-normal"
             />
           </div>
         </div>
