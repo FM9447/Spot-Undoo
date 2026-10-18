@@ -34,6 +34,7 @@ export default function SettingsModal({
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [avatarSuccess, setAvatarSuccess] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   // Avada Map Style Preference
   const [mapStyle, setMapStyle] = useState(
@@ -165,12 +166,7 @@ export default function SettingsModal({
 
           {onLogout && (
             <button
-              onClick={() => {
-                if (confirm('Log out from this session and return to login?')) {
-                  onLogout();
-                  onClose();
-                }
-              }}
+              onClick={() => setShowLogoutConfirm(true)}
               className="bg-rose-500 hover:bg-rose-600 text-white border-[2px] border-black rounded-xl px-3 py-1.5 text-xs font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5 shrink-0 active:scale-95 transition cursor-pointer"
               title="Log Out of Spot Undoo"
             >
@@ -378,11 +374,8 @@ export default function SettingsModal({
             </button>
             {onLogout && (
               <button
-                onClick={() => {
-                  onLogout();
-                  onClose();
-                }}
-                className="text-xs font-black text-rose-600 hover:text-rose-700 flex items-center gap-1 active:scale-95 transition"
+                onClick={() => setShowLogoutConfirm(true)}
+                className="text-xs font-black text-rose-600 hover:text-rose-700 flex items-center gap-1 active:scale-95 transition cursor-pointer"
               >
                 <LogOut size={13} />
                 <span>Log Out</span>
@@ -392,7 +385,7 @@ export default function SettingsModal({
 
           <button
             onClick={handleSave}
-            className="bg-[#0B3BF4] text-white border-[2.5px] border-black rounded-xl px-5 py-2.5 text-xs font-black shadow-[0_3px_0_0_#000000] active:translate-y-0.5 transition flex items-center gap-1.5"
+            className="bg-[#0B3BF4] text-white border-[2.5px] border-black rounded-xl px-5 py-2.5 text-xs font-black shadow-[0_3px_0_0_#000000] active:translate-y-0.5 transition flex items-center gap-1.5 cursor-pointer"
           >
             {savedSuccess ? (
               <>
@@ -407,6 +400,55 @@ export default function SettingsModal({
             )}
           </button>
         </div>
+
+        {/* ── CUSTOM NEO-BRUTALIST LOGOUT POPUP ── */}
+        {showLogoutConfirm && (
+          <div className="fixed inset-0 z-[100] bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
+            <div className="w-full max-w-sm bg-white border-[3px] border-black rounded-[28px] p-5 shadow-[0_8px_0_0_#000000] space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-rose-100 border-[2px] border-black flex items-center justify-center text-rose-600 shadow-[0_2px_0_0_#000000] shrink-0">
+                  <LogOut size={22} strokeWidth={2.6} />
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-black leading-tight">Log Out Session?</h3>
+                  <p className="text-xs font-semibold text-gray-600 mt-0.5">Return to the sign-in screen</p>
+                </div>
+              </div>
+
+              <div className="bg-[#F4F6F9] border-[2px] border-black rounded-xl p-3 flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-full border border-black overflow-hidden bg-white shrink-0">
+                  <img src={avatar} alt="Avatar" className="w-full h-full object-cover" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs font-black text-black truncate">{name}</div>
+                  <div className="text-[10px] font-bold text-gray-500 truncate">{currentUser?.email || 'explorer@spotundoo.com'}</div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2.5 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setShowLogoutConfirm(false)}
+                  className="bg-white hover:bg-gray-100 border-[2px] border-black rounded-xl py-2.5 text-xs font-black text-black shadow-[0_2px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowLogoutConfirm(false);
+                    if (onLogout) onLogout();
+                    onClose();
+                  }}
+                  className="bg-rose-500 hover:bg-rose-600 text-white border-[2px] border-black rounded-xl py-2.5 text-xs font-black shadow-[0_2px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer flex items-center justify-center gap-1.5"
+                >
+                  <LogOut size={13} strokeWidth={2.6} />
+                  <span>Yes, Log Out</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
