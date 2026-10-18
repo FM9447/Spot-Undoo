@@ -40,14 +40,14 @@ def test_plan_update():
     current_city = "Shoranur"
     hub_name = "Shoranur Jn Hub (Palakkad)"
     current_stops = ["River Ghat Step Walk (Hidden Spots)", "Varikkasseri Mana Heritage (Hidden Spots)"]
-    user_adjustment_prompt = "Train got delayed by 25 mins. Drop the far heritage house and add an authentic hot tea/pazhampori stall with quick walking return."
+    user_adjustment_prompt = "Drop River Ghat Step Walk and add Amma's Crispy Vada & Chai"
 
     system_prompt = "You are Spot Undo AI travel planner for Kerala. You adapt itineraries dynamically based on real-time user requests."
 
     user_content = f"""You are Spot Undo AI travel planner for Kerala.
 User wants to modify this existing itinerary:
 Current stops: River Ghat Step Walk, Varikkasseri Mana Heritage
-User request: "Train delayed by 20m, need fastest route and add a tea stop"
+User request: "{user_adjustment_prompt}"
 
 City: Shoranur (Hub: Shoranur Jn Hub (Palakkad))
 Available spots:
@@ -74,7 +74,7 @@ Output format: Start immediately with the opening brace {{{{ without ANY thinkin
     print("📥 INPUT PROMPT SENT TO MODEL:")
     print("-" * 65)
     print(f"📍 Location: {hub_name}")
-    print(f"💬 User Modification Prompt: \"Train delayed by 20m, need fastest route and add a tea stop\"")
+    print(f"💬 User Modification Prompt: \"{user_adjustment_prompt}\"")
     print("-" * 65)
 
     # Format using tokenizer chat template and prefill JSON start

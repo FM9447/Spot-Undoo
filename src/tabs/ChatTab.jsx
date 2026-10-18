@@ -81,11 +81,14 @@ User wants to modify this existing itinerary:
 Current stops: ${currentStops.map((s) => s.name).join(', ')}
 User request: "${promptToUse}"
 
-City: ${currentCity.name}
+City: ${currentCity.name} (Hub: ${currentCity.hub?.name || currentCity.name})
 Available spots:
 ${(currentCity.spots || []).map((s) => `- ${s.name} (${s.category}, ₹${s.expense}, ${s.time}m)`).join('\n')}
 
-Return JSON ONLY:
+Rules:
+- If user says "remove X" or "drop X", do NOT include X.
+- If user says "add Y", include Y from Available spots.
+- Return valid JSON only starting immediately with {:
 {
   "updatedTitle": "short plan title",
   "reasoning": "short 1-sentence note of what changed",
@@ -103,20 +106,21 @@ Return JSON ONLY:
       if (res && Array.isArray(res.stops) && res.stops.length > 0) {
         const updatedStops = res.stops.map((s, idx) => {
           const matched = (currentCity.spots || []).find((c) =>
-            c.name.toLowerCase().includes(s.name.toLowerCase())
+            c.name.toLowerCase().includes(s.name.toLowerCase()) ||
+            s.name.toLowerCase().includes(c.name.toLowerCase())
           );
           return {
             id: matched?.id || `mod-${idx}-${Date.now()}`,
             step: idx + 1,
             name: matched?.name || s.name,
-            time: s.time || matched?.time || '30m',
-            costText: `₹${s.expense ?? matched?.expense ?? 0} • ${s.time || '30m'}`,
+            time: s.time || (matched?.time ? `${matched.time}m` : '30m'),
+            costText: `₹${s.expense ?? matched?.expense ?? 0} • ${s.time || (matched?.time ? `${matched.time}m` : '30m')}`,
             transitPill: s.transit || matched?.transit || '🚶 6m • Free',
-            photo: matched?.photo || currentCity.spots[0].photo,
+            photo: matched?.photo || currentCity.spots[0]?.photo || 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=70',
             expense: s.expense ?? matched?.expense ?? 0,
             data: matched || currentCity.spots[0],
-            lat: matched?.lat || currentCity.hub.lat,
-            lng: matched?.lng || currentCity.hub.lng,
+            lat: matched?.lat || currentCity.hub?.lat || 10.76,
+            lng: matched?.lng || currentCity.hub?.lng || 76.27,
           };
         });
 
@@ -139,47 +143,109 @@ Return JSON ONLY:
       console.warn('AI modify plan fallback:', err);
     }
 
-    // Heuristic instant modifier
+    // Heuristic instant modifier for remove/add/swap operations
     const lower = promptToUse.toLowerCase();
     const currentP = plans[activePlanIdx];
     let newStops = [...(currentP.stops || [])];
+    let actionReason = '';
 
-    if (lower.includes('faster') || lower.includes('short') || lower.includes('delay') || lower.includes('quick')) {
-      if (newStops.length > 1) newStops = newStops.slice(0, Math.max(1, newStops.length - 1));
-      setModificationMsg(`⚡ Shortened plan by dropping the furthest stop for fastest return!`);
-    } else if (lower.includes('tea') || lower.includes('chai') || lower.includes('snack') || lower.includes('food') || lower.includes('eat')) {
-      const foodSpot = (currentCity.spots || []).find((s) => s.category?.toLowerCase().includes('food')) || currentCity.spots[1];
-      if (foodSpot && !newStops.some((s) => s.name === foodSpot.name)) {
-        newStops.push({
-          id: foodSpot.id,
-          step: newStops.length + 1,
-          name: foodSpot.name,
-          time: `${foodSpot.time}m`,
-          costText: `₹${foodSpot.expense} • ${foodSpot.time}m`,
-          transitPill: foodSpot.transit || '🚶 5m • Free',
-          photo: foodSpot.photo,
-          expense: foodSpot.expense,
-          data: foodSpot,
-          lat: foodSpot.lat,
-          lng: foodSpot.lng,
-        });
-        setModificationMsg(`☕ Added authentic chai & snack stop: ${foodSpot.name}!`);
+    // Check for remove / drop keywords
+    const isRemove = lower.includes('remove') || lower.includes('drop') || lower.includes('delete') || lower.includes('cut');
+    const isAdd = lower.includes('add') || lower.includes('include') || lower.includes('put') || lower.includes('swap');
+
+    // 1. Handle REMOVE
+    if (isRemove) {
+      // Check if user specified 1st, 2nd, last, etc.
+      if (lower.includes('1st') || lower.includes('first') || lower.includes('stop 1')) {
+        if (newStops.length > 1) {
+          const removed = newStops.shift();
+          actionReason = `Dropped 1st stop (${removed.name})`;
+        }
+      } else if (lower.includes('2nd') || lower.includes('second') || lower.includes('stop 2')) {
+        if (newStops.length > 1) {
+          const removed = newStops.splice(1, 1);
+          actionReason = `Dropped 2nd stop (${removed[0]?.name})`;
+        }
+      } else if (lower.includes('last')) {
+        if (newStops.length > 1) {
+          const removed = newStops.pop();
+          actionReason = `Dropped last stop (${removed.name})`;
+        }
+      } else {
+        // Try matching by stop name
+        const foundIdx = newStops.findIndex((s) =>
+          lower.includes(s.name.toLowerCase().split(' ')[0]) ||
+          lower.includes(s.name.toLowerCase())
+        );
+        if (foundIdx !== -1 && newStops.length > 1) {
+          const removed = newStops.splice(foundIdx, 1);
+          actionReason = `Removed ${removed[0]?.name}`;
+        } else if (newStops.length > 1) {
+          // Drop furthest
+          const removed = newStops.pop();
+          actionReason = `Removed ${removed.name}`;
+        }
       }
-    } else if (lower.includes('budget') || lower.includes('cheap') || lower.includes('free') || lower.includes('reduce')) {
-      newStops.sort((a, b) => (a.expense || 0) - (b.expense || 0));
-      setModificationMsg(`💰 Prioritized free & ultra-low cost spots to preserve budget!`);
-    } else {
-      setModificationMsg(`✨ Re-balanced route timings and transit for: "${promptToUse}".`);
     }
+
+    // 2. Handle ADD
+    if (isAdd || lower.includes('tea') || lower.includes('chai') || lower.includes('food') || lower.includes('beach') || lower.includes('fort')) {
+      // Find candidate from available spots not already in plan
+      const candidate = (currentCity.spots || []).find((s) => {
+        const sLower = s.name.toLowerCase();
+        const catLower = (s.category || '').toLowerCase();
+        const inPlan = newStops.some((ns) => ns.name.toLowerCase() === sLower);
+        if (inPlan) return false;
+
+        if (lower.includes('tea') || lower.includes('chai')) return sLower.includes('tea') || sLower.includes('chai') || catLower.includes('food');
+        if (lower.includes('food') || lower.includes('snack') || lower.includes('eat')) return catLower.includes('food') || sLower.includes('biryani') || sLower.includes('baje');
+        if (lower.includes('beach')) return sLower.includes('beach');
+        if (lower.includes('fort') || lower.includes('heritage')) return sLower.includes('fort') || catLower.includes('hidden');
+        if (lower.includes('game') || lower.includes('gaming')) return catLower.includes('gaming');
+        
+        // Match any part of spot name in user prompt
+        return lower.includes(sLower.split(' ')[0]) || lower.includes(sLower);
+      }) || (currentCity.spots || []).find((s) => !newStops.some((ns) => ns.name === s.name));
+
+      if (candidate) {
+        newStops.push({
+          id: candidate.id,
+          step: newStops.length + 1,
+          name: candidate.name,
+          time: `${candidate.time}m`,
+          costText: `₹${candidate.expense} • ${candidate.time}m`,
+          transitPill: candidate.transit || '🚶 5m • Free',
+          photo: candidate.photo,
+          expense: candidate.expense,
+          data: candidate,
+          lat: candidate.lat,
+          lng: candidate.lng,
+        });
+        actionReason += (actionReason ? ' and added ' : 'Added ') + candidate.name;
+      }
+    }
+
+    if (!actionReason) {
+      if (lower.includes('budget') || lower.includes('cheap') || lower.includes('free')) {
+        newStops.sort((a, b) => (a.expense || 0) - (b.expense || 0));
+        actionReason = 'Prioritized free & low-cost spots';
+      } else {
+        actionReason = `Re-balanced plan for "${promptToUse}"`;
+      }
+    }
+
+    // Renumber steps
+    newStops = newStops.map((s, i) => ({ ...s, step: i + 1 }));
 
     const updatedPlan = {
       ...currentP,
       stops: newStops,
-      vibe: `Customized: "${promptToUse}"`,
+      vibe: actionReason,
     };
     const newPlans = [...plans];
     newPlans[activePlanIdx] = updatedPlan;
     setPlans(newPlans);
+    setModificationMsg(`✨ Plan updated: ${actionReason}!`);
     setChatModifierInput('');
     setIsModifyingPlan(false);
   };
