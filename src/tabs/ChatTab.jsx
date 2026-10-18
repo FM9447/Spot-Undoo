@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Sparkles, MapPin, ExternalLink, Bookmark, Clock, ArrowRight, Loader2, Star, ArrowLeft, History, Check, X, Navigation, Send, CheckCircle2, Search, ChevronDown } from 'lucide-react';
+import { Sparkles, MapPin, ExternalLink, Bookmark, Clock, ArrowRight, Loader2, Star, ArrowLeft, History, Check, X, Navigation, Send, CheckCircle2, Search, ChevronDown, Layers } from 'lucide-react';
 import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { ollamaChat } from '../utils/ollama';
 import ImageCarousel from '../components/ImageCarousel';
+import InteractiveMap from '../components/InteractiveMap';
 import { getBackendUrl } from '../utils/apiConfig';
 import { haversineKm } from '../utils/plannerMath';
 import SpotUndooLoadingScreen from '../components/SpotUndooLoadingScreen';
@@ -28,6 +29,9 @@ export default function ChatTab({ location, setLocation, settings }) {
   const [viewState, setViewState] = useState(() => {
     return localStorage.getItem('spot_undoo_viewState') || 'form';
   });
+
+  // Toggle between cartoon Trail Canvas and Live OpenStreetMap
+  const [mapViewMode, setMapViewMode] = useState('trail'); // 'trail' | 'osm'
   const [selectedCityKey, setSelectedCityKey] = useState(() => {
     return localStorage.getItem('spot_undoo_cityKey') || 'Shoranur';
   });
@@ -148,65 +152,98 @@ export default function ChatTab({ location, setLocation, settings }) {
       return timeStr;
     };
 
-    // Candidate pool: current city spots + user uploaded spots + all Kerala city spots + authentic local fallbacks
+    // Detect if user is specifically requesting a spot or destination in another city
+    let activeCityKey = selectedCityKey;
+    let activeCity = currentCity;
+
+    const cityAliasMap = {
+      calicut: 'Calicut',
+      kozhikode: 'Calicut',
+      kochi: 'Kochi',
+      ernakulam: 'Kochi',
+      trivandrum: 'Trivandrum',
+      thiruvananthapuram: 'Trivandrum',
+      munnar: 'Munnar',
+      wayanad: 'Wayanad',
+      alappuzha: 'Alappuzha',
+      alleppey: 'Alappuzha',
+      thrissur: 'Thrissur',
+      kannur: 'Kannur',
+      kollam: 'Kollam',
+      kottayam: 'Kottayam',
+      varkala: 'Varkala',
+      palakkad: 'Palakkad',
+      shoranur: 'Shoranur',
+      malappuram: 'Malappuram',
+    };
+
+    for (const [alias, key] of Object.entries(cityAliasMap)) {
+      if (lower.includes(alias) && KERALA_CITIES[key]) {
+        activeCityKey = key;
+        activeCity = KERALA_CITIES[key];
+        setSelectedCityKey(key);
+        break;
+      }
+    }
+
+    // Candidate pool: strictly target city spots + user uploaded spots for this city + authentic local fallbacks
     const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
     const userCitySpots = stored.filter(
       (s) =>
-        s.cityKey === selectedCityKey ||
-        (s.cityName && s.cityName.toLowerCase() === currentCity.name.toLowerCase())
+        s.cityKey === activeCityKey ||
+        (s.cityName && s.cityName.toLowerCase() === activeCity.name.toLowerCase())
     );
-    const otherCitySpots = Object.values(KERALA_CITIES).flatMap((c) => c.spots || []);
+
     const candidatePool = [
-      ...(currentCity.spots || []),
+      ...(activeCity.spots || []),
       ...userCitySpots,
-      ...otherCitySpots,
       {
-        id: `fb-${currentCity.name}-1`,
-        name: `${currentCity.name} River Viewpoint`,
+        id: `fb-${activeCity.name}-1`,
+        name: `${activeCity.name} River Viewpoint`,
         category: 'Hidden Spots',
         badge: 'VIEWPOINT',
         expense: 0,
         spendTime: 30,
         transitText: '🚶 6m • Free',
-        photo: currentCity.spots[0]?.photo,
-        lat: currentCity.hub.lat + 0.008,
-        lng: currentCity.hub.lng + 0.006,
+        photo: activeCity.spots?.[0]?.photo,
+        lat: activeCity.hub.lat + 0.008,
+        lng: activeCity.hub.lng + 0.006,
       },
       {
-        id: `fb-${currentCity.name}-2`,
-        name: `${currentCity.name} Malabar Tea & Snacks`,
+        id: `fb-${activeCity.name}-2`,
+        name: `${activeCity.name} Malabar Tea & Snacks`,
         category: 'Food',
         badge: 'LOCAL FOOD',
         expense: 30,
         spendTime: 25,
         transitText: '🚶 4m • Free',
-        photo: currentCity.spots[1]?.photo || currentCity.spots[0]?.photo,
-        lat: currentCity.hub.lat - 0.005,
-        lng: currentCity.hub.lng - 0.004,
+        photo: activeCity.spots?.[1]?.photo || activeCity.spots?.[0]?.photo,
+        lat: activeCity.hub.lat - 0.005,
+        lng: activeCity.hub.lng - 0.004,
       },
       {
-        id: `fb-${currentCity.name}-3`,
-        name: `${currentCity.name} Heritage Lane Walk`,
+        id: `fb-${activeCity.name}-3`,
+        name: `${activeCity.name} Heritage Lane Walk`,
         category: 'Hidden Spots',
         badge: 'HERITAGE',
         expense: 0,
         spendTime: 40,
         transitText: '🚶 8m • Free',
-        photo: currentCity.spots[2]?.photo || currentCity.spots[0]?.photo,
-        lat: currentCity.hub.lat + 0.004,
-        lng: currentCity.hub.lng - 0.006,
+        photo: activeCity.spots?.[2]?.photo || activeCity.spots?.[0]?.photo,
+        lat: activeCity.hub.lat + 0.004,
+        lng: activeCity.hub.lng - 0.006,
       },
       {
-        id: `fb-${currentCity.name}-4`,
-        name: `${currentCity.name} Spice Corner Market`,
+        id: `fb-${activeCity.name}-4`,
+        name: `${activeCity.name} Spice Corner Market`,
         category: 'Shopping',
         badge: 'MARKET',
         expense: 120,
         spendTime: 45,
         transitText: '🛺 10m • ₹30',
-        photo: currentCity.spots[0]?.photo,
-        lat: currentCity.hub.lat - 0.007,
-        lng: currentCity.hub.lng + 0.005,
+        photo: activeCity.spots?.[0]?.photo,
+        lat: activeCity.hub.lat - 0.007,
+        lng: activeCity.hub.lng + 0.005,
       },
     ];
 
@@ -221,13 +258,13 @@ export default function ChatTab({ location, setLocation, settings }) {
         badge: customBadge || cand.badge || 'ACTIVE',
         costText: exp === 0 ? `Free • ${mins}m` : `₹${exp} • ${mins}m`,
         transitPill: cand.transitText || cand.transitPill || cand.transit || '🚶 6m • Free',
-        photo: cand.photo || (cand.photos && cand.photos[0]) || currentCity.spots[0]?.photo,
-        photos: cand.photos || (cand.photo ? [cand.photo] : [currentCity.spots[0]?.photo]),
+        photo: cand.photo || (cand.photos && cand.photos[0]) || activeCity.spots?.[0]?.photo,
+        photos: cand.photos || (cand.photo ? [cand.photo] : [activeCity.spots?.[0]?.photo]),
         links: cand.links || [],
         expense: exp,
         data: cand,
-        lat: cand.lat || currentCity.hub.lat,
-        lng: cand.lng || currentCity.hub.lng,
+        lat: cand.lat || activeCity.hub.lat,
+        lng: cand.lng || activeCity.hub.lng,
       };
     };
 
@@ -1538,282 +1575,84 @@ Return JSON in this format:
             </button>
           </div>
 
-          {/* 3-Plan Tabs Selector */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-            {plans.map((p, idx) => {
-              const isSelected = activePlanIdx === idx;
-              return (
-                <button
-                  key={p.id || idx}
-                  onClick={() => {
-                    setActivePlanIdx(idx);
-                    if (p.stops?.[0]?.data) {
-                      setSelectedSpot(p.stops[0].data);
-                    }
-                  }}
-                  className={`text-xs font-black px-3 py-1.5 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] shrink-0 active:translate-y-0.5 ${
-                    isSelected
-                      ? 'bg-[#0B3BF4] text-white'
-                      : 'bg-white text-black hover:bg-gray-100'
-                  }`}
-                >
-                  {p.title?.split(':')[0] || `Plan ${idx + 1}`}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Trail Map Canvas (Scrollable with Dynamic Multi-Stop Path) */}
-          <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[78vh] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
-            {/* Dynamic Trail SVG Line: Starts at START at top, terminates at END at bottom */}
-            {(() => {
-              const stops = currentPlan.stops || [];
-              const stopsCount = stops.length;
-              const stopNodes = stops.map((_, sIdx) => {
-                const isLeft = sIdx % 2 === 0;
-                return {
-                  cx: isLeft ? 26 : 330,
-                  cy: 114 + sIdx * 96,
-                  idx: sIdx,
-                };
-              });
-
-              const endCy = stopsCount === 0 ? 90 : 60 + stopsCount * 96 + 12;
-              const endPoint = { cx: 180, cy: endCy };
-              const svgHeight = endCy + 70;
-
-              // Build smooth curved path through all stops
-              let pathD = `M 240 18`;
-              if (stopNodes.length > 0) {
-                pathD += ` C 140 22, 26 55, ${stopNodes[0].cx} ${stopNodes[0].cy}`;
-                for (let i = 0; i < stopNodes.length - 1; i++) {
-                  const curr = stopNodes[i];
-                  const next = stopNodes[i + 1];
-                  const midY = (curr.cy + next.cy) / 2;
-                  const c1x = curr.cx > next.cx ? curr.cx - 60 : curr.cx + 60;
-                  const c2x = next.cx < curr.cx ? next.cx - 50 : next.cx + 50;
-                  pathD += ` C ${c1x} ${midY - 10}, ${c2x} ${midY + 10}, ${next.cx} ${next.cy}`;
-                }
-                const last = stopNodes[stopNodes.length - 1];
-                const lastMidY = (last.cy + endCy) / 2;
-                const cLastX = last.cx > 180 ? 250 : 110;
-                pathD += ` C ${cLastX} ${lastMidY}, 180 ${endCy - 15}, ${endPoint.cx} ${endPoint.cy}`;
-              } else {
-                pathD += ` C 180 30, 180 60, ${endPoint.cx} ${endPoint.cy}`;
-              }
-
-              return (
-                <svg
-                  className="absolute inset-0 w-full pointer-events-none"
-                  style={{ height: `${svgHeight}px` }}
-                  viewBox={`0 0 360 ${svgHeight}`}
-                >
-                  <defs>
-                    <linearGradient id="neonCyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#38BDF8" />
-                      <stop offset="50%" stopColor="#06B6D4" />
-                      <stop offset="100%" stopColor="#0284C7" />
-                    </linearGradient>
-                    <filter id="trailGlow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feDropShadow dx="0" dy="1" stdDeviation="3" floodColor="#38BDF8" floodOpacity="0.45" />
-                    </filter>
-                  </defs>
-
-                  {/* Outer casing: Sleek Dark Slate Border */}
-                  <path
-                    d={pathD}
-                    fill="none"
-                    stroke="#090D16"
-                    strokeWidth="9"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-
-                  {/* Inner Path: Electric Sky-Blue / Neon Cyan */}
-                  <path
-                    d={pathD}
-                    fill="none"
-                    stroke="url(#neonCyanGlow)"
-                    strokeWidth="4.5"
-                    strokeDasharray="9 5"
-                    strokeLinecap="round"
-                    filter="url(#trailGlow)"
-                  />
-
-                  {/* Start Waypoint Node (Top right at Start Station) */}
-                  <circle cx="240" cy="18" r="5.5" fill="#0B3BF4" stroke="#090D16" strokeWidth="2" />
-
-                  {/* Dynamic Waypoint Nodes for all Stops */}
-                  {stopNodes.map((node, i) => (
-                    <circle
-                      key={i}
-                      cx={node.cx}
-                      cy={node.cy}
-                      r="6"
-                      fill={visitedStopIds.length > i ? '#10B981' : '#06B6D4'}
-                      stroke="#090D16"
-                      strokeWidth="2"
-                    />
-                  ))}
-
-                  {/* END Waypoint Node placed exactly at the top center of the SAFE RETURN box */}
-                  <circle cx={endPoint.cx} cy={endPoint.cy} r="6" fill="#F59E0B" stroke="#090D16" strokeWidth="2" />
-                </svg>
-              );
-            })()}
-
-            {/* TOP HEADER: STARTING PLACE */}
-            <div className="relative z-10 flex items-center justify-between gap-1 mb-3 h-[36px]">
-              <div className="bg-[#FEF3C7] border-[2px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-amber-900 shadow-[0_2px_0_0_#000000] flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block" />
-                <span>STARTING PLACE</span>
-              </div>
-
-              {/* START Station Pill */}
-              <div className="bg-white border-[2px] border-black rounded-full px-3 py-1 flex items-center gap-1.5 text-xs font-black shadow-[0_2px_0_0_#000000]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#0B3BF4] border border-black inline-block" />
-                <span>START • {currentPlan.startTime || '14:00'}</span>
-                <span className="text-gray-400">|</span>
-                <span>{currentCity.hub.stationName}</span>
-                <span className="text-[#0B3BF4]">↗</span>
-              </div>
-            </div>
-
-            {/* Dynamic Trail Steps with Live GPS Distance & Check-in */}
-            <div className="relative z-10 space-y-3">
-              {(currentPlan.stops || []).length === 0 && (
-                <div className="py-4 px-3 text-center bg-white/70 border-[2px] border-dashed border-gray-400 rounded-2xl shadow-[0_2px_0_0_#000000]">
-                  <p className="text-xs font-black text-black">Route cleared</p>
-                  <p className="text-[10px] font-bold text-gray-500 mt-0.5">
-                    Ask AI to "add [place]" or choose a vibe below
-                  </p>
-                </div>
-              )}
-              {(currentPlan.stops || []).map((stop, sIdx) => {
-                const isLeft = sIdx % 2 === 0;
-                const stopId = stop.id || stop.name;
-                const isReached = visitedStopIds.includes(stopId);
-                const stopLat = stop.lat || stop.data?.lat || currentCity.hub.lat;
-                const stopLng = stop.lng || stop.data?.lng || currentCity.hub.lng;
-                const distKm = location?.lat
-                  ? haversineKm(location.lat, location.lon, stopLat, stopLng)
-                  : null;
-                const distMeters = distKm !== null ? Math.round(distKm * 1000) : null;
-
+          {/* Plan Switcher Pills & Interactive Route Map Toggle */}
+          <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <div className="flex items-center gap-1.5 shrink-0">
+              {plans.map((p, idx) => {
+                const isSelected = activePlanIdx === idx;
                 return (
-                  <div key={sIdx} className="space-y-1">
-                    {/* Transit pill & GPS Check-in badge above card */}
-                    <div className={`flex items-center gap-1.5 ${isLeft ? 'justify-start pl-16' : 'justify-center pr-6'}`}>
-                      <span className="bg-[#FEF3C7] border-[1.5px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-black shadow-[0_1px_0_0_#000000]">
-                        {stop.transitPill || '🚶 8m • Free'}
-                      </span>
-
-                      {/* GPS Check-In Button / Reached Status */}
-                      <button
-                        type="button"
-                        onClick={() => toggleCheckIn(stopId)}
-                        className={`text-[9px] font-black px-2 py-0.5 rounded-full border border-black flex items-center gap-1 shadow-[0_1px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer ${
-                          isReached
-                            ? 'bg-emerald-500 text-white'
-                            : distMeters && distMeters < 300
-                            ? 'bg-emerald-100 text-emerald-800 animate-pulse'
-                            : 'bg-white text-gray-700 hover:bg-gray-100'
-                        }`}
-                        title="Click to check in or mark reached"
-                      >
-                        {isReached ? (
-                          <>
-                            <Check size={9} strokeWidth={3} />
-                            <span>Reached</span>
-                          </>
-                        ) : (
-                          <>
-                            <Navigation size={8} />
-                            <span>{distMeters ? `${distMeters}m away` : 'Check In'}</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-
-                    {isLeft ? (
-                      <div className="flex items-center gap-2">
-                        <div
-                          className={`w-7 h-7 rounded-full border-[2px] border-black font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
-                            isReached ? 'bg-emerald-500 text-white' : 'bg-[#0B3BF4] text-white'
-                          }`}
-                        >
-                          {isReached ? <Check size={14} strokeWidth={3} /> : sIdx + 1}
-                        </div>
-                        <div
-                          onClick={() => setSelectedSpot(stop.data || stop)}
-                          className={`bg-white border-[2.5px] rounded-2xl p-1.5 shadow-[0_3px_0_0_#000000] flex items-center gap-2 cursor-pointer hover:scale-102 transition flex-1 max-w-[220px] ${
-                            isReached ? 'border-emerald-600 ring-2 ring-emerald-400/30' : 'border-black'
-                          }`}
-                        >
-                          <img
-                            src={stop.photo || currentCity.spots[0].photo}
-                            alt={stop.name}
-                            className="w-12 h-12 rounded-xl border-[1.5px] border-black object-cover shrink-0"
-                          />
-                          <div className="leading-tight overflow-hidden">
-                            <div className="flex items-center gap-1 truncate">
-                              <span className="font-black text-xs text-black truncate">
-                                {stop.name}
-                              </span>
-                              {isReached ? (
-                                <span className="bg-emerald-500 text-white font-black text-[7px] px-1 rounded uppercase shrink-0">
-                                  VISITED
-                                </span>
-                              ) : stop.badge ? (
-                                <span className="bg-[#F59E0B] border border-black text-black font-black text-[8px] px-1 rounded uppercase shrink-0">
-                                  {stop.badge}
-                                </span>
-                              ) : null}
-                            </div>
-                            <div className="text-[11px] font-bold text-emerald-700 mt-0.5">
-                              {stop.costText || 'Free • 30m'} ↗
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-end gap-2 pr-1">
-                        <div
-                          onClick={() => setSelectedSpot(stop.data || stop)}
-                          className={`bg-white border-[2px] rounded-2xl p-1.5 shadow-[0_3px_0_0_#000000] flex items-center gap-2 cursor-pointer hover:scale-102 transition max-w-[210px] ${
-                            isReached ? 'border-emerald-600 ring-2 ring-emerald-400/30' : 'border-black'
-                          }`}
-                        >
-                          <div className="leading-tight text-right flex-1 overflow-hidden">
-                            <div className="font-black text-xs text-black truncate">
-                              {stop.name}
-                            </div>
-                            <div className="text-[11px] font-bold text-emerald-700 mt-0.5">
-                              {stop.costText || 'Free • 30m'} ↗
-                            </div>
-                          </div>
-                          <img
-                            src={stop.photo || currentCity.spots[1]?.photo}
-                            alt={stop.name}
-                            className="w-12 h-12 rounded-xl border-[1.5px] border-black object-cover shrink-0"
-                          />
-                        </div>
-                        <div
-                          className={`w-7 h-7 rounded-full border-[2px] border-black font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
-                            isReached ? 'bg-emerald-500 text-white' : 'bg-[#0B3BF4] text-white'
-                          }`}
-                        >
-                          {isReached ? <Check size={14} strokeWidth={3} /> : sIdx + 1}
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  <button
+                    key={p.id || idx}
+                    onClick={() => {
+                      setActivePlanIdx(idx);
+                      if (p.stops?.[0]?.data) {
+                        setSelectedSpot(p.stops[0].data);
+                      }
+                    }}
+                    className={`text-xs font-black px-3 py-1.5 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] shrink-0 active:translate-y-0.5 ${
+                      isSelected
+                        ? 'bg-[#0B3BF4] text-white'
+                        : 'bg-white text-black hover:bg-gray-100'
+                    }`}
+                  >
+                    {p.title?.split(':')[0] || `Plan ${idx + 1}`}
+                  </button>
                 );
               })}
             </div>
 
-            {/* MANDATORY SAFE RETURN END LOCATION ALWAYS ON THE BOTTOM OF THAT BOX */}
-            <div className="relative z-10 mt-3 mb-1">
+            {/* Trail Canvas vs OSM Live Map Toggle */}
+            <div className="flex items-center gap-1 bg-white border-[2px] border-black rounded-full p-0.5 shadow-[0_2px_0_0_#000000] shrink-0">
+              <button
+                type="button"
+                onClick={() => setMapViewMode('trail')}
+                className={`px-2.5 py-1 rounded-full text-[11px] font-black transition flex items-center gap-1 ${
+                  mapViewMode === 'trail'
+                    ? 'bg-[#0B3BF4] text-white'
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <span>🗺️</span>
+                <span>Trail</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setMapViewMode('osm')}
+                className={`px-2.5 py-1 rounded-full text-[11px] font-black transition flex items-center gap-1 ${
+                  mapViewMode === 'osm'
+                    ? 'bg-[#0B3BF4] text-white'
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <span>🛰️</span>
+                <span>Map</span>
+              </button>
+            </div>
+          </div>
+
+          {/* VIEW MODE 1: OSM Live Map Mode */}
+          {mapViewMode === 'osm' ? (
+            <div className="space-y-3">
+              <InteractiveMap
+                center={[currentCity.hub.lat, currentCity.hub.lng]}
+                zoom={13}
+                spots={(currentPlan.stops || []).map((s, i) => ({
+                  ...s,
+                  lat: s.lat || s.data?.lat || (currentCity.hub.lat + 0.008 * (i + 1)),
+                  lng: s.lng || s.data?.lng || (currentCity.hub.lng + 0.006 * (i + 1)),
+                }))}
+                selectedSpot={selectedSpot}
+                onSelectSpot={setSelectedSpot}
+                userLocation={{
+                  lat: currentCity.hub.lat,
+                  lon: currentCity.hub.lng,
+                  label: currentCity.hub.stationName,
+                }}
+                showRoute={true}
+                height="500px"
+              />
+
+              {/* SAFE RETURN BOX UNDER MAP */}
               <div className="bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-3 px-3.5 flex items-center justify-between shadow-[0_4px_0_0_#000000]">
                 <div className="flex items-center gap-2.5">
                   <span className="w-7 h-7 rounded-full bg-black text-amber-400 font-black text-sm flex items-center justify-center shrink-0 shadow-[0_1px_0_0_#000000]">
@@ -1833,7 +1672,291 @@ Return JSON in this format:
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            /* VIEW MODE 2: Scrollable Neo-Brutalist Trail Canvas (Generously Spaced & De-congested) */
+            <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[78vh] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
+              {/* Dynamic Trail SVG Line: Starts at START at top, terminates at END at bottom */}
+              {(() => {
+                const stops = currentPlan.stops || [];
+                const stopsCount = stops.length;
+                const stepGap = 132;
+                const stopNodes = stops.map((_, sIdx) => {
+                  const isLeft = sIdx % 2 === 0;
+                  return {
+                    cx: isLeft ? 26 : 330,
+                    cy: 122 + sIdx * stepGap,
+                    idx: sIdx,
+                  };
+                });
+
+                const endCy = stopsCount === 0 ? 90 : 70 + stopsCount * stepGap + 18;
+                const endPoint = { cx: 180, cy: endCy };
+                const svgHeight = endCy + 75;
+
+                // Build smooth curved path through all stops
+                let pathD = `M 240 18`;
+                if (stopNodes.length > 0) {
+                  pathD += ` C 140 22, 26 55, ${stopNodes[0].cx} ${stopNodes[0].cy}`;
+                  for (let i = 0; i < stopNodes.length - 1; i++) {
+                    const curr = stopNodes[i];
+                    const next = stopNodes[i + 1];
+                    const midY = (curr.cy + next.cy) / 2;
+                    const c1x = curr.cx > next.cx ? curr.cx - 60 : curr.cx + 60;
+                    const c2x = next.cx < curr.cx ? next.cx - 50 : next.cx + 50;
+                    pathD += ` C ${c1x} ${midY - 10}, ${c2x} ${midY + 10}, ${next.cx} ${next.cy}`;
+                  }
+                  const last = stopNodes[stopNodes.length - 1];
+                  const lastMidY = (last.cy + endCy) / 2;
+                  const cLastX = last.cx > 180 ? 250 : 110;
+                  pathD += ` C ${cLastX} ${lastMidY}, 180 ${endCy - 15}, ${endPoint.cx} ${endPoint.cy}`;
+                } else {
+                  pathD += ` C 180 30, 180 60, ${endPoint.cx} ${endPoint.cy}`;
+                }
+
+                return (
+                  <svg
+                    className="absolute inset-0 w-full pointer-events-none"
+                    style={{ height: `${svgHeight}px` }}
+                    viewBox={`0 0 360 ${svgHeight}`}
+                  >
+                    <defs>
+                      <linearGradient id="neonCyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#38BDF8" />
+                        <stop offset="50%" stopColor="#06B6D4" />
+                        <stop offset="100%" stopColor="#0284C7" />
+                      </linearGradient>
+                      <filter id="trailGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="1" stdDeviation="3" floodColor="#38BDF8" floodOpacity="0.45" />
+                      </filter>
+                    </defs>
+
+                    {/* Outer casing: Sleek Dark Slate Border */}
+                    <path
+                      d={pathD}
+                      fill="none"
+                      stroke="#090D16"
+                      strokeWidth="9"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+
+                    {/* Inner Path: Electric Sky-Blue / Neon Cyan */}
+                    <path
+                      d={pathD}
+                      fill="none"
+                      stroke="url(#neonCyanGlow)"
+                      strokeWidth="4.5"
+                      strokeDasharray="9 5"
+                      strokeLinecap="round"
+                      filter="url(#trailGlow)"
+                    />
+
+                    {/* Start Waypoint Node (Top right at Start Station) */}
+                    <circle cx="240" cy="18" r="5.5" fill="#0B3BF4" stroke="#090D16" strokeWidth="2" />
+
+                    {/* Dynamic Waypoint Nodes for all Stops */}
+                    {stopNodes.map((node, i) => (
+                      <circle
+                        key={i}
+                        cx={node.cx}
+                        cy={node.cy}
+                        r="6"
+                        fill={visitedStopIds.length > i ? '#10B981' : '#06B6D4'}
+                        stroke="#090D16"
+                        strokeWidth="2"
+                      />
+                    ))}
+
+                    {/* END Waypoint Node placed exactly at the top center of the SAFE RETURN box */}
+                    <circle cx={endPoint.cx} cy={endPoint.cy} r="6" fill="#F59E0B" stroke="#090D16" strokeWidth="2" />
+                  </svg>
+                );
+              })()}
+
+              {/* TOP HEADER: STARTING PLACE */}
+              <div className="relative z-10 flex items-center justify-between gap-1 mb-3 h-[36px]">
+                <div className="bg-[#FEF3C7] border-[2px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-amber-900 shadow-[0_2px_0_0_#000000] flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block" />
+                  <span>STARTING PLACE</span>
+                </div>
+
+                {/* START Station Pill */}
+                <div className="bg-white border-[2px] border-black rounded-full px-3 py-1 flex items-center gap-1.5 text-xs font-black shadow-[0_2px_0_0_#000000]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#0B3BF4] border border-black inline-block" />
+                  <span>START • {currentPlan.startTime || '14:00'}</span>
+                  <span className="text-gray-400">|</span>
+                  <span>{currentCity.hub.stationName}</span>
+                  <span className="text-[#0B3BF4]">↗</span>
+                </div>
+              </div>
+
+              {/* Dynamic Trail Steps with Live GPS Distance & Check-in (Spacious 132px spacing) */}
+              <div className="relative z-10 space-y-4">
+                {(currentPlan.stops || []).length === 0 && (
+                  <div className="py-4 px-3 text-center bg-white/70 border-[2px] border-dashed border-gray-400 rounded-2xl shadow-[0_2px_0_0_#000000]">
+                    <p className="text-xs font-black text-black">Route cleared</p>
+                    <p className="text-[10px] font-bold text-gray-500 mt-0.5">
+                      Ask AI to "add [place]" or choose a vibe below
+                    </p>
+                  </div>
+                )}
+                {(currentPlan.stops || []).map((stop, sIdx) => {
+                  const isLeft = sIdx % 2 === 0;
+                  const stopId = stop.id || stop.name;
+                  const isReached = visitedStopIds.includes(stopId);
+                  const stopLat = stop.lat || stop.data?.lat || currentCity.hub.lat;
+                  const stopLng = stop.lng || stop.data?.lng || currentCity.hub.lng;
+                  const distKm = location?.lat
+                    ? haversineKm(location.lat, location.lon, stopLat, stopLng)
+                    : null;
+                  const distMeters = distKm !== null ? Math.round(distKm * 1000) : null;
+
+                  return (
+                    <div key={sIdx} className="space-y-1.5 pb-1">
+                      {/* Transit pill & GPS Check-in badge above card */}
+                      <div className={`flex items-center gap-1.5 ${isLeft ? 'justify-start pl-11' : 'justify-end pr-11'}`}>
+                        <span className="bg-[#FEF3C7] border-[1.5px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-black shadow-[0_1px_0_0_#000000]">
+                          {stop.transitPill || '🚶 8m • Free'}
+                        </span>
+
+                        {/* GPS Check-In Button / Reached Status */}
+                        <button
+                          type="button"
+                          onClick={() => toggleCheckIn(stopId)}
+                          className={`text-[9px] font-black px-2 py-0.5 rounded-full border border-black flex items-center gap-1 shadow-[0_1px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer ${
+                            isReached
+                              ? 'bg-emerald-500 text-white'
+                              : distMeters && distMeters < 300
+                              ? 'bg-emerald-100 text-emerald-800 animate-pulse'
+                              : 'bg-white text-gray-700 hover:bg-gray-100'
+                          }`}
+                          title="Click to check in or mark reached"
+                        >
+                          {isReached ? (
+                            <>
+                              <Check size={9} strokeWidth={3} />
+                              <span>Reached</span>
+                            </>
+                          ) : (
+                            <>
+                              <Navigation size={8} />
+                              <span>{distMeters ? `${distMeters}m away` : 'Check In'}</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+
+                      {isLeft ? (
+                        <div className="flex items-center gap-2.5">
+                          <div
+                            className={`w-7 h-7 rounded-full border-[2px] border-black font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
+                              isReached ? 'bg-emerald-500 text-white' : 'bg-[#0B3BF4] text-white'
+                            }`}
+                          >
+                            {isReached ? <Check size={14} strokeWidth={3} /> : sIdx + 1}
+                          </div>
+                          <div
+                            onClick={() => setSelectedSpot(stop.data || stop)}
+                            className={`bg-white border-[2.5px] rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-102 transition flex-1 max-w-[280px] ${
+                              isReached ? 'border-emerald-600 ring-2 ring-emerald-400/30' : 'border-black'
+                            }`}
+                          >
+                            <img
+                              src={stop.photo || currentCity.spots[0].photo}
+                              alt={stop.name}
+                              className="w-13 h-13 rounded-xl border-[1.5px] border-black object-cover shrink-0"
+                            />
+                            <div className="leading-tight overflow-hidden flex-1 min-w-0">
+                              <div className="flex items-center gap-1">
+                                <span className="font-black text-xs text-black truncate leading-snug">
+                                  {stop.name}
+                                </span>
+                                {isReached ? (
+                                  <span className="bg-emerald-500 text-white font-black text-[7px] px-1 rounded uppercase shrink-0">
+                                    VISITED
+                                  </span>
+                                ) : stop.badge ? (
+                                  <span className="bg-[#F59E0B] border border-black text-black font-black text-[8px] px-1.5 py-0.5 rounded uppercase shrink-0 leading-none">
+                                    {stop.badge}
+                                  </span>
+                                ) : null}
+                              </div>
+                              <div className="text-[11px] font-bold text-emerald-700 mt-1">
+                                {stop.costText || 'Free • 30m'} ↗
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-end gap-2.5 pr-1">
+                          <div
+                            onClick={() => setSelectedSpot(stop.data || stop)}
+                            className={`bg-white border-[2.5px] rounded-2xl p-2 shadow-[0_3px_0_0_#000000] flex items-center gap-2.5 cursor-pointer hover:scale-102 transition flex-1 max-w-[280px] ${
+                              isReached ? 'border-emerald-600 ring-2 ring-emerald-400/30' : 'border-black'
+                            }`}
+                          >
+                            <div className="leading-tight text-right flex-1 overflow-hidden min-w-0">
+                              <div className="flex items-center justify-end gap-1">
+                                {isReached ? (
+                                  <span className="bg-emerald-500 text-white font-black text-[7px] px-1 rounded uppercase shrink-0">
+                                    VISITED
+                                  </span>
+                                ) : stop.badge ? (
+                                  <span className="bg-[#F59E0B] border border-black text-black font-black text-[8px] px-1.5 py-0.5 rounded uppercase shrink-0 leading-none">
+                                    {stop.badge}
+                                  </span>
+                                ) : null}
+                                <span className="font-black text-xs text-black truncate leading-snug">
+                                  {stop.name}
+                                </span>
+                              </div>
+                              <div className="text-[11px] font-bold text-emerald-700 mt-1">
+                                {stop.costText || 'Free • 30m'} ↗
+                              </div>
+                            </div>
+                            <img
+                              src={stop.photo || currentCity.spots[1]?.photo}
+                              alt={stop.name}
+                              className="w-13 h-13 rounded-xl border-[1.5px] border-black object-cover shrink-0"
+                            />
+                          </div>
+                          <div
+                            className={`w-7 h-7 rounded-full border-[2px] border-black font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
+                              isReached ? 'bg-emerald-500 text-white' : 'bg-[#0B3BF4] text-white'
+                            }`}
+                          >
+                            {isReached ? <Check size={14} strokeWidth={3} /> : sIdx + 1}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* MANDATORY SAFE RETURN END LOCATION ALWAYS ON THE BOTTOM OF THAT BOX */}
+              <div className="relative z-10 mt-4 mb-1">
+                <div className="bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-3 px-3.5 flex items-center justify-between shadow-[0_4px_0_0_#000000]">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-7 h-7 rounded-full bg-black text-amber-400 font-black text-sm flex items-center justify-center shrink-0 shadow-[0_1px_0_0_#000000]">
+                      🏁
+                    </span>
+                    <div className="leading-tight text-left">
+                      <div className="text-[10px] font-black uppercase tracking-wider text-black/80">
+                        FINAL DESTINATION • SAFE RETURN
+                      </div>
+                      <div className="font-black text-xs text-black">
+                        {currentPlan.returnPill || `Safe Return to ${currentCity.hub.stationName}`}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-black text-white text-xs font-black px-3 py-1 rounded-full shrink-0 shadow-[0_1px_0_0_#000000]">
+                    {currentPlan.returnTime || '17:10 PM'}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Interactive AI Chat Plan Modifier */}
           <div className="bg-white border-[2.5px] border-black rounded-3xl p-3.5 shadow-[0_4px_0_0_#000000] space-y-2.5 mt-2">

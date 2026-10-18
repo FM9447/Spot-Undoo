@@ -336,25 +336,34 @@ export default function ExploreTab({ location, setLocation }) {
           userLocation={location}
         />
       ) : viewMode === 'cartoon' ? (
-        <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] min-h-[480px] overflow-hidden">
-          {/* Subtle Stylized River / Road Background Canvas SVG */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-60" viewBox="0 0 360 480">
-            <path
-              d="M 60 0 C 180 80, 240 180, 140 280 S 260 400, 220 480"
-              fill="none"
-              stroke="#BAE6FD"
-              strokeWidth="28"
-              strokeLinecap="round"
-            />
-            <path
-              d="M 60 0 C 180 80, 240 180, 140 280 S 260 400, 220 480"
-              fill="none"
-              stroke="#38BDF8"
-              strokeWidth="4"
-              strokeDasharray="6 6"
-              strokeLinecap="round"
-            />
-          </svg>
+        <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[640px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
+          {/* Stylized River / Road Background Canvas SVG with dynamic height */}
+          {(() => {
+            const svgH = Math.max(520, filteredSpots.length * 110 + 90);
+            return (
+              <svg
+                className="absolute inset-0 w-full pointer-events-none opacity-60"
+                style={{ height: `${svgH}px` }}
+                viewBox={`0 0 360 ${svgH}`}
+              >
+                <path
+                  d={`M 60 0 C 180 80, 240 180, 140 280 S 260 400, 180 500 S 240 680, 150 ${svgH}`}
+                  fill="none"
+                  stroke="#BAE6FD"
+                  strokeWidth="28"
+                  strokeLinecap="round"
+                />
+                <path
+                  d={`M 60 0 C 180 80, 240 180, 140 280 S 260 400, 180 500 S 240 680, 150 ${svgH}`}
+                  fill="none"
+                  stroke="#38BDF8"
+                  strokeWidth="4"
+                  strokeDasharray="6 6"
+                  strokeLinecap="round"
+                />
+              </svg>
+            );
+          })()}
 
           {/* Floating Top Control: Live Explore */}
           <div className="relative z-10 flex items-center justify-between mb-2">
@@ -392,7 +401,7 @@ export default function ExploreTab({ location, setLocation }) {
             </div>
           ) : (
             <div className="relative z-10 space-y-4 my-1">
-              {filteredSpots.slice(0, 8).map((spot, idx) => {
+              {filteredSpots.map((spot, idx) => {
                 const isLeft = idx % 2 === 0;
                 const isSelected = selectedSpot?.id === spot.id || selectedSpot?.name === spot.name;
                 return (

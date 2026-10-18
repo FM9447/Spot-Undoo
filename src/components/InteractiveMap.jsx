@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Navigation, MapPin } from 'lucide-react';
+import { Navigation, MapPin, Layers } from 'lucide-react';
 
 export default function InteractiveMap({
   center = [10.7606, 76.2711],
@@ -10,10 +10,13 @@ export default function InteractiveMap({
   selectedSpot = null,
   onSelectSpot,
   userLocation,
+  showRoute = false,
+  height = '480px',
 }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef([]);
+  const polylineRef = useRef(null);
 
   // Initialize Map
   useEffect(() => {
@@ -24,6 +27,7 @@ export default function InteractiveMap({
         center: center,
         zoom: zoom,
         zoomControl: false,
+        scrollWheelZoom: true,
       });
 
       // Free OpenStreetMap Tiles
@@ -46,39 +50,50 @@ export default function InteractiveMap({
     };
   }, []);
 
-  // Update Markers when spots or userLocation change
+  // Update Markers and Polyline Route when spots or userLocation change
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!map) return;
 
-    // Clear old markers
+    // Clear old markers & polylines
     markersRef.current.forEach((m) => m.remove());
     markersRef.current = [];
+    if (polylineRef.current) {
+      polylineRef.current.remove();
+      polylineRef.current = null;
+    }
 
-    // User / Hub Marker
+    const routeLatLngs = [];
+
+    // User / Hub Starting Marker
     if (userLocation && userLocation.lat && userLocation.lon) {
+      routeLatLngs.push([userLocation.lat, userLocation.lon]);
+
       const userIcon = L.divIcon({
         className: 'custom-user-marker',
         html: `
-          <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px;">
-            <div style="position: absolute; width: 34px; height: 34px; border-radius: 9999px; background-color: rgba(11, 59, 244, 0.25); animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
-            <div style="width: 24px; height: 24px; border-radius: 9999px; background-color: #0B3BF4; border: 2.5px solid #000; box-shadow: 0 2px 0 0 #000; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 900;">
-              📍
+          <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;">
+            <div style="position: absolute; width: 36px; height: 36px; border-radius: 9999px; background-color: rgba(11, 59, 244, 0.25); animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 9999px; background-color: #0B3BF4; border: 2.5px solid #000; box-shadow: 0 2px 0 0 #000; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 900;">
+              🏁
             </div>
           </div>
         `,
-        iconSize: [34, 34],
-        iconAnchor: [17, 17],
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
       });
 
       const userMarker = L.marker([userLocation.lat, userLocation.lon], { icon: userIcon })
         .addTo(map)
-        .bindPopup(`<b>${userLocation.label || 'Your Location'}</b><br/>Shoranur Jn Hub`);
+        .bindPopup(`<b>${userLocation.label || 'Starting Station'}</b><br/>Safe Return Hub`);
       markersRef.current.push(userMarker);
     }
 
     // Spot Markers
-    spots.forEach((spot) => {
+    spots.forEach((spot, idx) => {
+      if (!spot.lat || !spot.lng) return;
+      routeLatLngs.push([spot.lat, spot.lng]);
+
       const isSelected = selectedSpot && (selectedSpot.id === spot.id || selectedSpot.name === spot.name);
 
       const spotIcon = L.divIcon({
@@ -87,28 +102,46 @@ export default function InteractiveMap({
           <div style="
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
             background: #ffffff;
-            border: 2px solid #000000;
-            border-radius: 12px;
-            padding: 2px 6px 2px 2px;
+            border: 2.5px solid #000000;
+            border-radius: 14px;
+            padding: 3px 8px 3px 3px;
             box-shadow: ${isSelected ? '0 4px 0 0 #0B3BF4' : '0 2px 0 0 #000000'};
             transform: ${isSelected ? 'scale(1.12)' : 'scale(1)'};
             transition: transform 0.15s ease;
             cursor: pointer;
             white-space: nowrap;
           ">
-            <img src="${spot.photo}" style="width: 22px; height: 22px; border-radius: 8px; object-fit: cover; border: 1.5px solid #000;" />
-            <div style="display: flex; flex-direction: column; line-height: 1.1;">
-              <span style="font-size: 11px; font-weight: 900; color: #000000;">${spot.name}</span>
-              <span style="font-size: 9px; font-weight: 800; color: ${spot.expense === 0 ? '#10B981' : '#F59E0B'};">
-                ${spot.expense === 0 ? 'FREE' : '₹' + spot.expense} • ★${spot.rating || 4.5}
+            ${showRoute ? `
+              <div style="
+                width: 20px;
+                height: 20px;
+                border-radius: 9999px;
+                background-color: #0B3BF4;
+                color: #ffffff;
+                border: 1.5px solid #000000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 11px;
+                font-weight: 900;
+                flex-shrink: 0;
+              ">
+                ${idx + 1}
+              </div>
+            ` : ''}
+            <img src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}" style="width: 26px; height: 26px; border-radius: 9px; object-fit: cover; border: 1.5px solid #000;" />
+            <div style="display: flex; flex-direction: column; line-height: 1.15; max-width: 140px; overflow: hidden;">
+              <span style="font-size: 11px; font-weight: 900; color: #000000; overflow: hidden; text-overflow: ellipsis;">${spot.name}</span>
+              <span style="font-size: 9px; font-weight: 800; color: ${spot.expense === 0 ? '#059669' : '#D97706'};">
+                ${spot.expense === 0 ? 'FREE' : '₹' + spot.expense} • ★${spot.rating || 4.7}
               </span>
             </div>
           </div>
         `,
-        iconSize: [120, 36],
-        iconAnchor: [60, 18],
+        iconSize: [showRoute ? 165 : 145, 38],
+        iconAnchor: [showRoute ? 82 : 72, 19],
       });
 
       const marker = L.marker([spot.lat, spot.lng], { icon: spotIcon }).addTo(map);
@@ -120,14 +153,34 @@ export default function InteractiveMap({
 
       markersRef.current.push(marker);
     });
-  }, [spots, selectedSpot, userLocation, onSelectSpot]);
 
-  // Automatically fly to new city hub when location changes
-  useEffect(() => {
-    if (mapInstanceRef.current && userLocation?.lat && userLocation?.lon) {
-      mapInstanceRef.current.flyTo([userLocation.lat, userLocation.lon], 13, { duration: 0.8 });
+    // Draw route polyline if showRoute is enabled
+    if (showRoute && routeLatLngs.length > 1) {
+      if (userLocation && userLocation.lat && userLocation.lon) {
+        // Complete the loop back to starting hub
+        routeLatLngs.push([userLocation.lat, userLocation.lon]);
+      }
+
+      const polyline = L.polyline(routeLatLngs, {
+        color: '#0B3BF4',
+        weight: 4.5,
+        dashArray: '8, 8',
+        opacity: 0.85,
+        lineCap: 'round',
+        lineJoin: 'round',
+      }).addTo(map);
+
+      polylineRef.current = polyline;
+
+      // Fit bounds to show entire route with breathing room
+      try {
+        const bounds = polyline.getBounds();
+        if (bounds.isValid()) {
+          map.fitBounds(bounds, { padding: [50, 50], maxZoom: 15 });
+        }
+      } catch {}
     }
-  }, [userLocation?.lat, userLocation?.lon]);
+  }, [spots, selectedSpot, userLocation, onSelectSpot, showRoute]);
 
   // Recenter map on user location
   const handleRecenter = () => {
@@ -137,22 +190,26 @@ export default function InteractiveMap({
   };
 
   return (
-    <div className="relative w-full h-[480px] rounded-3xl overflow-hidden border-[2.5px] border-black shadow-[0_4px_0_0_#000000] bg-[#e5e7eb]">
+    <div
+      style={{ height }}
+      className="relative w-full rounded-3xl overflow-hidden border-[2.5px] border-black shadow-[0_4px_0_0_#000000] bg-[#e5e7eb]"
+    >
       <div ref={mapRef} className="w-full h-full z-0" />
 
       {/* Recenter Floating Button */}
       <button
+        type="button"
         onClick={handleRecenter}
-        className="absolute bottom-4 right-4 z-[400] bg-white border-[2px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] flex items-center gap-1.5 text-xs font-black active:translate-y-0.5 hover:bg-gray-50 transition"
+        className="absolute bottom-4 right-4 z-[400] bg-white border-[2px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] flex items-center gap-1.5 text-xs font-black active:translate-y-0.5 hover:bg-gray-50 transition cursor-pointer"
       >
         <Navigation size={14} className="text-[#0B3BF4]" strokeWidth={2.5} />
         <span>Recenter</span>
       </button>
 
       {/* Attribution / OpenStreetMap pill */}
-      <div className="absolute top-3 left-3 z-[400] bg-white/95 backdrop-blur border-[2px] border-black rounded-full px-2.5 py-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1">
+      <div className="absolute top-3 left-3 z-[400] bg-white/95 backdrop-blur border-[2px] border-black rounded-full px-2.5 py-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5">
         <MapPin size={11} className="text-[#F59E0B]" strokeWidth={2.5} />
-        <span>Live OpenStreetMap</span>
+        <span>{showRoute ? 'Interactive Layover Route' : 'Live OpenStreetMap'}</span>
       </div>
     </div>
   );
