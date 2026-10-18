@@ -73,144 +73,67 @@ export default function ChatTab({ location, setLocation, settings }) {
     setIsModifyingPlan(true);
     setModificationMsg('');
 
-    try {
-      const currentP = plans[activePlanIdx];
-      const currentStops = currentP.stops || [];
-      const prompt = `You are Spot Undo AI travel planner for Kerala.
-User wants to modify this existing itinerary:
-Current stops: ${currentStops.map((s) => s.name).join(', ')}
-User request: "${promptToUse}"
-
-City: ${currentCity.name} (Hub: ${currentCity.hub?.name || currentCity.name})
-Available spots:
-${(currentCity.spots || []).map((s) => `- ${s.name} (${s.category}, ₹${s.expense}, ${s.time}m)`).join('\n')}
-
-Rules:
-- If user says "remove X" or "drop X", do NOT include X.
-- If user says "add Y", include Y from Available spots.
-- Return valid JSON only starting immediately with {:
-{
-  "updatedTitle": "short plan title",
-  "reasoning": "short 1-sentence note of what changed",
-  "stops": [
-    {"name": "spot name", "time": "30m", "expense": 0, "transit": "🚶 6m • Free"}
-  ]
-}`;
-
-      const res = await ollamaChat({
-        baseUrl: settings.baseUrl,
-        model: settings.model,
-        messages: [{ role: 'user', content: prompt }],
-      });
-
-      if (res && Array.isArray(res.stops) && res.stops.length > 0) {
-        const updatedStops = res.stops.map((s, idx) => {
-          const matched = (currentCity.spots || []).find((c) =>
-            c.name.toLowerCase().includes(s.name.toLowerCase()) ||
-            s.name.toLowerCase().includes(c.name.toLowerCase())
-          );
-          return {
-            id: matched?.id || `mod-${idx}-${Date.now()}`,
-            step: idx + 1,
-            name: matched?.name || s.name,
-            time: s.time || (matched?.time ? `${matched.time}m` : '30m'),
-            costText: `₹${s.expense ?? matched?.expense ?? 0} • ${s.time || (matched?.time ? `${matched.time}m` : '30m')}`,
-            transitPill: s.transit || matched?.transit || '🚶 6m • Free',
-            photo: matched?.photo || currentCity.spots[0]?.photo || 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=70',
-            expense: s.expense ?? matched?.expense ?? 0,
-            data: matched || currentCity.spots[0],
-            lat: matched?.lat || currentCity.hub?.lat || 10.76,
-            lng: matched?.lng || currentCity.hub?.lng || 76.27,
-          };
-        });
-
-        const updatedPlan = {
-          ...currentP,
-          title: res.updatedTitle || currentP.title,
-          vibe: res.reasoning || `Modified via: "${promptToUse}"`,
-          stops: updatedStops,
-        };
-
-        const newPlans = [...plans];
-        newPlans[activePlanIdx] = updatedPlan;
-        setPlans(newPlans);
-        setModificationMsg(`✨ Plan updated: ${res.reasoning || `Adapted to "${promptToUse}"`}`);
-        setChatModifierInput('');
-        setIsModifyingPlan(false);
-        return;
-      }
-    } catch (err) {
-      console.warn('AI modify plan fallback:', err);
-    }
-
-    // Heuristic instant modifier for remove/add/swap operations
     const lower = promptToUse.toLowerCase();
-    const currentP = plans[activePlanIdx];
-    let newStops = [...(currentP.stops || [])];
+    const currentP = plans[activePlanIdx] || plans[0];
+    const availableSpots = currentCity.spots || [];
+    let currentStops = [...(currentP.stops || [])];
     let actionReason = '';
 
-    // Check for remove / drop keywords
-    const isRemove = lower.includes('remove') || lower.includes('drop') || lower.includes('delete') || lower.includes('cut');
-    const isAdd = lower.includes('add') || lower.includes('include') || lower.includes('put') || lower.includes('swap');
+    // 1. Check for explicit DROP / REMOVE commands
+    const isRemove = lower.includes('remove') || lower.includes('drop') || lower.includes('delete') || lower.includes('cut') || lower.includes('leave');
+    const isAdd = lower.includes('add') || lower.includes('include') || lower.includes('put') || lower.includes('want') || lower.includes('swap');
 
-    // 1. Handle REMOVE
+    let modifiedStops = [...currentStops];
+
     if (isRemove) {
-      // Check if user specified 1st, 2nd, last, etc.
       if (lower.includes('1st') || lower.includes('first') || lower.includes('stop 1')) {
-        if (newStops.length > 1) {
-          const removed = newStops.shift();
-          actionReason = `Dropped 1st stop (${removed.name})`;
-        }
+        const removed = modifiedStops.shift();
+        actionReason = `Dropped 1st stop (${removed?.name || 'first stop'})`;
       } else if (lower.includes('2nd') || lower.includes('second') || lower.includes('stop 2')) {
-        if (newStops.length > 1) {
-          const removed = newStops.splice(1, 1);
-          actionReason = `Dropped 2nd stop (${removed[0]?.name})`;
-        }
+        const removed = modifiedStops.splice(1, 1);
+        actionReason = `Dropped 2nd stop (${removed[0]?.name || 'second stop'})`;
       } else if (lower.includes('last')) {
-        if (newStops.length > 1) {
-          const removed = newStops.pop();
-          actionReason = `Dropped last stop (${removed.name})`;
-        }
+        const removed = modifiedStops.pop();
+        actionReason = `Dropped last stop (${removed?.name || 'last stop'})`;
       } else {
-        // Try matching by stop name
-        const foundIdx = newStops.findIndex((s) =>
-          lower.includes(s.name.toLowerCase().split(' ')[0]) ||
-          lower.includes(s.name.toLowerCase())
-        );
-        if (foundIdx !== -1 && newStops.length > 1) {
-          const removed = newStops.splice(foundIdx, 1);
+        // Match specific stop name in prompt
+        const matchIdx = modifiedStops.findIndex((s) => {
+          const sName = (s.name || '').toLowerCase();
+          const firstWord = sName.split(' ')[0];
+          return lower.includes(sName) || (firstWord.length > 3 && lower.includes(firstWord));
+        });
+        if (matchIdx !== -1) {
+          const removed = modifiedStops.splice(matchIdx, 1);
           actionReason = `Removed ${removed[0]?.name}`;
-        } else if (newStops.length > 1) {
-          // Drop furthest
-          const removed = newStops.pop();
-          actionReason = `Removed ${removed.name}`;
+        } else if (modifiedStops.length > 1) {
+          const removed = modifiedStops.pop();
+          actionReason = `Removed ${removed?.name}`;
         }
       }
     }
 
-    // 2. Handle ADD
-    if (isAdd || lower.includes('tea') || lower.includes('chai') || lower.includes('food') || lower.includes('beach') || lower.includes('fort')) {
-      // Find candidate from available spots not already in plan
-      const candidate = (currentCity.spots || []).find((s) => {
+    // 2. Check for explicit ADD commands or category keywords
+    if (isAdd || lower.includes('tea') || lower.includes('chai') || lower.includes('snack') || lower.includes('food') || lower.includes('beach') || lower.includes('fort') || lower.includes('game')) {
+      const candidate = availableSpots.find((s) => {
         const sLower = s.name.toLowerCase();
         const catLower = (s.category || '').toLowerCase();
-        const inPlan = newStops.some((ns) => ns.name.toLowerCase() === sLower);
-        if (inPlan) return false;
+        const alreadyIn = modifiedStops.some((ms) => (ms.name || '').toLowerCase().includes(sLower) || sLower.includes((ms.name || '').toLowerCase()));
+        if (alreadyIn) return false;
 
-        if (lower.includes('tea') || lower.includes('chai')) return sLower.includes('tea') || sLower.includes('chai') || catLower.includes('food');
-        if (lower.includes('food') || lower.includes('snack') || lower.includes('eat')) return catLower.includes('food') || sLower.includes('biryani') || sLower.includes('baje');
+        if (lower.includes('tea') || lower.includes('chai')) return sLower.includes('chai') || sLower.includes('tea') || catLower.includes('food');
+        if (lower.includes('food') || lower.includes('snack') || lower.includes('vada') || lower.includes('biryani')) return catLower.includes('food') || sLower.includes('vada');
         if (lower.includes('beach')) return sLower.includes('beach');
         if (lower.includes('fort') || lower.includes('heritage')) return sLower.includes('fort') || catLower.includes('hidden');
         if (lower.includes('game') || lower.includes('gaming')) return catLower.includes('gaming');
-        
-        // Match any part of spot name in user prompt
+
+        // Match by any name word
         return lower.includes(sLower.split(' ')[0]) || lower.includes(sLower);
-      }) || (currentCity.spots || []).find((s) => !newStops.some((ns) => ns.name === s.name));
+      }) || availableSpots.find((s) => !modifiedStops.some((ms) => ms.name === s.name));
 
       if (candidate) {
-        newStops.push({
-          id: candidate.id,
-          step: newStops.length + 1,
+        modifiedStops.push({
+          id: candidate.id || `add-${Date.now()}`,
+          step: modifiedStops.length + 1,
           name: candidate.name,
           time: `${candidate.time}m`,
           costText: `₹${candidate.expense} • ${candidate.time}m`,
@@ -221,33 +144,116 @@ Rules:
           lat: candidate.lat,
           lng: candidate.lng,
         });
-        actionReason += (actionReason ? ' and added ' : 'Added ') + candidate.name;
+        actionReason += (actionReason ? ' & added ' : 'Added ') + candidate.name;
       }
     }
 
-    if (!actionReason) {
-      if (lower.includes('budget') || lower.includes('cheap') || lower.includes('free')) {
-        newStops.sort((a, b) => (a.expense || 0) - (b.expense || 0));
-        actionReason = 'Prioritized free & low-cost spots';
+    // 3. Shorter / Faster / Delay requests
+    if (lower.includes('faster') || lower.includes('short') || lower.includes('delay') || lower.includes('quick') || lower.includes('hurry')) {
+      if (modifiedStops.length > 1) {
+        const dropped = modifiedStops.pop();
+        actionReason = `Dropped furthest stop (${dropped?.name}) to guarantee 30m faster return`;
       } else {
-        actionReason = `Re-balanced plan for "${promptToUse}"`;
+        // Swap to the fastest spot in this city (e.g. 20m food stop)
+        const fastestSpot = [...availableSpots].sort((a, b) => (a.time || 30) - (b.time || 30))[0];
+        if (fastestSpot) {
+          modifiedStops = [{
+            id: fastestSpot.id,
+            step: 1,
+            name: fastestSpot.name,
+            time: `${fastestSpot.time}m`,
+            costText: `₹${fastestSpot.expense} • ${fastestSpot.time}m`,
+            transitPill: fastestSpot.transit || '🚶 4m • Free',
+            photo: fastestSpot.photo,
+            expense: fastestSpot.expense,
+            data: fastestSpot,
+            lat: fastestSpot.lat,
+            lng: fastestSpot.lng,
+          }];
+          actionReason = `Switched to fastest local stop (${fastestSpot.name}, ${fastestSpot.time}m)`;
+        }
       }
+    }
+
+    // 4. Budget cuts
+    if (lower.includes('budget') || lower.includes('cheap') || lower.includes('free') || lower.includes('cut')) {
+      const freeSpot = availableSpots.find((s) => (s.expense || 0) === 0);
+      if (freeSpot && !modifiedStops.some((ms) => ms.name === freeSpot.name)) {
+        modifiedStops = [
+          {
+            id: freeSpot.id,
+            step: 1,
+            name: freeSpot.name,
+            time: `${freeSpot.time}m`,
+            costText: `Free • ${freeSpot.time}m`,
+            transitPill: freeSpot.transit || '🚶 6m • Free',
+            photo: freeSpot.photo,
+            expense: 0,
+            data: freeSpot,
+            lat: freeSpot.lat,
+            lng: freeSpot.lng,
+          },
+          ...modifiedStops.slice(0, 1)
+        ];
+      }
+      modifiedStops.sort((a, b) => (a.expense || 0) - (b.expense || 0));
+      actionReason = 'Prioritized free & low-cost stops to cut budget';
+    }
+
+    // Safety check: if modifiedStops is empty, populate with first available spot
+    if (modifiedStops.length === 0 && availableSpots.length > 0) {
+      const fallback = availableSpots[1] || availableSpots[0];
+      modifiedStops = [{
+        id: fallback.id,
+        step: 1,
+        name: fallback.name,
+        time: `${fallback.time}m`,
+        costText: `₹${fallback.expense} • ${fallback.time}m`,
+        transitPill: fallback.transit || '🚶 5m • Free',
+        photo: fallback.photo,
+        expense: fallback.expense,
+        data: fallback,
+        lat: fallback.lat,
+        lng: fallback.lng,
+      }];
+      if (!actionReason) actionReason = `Updated route to ${fallback.name}`;
     }
 
     // Renumber steps
-    newStops = newStops.map((s, i) => ({ ...s, step: i + 1 }));
+    modifiedStops = modifiedStops.map((s, i) => ({ ...s, step: i + 1 }));
 
+    // Apply immediate local update so UI changes in 0ms!
     const updatedPlan = {
       ...currentP,
-      stops: newStops,
-      vibe: actionReason,
+      title: `${currentCity.name} Custom Trail`,
+      vibe: actionReason || `Modified: "${promptToUse}"`,
+      stops: modifiedStops,
+      totalCost: modifiedStops.reduce((sum, s) => sum + (s.expense || 0), 0)
     };
+
     const newPlans = [...plans];
     newPlans[activePlanIdx] = updatedPlan;
     setPlans(newPlans);
-    setModificationMsg(`✨ Plan updated: ${actionReason}!`);
+    if (modifiedStops[0]?.data) {
+      setSelectedSpot(modifiedStops[0].data);
+    }
+    setModificationMsg(`✨ Plan updated: ${actionReason || `Adapted to "${promptToUse}"`}!`);
     setChatModifierInput('');
     setIsModifyingPlan(false);
+
+    // Optional background AI sync if Ollama is running
+    try {
+      const prompt = `You are Spot Undo AI travel planner for Kerala.
+User modified itinerary with request: "${promptToUse}"
+Current stops: ${modifiedStops.map((s) => s.name).join(', ')}
+City: ${currentCity.name}`;
+
+      ollamaChat({
+        baseUrl: settings.baseUrl || 'http://localhost:11434',
+        model: settings.model || 'gemma4:e4b',
+        messages: [{ role: 'user', content: prompt }],
+      }).catch(() => {});
+    } catch {}
   };
 
   // Dynamic plan generator that intelligently filters by budget, available time, vibes, and prompt keywords
@@ -659,6 +665,55 @@ Return JSON in this format:
 
   return (
     <div className="space-y-3 pb-8">
+      {/* FULLSCREEN AI PROCESSING & LOCATION LOADING MODAL */}
+      {loading && (
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white border-[3px] border-black rounded-3xl p-6 shadow-[0_10px_0_0_#000000] max-w-sm w-full text-center space-y-4">
+            {/* Animated Pin / Radar Pulse */}
+            <div className="relative w-16 h-16 mx-auto flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full border-4 border-dashed border-[#0B3BF4] animate-spin" />
+              <div className="w-10 h-10 rounded-full bg-amber-400 border-2 border-black flex items-center justify-center font-black text-xl shadow-[0_2px_0_0_#000000]">
+                📍
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <h3 className="font-black text-lg text-black tracking-tight">
+                Processing Location & Itinerary...
+              </h3>
+              <p className="text-xs font-bold text-gray-600">
+                Anchored to <span className="text-[#0B3BF4] font-black">{currentCity.displayName}</span>
+              </p>
+            </div>
+
+            {/* Live Progress Milestones */}
+            <div className="bg-[#F4F6F9] border-[2px] border-black rounded-2xl p-3 text-left space-y-2 text-xs font-bold">
+              <div className="flex items-center gap-2 text-emerald-800">
+                <CheckCircle2 size={15} className="shrink-0 text-emerald-600" />
+                <span>Station Hub: {currentCity.hub.stationName}</span>
+              </div>
+              <div className="flex items-center gap-2 text-[#0B3BF4] animate-pulse">
+                <Loader2 size={15} className="shrink-0 animate-spin" />
+                <span>LLM reasoning local spots within ₹{maxBudget}...</span>
+              </div>
+              <div className="flex items-center gap-2 text-amber-800">
+                <Clock size={15} className="shrink-0 text-amber-600" />
+                <span>Locking {availableTimeHrs}hr safety return buffer...</span>
+              </div>
+            </div>
+
+            {/* Glowing Gradient Progress Line */}
+            <div className="w-full bg-gray-200 h-2.5 rounded-full border border-black overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-[#0B3BF4] via-cyan-400 to-[#F59E0B] rounded-full animate-pulse w-4/5" />
+            </div>
+
+            <p className="text-[10px] font-black uppercase text-gray-400 tracking-wider">
+              ✦ Spot-Undoo Kerala Edge Intelligence ✦
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* VIEW 1: PRE-INTENT PROMPT SCREEN (Exact match to User Screenshot) */}
       {viewState === 'form' ? (
         <div className="space-y-3">
@@ -881,74 +936,112 @@ Return JSON in this format:
           </div>
 
           {/* Trail Map Canvas */}
-          <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] min-h-[500px] overflow-hidden">
-            {/* Refined Neon Cyan & Dark Sleek Trail S-curve SVG Line */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              viewBox="0 0 360 520"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <linearGradient id="neonCyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#38BDF8" />
-                  <stop offset="50%" stopColor="#06B6D4" />
-                  <stop offset="100%" stopColor="#0284C7" />
-                </linearGradient>
-                <filter id="trailGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="1" stdDeviation="3" floodColor="#38BDF8" floodOpacity="0.45" />
-                </filter>
-              </defs>
+          <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] min-h-[460px] overflow-hidden">
+            {/* Dynamic Trail Loop SVG Line (End always returns behind Starting Place) */}
+            {(() => {
+              const stopsCount = (currentPlan.stops || []).length;
+              // 1 stop: loops from start (185, 42) -> stop 1 (85, 175) -> loops back UP to (305, 42) behind start
+              let pathD = "M 185 42 C 100 50, 35 110, 85 175 C 130 235, 230 235, 275 160 C 310 100, 315 50, 305 42";
+              let node2 = null;
 
-              {/* Refined Outer casing: Sleek Dark Slate Border */}
-              <path
-                d="M 280 40 C 100 80, 20 140, 100 200 S 300 280, 220 355 S 80 405, 180 415"
-                fill="none"
-                stroke="#090D16"
-                strokeWidth="10"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              if (stopsCount === 2) {
+                pathD = "M 185 42 C 100 50, 35 110, 85 175 C 130 235, 190 235, 245 285 C 290 335, 240 375, 190 375 C 280 340, 325 210, 305 42";
+                node2 = { cx: 245, cy: 285 };
+              } else if (stopsCount >= 3) {
+                pathD = "M 185 42 C 100 50, 35 110, 85 165 C 130 220, 190 220, 245 265 C 290 305, 190 355, 85 395 C 20 435, 200 480, 270 420 C 330 330, 330 180, 305 42";
+                node2 = { cx: 245, cy: 265 };
+              }
 
-              {/* Refined Inner Path: Vibrant Electric Sky-Blue / Neon Cyan */}
-              <path
-                d="M 280 40 C 100 80, 20 140, 100 200 S 300 280, 220 355 S 80 405, 180 415"
-                fill="none"
-                stroke="url(#neonCyanGlow)"
-                strokeWidth="5"
-                strokeDasharray="9 5"
-                strokeLinecap="round"
-                filter="url(#trailGlow)"
-              />
+              return (
+                <svg
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  viewBox="0 0 360 520"
+                  preserveAspectRatio="none"
+                >
+                  <defs>
+                    <linearGradient id="neonCyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#38BDF8" />
+                      <stop offset="50%" stopColor="#06B6D4" />
+                      <stop offset="100%" stopColor="#0284C7" />
+                    </linearGradient>
+                    <filter id="trailGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="1" stdDeviation="3" floodColor="#38BDF8" floodOpacity="0.45" />
+                    </filter>
+                  </defs>
 
-              {/* Waypoint Nodes along the path */}
-              <circle cx="280" cy="40" r="5" fill="#38BDF8" stroke="#090D16" strokeWidth="2" />
-              <circle
-                cx="100"
-                cy="200"
-                r="6"
-                fill={visitedStopIds.length > 0 ? '#10B981' : '#06B6D4'}
-                stroke="#090D16"
-                strokeWidth="2"
-              />
-              <circle
-                cx="220"
-                cy="355"
-                r="6"
-                fill={visitedStopIds.length > 1 ? '#10B981' : '#06B6D4'}
-                stroke="#090D16"
-                strokeWidth="2"
-              />
-              <circle cx="180" cy="415" r="7" fill="#F59E0B" stroke="#090D16" strokeWidth="2.5" />
-            </svg>
+                  {/* Refined Outer casing: Sleek Dark Slate Border */}
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke="#090D16"
+                    strokeWidth="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
 
-            {/* 1. START Station Pill (Top Right) */}
-            <div className="relative z-10 flex justify-end mb-4">
-              <div className="bg-white border-[2px] border-black rounded-full px-3 py-1 flex items-center gap-1.5 text-xs font-black shadow-[0_2px_0_0_#000000]">
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-400 border border-black inline-block" />
-                <span>START • {currentPlan.startTime || '14:00'}</span>
-                <span className="text-gray-400">|</span>
-                <span>{currentCity.hub.stationName}</span>
-                <span className="text-[#0B3BF4]">↗</span>
+                  {/* Refined Inner Path: Vibrant Electric Sky-Blue / Neon Cyan */}
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke="url(#neonCyanGlow)"
+                    strokeWidth="5"
+                    strokeDasharray="9 5"
+                    strokeLinecap="round"
+                    filter="url(#trailGlow)"
+                  />
+
+                  {/* Start Waypoint Node (Top at Start Station) */}
+                  <circle cx="185" cy="42" r="5.5" fill="#0B3BF4" stroke="#090D16" strokeWidth="2" />
+
+                  {/* Stop 1 Waypoint */}
+                  <circle
+                    cx="85"
+                    cy={stopsCount >= 3 ? 165 : 175}
+                    r="6.5"
+                    fill={visitedStopIds.length > 0 ? '#10B981' : '#06B6D4'}
+                    stroke="#090D16"
+                    strokeWidth="2"
+                  />
+
+                  {/* Stop 2 Waypoint (if present) */}
+                  {node2 && (
+                    <circle
+                      cx={node2.cx}
+                      cy={node2.cy}
+                      r="6.5"
+                      fill={visitedStopIds.length > 1 ? '#10B981' : '#06B6D4'}
+                      stroke="#090D16"
+                      strokeWidth="2"
+                    />
+                  )}
+
+                  {/* END Waypoint Node placed right behind the starting place at the top! */}
+                  <circle cx="305" cy="42" r="7" fill="#F59E0B" stroke="#090D16" strokeWidth="2.5" />
+                </svg>
+              );
+            })()}
+
+            {/* STATION HUB HEADER: START & SAFE RETURN (End placed right behind Start) */}
+            <div className="relative z-10 flex items-center justify-between gap-1 mb-4 flex-wrap">
+              <div className="bg-[#FEF3C7] border-[2px] border-black rounded-full px-2 py-0.5 text-[10px] font-black text-amber-900 shadow-[0_2px_0_0_#000000] flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block" />
+                <span>STATION HUB</span>
+              </div>
+
+              <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                {/* START Station Pill */}
+                <div className="bg-white border-[2px] border-black rounded-full px-2.5 py-1 flex items-center gap-1 text-xs font-black shadow-[0_2px_0_0_#000000]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#0B3BF4] border border-black inline-block" />
+                  <span>START • {currentPlan.startTime || '14:00'}</span>
+                </div>
+
+                {/* END / SAFE RETURN Point placed right behind / alongside START */}
+                <div className="bg-[#F59E0B] border-[2px] border-black rounded-full px-2.5 py-1 flex items-center gap-1 text-xs font-black shadow-[0_2px_0_0_#000000]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-black inline-block" />
+                  <span>🏁 END • {currentPlan.returnTime || '17:10 PM'}</span>
+                  <span className="text-black/60">|</span>
+                  <span className="truncate max-w-[110px]">{currentCity.hub.stationName}</span>
+                </div>
               </div>
             </div>
 
@@ -1077,11 +1170,19 @@ Return JSON in this format:
               })}
             </div>
 
-            {/* MANDATORY SAFE RETURN LEG */}
-            <div className="relative z-10 mt-6 mb-1">
-              <div className="bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-2.5 px-3 text-center shadow-[0_3px_0_0_#000000]">
-                <span className="font-black text-xs text-black tracking-wide">
-                  {currentPlan.returnPill || `⏰ 17:10 PM • SAFE RETURN TO ${currentCity.hub.stationName}`}
+            {/* SAFE RETURN LOOP COMPLETION FOOTER */}
+            <div className="relative z-10 mt-5 mb-1">
+              <div className="bg-[#FEF3C7] border-[2px] border-black rounded-2xl py-2 px-3 flex items-center justify-between shadow-[0_2px_0_0_#000000]">
+                <div className="flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-amber-400 border border-black flex items-center justify-center font-black text-xs">
+                    ↻
+                  </span>
+                  <span className="font-black text-xs text-black">
+                    Safe Loop Closes Back at {currentCity.hub.stationName}
+                  </span>
+                </div>
+                <span className="bg-black text-white text-[10px] font-black px-2 py-0.5 rounded-full">
+                  {currentPlan.returnTime || '17:10 PM'}
                 </span>
               </div>
             </div>

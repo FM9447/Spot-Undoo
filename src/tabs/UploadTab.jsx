@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { Camera, Check, Pencil, Loader2, CheckCircle2, MapPin, Sparkles, Plus, X } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Camera, Check, Pencil, Loader2, CheckCircle2, MapPin, Sparkles, Plus } from 'lucide-react';
 import { ollamaChat, resizeImageToBase64 } from '../utils/ollama';
 import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { getBackendUrl } from '../utils/apiConfig';
@@ -11,7 +11,8 @@ const CATEGORIES = [
   { id: 'Party', label: '🎉 Party' },
 ];
 
-export default function UploadTab({ location, settings }) {
+export default function UploadTab({ location, settings = {} }) {
+  const fileInputRef = useRef(null);
   const initialCity = location?.cityKey && KERALA_CITIES[location.cityKey] ? location.cityKey : 'Shoranur';
   const initialArea = location?.label ? location.label.replace(/\s*\(Active\)/i, '') : 'Shoranur, Palakkad';
   const [selectedCityKey, setSelectedCityKey] = useState(initialCity);
@@ -25,6 +26,7 @@ export default function UploadTab({ location, settings }) {
       setSpecificArea(location.label.replace(/\s*\(Active\)/i, ''));
     }
   }, [location]);
+
   const [photoPreview, setPhotoPreview] = useState(
     'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80'
   );
@@ -46,6 +48,9 @@ export default function UploadTab({ location, settings }) {
   const [verifying, setVerifying] = useState(false);
   const [generatingTags, setGeneratingTags] = useState(false);
   const [published, setPublished] = useState(false);
+  const [showAddTag, setShowAddTag] = useState(false);
+  const [customTagInput, setCustomTagInput] = useState('');
+
   // Multi-photo state
   const [photoList, setPhotoList] = useState([
     {
@@ -647,7 +652,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
         <div className="bg-[#ECFDF5] border-[2px] border-black rounded-2xl p-3 flex items-center gap-2 shadow-[0_3px_0_0_#000000] animate-bounce">
           <CheckCircle2 size={18} className="text-emerald-600 shrink-0" />
           <div className="text-xs font-black text-emerald-950">
-            🎉 "{spotName}" published to {specificArea.trim() || selectedCityKey} feed & saved to MongoDB Atlas!
+            🎉 &quot;{spotName}&quot; published to {specificArea.trim() || selectedCityKey} feed & saved to MongoDB Atlas!
           </div>
         </div>
       )}
