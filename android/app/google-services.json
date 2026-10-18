@@ -12,7 +12,20 @@
           "package_name": "com.spotundoo.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "745674728664-18i888eggt7cv1kkvq6blh8odmeakleb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spotundoo.app",
+            "certificate_hash": "971667af6180b6daee874180e62f4635802db5e9"
+          }
+        },
+        {
+          "client_id": "745674728664-c9mj0c8bglu1dhuq5bmvt3m404io9n5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCi_UaUdDwiJxl92gAPuknb-mMhOnyZkyU"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745674728664-c9mj0c8bglu1dhuq5bmvt3m404io9n5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
