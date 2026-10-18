@@ -381,13 +381,16 @@ app.post('/api/ai/enhance-story', async (req, res) => {
     const effectiveCategory = (category || '').trim() || 'Hidden Spot';
     const userDraft = (draft || '').trim();
 
-    const prompt = `You are a local Kerala travel writer and insider.
-Spot: "${effectiveName}" in ${effectiveCity} (${effectiveCategory}, approx ₹${avgCost || '50'}).
-User rough draft: "${userDraft || 'Peaceful spot with amazing vibes and breeze'}".
+    const prompt = userDraft
+      ? `You are an editor polishing a traveler's review for "${effectiveName}" in ${effectiveCity}.
+User notes: "${userDraft}".
 
-Task: Polish and transform this into a genuine, highly engaging, 2-to-3 sentence community review (strictly under 45 words).
-Include a specific authentic local insider tip (e.g. best time to visit, nearby snack stall, chai, or how to reach).
-Return ONLY the polished review text without quotes, markdown, or greetings.`;
+Task: Polish the user's text into 1 to 2 clear, concise, natural sentences (under 35 words).
+CRITICAL RULES:
+- Strictly stick ONLY to what the user wrote.
+- DO NOT invent or fabricate any details, shops, food, paths, or claims the user did NOT mention.
+- Output ONLY the polished review text without quotes or markdown.`
+      : `Write a short, simple, grounded 1-to-2 sentence community note for "${effectiveName}" in ${effectiveCity} (${effectiveCategory}). Keep it honest, pleasant, and under 25 words without exaggerations or fake claims. Output ONLY the text without quotes.`;
 
     const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -398,8 +401,8 @@ Return ONLY the polished review text without quotes, markdown, or greetings.`;
       body: JSON.stringify({
         model: 'qwen/qwen3.8-27b',
         messages: [{ role: 'user', content: prompt }],
-        temperature: 0.8,
-        max_tokens: 150,
+        temperature: 0.5,
+        max_tokens: 100,
       }),
     });
 

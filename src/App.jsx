@@ -120,9 +120,11 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen w-full sm:max-w-md sm:mx-auto relative flex flex-col font-sans overflow-x-hidden">
-      {/* 1. Header (Touches top, left, right full-width) */}
+    <div className="min-h-screen w-full relative flex flex-col font-sans overflow-x-hidden bg-[#F4F6F9]">
+      {/* 1. Header (Responsive full-width on mobile, structured on desktop) */}
       <Header
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
         location={location}
         setLocation={setLocation}
         settings={settings}
@@ -142,7 +144,7 @@ export default function App() {
       />
 
       {/* 2. Main Tab Body */}
-      <main className="flex-1 w-full px-2.5 sm:px-4 pb-24 overflow-x-hidden">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-24 md:pb-12 overflow-x-hidden">
         {activeTab === 'explore' && (
           <ExploreTab location={location} setLocation={setLocation} />
         )}
@@ -157,7 +159,7 @@ export default function App() {
         </div>
       </main>
 
-      {/* 3. Floating Bottom Nav */}
+      {/* 3. Floating Bottom Nav (Mobile only, hidden on md+) */}
       <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Loading Overlay with Smooth Fade-Out */}

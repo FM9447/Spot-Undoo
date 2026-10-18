@@ -595,17 +595,19 @@ export default function ExploreTab({ location, setLocation }) {
 
       {/* 3. View Content (OSM Live Map / Cartoon Canvas / Grid) */}
       {viewMode === 'osm' ? (
-        <InteractiveMap
-          spots={filteredSpots}
-          selectedSpot={selectedSpot}
-          onSelectSpot={setSelectedSpot}
-          userLocation={location}
-          height="540px"
-        />
+        <div className="w-full">
+          <InteractiveMap
+            spots={filteredSpots}
+            selectedSpot={selectedSpot}
+            onSelectSpot={setSelectedSpot}
+            userLocation={location}
+            height="min(72vh, 680px)"
+          />
+        </div>
       ) : viewMode === 'cartoon' ? (
         <div
           ref={trailContainerRef}
-          className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[520px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
+          className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[540px] md:max-h-[720px] max-w-4xl mx-auto overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
         >
           {/* Dynamic Illustrated Background Canvas: Simple Clean Path */}
           <svg
@@ -984,7 +986,7 @@ export default function ExploreTab({ location, setLocation }) {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3 pt-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3.5 sm:gap-4 pt-2">
             {filteredSpots.map((spot, idx) => (
               <div
                 key={spot.id || spot.name}

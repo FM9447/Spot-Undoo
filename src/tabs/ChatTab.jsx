@@ -1415,7 +1415,7 @@ Return JSON in this format:
 
       {/* VIEW 1: PRE-INTENT PROMPT SCREEN (Exact match to User Screenshot) */}
       {viewState === 'form' ? (
-        <div className="space-y-3">
+        <div className="max-w-3xl mx-auto space-y-4">
           {/* Page Title & History Button */}
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-black text-black tracking-tight">
@@ -1689,7 +1689,7 @@ Return JSON in this format:
         </div>
       ) : (
         /* VIEW 2: ADVENTURE TRAIL MAP (Results Screen) */
-        <div className="space-y-3">
+        <div className="max-w-6xl mx-auto space-y-4">
           {/* Subheader Status / Filter Bar with Back Button */}
           <div className="bg-white border-[2.5px] border-black rounded-full p-1.5 flex items-center justify-between shadow-[0_3px_0_0_#000000]">
             <button
@@ -1784,7 +1784,7 @@ Return JSON in this format:
                   label: currentCity.hub.stationName,
                 }}
                 showRoute={true}
-                height="500px"
+                height="min(72vh, 650px)"
               />
 
               {/* SAFE RETURN BOX UNDER MAP */}
@@ -1811,7 +1811,7 @@ Return JSON in this format:
             /* VIEW MODE 2: Scrollable Neo-Brutalist Trail Canvas (Calibrated for ~3 compact Polaroid cards + scroll) */
             <div
               ref={trailContainerRef}
-              className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[460px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
+              className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[480px] md:max-h-[680px] max-w-4xl mx-auto overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
             >
               {/* Clean Minimal Background Canvas: Subtle Dot Grid & Dotted Trail Path */}
               <svg

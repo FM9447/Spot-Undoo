@@ -76,13 +76,16 @@ export default function UploadTab({ location, settings = {} }) {
     const groqKey = getGroqApiKey();
     if (groqKey) {
       try {
-        const prompt = `You are a local Kerala travel explorer sharing a genuine community review for "${nameStr}" in ${cityStr} (${effectiveCategory}, approx ₹${avgCost || '50'}).
-User rough draft: "${baseText || 'Calm breezy spot with great local vibe'}".
+        const prompt = baseText
+          ? `You are an editor polishing a traveler's review for "${nameStr}" in ${cityStr}.
+User notes: "${baseText}".
 
-Task: Polish and transform this into a fresh, authentic 2-sentence community review strictly under 40 words.
-Include an insider tip (best time to visit, secret path, sunset angle, or nearby snack/chai stall).
-Random seed variation: ${Date.now() % 10000}.
-Return ONLY the review text without quotes, markdown, or greetings.`;
+Task: Polish the user's text into 1 to 2 clear, concise, natural sentences (under 30 words).
+CRITICAL RULES:
+- Strictly stick ONLY to what the user wrote.
+- DO NOT invent or fabricate any details, shops, food, paths, or claims the user did NOT mention.
+- Output ONLY the polished review text without quotes or markdown.`
+          : `Write a short, simple, grounded 1-to-2 sentence community note for "${nameStr}" in ${cityStr} (${effectiveCategory}). Keep it honest, pleasant, and under 25 words without exaggerations or fake claims. Output ONLY the text without quotes.`;
 
         const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
           method: 'POST',
@@ -93,8 +96,8 @@ Return ONLY the review text without quotes, markdown, or greetings.`;
           body: JSON.stringify({
             model: 'qwen/qwen3.8-27b',
             messages: [{ role: 'user', content: prompt }],
-            temperature: 0.9,
-            max_tokens: 120,
+            temperature: 0.4,
+            max_tokens: 80,
           }),
         });
         if (groqRes.ok) {
@@ -139,12 +142,12 @@ Return ONLY the review text without quotes, markdown, or greetings.`;
 
     // 3. Try Local Ollama if configured
     try {
-      const prompt = `You are a local Kerala explorer writing a genuine community review for "${nameStr}" in ${cityStr} (${effectiveCategory}, approx ₹${avgCost}).
-User text draft in box: "${baseText || 'Peaceful spot with amazing vibes'}".
-Return JSON: {"story": "Enhance and polish the draft into 2 short, authentic sentences under 40 words like a local traveler with an insider tip (best time, path, or snack)."}`;
+      const prompt = baseText
+        ? `Polish this user note into 1 clean sentence under 25 words without inventing extra facts: "${baseText}". Return JSON: {"story": "polished text"}`
+        : `Write a 1-sentence note for ${nameStr} in ${cityStr}. Return JSON: {"story": "short note"}`;
 
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout')), 3000)
+        setTimeout(() => reject(new Error('Timeout')), 2500)
       );
       const res = await Promise.race([
         ollamaChat({
@@ -164,39 +167,24 @@ Return JSON: {"story": "Enhance and polish the draft into 2 short, authentic sen
       console.warn('Ollama auto description fallback:', e);
     }
 
-    // 4. Dynamic multi-part smart generator if offline (never produces identical text)
-    const openers = [
-      `Skip the standard tourist trail and head to ${nameStr} in ${cityStr}!`,
-      `Such an underrated local gem in ${cityStr}.`,
-      `Locals love ${nameStr} for good reason.`,
-      `A true hidden sanctuary tucked away in ${cityStr}.`,
-      `Pure tranquility at ${nameStr} without the commercial rush.`,
-      `One of the most scenic pockets around ${cityStr}.`,
-    ];
-    const middles = baseText
-      ? [
-          `${baseText} - honestly worth the detour.`,
-          `As they say: "${baseText}", and it truly delivers on that vibe.`,
-          `${baseText}. The atmosphere here hits differently in person.`,
-        ]
-      : [
-          `Lush surroundings and a cool soothing breeze throughout the day.`,
-          `Very few crowds know about this spot, making it ideal for peaceful photos.`,
-          `Authentic Kerala atmosphere with clean, relaxing surroundings.`,
-          `Great spot to unwind with friends or take a solo stroll.`,
-        ];
-    const tips = [
-      `Best visited around 5:30 PM for the golden hour; grab a hot chai nearby for under ₹${avgCost}.`,
-      `Take the narrow walking path to the right for the best vantage point with zero crowd.`,
-      `Small tea stall just 50 meters away serves incredible pazham pori and kattan chai.`,
-      `Arrive early morning before 8 AM for peaceful misty views and easy parking.`,
-      `Keep ₹${avgCost} small cash handy for local tea or entry; evening breeze here is magical.`,
-      `Don't miss the sunset view from the far edge — absolute postcard scenery.`,
-    ];
-
-    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
-    const generatedReview = `${pick(openers)} ${pick(middles)} ${pick(tips)}`;
-    setReview(generatedReview);
+    // 4. Grounded fallback: NEVER invent details or unmentioned claims
+    if (baseText) {
+      const clean = baseText.charAt(0).toUpperCase() + baseText.slice(1).replace(/[.]+$/, '');
+      const polishedDrafts = [
+        `${clean}. Definitely a spot worth stopping by.`,
+        `${clean}. A great experience if you are in the area.`,
+        `${clean}. Well worth checking out when visiting ${cityStr}.`,
+        `${clean}. Truly recommended.`
+      ];
+      setReview(polishedDrafts[Math.floor(Math.random() * polishedDrafts.length)]);
+    } else {
+      const genericDrafts = [
+        `Pleasant and relaxing spot in ${cityStr}. Great place to spend some quiet time.`,
+        `A lovely location in ${cityStr} with nice surroundings. Well worth a short visit.`,
+        `Calm atmosphere and scenic views around ${cityStr}. Good stop for a peaceful break.`
+      ];
+      setReview(genericDrafts[Math.floor(Math.random() * genericDrafts.length)]);
+    }
     setGeneratingText(false);
   };
 
@@ -446,14 +434,21 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
   };
 
   return (
-    <div className="space-y-3 pb-8">
+    <div className="max-w-5xl mx-auto space-y-4 pb-12">
       {/* Page Title */}
-      <h2 className="text-2xl font-black text-black tracking-tight">
-        Share a Hidden Spot or Review
-      </h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl sm:text-3xl font-black text-black tracking-tight">
+          Share a Hidden Spot or Review
+        </h2>
+        <span className="hidden sm:inline-block bg-[#EFF6FF] border border-[#3B82F6] text-[#0B3BF4] font-black text-xs px-3 py-1 rounded-full">
+          Community Discovery ✦
+        </span>
+      </div>
 
-      {/* 1. Photo Dropzone & Vision Card */}
-      <div className="bg-white border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] space-y-2.5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        {/* Left Column: Photo Dropzone & Vision Card (lg:col-span-5) */}
+        <div className="lg:col-span-5 space-y-4">
+          <div className="bg-white border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] space-y-2.5">
         <input
           type="file"
           ref={fileInputRef}
@@ -677,7 +672,10 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
           </div>
         </div>
       </div>
+    </div>
 
+    {/* Right Column: Spot Details & Community Review (lg:col-span-7) */}
+    <div className="lg:col-span-7 space-y-4">
       {/* 2. Spot Details Form Card */}
       <div className="bg-white border-[2.5px] border-black rounded-3xl p-3.5 shadow-[0_4px_0_0_#000000] space-y-3">
         {/* City Selection */}
@@ -937,6 +935,8 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
           </div>
         </div>
       )}
+        </div>
+      </div>
     </div>
   );
 }
