@@ -1,10 +1,17 @@
 export const getBackendUrl = () => {
   if (typeof window !== 'undefined') {
+    const custom = localStorage.getItem('spot_undoo_backend_url');
+    if (custom) return custom;
     if (import.meta.env?.VITE_BACKEND_URL) {
       return import.meta.env.VITE_BACKEND_URL;
     }
+    // Check if running on Android/iOS Capacitor
+    const isNative = window.Capacitor?.isNativePlatform?.() || window.location.protocol === 'capacitor:';
+    if (isNative) {
+      return 'http://192.168.1.44:4000';
+    }
     const host = window.location.hostname;
-    // In production on HTTPS (e.g. Hugging Face Spaces or custom domain), use same origin
+    // In production on HTTPS (e.g. Vercel or custom domain), use same origin
     if (window.location.protocol === 'https:') {
       return window.location.origin;
     }

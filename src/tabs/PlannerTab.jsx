@@ -2,7 +2,8 @@ import { useState } from 'react';
 import places from '../data/placesSeed';
 import { filterCandidates, buildFallbackPlans } from '../utils/plannerMath';
 import { ollamaChat } from '../utils/ollama';
-import { Loader2, BrainCircuit, IndianRupee, Clock, MapPin } from 'lucide-react';
+import { getBackendUrl } from '../utils/apiConfig';
+import { Loader2, BrainCircuit, IndianRupee, Clock, MapPin, Sparkles } from 'lucide-react';
 import SpotUndooLoadingScreen from '../components/SpotUndooLoadingScreen';
 
 const MOODS = ['Chill', 'Street Food', 'Hidden Nature', 'Gaming', 'Party'];
@@ -53,11 +54,34 @@ Return this JSON structure:
   ]
 }`;
 
-      const result = await ollamaChat({
-        baseUrl: settings.baseUrl,
-        model: settings.model,
-        messages: [{ role: 'user', content: prompt }],
-      });
+      let result = null;
+      let engineName = 'Groq Cloud (Qwen 3.8)';
+
+      // 1. Try Cloud AI backend (Groq Qwen 3.8 27B) first
+      try {
+        const backendUrl = getBackendUrl();
+        const aiRes = await fetch(`${backendUrl}/api/ai/plan`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt }),
+        });
+        if (aiRes.ok) {
+          result = await aiRes.json();
+        }
+      } catch (err) {
+        console.warn('Backend Groq AI unavailable, trying local Ollama:', err.message);
+      }
+
+      // 2. Fall back to local Ollama if backend didn't return plans
+      if (!result?.plans?.length) {
+        engineName = 'Local Ollama';
+        result = await ollamaChat({
+          baseUrl: settings.baseUrl,
+          model: settings.model,
+          messages: [{ role: 'user', content: prompt }],
+        });
+      }
+
       // Support both modern {plans: [...]} and legacy flat plan objects
       if (Array.isArray(result?.plans) && result.plans.length) {
         setPlans(result.plans);
@@ -80,12 +104,12 @@ Return this JSON structure:
             bufferMins: 0,
           }));
         if (legacyPlans.length) setPlans(legacyPlans);
-        else throw new Error('Invalid AI response');
+        else throw new Error('Invalid AI response structure');
       } else {
-        throw new Error('Invalid AI response');
+        throw new Error('Invalid AI response structure');
       }
     } catch (err) {
-      setError(`AI offline or error: ${err.message}. Showing math-based plans.`);
+      setError(`AI offline: ${err.message}. Showing smart route plans.`);
       setPlans(buildFallbackPlans(candidates, startTime, budget));
     } finally {
       setLoading(false);

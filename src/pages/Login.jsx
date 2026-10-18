@@ -47,8 +47,15 @@ export default function Login({ onLogin }) {
         if (onLogin) onLogin();
       }
     } catch (err) {
-      // Local fallback for offline/demo access
-      if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
+      // Local fallback for offline/demo access or when backend isn't reached
+      const isOfflineOrHtml =
+        err.message.includes('Failed to fetch') ||
+        err.message.includes('NetworkError') ||
+        err.message.includes('Unexpected token') ||
+        err.message.includes('not valid JSON') ||
+        err.message.includes('doctype');
+
+      if (isOfflineOrHtml) {
         const fallbackUser = {
           name: name.trim() || 'Local Explorer',
           email: cleanEmail || 'explorer@spotundoo.local',

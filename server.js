@@ -281,8 +281,64 @@ app.post('/api/audio/tts', async (req, res) => {
   }
 });
 
+// AI Itinerary Planner endpoint powered by Groq (Qwen 3.8 27B)
+app.post('/api/ai/plan', async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    if (!prompt) return res.status(400).json({ error: 'Prompt is required' });
+
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      return res.status(503).json({ error: 'No GROQ_API_KEY configured' });
+    }
+
+    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'qwen/qwen3.8-27b',
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an expert Kerala travel itinerary planner. Return ONLY a valid JSON object matching the requested schema with key "plans". Do not wrap in markdown quotes.'
+          },
+          {
+            role: 'user',
+            content: prompt
+          }
+        ],
+        temperature: 0.6,
+        response_format: { type: 'json_object' }
+      }),
+    });
+
+    if (!groqRes.ok) {
+      const errText = await groqRes.text();
+      console.error('Groq API error:', errText);
+      return res.status(groqRes.status).json({ error: `Groq error: ${errText}` });
+    }
+
+    const data = await groqRes.json();
+    const rawContent = data.choices?.[0]?.message?.content || '{}';
+    const parsed = JSON.parse(rawContent);
+    res.json(parsed);
+  } catch (err) {
+    console.error('AI plan generation error:', err);
+    res.status(500).json({ error: err.message || 'AI planning generation failed' });
+  }
+});
+
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', db: !!db, elevenlabs: !!process.env.ELEVENLABS_API_KEY, time: new Date() });
+  res.json({
+    status: 'ok',
+    db: !!db,
+    groq: !!process.env.GROQ_API_KEY,
+    elevenlabs: !!process.env.ELEVENLABS_API_KEY,
+    time: new Date()
+  });
 });
 
 // Serve frontend static build if dist directory exists
