@@ -8,6 +8,7 @@ import RideComparatorModal from '../components/RideComparatorModal';
 import LocationPickerModal from '../components/LocationPickerModal';
 import { getBackendUrl } from '../utils/apiConfig';
 import { sanitizeText } from '../utils/sanitize';
+import { getRealSpotPhoto, getRealSpotPhotos } from '../utils/realPhotoResolver';
 
 const CATEGORIES = ['All Spots', '💎 Hidden Spots', 'Food', 'Gaming & Chill', 'Night'];
 const CITIES_LIST = ['Your Location', 'All Cities', 'Shoranur', 'Pattambi', 'Kochi', 'Calicut', 'Palakkad', 'Trivandrum', 'Kollam', 'Wayanad'];
@@ -811,7 +812,7 @@ export default function ExploreTab({ location, setLocation }) {
                       {/* Photo Frame */}
                       <div className="relative w-full h-[72px] rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                         <img
-                          src={spot.photo || spot.photos?.[0]}
+                          src={getRealSpotPhoto(spot)}
                           alt={spot.name}
                           onLoad={measureCanvas}
                           className="w-full h-full object-cover"
@@ -983,7 +984,7 @@ export default function ExploreTab({ location, setLocation }) {
                 {/* Photo Frame */}
                 <div className="relative w-full h-22 rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                   <img
-                    src={spot.photo || spot.photos?.[0]}
+                    src={getRealSpotPhoto(spot)}
                     alt={spot.name}
                     className="w-full h-full object-cover"
                   />
@@ -1069,7 +1070,7 @@ export default function ExploreTab({ location, setLocation }) {
 
           {/* Spot Photos Carousel with cyclic navigation < > and link */}
           <ImageCarousel
-            images={selectedSpot.photos || (selectedSpot.photo ? [selectedSpot.photo] : [])}
+            images={getRealSpotPhotos(selectedSpot)}
             links={selectedSpot.links || []}
             alt={selectedSpot.name}
             className="w-full h-44 rounded-2xl border-[2px] border-black shadow-[0_2px_0_0_#000000]"

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Navigation, MapPin, Layers, Sparkles } from 'lucide-react';
+import { getRealSpotPhoto } from '../utils/realPhotoResolver';
 
 const AVADA_TILE_PROVIDERS = {
   standard: {
@@ -186,6 +187,7 @@ export default function InteractiveMap({
       routeLatLngs.push([spot.lat, spot.lng]);
 
       const isSelected = selectedSpot && (selectedSpot.id === spot.id || selectedSpot.name === spot.name);
+      const spotPhoto = getRealSpotPhoto(spot);
       const priceText = spot.expense === 0 ? 'FREE' : (spot.expense ? `₹${spot.expense}` : (spot.fare ? `₹${spot.fare}` : 'FREE'));
       const cat = (spot.category || '').toLowerCase();
       let pinColor = isSelected ? '#EF4444' : (showRoute ? '#0B3BF4' : '#0B3BF4');
@@ -264,7 +266,7 @@ export default function InteractiveMap({
                   ${idx + 1}
                 </div>
                 <div style="width: 26px; height: 18px; border-radius: 5px; overflow: hidden; border: 1px solid #000; margin-top: 4px; background: #f1f5f9;">
-                  <img src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <img src="${spotPhoto}" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
               </div>
               <div style="width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid #000000; margin-top: -1px;"></div>
@@ -314,7 +316,7 @@ export default function InteractiveMap({
                   ${idx + 1}
                 </div>
                 <div style="width: 42px; height: 30px; border-radius: 6px; overflow: hidden; border: 1px solid #000; margin-top: 4px; background: #f1f5f9;">
-                  <img src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <img src="${spotPhoto}" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
                 <div style="width: 100%; text-align: center; margin-top: 1px; line-height: 1.1; padding: 0 1px;">
                   <div style="font-size: 7px; font-weight: 900; color: #000; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
@@ -372,7 +374,7 @@ export default function InteractiveMap({
                   ${idx + 1}
                 </div>
                 <div style="width: 58px; height: 44px; border-radius: 8px; overflow: hidden; border: 1.5px solid #000; margin-top: 5px; background: #f1f5f9;">
-                  <img src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <img src="${spotPhoto}" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
                 <div style="width: 100%; text-align: center; margin-top: 2px; line-height: 1.15; padding: 0 1px;">
                   <div style="font-size: 8px; font-weight: 900; color: #000; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">

@@ -39,7 +39,19 @@ export function filterCandidates(places, userLat, userLon, usableTimeMins, maxBu
 }
 
 export function buildFallbackPlans(candidates, startTime, maxBudget) {
-  if (candidates.length === 0) return [];
+  if (!candidates || candidates.length === 0) return [];
+
+  // Deduplicate candidates by name
+  const seenNames = new Set();
+  const uniqueCandidates = candidates.filter((c) => {
+    const k = (c.name || '').toLowerCase().trim();
+    if (!k || seenNames.has(k)) return false;
+    seenNames.add(k);
+    return true;
+  });
+
+  if (uniqueCandidates.length === 0) return [];
+
   const fmt = (mins) => {
     const d = new Date(startTime.getTime() + mins * 60000);
     return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -48,7 +60,15 @@ export function buildFallbackPlans(candidates, startTime, maxBudget) {
   const makePlan = (spots, label) => {
     let cursor = 0;
     let totalCost = 0;
-    const stops = spots.map((s) => {
+    const planStopsSeen = new Set();
+    const uniqueSpots = spots.filter((s) => {
+      const k = (s.name || '').toLowerCase().trim();
+      if (!k || planStopsSeen.has(k)) return false;
+      planStopsSeen.add(k);
+      return true;
+    });
+
+    const stops = uniqueSpots.map((s) => {
       const arriveStr = fmt(cursor + s.transit.mins);
       cursor += s.transit.mins + s.spendTime;
       const leaveStr = fmt(cursor);
@@ -59,9 +79,9 @@ export function buildFallbackPlans(candidates, startTime, maxBudget) {
   };
 
   const plans = [];
-  if (candidates.length >= 1)
-    plans.push(makePlan(candidates.slice(0, Math.min(3, candidates.length)), "Best Rated Route"));
-  const budgetSorted = [...candidates].sort((a, b) => a.totalCost - b.totalCost);
+  if (uniqueCandidates.length >= 1)
+    plans.push(makePlan(uniqueCandidates.slice(0, Math.min(3, uniqueCandidates.length)), "Best Rated Route"));
+  const budgetSorted = [...uniqueCandidates].sort((a, b) => a.totalCost - b.totalCost);
   if (budgetSorted.length >= 1)
     plans.push(makePlan(budgetSorted.slice(0, Math.min(3, budgetSorted.length)), "Ultra-Budget Saver"));
   return plans;

@@ -19,7 +19,7 @@ export default function ImageCarousel({
 
   const safeImages = imageList.length > 0
     ? imageList
-    : ['https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80'];
+    : ['https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg'];
 
   const total = safeImages.length;
   const currentImage = safeImages[currentIndex % total];

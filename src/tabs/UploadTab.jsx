@@ -7,6 +7,7 @@ import { uploadImageToFirebase } from '../utils/firebaseStorage';
 import { haversineKm } from '../utils/plannerMath';
 import { nearestCityKey, acquireGPS } from '../utils/gps';
 import { sanitizeText } from '../utils/sanitize';
+import { getRealSpotPhoto } from '../utils/realPhotoResolver';
 
 const CATEGORIES = [
   { id: 'Hidden', label: '💎 Hidden' },
@@ -30,6 +31,8 @@ export default function UploadTab({ location, settings = {} }) {
   const [resolvingLink, setResolvingLink] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [modalAlert, setModalAlert] = useState(null);
+  const [nearbySpotWarning, setNearbySpotWarning] = useState(null);
+  const [inspectedSpot, setInspectedSpot] = useState(null);
 
   const showBrutalistAlert = (title, message) => {
     setModalAlert({ title, message });
@@ -567,7 +570,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
     }
   };
 
-  const handlePublish = async () => {
+  const handlePublish = async (overrideProximity = false) => {
     if (!spotName.trim()) {
       showBrutalistAlert('SPOT NAME REQUIRED', 'Please enter a name for this hidden spot before publishing.');
       return;
@@ -577,7 +580,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
     const checkLat = Number(lat);
     const checkLng = Number(lng);
 
-    // 100-Meter Duplicate Check against all existing spots
+    // 100-Meter Proximity Check against all existing spots
     const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
     const allSpots = [
       ...stored,
@@ -589,10 +592,13 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
       return distMeters <= 100;
     });
 
-    if (dup) {
+    if (!overrideProximity && dup) {
       const dM = Math.round(haversineKm(checkLat, checkLng, dup.lat, dup.lng) * 1000);
       setDuplicateError(`⚠️ A spot already exists within 100m: "${dup.name}" (${dM}m away).`);
-      showBrutalistAlert('DUPLICATE SPOT DETECTED', `A spot already exists within 100m: "${dup.name}" (${dM}m away). Please pick a different spot.`);
+      setNearbySpotWarning({
+        spot: dup,
+        distanceMeters: dM,
+      });
       return;
     }
 
@@ -1206,6 +1212,156 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
           </div>
         </div>
       )}
+        {/* Neo-Brutalist Nearby Spot Proximity Warning Modal (< 100m) */}
+        {nearbySpotWarning && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
+            <div className="relative w-full max-w-sm bg-[#FFFDF7] border-[3.5px] border-black rounded-2xl p-5 shadow-[8px_8px_0px_0px_#000000] text-black animate-in fade-in zoom-in duration-200">
+              {/* Header */}
+              <div className="flex items-center justify-between pb-3 border-b-[2.5px] border-black mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#FFE500] border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_0px_#000000]">
+                    <AlertTriangle size={18} strokeWidth={2.5} className="text-black" />
+                  </div>
+                  <span className="font-black text-xs tracking-wider uppercase text-black">
+                    SPOT NEARBY ({nearbySpotWarning.distanceMeters}M)
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setNearbySpotWarning(null)}
+                  className="w-7 h-7 rounded-lg bg-white border-[2px] border-black font-black text-xs flex items-center justify-center hover:bg-gray-100 shadow-[2px_2px_0px_0px_#000000] cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Description */}
+              <p className="text-xs font-bold text-gray-800 leading-snug mb-3">
+                A spot is already registered within 100 meters of your coordinates:
+              </p>
+
+              {/* Interactive Nearby Spot Card - Clicking opens full details popup */}
+              <div
+                onClick={() => setInspectedSpot(nearbySpotWarning.spot)}
+                className="group bg-white border-[2.5px] border-black rounded-xl p-2.5 mb-3.5 shadow-[3px_3px_0px_0px_#000000] hover:bg-amber-50 cursor-pointer transition active:translate-x-0.5 active:translate-y-0.5"
+              >
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src={getRealSpotPhoto(nearbySpotWarning.spot)}
+                    alt={nearbySpotWarning.spot.name}
+                    className="w-14 h-14 rounded-lg object-cover border-[1.5px] border-black shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-1">
+                      <span className="text-[9px] font-black uppercase text-amber-800 bg-amber-100 border border-black/30 px-1.5 py-0.5 rounded">
+                        {nearbySpotWarning.spot.category || 'Spot'}
+                      </span>
+                      <span className="text-[9px] font-black text-emerald-800 bg-emerald-100 border border-emerald-400 px-1.5 py-0.5 rounded">
+                        {nearbySpotWarning.distanceMeters}m away
+                      </span>
+                    </div>
+                    <h4 className="font-black text-xs text-black truncate mt-1">
+                      {nearbySpotWarning.spot.name}
+                    </h4>
+                    <div className="text-[10px] text-gray-500 font-bold truncate">
+                      {nearbySpotWarning.spot.area || nearbySpotWarning.spot.cityName || 'Kerala'}
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-2 pt-1.5 border-t border-dashed border-gray-300 flex items-center justify-center gap-1 text-[10px] font-black text-[#0B3BF4] group-hover:underline">
+                  <span>🔍 Tap card to inspect place details</span>
+                </div>
+              </div>
+
+              <p className="text-[11px] font-bold text-gray-700 leading-snug mb-4">
+                Is &quot;{spotName}&quot; a completely different spot, or did you mean to check into this nearby place?
+              </p>
+
+              {/* Confirmation Actions */}
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setNearbySpotWarning(null)}
+                  className="flex-1 bg-white hover:bg-gray-100 text-black font-black text-[11px] uppercase tracking-wider py-2.5 rounded-xl border-[2px] border-black shadow-[3px_3px_0px_0px_#000000] cursor-pointer"
+                >
+                  Adjust Location
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setNearbySpotWarning(null);
+                    handlePublish(true);
+                  }}
+                  className="flex-1 bg-[#10B981] hover:bg-[#059669] text-white font-black text-[11px] uppercase tracking-wider py-2.5 rounded-xl border-[2px] border-black shadow-[3px_3px_0px_0px_#000000] cursor-pointer"
+                >
+                  Add Anyway
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Inspected Nearby Spot Detail Popup */}
+        {inspectedSpot && (
+          <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs">
+            <div className="relative w-full max-w-sm bg-[#FFFDF7] border-[3.5px] border-black rounded-2xl p-4 shadow-[8px_8px_0px_0px_#000000] text-black max-h-[85vh] overflow-y-auto animate-in fade-in zoom-in duration-150">
+              <div className="flex items-center justify-between pb-2 border-b-[2px] border-black mb-3">
+                <span className="text-[10px] font-black uppercase text-amber-800 bg-amber-100 border border-black/30 px-2 py-0.5 rounded">
+                  {inspectedSpot.category || 'Existing Spot'}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setInspectedSpot(null)}
+                  className="w-7 h-7 rounded-lg bg-white border-[2px] border-black font-black text-xs flex items-center justify-center hover:bg-gray-100 shadow-[2px_2px_0px_0px_#000000] cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <h3 className="text-base font-black text-black leading-tight mb-2">
+                {inspectedSpot.name}
+              </h3>
+
+              <div className="w-full h-40 rounded-xl overflow-hidden border-[2px] border-black mb-3 bg-gray-100">
+                <img
+                  src={getRealSpotPhoto(inspectedSpot)}
+                  alt={inspectedSpot.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <p className="text-xs text-gray-700 font-medium mb-3 italic">
+                &quot;{inspectedSpot.review || 'Registered community spot in Kerala.'}&quot;
+              </p>
+
+              <div className="grid grid-cols-3 gap-2 border-[2px] border-black rounded-xl p-2 bg-white text-center mb-4">
+                <div>
+                  <div className="text-[9px] text-gray-500 font-bold uppercase">Rating</div>
+                  <div className="text-xs font-black text-black">⭐ {inspectedSpot.rating || 4.5}</div>
+                </div>
+                <div>
+                  <div className="text-[9px] text-gray-500 font-bold uppercase">Avg Cost</div>
+                  <div className="text-xs font-black text-emerald-600">
+                    {inspectedSpot.expense === 0 ? 'Free' : `₹${inspectedSpot.expense}`}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[9px] text-gray-500 font-bold uppercase">Visit Time</div>
+                  <div className="text-xs font-black text-blue-600">{inspectedSpot.spendTime || 45}m</div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setInspectedSpot(null)}
+                className="w-full bg-[#FFE500] hover:bg-[#FACC15] text-black font-black text-xs uppercase tracking-wider py-2.5 rounded-xl border-[2.5px] border-black shadow-[3px_3px_0px_0px_#000000] cursor-pointer"
+              >
+                Back to Confirmation
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Neo-Brutalist Alert Modal */}
         {modalAlert && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">

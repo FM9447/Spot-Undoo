@@ -47,13 +47,38 @@ export default function PlannerTab({ location, settings }) {
     const buffer = mode === 'Waiting for Train/Flight' ? 30 : 0;
     const usableTimeMins = timeHrs * 60 - buffer;
     const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
-    const all = [...places, ...stored];
+    // Strictly deduplicate combined spots by normalized name
+    const rawAll = [...stored, ...places];
+    const seenMap = new Set();
+    const all = rawAll.filter((p) => {
+      const k = (p.name || '').toLowerCase().trim();
+      if (!k || seenMap.has(k)) return false;
+      seenMap.add(k);
+      return true;
+    });
+
     const candidates = filterCandidates(all, location.lat, location.lon, usableTimeMins, budget);
     const startTime = new Date();
+
+    const dedupePlanStops = (planList) => {
+      return (planList || []).map((p) => {
+        const stopSeen = new Set();
+        const cleanStops = (p.stops || []).filter((s) => {
+          const k = (s.name || s.location || '').toLowerCase().trim();
+          if (!k || stopSeen.has(k)) return false;
+          stopSeen.add(k);
+          return true;
+        });
+        return { ...p, stops: cleanStops };
+      });
+    };
 
     try {
       if (candidates.length === 0) throw new Error('No candidates match your filters');
       const prompt = `You are a local Kerala travel planner. Based on these ${candidates.length} filtered spots (already within time and budget), create EXACTLY 3 travel plans as JSON.
+
+CRITICAL DEDUPLICATION RULE:
+Every stop within a plan MUST be a completely unique place. DO NOT repeat the same spot or location twice in any itinerary.
 
 User preferences: Mode=${mode}, Time=${timeHrs}hrs (usable=${usableTimeMins}min), Budget=₹${budget}, Moods=${[...moods, customMood].filter(Boolean).join(', ')}
 
@@ -103,7 +128,7 @@ Return this JSON structure:
 
       // Support both modern {plans: [...]} and legacy flat plan objects
       if (Array.isArray(result?.plans) && result.plans.length) {
-        setPlans(result.plans);
+        setPlans(dedupePlanStops(result.plans));
       } else if (result && typeof result === 'object') {
         const legacyPlans = Object.entries(result)
           .filter(([k]) => k.startsWith('Plan'))
@@ -122,14 +147,14 @@ Return this JSON structure:
             totalCost: v.totalCost ?? 0,
             bufferMins: 0,
           }));
-        if (legacyPlans.length) setPlans(legacyPlans);
+        if (legacyPlans.length) setPlans(dedupePlanStops(legacyPlans));
         else throw new Error('Invalid AI response structure');
       } else {
         throw new Error('Invalid AI response structure');
       }
     } catch (err) {
       setError(`AI offline: ${err.message}. Showing smart route plans.`);
-      setPlans(buildFallbackPlans(candidates, startTime, budget));
+      setPlans(dedupePlanStops(buildFallbackPlans(candidates, startTime, budget)));
     } finally {
       setLoading(false);
     }

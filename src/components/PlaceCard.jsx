@@ -13,6 +13,8 @@ const CATEGORY_COLORS = {
   'Party/Night': 'bg-pink-500/20 text-pink-400',
 };
 
+import { getRealSpotPhotos } from '../utils/realPhotoResolver';
+
 export default function PlaceCard({ place, userLat, userLon }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAudioLoading, setIsAudioLoading] = useState(false);
@@ -42,13 +44,7 @@ export default function PlaceCard({ place, userLat, userLon }) {
     }
   };
 
-  const photos = place.photos && place.photos.length > 0
-    ? place.photos
-    : [
-        place.photo || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
-        'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80',
-        'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80',
-      ];
+  const photos = getRealSpotPhotos(place);
 
   const links = place.links || [
     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}`,
