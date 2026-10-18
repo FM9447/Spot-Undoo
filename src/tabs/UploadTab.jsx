@@ -11,9 +11,20 @@ const CATEGORIES = [
   { id: 'Party', label: '🎉 Party' },
 ];
 
-export default function UploadTab({ settings }) {
-  const [selectedCityKey, setSelectedCityKey] = useState('Shoranur');
-  const [specificArea, setSpecificArea] = useState('Kottakkunnu, Malappuram');
+export default function UploadTab({ location, settings }) {
+  const initialCity = location?.cityKey && KERALA_CITIES[location.cityKey] ? location.cityKey : 'Shoranur';
+  const initialArea = location?.label ? location.label.replace(/\s*\(Active\)/i, '') : 'Shoranur, Palakkad';
+  const [selectedCityKey, setSelectedCityKey] = useState(initialCity);
+  const [specificArea, setSpecificArea] = useState(initialArea);
+
+  useEffect(() => {
+    if (location?.cityKey && KERALA_CITIES[location.cityKey]) {
+      setSelectedCityKey(location.cityKey);
+    }
+    if (location?.label) {
+      setSpecificArea(location.label.replace(/\s*\(Active\)/i, ''));
+    }
+  }, [location]);
   const [photoPreview, setPhotoPreview] = useState(
     'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80'
   );

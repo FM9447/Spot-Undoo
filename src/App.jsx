@@ -99,7 +99,7 @@ export default function App() {
           <ChatTab location={location} setLocation={setLocation} settings={settings} />
         )}
         {activeTab === 'upload' && (
-          <UploadTab settings={settings} />
+          <UploadTab location={location} settings={settings} />
         )}
         <div className={activeTab === 'debug' ? '' : 'hidden'}>
           <LLMDebugTab settings={settings} />

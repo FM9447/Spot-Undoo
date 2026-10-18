@@ -184,12 +184,19 @@ def main():
         final_res = final_save_future.result()
         print(f"🎉 Final Checkpoint Saved Successfully: {final_res.path}")
 
+        # Live Inference Sampler Checkpoint for real-time model execution
+        print(f"⚡ Generating live inference sampler checkpoint '{args.checkpoint_name}-live'...")
+        sampler_save_future = training_client.save_weights_for_sampler(name=f"{args.checkpoint_name}-live")
+        sampler_res = sampler_save_future.result()
+        print(f"🚀 Live Sampler Endpoint Ready: {sampler_res.path}")
+
         print("\n" + "=" * 65)
-        print("🏆 Spot-Undoo Fine-Tuning Complete!")
+        print("🏆 Spot-Undoo Multi-Task Fine-Tuning Complete!")
         print(f"   • Total Steps: {args.steps}")
         print(f"   • Total Trained Tokens: {total_tokens:,}")
         print(f"   • Dashboard URL: {console_url}")
-        print(f"   • Remote Checkpoint: {final_res.path}")
+        print(f"   • Training Checkpoint: {final_res.path}")
+        print(f"   • Live Sampler Checkpoint: {sampler_res.path}")
         print("=" * 65)
 
     except Exception as e:

@@ -379,7 +379,8 @@ rows = []
 for city_name, city_info in KERALA_30_CITIES.items():
     hub = city_info["hub"]
     spots = city_info["spots"]
-    for i in range(100):
+    # Task 1: 40 Itinerary Planning samples per city (anchored to current location)
+    for i in range(40):
         mode = random.choice(MODES)
         time_hrs = random.choice([2, 3, 4, 5])
         budget = random.choice([200, 300, 500, 800, 1200])
@@ -392,6 +393,7 @@ for city_name, city_info in KERALA_30_CITIES.items():
 Available Time: {time_hrs} Hours (30m buffer locked)
 Max Budget: ₹{budget} PER PERSON
 Location: {hub['name']} ({city_name}, Kerala)
+GPS Coordinates: ({hub['lat']}, {hub['lng']})
 Quick Vibes: {', '.join(vibes)}
 User Request: "Find me authentic {vibes[0].lower()} and {vibes[1].lower()} near {hub['name']} within safe return time."
 
@@ -499,6 +501,100 @@ Filtered Local Candidates:
                 },
                 {"role": "user", "content": prompt},
                 {"role": "assistant", "content": json.dumps(assistant_json, ensure_ascii=False)}
+            ]
+        })
+
+    # Task 2: 20 AI Hashtag & Vibe Tag samples per city (anchored to current city)
+    for i in range(20):
+        spot = random.choice(spots)
+        hashtag_prompt = f"""Generate 5 viral Instagram/Travel hashtags starting with '#' for this Kerala spot:
+Spot: {spot['name']}
+Category: {spot['category']}
+City: {city_name}, Kerala (Near {hub['name']})
+
+Return JSON: {{"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": "short 1-line catchy description"}}"""
+        
+        city_clean = city_name.replace(" ", "")
+        tags_response = {
+            "tags": [f"#{city_clean}Gems", f"#Discover{city_clean}", f"#{spot['category'].replace(' ', '')}", "#KeralaTravel", "#HiddenKerala"],
+            "caption": f"Unmissable authentic spot in {city_name}: {spot['review'][:60]}..."
+        }
+        rows.append({
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "You are Spot Undo AI hashtag creator. You output viral travel hashtags strictly based on the current Kerala city and spot category."
+                },
+                {"role": "user", "content": hashtag_prompt},
+                {"role": "assistant", "content": json.dumps(tags_response, ensure_ascii=False)}
+            ]
+        })
+
+    # Task 3: 20 AI Story & Review Drafting samples per city (anchored to current city)
+    for i in range(20):
+        spot = random.choice(spots)
+        story_prompt = f"""You are a local Kerala explorer who knows secret spots. Write a short, authentic 2-sentence insider tip/review for:
+Spot: "{spot['name']}"
+Category: {spot['category']}
+City / Area: {city_name}, Kerala (Near {hub['stationName']})
+Cost: {format_cost(spot['expense'])} | Time: {spot['time']}m
+
+Write in first-person like a Reddit r/Kerala traveler. Mention an authentic tip (best time, path to take, or snack to try). Output plain text only, no quotes, under 45 words."""
+        
+        story_response = f"Visited {spot['name']} right near {hub['name']} in {city_name}. {spot['review']} Head there before dusk to beat any crowd."
+        rows.append({
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "You are a local Kerala explorer who knows secret spots. You write authentic 2-sentence insider reviews mentioning local tips for the exact city."
+                },
+                {"role": "user", "content": story_prompt},
+                {"role": "assistant", "content": story_response}
+            ]
+        })
+
+    # Task 4: 20 Interactive Plan Chat Modifier samples per city (anchored to current city)
+    for i in range(20):
+        s_base = spots[:2]
+        user_requests = [
+            ("Train delayed by 20m, need fastest route", "Shortened route to 1 spot for guaranteed quick station return."),
+            ("Add an authentic chai and snack stop", "Added local tea stall with fresh snacks right on your walking path."),
+            ("Cut budget by ₹100, make it cheaper", "Re-balanced stops to prioritize free and ultra-low cost entry points."),
+            ("Only walking distance from station", "Filtered out auto legs to keep all stops strictly walkable.")
+        ]
+        u_req, reasoning = random.choice(user_requests)
+        modifier_prompt = f"""You are Spot Undo AI travel planner for Kerala.
+User wants to modify this existing itinerary:
+Current stops: {', '.join(s['name'] for s in s_base)}
+User request: "{u_req}"
+
+City: {city_name} (Hub: {hub['name']})
+Available spots:
+{chr(10).join(f"- {s['name']} ({s['category']}, ₹{s['expense']}, {s['time']}m)" for s in spots)}
+
+Return JSON ONLY:
+{{
+  "updatedTitle": "short plan title",
+  "reasoning": "short 1-sentence note of what changed",
+  "stops": [
+    {{"name": "spot name", "time": "30m", "expense": 0, "transit": "🚶 6m • Free"}}
+  ]
+}}"""
+        mod_response = {
+            "updatedTitle": f"{city_name} Custom Trail",
+            "reasoning": reasoning,
+            "stops": [
+                {"name": s_base[0]["name"], "time": f"{s_base[0]['time']}m", "expense": s_base[0]["expense"], "transit": s_base[0]["transit"]}
+            ]
+        }
+        rows.append({
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "You are Spot Undo AI travel planner for Kerala. You adapt itineraries dynamically based on real-time user requests."
+                },
+                {"role": "user", "content": modifier_prompt},
+                {"role": "assistant", "content": json.dumps(mod_response, ensure_ascii=False)}
             ]
         })
 
