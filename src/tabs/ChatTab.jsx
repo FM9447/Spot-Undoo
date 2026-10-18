@@ -39,10 +39,7 @@ export default function ChatTab({ location, setLocation, settings }) {
     return Number(localStorage.getItem('spot_undoo_activePlanIdx')) || 0;
   });
   const [trailMode, setTrailMode] = useState('trail');
-  const [selectedSpot, setSelectedSpot] = useState(() => {
-    const city = KERALA_CITIES[localStorage.getItem('spot_undoo_cityKey') || 'Shoranur'] || KERALA_CITIES['Shoranur'];
-    return city.spots[0];
-  });
+  const [selectedSpot, setSelectedSpot] = useState(null);
   const [bookmarkedIds, setBookmarkedIds] = useState([]);
   const [userRating, setUserRating] = useState(5);
   const [userReviewText, setUserReviewText] = useState('');
@@ -766,9 +763,6 @@ If user requests adding budget (e.g. "1000 rs more"), set addedBudget.`;
     const newPlans = [...plans];
     newPlans[activePlanIdx] = updatedPlan;
     setPlans(newPlans);
-    if (modifiedStops[0]?.data) {
-      setSelectedSpot(modifiedStops[0].data);
-    }
     setModificationMsg(`✨ Plan updated: ${actionReason || `Adapted to "${promptToUse}"`}!`);
     setChatModifierInput('');
     setIsModifyingPlan(false);
@@ -980,7 +974,6 @@ If user requests adding budget (e.g. "1000 rs more"), set addedBudget.`;
           label: `${newCity.hub.name} (Active)`,
         });
       }
-      setSelectedSpot(newCity.spots[0]);
       setPlans(makeDynamicPlans(newCity, maxBudget, availableTimeHrs, selectedVibes, promptText));
     }
   };
@@ -1268,7 +1261,6 @@ Return JSON in this format:
 
         setPlans(enriched);
         setActivePlanIdx(0);
-        setSelectedSpot(enriched[0]?.stops[0]?.data || candidates[0]);
         setViewState('trail');
         // Save to MongoDB Atlas
         savePlanToDatabase(enriched, currentCity);
@@ -1293,7 +1285,6 @@ Return JSON in this format:
       );
       setPlans(dynamicPlans);
       setActivePlanIdx(0);
-      setSelectedSpot(dynamicPlans[0]?.stops[0]?.data || currentCity.spots[0]);
       setViewState('trail');
       savePlanToDatabase(dynamicPlans, currentCity);
     } finally {
@@ -1301,7 +1292,7 @@ Return JSON in this format:
     }
   };
 
-  const currentPlan = plans[activePlanIdx] || plans[0];
+  const currentPlan = plans[activePlanIdx] || plans[0] || { stops: [] };
 
   return (
     <div className="space-y-3 pb-8">
@@ -1627,9 +1618,6 @@ Return JSON in this format:
                     key={p.id || idx}
                     onClick={() => {
                       setActivePlanIdx(idx);
-                      if (p.stops?.[0]?.data) {
-                        setSelectedSpot(p.stops[0].data);
-                      }
                     }}
                     className={`text-xs font-black px-3 py-1.5 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] shrink-0 active:translate-y-0.5 ${
                       isSelected
@@ -1940,7 +1928,8 @@ Return JSON in this format:
                       {isLeft ? (
                         <div className="flex items-center gap-2.5">
                           <div
-                            className={`w-7 h-7 rounded-full border-[2px] font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
+                            onClick={() => setSelectedSpot(stop.data || stop)}
+                            className={`w-7 h-7 rounded-full border-[2px] font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition cursor-pointer hover:scale-105 active:scale-95 ${
                               isReached
                                 ? 'bg-[#E5E7EB] text-gray-600 border-gray-400'
                                 : 'bg-[#0B3BF4] text-white border-black'
@@ -2026,7 +2015,8 @@ Return JSON in this format:
                             />
                           </div>
                           <div
-                            className={`w-7 h-7 rounded-full border-[2px] font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
+                            onClick={() => setSelectedSpot(stop.data || stop)}
+                            className={`w-7 h-7 rounded-full border-[2px] font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition cursor-pointer hover:scale-105 active:scale-95 ${
                               isReached
                                 ? 'bg-[#E5E7EB] text-gray-600 border-gray-400'
                                 : 'bg-[#0B3BF4] text-white border-black'
@@ -2414,13 +2404,6 @@ Return JSON in this format:
 
                           setPlans(item.plans);
                           setActivePlanIdx(0);
-                          const firstStop = item.plans[0]?.stops?.[0];
-                          if (firstStop) {
-                            setSelectedSpot(firstStop.data || firstStop);
-                          } else if (cityData) {
-                            setSelectedSpot(cityData.spots[0]);
-                          }
-
                           setViewState('trail');
                           setShowHistory(false);
                         }

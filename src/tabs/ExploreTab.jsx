@@ -13,7 +13,7 @@ export default function ExploreTab({ location, setLocation }) {
   const [selectedCityFilter, setSelectedCityFilter] = useState('All Cities');
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState('cartoon'); // 'cartoon' | 'osm' | 'grid'
-  const [selectedSpot, setSelectedSpot] = useState(KERALA_CITIES['Shoranur'].spots[0]);
+  const [selectedSpot, setSelectedSpot] = useState(null);
   const [bookmarkedIds, setBookmarkedIds] = useState([]);
   const [userRating, setUserRating] = useState(5);
   const [userReviewText, setUserReviewText] = useState('');
@@ -130,17 +130,15 @@ export default function ExploreTab({ location, setLocation }) {
     return matchesCity && matchesCat && matchesSearch;
   });
 
-  // Automatically update selectedSpot when filters change if current spot is filtered out
+  // Reset selectedSpot only if currently viewed spot is filtered out (do not auto-open)
   useEffect(() => {
-    if (filteredSpots.length > 0) {
-      const isStillInList = selectedSpot && filteredSpots.some(
+    if (selectedSpot) {
+      const isStillInList = filteredSpots.some(
         (s) => (s.id || s.name) === (selectedSpot.id || selectedSpot.name)
       );
       if (!isStillInList) {
-        setSelectedSpot(filteredSpots[0]);
+        setSelectedSpot(null);
       }
-    } else {
-      setSelectedSpot(null);
     }
   }, [activeCategory, selectedCityFilter, searchQuery, filteredSpots.length]);
 
