@@ -379,7 +379,7 @@ rows = []
 for city_name, city_info in KERALA_30_CITIES.items():
     hub = city_info["hub"]
     spots = city_info["spots"]
-    for i in range(50):
+    for i in range(100):
         mode = random.choice(MODES)
         time_hrs = random.choice([2, 3, 4, 5])
         budget = random.choice([200, 300, 500, 800, 1200])

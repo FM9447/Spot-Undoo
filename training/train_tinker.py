@@ -100,8 +100,43 @@ def main():
         tokenizer = training_client.get_tokenizer()
         print("✅ Tokenizer ready.")
 
-        # Prepare SFT training samples
-        print(f"\n⚙️ Preparing batches for {args.steps} steps...")
+        # Pre-tokenize dataset into batches for ultra-fast GPU pipelining
+        total_samples_needed = args.steps * args.batch_size
+        print(f"\n⚙️ Pre-tokenizing {total_samples_needed} samples for maximum GPU throughput...")
+        
+        prepped_data = []
+        for i in range(total_samples_needed):
+            item = samples[i % len(samples)]
+            messages = item.get("messages", [])
+            if len(messages) < 3:
+                continue
+
+            prompt_text = tokenizer.apply_chat_template(messages[:2], tokenize=False, add_generation_prompt=True)
+            prompt_tokens = tokenizer.encode(prompt_text)
+            
+            full_text = tokenizer.apply_chat_template(messages, tokenize=False)
+            full_tokens = tokenizer.encode(full_text)
+
+            if len(full_tokens) <= len(prompt_tokens):
+                continue
+
+            model_input = types.ModelInput.from_ints(full_tokens[:-1])
+            target_tokens = full_tokens[1:]
+            
+            prompt_len = len(prompt_tokens)
+            weights = [0.0 if idx < (prompt_len - 1) else 1.0 for idx in range(len(target_tokens))]
+
+            prepped_data.append((
+                types.Datum(
+                    model_input=model_input,
+                    loss_fn_inputs={"target_tokens": target_tokens, "weights": weights}
+                ),
+                sum(weights)
+            ))
+            if (i + 1) % 50 == 0 or (i + 1) == total_samples_needed:
+                print(f"   • Tokenized {i + 1}/{total_samples_needed} samples...")
+
+        print(f"✅ Ready! Launching {args.steps} GPU optimization steps with batch_size={args.batch_size}...")
         sample_idx = 0
         total_tokens = 0
         start_time = time.time()
@@ -111,35 +146,11 @@ def main():
             step_tokens = 0
 
             for _ in range(args.batch_size):
-                item = samples[sample_idx % len(samples)]
-                sample_idx += 1
-
-                messages = item.get("messages", [])
-                if len(messages) < 3:
-                    continue
-
-                prompt_text = tokenizer.apply_chat_template(messages[:2], tokenize=False, add_generation_prompt=True)
-                prompt_tokens = tokenizer.encode(prompt_text)
-                
-                full_text = tokenizer.apply_chat_template(messages, tokenize=False)
-                full_tokens = tokenizer.encode(full_text)
-
-                if len(full_tokens) <= len(prompt_tokens):
-                    continue
-
-                # Causal next-token prediction: predict target_tokens from model_input
-                model_input = types.ModelInput.from_ints(full_tokens[:-1])
-                target_tokens = full_tokens[1:]
-                
-                # SFT Mask: zero out loss on prompt tokens, train only on assistant response
-                prompt_len = len(prompt_tokens)
-                weights = [0.0 if i < (prompt_len - 1) else 1.0 for i in range(len(target_tokens))]
-                step_tokens += sum(weights)
-
-                batch_data.append(types.Datum(
-                    model_input=model_input,
-                    loss_fn_inputs={"target_tokens": target_tokens, "weights": weights}
-                ))
+                if sample_idx < len(prepped_data):
+                    datum, num_tokens = prepped_data[sample_idx]
+                    batch_data.append(datum)
+                    step_tokens += num_tokens
+                    sample_idx += 1
 
             if not batch_data:
                 continue
@@ -157,7 +168,7 @@ def main():
             total_tokens += int(step_tokens)
 
             elapsed = time.time() - start_time
-            print(f"   [Step {step:02d}/{args.steps:02d}] Loss: {avg_loss:.4f} | Tokens: {int(step_tokens)} (Cumulative: {total_tokens:,}) | Elapsed: {elapsed:.1f}s")
+            print(f"   [Step {step:02d}/{args.steps:02d}] Loss: {avg_loss:.4f} | Batch Tokens: {int(step_tokens):,} (Cumulative: {total_tokens:,}) | Elapsed: {elapsed:.1f}s")
 
             # Periodic checkpoint save
             if step % args.save_every == 0 and step < args.steps:
