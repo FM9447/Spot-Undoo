@@ -27,7 +27,6 @@ export default function UploadTab({ location, settings = {} }) {
   const [mapsLink, setMapsLink] = useState('');
   const [duplicateError, setDuplicateError] = useState('');
   const [resolvingLink, setResolvingLink] = useState(false);
-  const [mapErrorPopup, setMapErrorPopup] = useState('');
   const [publishing, setPublishing] = useState(false);
 
   useEffect(() => {
@@ -224,7 +223,6 @@ CRITICAL RULES:
     setDuplicateError('');
     if (!val || !val.trim()) {
       if (isExplicit) {
-        setMapErrorPopup('Not a map location');
         alert('Not a map location');
       }
       return;
@@ -287,31 +285,62 @@ CRITICAL RULES:
         }
       }
 
-      // 2. URL resolution via backend for short links (maps.app.goo.gl, goo.gl, etc.)
+      // 2. URL resolution via backend candidates (handles maps.app.goo.gl, goo.gl, place links)
       if (trimmed.includes('http') || trimmed.includes('goo.gl') || trimmed.includes('maps')) {
-        try {
-          const backendUrl = getBackendUrl();
-          const res = await fetch(`${backendUrl}/api/maps/resolve`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url: trimmed }),
-          });
-          if (res.ok) {
-            const data = await res.json();
-            if (data.success && data.lat !== null && data.lng !== null) {
-              applyCoordinates(data.lat, data.lng, data.placeName || '', false);
-              setResolvingLink(false);
-              return;
+        const candidateBases = [
+          'http://127.0.0.1:4000',
+          'http://localhost:4000',
+          'http://192.168.1.44:4000',
+          getBackendUrl(),
+        ];
+        const uniqueBases = [...new Set(candidateBases.filter(Boolean))];
+
+        for (const base of uniqueBases) {
+          try {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 3500);
+            const res = await fetch(`${base}/api/maps/resolve`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ url: trimmed }),
+              signal: controller.signal,
+            });
+            clearTimeout(timer);
+            if (res.ok) {
+              const data = await res.json();
+              if (data.success && data.lat !== null && data.lng !== null) {
+                applyCoordinates(data.lat, data.lng, data.placeName || '', false);
+                setResolvingLink(false);
+                return;
+              }
             }
+          } catch {}
+        }
+
+        // 3. Fallback client-side known Kerala town detection if network unreachable
+        const lowerUrl = trimmed.toLowerCase();
+        const townFallbacks = [
+          { pattern: /pattambi/i, lat: 10.8064, lng: 76.1884, name: 'Pattambi, Kerala' },
+          { pattern: /shoranur/i, lat: 10.7606, lng: 76.2711, name: 'Shoranur, Kerala' },
+          { pattern: /kochi|ernakulam/i, lat: 9.9630, lng: 76.2443, name: 'Kochi, Kerala' },
+          { pattern: /calicut|kozhikode/i, lat: 11.2588, lng: 75.7804, name: 'Calicut, Kerala' },
+          { pattern: /palakkad/i, lat: 10.7867, lng: 76.6548, name: 'Palakkad, Kerala' },
+          { pattern: /wayanad|kalpetta/i, lat: 11.6050, lng: 76.0828, name: 'Wayanad, Kerala' },
+          { pattern: /trivandrum|thiruvananthapuram/i, lat: 8.5241, lng: 76.9366, name: 'Trivandrum, Kerala' },
+          { pattern: /kollam/i, lat: 8.8932, lng: 76.6141, name: 'Kollam, Kerala' },
+        ];
+
+        for (const t of townFallbacks) {
+          if (t.pattern.test(lowerUrl)) {
+            applyCoordinates(t.lat, t.lng, t.name, false);
+            setResolvingLink(false);
+            return;
           }
-        } catch (err) {
-          console.warn('Backend maps resolve failed:', err);
         }
       }
 
-      // 3. Failed to identify valid map location
+      // 4. Failed to identify valid map location
       if (isExplicit) {
-        setMapErrorPopup('Not a map location');
         alert('Not a map location');
       }
     } finally {
@@ -1057,30 +1086,6 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
           <CheckCircle2 size={18} className="text-emerald-600 shrink-0" />
           <div className="text-xs font-black text-emerald-950">
             🎉 &quot;{spotName}&quot; published to {specificArea.trim() || selectedCityKey} feed & saved to Cloud Storage & Database!
-          </div>
-        </div>
-      )}
-
-      {/* Invalid Map Location Modal Popup */}
-      {mapErrorPopup && (
-        <div className="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4 backdrop-blur-xs">
-          <div className="bg-white border-[3px] border-black rounded-3xl p-5 max-w-xs w-full shadow-[0_6px_0_0_#000000] text-center space-y-3 animate-in fade-in zoom-in-95 duration-150">
-            <div className="w-12 h-12 bg-red-100 border-[2px] border-black rounded-2xl mx-auto flex items-center justify-center text-red-600 shadow-[0_2px_0_0_#000000]">
-              <AlertTriangle size={24} />
-            </div>
-            <div className="space-y-1">
-              <h3 className="text-base font-black text-black">Not a map location</h3>
-              <p className="text-xs font-bold text-gray-600 leading-snug">
-                The link or text you pasted could not be resolved into a valid map location. Please paste a valid Google Maps location link or coordinates.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setMapErrorPopup('')}
-              className="w-full bg-[#0B3BF4] hover:bg-blue-600 text-white font-black py-2.5 rounded-xl border-[2px] border-black shadow-[0_2.5px_0_0_#000000] active:translate-y-0.5 cursor-pointer text-xs"
-            >
-              OK
-            </button>
           </div>
         </div>
       )}

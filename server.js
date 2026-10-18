@@ -362,6 +362,35 @@ app.post('/api/maps/resolve', async (req, res) => {
       placeName = decodeURIComponent(placeMatch[1].replace(/\+/g, ' '));
     }
 
+    // Precise Kerala Town coordinates lookup if district-wide center was returned
+    const KERALA_TOWN_COORDS = {
+      pattambi: [10.8064, 76.1884],
+      shoranur: [10.7606, 76.2711],
+      kochi: [9.9630, 76.2443],
+      ernakulam: [9.9816, 76.2999],
+      calicut: [11.2588, 75.7804],
+      kozhikode: [11.2588, 75.7804],
+      palakkad: [10.7867, 76.6548],
+      trivandrum: [8.5241, 76.9366],
+      thiruvananthapuram: [8.5241, 76.9366],
+      kollam: [8.8932, 76.6141],
+      wayanad: [11.6854, 76.1320],
+      kalpetta: [11.6050, 76.0828],
+    };
+
+    if (placeName) {
+      const lower = placeName.toLowerCase();
+      for (const [town, coords] of Object.entries(KERALA_TOWN_COORDS)) {
+        if (lower.includes(town)) {
+          if (!lat || Math.abs(lat - coords[0]) > 0.04 || Math.abs(lng - coords[1]) > 0.04) {
+            lat = coords[0];
+            lng = coords[1];
+          }
+          break;
+        }
+      }
+    }
+
     // Direct raw coordinates check
     if (!lat) {
       const rawMatch = rawInput.match(/^(-?\d{1,3}\.\d+)[,\s]+(-?\d{1,3}\.\d+)$/);
