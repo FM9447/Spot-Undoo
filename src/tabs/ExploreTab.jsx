@@ -35,7 +35,7 @@ export default function ExploreTab({ location, setLocation }) {
   // Trail measurement refs & state
   const trailContainerRef = useRef(null);
   const [trailDimensions, setTrailDimensions] = useState({ width: 360, height: 600 });
-  const [measuredPath, setMeasuredPath] = useState([]);
+  const [canvasTheme, setCanvasTheme] = useState('river'); // 'river' | 'road' | 'pinboard'
 
   // Merge all spots across all cities + user uploaded spots
   const userSpots = JSON.parse(localStorage.getItem('userSpots') || '[]');
@@ -147,84 +147,54 @@ export default function ExploreTab({ location, setLocation }) {
     return matchesCity && matchesCat && matchesSearch;
   });
 
-  // Dynamically measure actual red push-pin positions from DOM so the path is 100% on the pin
-  const measureTrail = useCallback(() => {
+  // Measure container dimensions for responsive SVG canvas
+  const measureCanvas = useCallback(() => {
     if (!trailContainerRef.current) return;
     const container = trailContainerRef.current;
-    const cRect = container.getBoundingClientRect();
     const w = container.clientWidth || 360;
     const h = Math.max(container.scrollHeight, container.clientHeight) || 600;
     setTrailDimensions({ width: w, height: h });
-
-    const startEl = container.querySelector('.trail-start-node');
-    const endEl = container.querySelector('.trail-end-node');
-    const pinEls = container.querySelectorAll('.trail-card-pin');
-
-    let p0 = startEl ? {
-      x: startEl.getBoundingClientRect().left - cRect.left + startEl.getBoundingClientRect().width / 2,
-      y: startEl.getBoundingClientRect().top - cRect.top + container.scrollTop + startEl.getBoundingClientRect().height / 2,
-    } : { x: 30, y: 30 };
-
-    const points = [];
-    pinEls.forEach((pin, idx) => {
-      const r = pin.getBoundingClientRect();
-      points.push({
-        x: r.left - cRect.left + r.width / 2,
-        y: r.top - cRect.top + container.scrollTop + r.height / 2,
-        idx,
-      });
-    });
-
-    let pEnd = endEl ? {
-      x: endEl.getBoundingClientRect().left - cRect.left + endEl.getBoundingClientRect().width / 2,
-      y: endEl.getBoundingClientRect().top - cRect.top + container.scrollTop + 10,
-    } : { x: w / 2, y: h - 30 };
-
-    const segments = [];
-    if (points.length > 0) {
-      // Start -> Pin 0: Flowing S-curve
-      const dy0 = points[0].y - p0.y;
-      segments.push(`M ${p0.x} ${p0.y} C ${p0.x} ${p0.y + dy0 * 0.55}, ${points[0].x} ${points[0].y - dy0 * 0.55}, ${points[0].x} ${points[0].y}`);
-
-      // Sequential Pin i -> Pin i+1: Organic vertical-tangent S-curves with NO kinks or zigzags
-      for (let i = 0; i < points.length - 1; i++) {
-        const curr = points[i];
-        const next = points[i + 1];
-        const dy = next.y - curr.y;
-        segments.push(`M ${curr.x} ${curr.y} C ${curr.x} ${curr.y + dy * 0.55}, ${next.x} ${next.y - dy * 0.55}, ${next.x} ${next.y}`);
-      }
-
-      // Last Pin -> End Terminal Box
-      const last = points[points.length - 1];
-      const dyEnd = pEnd.y - last.y;
-      segments.push(`M ${last.x} ${last.y} C ${last.x} ${last.y + dyEnd * 0.55}, ${pEnd.x} ${pEnd.y - dyEnd * 0.55}, ${pEnd.x} ${pEnd.y}`);
-    }
-
-    setMeasuredPath(segments);
   }, []);
 
-  // Recalculate whenever view, filter, or spot count changes
+  // Recalculate dimensions on view, filter, or spot count changes
   useEffect(() => {
     if (viewMode !== 'cartoon') return;
-    measureTrail();
-    const t1 = setTimeout(measureTrail, 60);
-    const t2 = setTimeout(measureTrail, 250);
-    const t3 = setTimeout(measureTrail, 600);
+    measureCanvas();
+    const t1 = setTimeout(measureCanvas, 60);
+    const t2 = setTimeout(measureCanvas, 250);
 
     let ro;
     if (trailContainerRef.current && window.ResizeObserver) {
-      ro = new ResizeObserver(() => measureTrail());
+      ro = new ResizeObserver(() => measureCanvas());
       ro.observe(trailContainerRef.current);
     }
-    window.addEventListener('resize', measureTrail);
+    window.addEventListener('resize', measureCanvas);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
-      clearTimeout(t3);
       if (ro) ro.disconnect();
-      window.removeEventListener('resize', measureTrail);
+      window.removeEventListener('resize', measureCanvas);
     };
-  }, [viewMode, filteredSpots.length, selectedCityFilter, activeCategory, measureTrail]);
+  }, [viewMode, filteredSpots.length, selectedCityFilter, activeCategory, measureCanvas]);
+
+  // Generates a smooth meandering central river or country road down the canvas
+  const meanderingPath = (() => {
+    const w = trailDimensions.width;
+    const h = trailDimensions.height;
+    const midX = w / 2;
+    const count = Math.max(filteredSpots.length, 6);
+    const stepY = Math.max(140, h / count);
+    let d = `M ${midX} 0`;
+    for (let i = 0; i < count; i++) {
+      const y1 = i * stepY;
+      const y2 = (i + 1) * stepY;
+      const midY = (y1 + y2) / 2;
+      const swayX = i % 2 === 0 ? midX + 38 : midX - 38;
+      const nextSwayX = (i + 1) % 2 === 0 ? midX + 38 : midX - 38;
+      d += ` C ${swayX} ${midY - 30}, ${nextSwayX} ${midY + 30}, ${nextSwayX} ${y2}`;
+    }
+    return d;
+  })();
 
   // Reset selectedSpot only if currently viewed spot is filtered out (do not auto-open)
   useEffect(() => {
@@ -434,7 +404,7 @@ export default function ExploreTab({ location, setLocation }) {
           ref={trailContainerRef}
           className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[520px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
         >
-          {/* Dynamic Illustrated Background Canvas: Topographic Contours & Pure Dotted Trail Curves */}
+          {/* Dynamic Illustrated Background Canvas: River / Country Road / Topographic Contours */}
           <svg
             className="absolute inset-0 w-full pointer-events-none"
             style={{ height: `${trailDimensions.height}px` }}
@@ -445,6 +415,11 @@ export default function ExploreTab({ location, setLocation }) {
               <pattern id="trailGrid" width="40" height="40" patternUnits="userSpaceOnUse">
                 <circle cx="20" cy="20" r="0.8" fill="#CBD5E1" opacity="0.6" />
               </pattern>
+              <linearGradient id="riverWaterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#BAE6FD" />
+                <stop offset="50%" stopColor="#7DD3FC" />
+                <stop offset="100%" stopColor="#BAE6FD" />
+              </linearGradient>
             </defs>
 
             {/* Subtle Map Coordinates Dot Grid */}
@@ -482,36 +457,123 @@ export default function ExploreTab({ location, setLocation }) {
               );
             })}
 
-            {/* Pure Dotted Path Running Directly Through All Red Push-Pins */}
-            {measuredPath.map((d, sIdx) => (
-              <path
-                key={sIdx}
-                d={d}
-                fill="none"
-                stroke="#0B3BF4"
-                strokeWidth="3.5"
-                strokeDasharray="6 6"
-                strokeLinecap="round"
-              />
-            ))}
+            {/* THEME 1: SCENIC KERALA BACKWATERS RIVER (Default) */}
+            {canvasTheme === 'river' && (
+              <g>
+                {/* River Bank Foam / Sandy Shore */}
+                <path
+                  d={meanderingPath}
+                  fill="none"
+                  stroke="#E0F2FE"
+                  strokeWidth="36"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                {/* Flowing Water Gradient */}
+                <path
+                  d={meanderingPath}
+                  fill="none"
+                  stroke="url(#riverWaterGrad)"
+                  strokeWidth="24"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                {/* Water Surface Ripples */}
+                <path
+                  d={meanderingPath}
+                  fill="none"
+                  stroke="#0284C7"
+                  strokeWidth="2"
+                  strokeDasharray="14 20"
+                  strokeLinecap="round"
+                  opacity="0.65"
+                />
+              </g>
+            )}
+
+            {/* THEME 2: SCENIC COUNTRY EXPEDITION ROAD */}
+            {canvasTheme === 'road' && (
+              <g>
+                {/* Road Shoulder */}
+                <path
+                  d={meanderingPath}
+                  fill="none"
+                  stroke="#94A3B8"
+                  strokeWidth="30"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                {/* Road Asphalt */}
+                <path
+                  d={meanderingPath}
+                  fill="none"
+                  stroke="#334155"
+                  strokeWidth="22"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                {/* Yellow Dashed Center Line */}
+                <path
+                  d={meanderingPath}
+                  fill="none"
+                  stroke="#FDE047"
+                  strokeWidth="2"
+                  strokeDasharray="10 12"
+                  strokeLinecap="round"
+                />
+              </g>
+            )}
+
+            {/* THEME 3: PINBOARD (Clean map canvas with no line cutting through cards) */}
           </svg>
 
-          {/* Floating Top Control: Start Emblem & Current Location Barometer */}
-          <div className="relative z-10 flex items-center justify-between mb-3 px-0.5">
-            <div className="flex items-center gap-2 min-w-0">
-              <div className="trail-start-node w-11 h-11 rounded-full bg-[#10B981] border-[2.5px] border-black flex flex-col items-center justify-center shadow-[0_2px_0_0_#000000] text-white shrink-0">
-                <span className="text-[8px] font-black uppercase tracking-wider leading-none">START</span>
-                <span className="text-[9px] font-black leading-none mt-0.5 text-emerald-100">HUB</span>
+          {/* Floating Top Control: Location Hub Barometer + Theme Selector [River | Road | Board] + Live Explore */}
+          <div className="relative z-10 flex items-center justify-between gap-1 mb-3 px-0.5">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <div className="bg-white border-[2px] border-black rounded-2xl px-2.5 py-1 text-xs font-black text-black shadow-[0_2px_0_0_#000000] truncate flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                <span className="truncate">{selectedCityFilter} • {filteredSpots.length}</span>
               </div>
-              <div className="bg-white border-[2px] border-black rounded-2xl px-3 py-1.5 text-xs font-black text-black shadow-[0_2px_0_0_#000000] truncate">
-                <span>📍 {selectedCityFilter} • {filteredSpots.length} Spots</span>
+
+              {/* Design Theme Selector */}
+              <div className="flex items-center bg-white border-[2px] border-black rounded-full p-0.5 shadow-[0_1.5px_0_0_#000000] shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setCanvasTheme('river')}
+                  className={`px-2 py-0.5 rounded-full text-[9px] font-black transition cursor-pointer ${
+                    canvasTheme === 'river' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-600 hover:text-black'
+                  }`}
+                  title="Kerala Backwaters River Theme"
+                >
+                  🌊 River
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCanvasTheme('road')}
+                  className={`px-2 py-0.5 rounded-full text-[9px] font-black transition cursor-pointer ${
+                    canvasTheme === 'road' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-600 hover:text-black'
+                  }`}
+                  title="Scenic Country Road Theme"
+                >
+                  🛣️ Road
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCanvasTheme('pinboard')}
+                  className={`px-2 py-0.5 rounded-full text-[9px] font-black transition cursor-pointer ${
+                    canvasTheme === 'pinboard' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-600 hover:text-black'
+                  }`}
+                  title="Explorer's Pinboard Theme"
+                >
+                  📌 Board
+                </button>
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 shrink-0">
+            <div className="flex items-center gap-1 shrink-0">
               <button
                 onClick={() => setViewMode('osm')}
-                className="bg-white border-[2px] border-black rounded-full px-2.5 py-1 flex items-center gap-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] hover:bg-gray-50 active:translate-y-0.5 transition"
+                className="bg-white border-[2px] border-black rounded-full px-2 py-1 flex items-center gap-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] hover:bg-gray-50 active:translate-y-0.5 transition"
                 title="View on Interactive Map"
               >
                 <span>🗺️</span>
@@ -519,7 +581,7 @@ export default function ExploreTab({ location, setLocation }) {
               </button>
               <button
                 onClick={() => setSelectedSpot(filteredSpots[0] || allSpots[0])}
-                className="bg-white border-[2px] border-black rounded-full px-2.5 py-1 flex items-center gap-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] hover:bg-emerald-50 active:translate-y-0.5 transition"
+                className="bg-white border-[2px] border-black rounded-full px-2 py-1 flex items-center gap-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] hover:bg-emerald-50 active:translate-y-0.5 transition"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-ping" />
                 <span>Explore</span>
