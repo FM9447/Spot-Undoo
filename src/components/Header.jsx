@@ -52,14 +52,14 @@ export default function Header({ location, setLocation, settings, setSettings, g
 
   return (
     <>
-      {/* ── Main Header Bar (Touches top, left, right) ── */}
-      <header className="w-full bg-white border-b-[2.5px] border-black px-4 pt-3 pb-2.5 flex items-center justify-between shadow-[0_3px_0_0_#0B3BF4] mb-3 sticky top-0 z-30">
+      {/* ── Main Header Bar (Touches top, left, right with rounded-b bottom radius) ── */}
+      <header className="w-full bg-white border-b-[3px] border-x-[3px] border-black rounded-b-[26px] px-4 pt-3.5 pb-3 flex items-center justify-between shadow-[0_4px_0_0_#000000] mb-3 sticky top-0 z-30">
         {/* Left: Logo */}
         <div className="flex items-center gap-2">
           <img
             src="/logo.png"
             alt="spot-undoo"
-            className="h-9 sm:h-10 w-auto object-contain select-none"
+            className="h-10 sm:h-12 w-auto object-contain select-none"
           />
         </div>
 
@@ -77,7 +77,7 @@ export default function Header({ location, setLocation, settings, setSettings, g
           {/* Profile picture — tap to open settings */}
           <button
             onClick={() => setShowProfile(true)}
-            className="w-10 h-10 rounded-full border-[2.2px] border-black overflow-hidden shadow-[0_2px_0_0_#000000] hover:scale-105 active:scale-95 transition-transform bg-white relative shrink-0"
+            className="w-12 h-12 rounded-full border-[3px] border-black overflow-hidden shadow-[0_2px_0_0_#000000] hover:scale-105 active:scale-95 transition-transform bg-white relative shrink-0"
             title="Profile & Settings"
           >
             <img src={userAvatar} alt="Profile" className="w-full h-full object-cover" />
