@@ -1,20 +1,16 @@
-import { useState, useMemo } from 'react';
-import { X, ExternalLink, Zap, Clock, ShieldCheck, ArrowUpDown, AlertCircle, MapPin, Info, CheckCircle2 } from 'lucide-react';
+import { useState, useMemo, useEffect } from 'react';
+import { X, ExternalLink, Zap, Clock, ShieldCheck, ArrowUpDown, AlertCircle, MapPin, Info, CheckCircle2, Navigation } from 'lucide-react';
 import { roadDistanceKm } from '../utils/plannerMath';
 
 export const KERALA_TOWN_HUBS = {
-  pattambi: { name: 'Pattambi Railway Station', lat: 10.80486, lng: 76.17802 },
-  shoranur: { name: 'Shoranur Junction Station', lat: 10.7606, lng: 76.2711 },
-  kochi: { name: 'Ernakulam South Station', lat: 9.9680, lng: 76.2890 },
-  ernakulam: { name: 'Ernakulam South Station', lat: 9.9680, lng: 76.2890 },
-  calicut: { name: 'Kozhikode Railway Station', lat: 11.2460, lng: 75.7830 },
-  kozhikode: { name: 'Kozhikode Railway Station', lat: 11.2460, lng: 75.7830 },
-  palakkad: { name: 'Palakkad Fort / Town Stand', lat: 10.7867, lng: 76.6548 },
-  trivandrum: { name: 'Thiruvananthapuram Central', lat: 8.4875, lng: 76.9525 },
-  thiruvananthapuram: { name: 'Thiruvananthapuram Central', lat: 8.4875, lng: 76.9525 },
-  kollam: { name: 'Kollam Junction Station', lat: 8.8833, lng: 76.6000 },
-  wayanad: { name: 'Kalpetta Town Bus Stand', lat: 11.6050, lng: 76.0828 },
-  kalpetta: { name: 'Kalpetta Town Bus Stand', lat: 11.6050, lng: 76.0828 },
+  pattambi: { key: 'pattambi', name: 'Pattambi Railway Station', city: 'Pattambi', lat: 10.80486, lng: 76.17802 },
+  shoranur: { key: 'shoranur', name: 'Shoranur Junction Station', city: 'Shoranur', lat: 10.7606, lng: 76.2711 },
+  kochi: { key: 'kochi', name: 'Kochi (Ernakulam South Station)', city: 'Kochi', lat: 9.9680, lng: 76.2890 },
+  calicut: { key: 'calicut', name: 'Calicut (Kozhikode Station)', city: 'Calicut', lat: 11.2460, lng: 75.7830 },
+  palakkad: { key: 'palakkad', name: 'Palakkad Town / Fort Stand', city: 'Palakkad', lat: 10.7867, lng: 76.6548 },
+  trivandrum: { key: 'trivandrum', name: 'Trivandrum Central Station', city: 'Trivandrum', lat: 8.4875, lng: 76.9525 },
+  kollam: { key: 'kollam', name: 'Kollam Junction Station', city: 'Kollam', lat: 8.8833, lng: 76.6000 },
+  wayanad: { key: 'wayanad', name: 'Wayanad (Kalpetta Bus Stand)', city: 'Wayanad', lat: 11.6050, lng: 76.0828 },
 };
 
 export function getKeralaRideAvailability(lat, lng, name = '') {
@@ -61,52 +57,69 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
   const destLng = destination.lng || destination.lon;
   const destName = destination.name || 'Destination';
 
-  // 1. Find the Town Transit Station / Central Hub for this destination
-  const townHub = useMemo(() => {
-    const lower = (destName + ' ' + (destination.cityName || '') + ' ' + (destination.cityKey || '')).toLowerCase();
-    for (const [key, hub] of Object.entries(KERALA_TOWN_HUBS)) {
-      if (lower.includes(key)) return hub;
+  // 1. Detect destination's matching city key
+  const destCityKey = useMemo(() => {
+    const lower = (destName + ' ' + (destination.cityName || '') + ' ' + (destination.cityKey || '') + ' ' + (destination.area || '')).toLowerCase();
+    for (const key of Object.keys(KERALA_TOWN_HUBS)) {
+      if (lower.includes(key)) return key;
     }
-    // Proximity fallback to nearest town hub
-    let nearest = null;
+    // Proximity fallback
+    let nearestKey = 'pattambi';
     let minD = Infinity;
-    for (const hub of Object.values(KERALA_TOWN_HUBS)) {
+    for (const [key, hub] of Object.entries(KERALA_TOWN_HUBS)) {
       const d = roadDistanceKm(destLat, destLng, hub.lat, hub.lng);
       if (d < minD) {
         minD = d;
-        nearest = hub;
+        nearestKey = key;
       }
     }
-    return nearest || { name: 'Town Central Stand', lat: destLat, lng: destLng };
+    return nearestKey;
   }, [destLat, destLng, destName, destination]);
 
-  // 2. Compute live GPS distance and town hub distance
+  // Selected city hub for starting point
+  const [selectedHubKey, setSelectedHubKey] = useState(destCityKey);
+
+  useEffect(() => {
+    setSelectedHubKey(destCityKey);
+  }, [destCityKey]);
+
+  // 2. Compute live GPS distance to destination
   const liveGpsDist = useMemo(() => {
     if (!userLat || !userLon || !destLat || !destLng) return null;
     return Math.max(0.2, roadDistanceKm(userLat, userLon, destLat, destLng));
   }, [userLat, userLon, destLat, destLng]);
 
-  const townHubDist = useMemo(() => {
-    if (!destLat || !destLng || !townHub) return 1.5;
-    return Math.max(0.3, roadDistanceKm(townHub.lat, townHub.lng, destLat, destLng));
-  }, [destLat, destLng, townHub]);
+  // Rule: Within 10 km radius?
+  const isWithin10Km = liveGpsDist !== null && liveGpsDist <= 10.0;
 
-  // Are we currently within 25 km of the destination?
-  const isUserInSameCity = liveGpsDist !== null && liveGpsDist <= 25;
+  // Active City Hub
+  const activeHub = KERALA_TOWN_HUBS[selectedHubKey] || KERALA_TOWN_HUBS.pattambi;
+  const hubDist = useMemo(() => {
+    if (!destLat || !destLng || !activeHub) return 1.5;
+    return Math.max(0.3, roadDistanceKm(activeHub.lat, activeHub.lng, destLat, destLng));
+  }, [destLat, destLng, activeHub]);
 
-  // Origin mode state: 'live' (User's live location) or 'hub' (Town station hub)
-  const [originMode, setOriginMode] = useState(() => (isUserInSameCity ? 'live' : 'hub'));
+  // Origin mode: 'live' (Current Location within 10km) or 'city' (Selected City Hub)
+  const [originMode, setOriginMode] = useState(() => (isWithin10Km ? 'live' : 'city'));
+
+  useEffect(() => {
+    setOriginMode(isWithin10Km ? 'live' : 'city');
+  }, [isWithin10Km]);
+
   const [filterMode, setFilterMode] = useState('cheapest'); // 'cheapest', 'fastest', 'autos', 'bikes', 'cabs'
   const [showTechDetails, setShowTechDetails] = useState(false);
 
   // Active distance used for calculations
-  const distKm = originMode === 'live' && liveGpsDist !== null ? liveGpsDist : townHubDist;
-  const currentOriginName = originMode === 'live' ? 'Your Live Location' : townHub.name;
+  const distKm = originMode === 'live' && liveGpsDist !== null ? liveGpsDist : hubDist;
+  const currentOriginName = originMode === 'live' ? 'Your Current Location' : activeHub.name;
 
-  // Regional Kerala availability detection
+  // Regional Kerala availability detection (based on starting city / destination)
   const availability = useMemo(() => {
-    return getKeralaRideAvailability(destLat, destLng, destName);
-  }, [destLat, destLng, destName]);
+    const checkName = originMode === 'city' ? activeHub.name : destName;
+    const checkLat = originMode === 'city' ? activeHub.lat : destLat;
+    const checkLng = originMode === 'city' ? activeHub.lng : destLng;
+    return getKeralaRideAvailability(checkLat, checkLng, checkName);
+  }, [originMode, activeHub, destLat, destLng, destName]);
 
   // Dynamic Kerala ride calculation engine
   const rideOptions = useMemo(() => {
@@ -125,7 +138,7 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
     const standAutoBase = Math.round((30 + Math.max(0, d - 1.5) * 15) * (isNight ? 1.5 : 1.0));
     options.push({
       id: 'kerala-stand-auto',
-      provider: availability.isPattambi ? 'Pattambi Stand' : (availability.isShoranur ? 'Shoranur Stand' : 'Kerala Auto Stand'),
+      provider: availability.isPattambi ? 'Pattambi Stand' : (availability.isShoranur ? 'Shoranur Stand' : `${activeHub.city} Auto Stand`),
       service: 'Kerala Meter Auto',
       type: 'auto',
       badgeColor: 'bg-black text-[#FFE500] border-black',
@@ -144,8 +157,8 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
     const taxiBase = Math.round(Math.max(300, (300 + Math.max(0, d - 10) * 18)) * (isNight ? 1.3 : 1.0));
     options.push({
       id: 'town-taxi',
-      provider: availability.isPattambi ? 'Pattambi Taxi Stand' : 'Town Taxi Stand',
-      service: 'Station Tourist Taxi',
+      provider: `${activeHub.city} Taxi Stand`,
+      service: 'Tourist Taxi Stand',
       type: 'cab',
       badgeColor: 'bg-[#0B3BF4] text-white border-black',
       icon: '🚕',
@@ -155,7 +168,7 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
       appScheme: `https://www.google.com/maps/dir/?api=1&destination=${destLat},${destLng}&travelmode=driving`,
       webUrl: `https://www.google.com/maps/dir/?api=1&destination=${destLat},${destLng}&travelmode=driving`,
       tag: 'Omni / Sedan / Innova',
-      note: 'Available at Railway Station Stand',
+      note: `Available at ${activeHub.city} Station Stand`,
     });
 
     // 3. Local Stage Carriage / KSRTC Bus
@@ -173,13 +186,13 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
         appScheme: `https://www.google.com/maps/dir/?api=1&destination=${destLat},${destLng}&travelmode=transit`,
         webUrl: `https://www.google.com/maps/dir/?api=1&destination=${destLat},${destLng}&travelmode=transit`,
         tag: 'Lowest Cost Transit',
-        note: 'Frequent services from Town Bus Stand',
+        note: `Frequent services from ${activeHub.city} Bus Stand`,
       });
     }
 
     // 4. App Cabs: Uber & Rapido
     if (!availability.noAppCabs) {
-      // In Kochi, Trivandrum, Calicut
+      // In active app cities (Kochi, Trivandrum, Calicut)
       options.push({
         id: 'rapido-bike',
         provider: 'Rapido',
@@ -237,7 +250,7 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
         tag: 'AC & Luggage',
       });
     } else {
-      // In Pattambi / Shoranur / non-app areas: explicitly show as unavailable so user isn't deceived
+      // In non-app towns like Pattambi/Shoranur
       options.push({
         id: 'uber-go-unavail',
         provider: 'Uber',
@@ -251,7 +264,7 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
         appScheme: `uber://`,
         webUrl: `https://m.uber.com`,
         tag: 'No Drivers in Area',
-        note: `Uber is not operational in ${availability.hubLabel}`,
+        note: `Uber does not operate in ${activeHub.city}`,
       });
       options.push({
         id: 'rapido-unavail',
@@ -266,7 +279,7 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
         appScheme: `rapido://`,
         webUrl: `https://rapido.bike`,
         tag: 'No Service',
-        note: `Rapido is not operational in ${availability.hubLabel}`,
+        note: `Rapido does not service ${activeHub.city}`,
       });
     }
 
@@ -290,7 +303,7 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
     }
 
     return options;
-  }, [distKm, destLat, destLng, destName, availability]);
+  }, [distKm, destLat, destLng, destName, availability, activeHub]);
 
   // Sorted and filtered options
   const displayedOptions = useMemo(() => {
@@ -364,50 +377,48 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
           </button>
         </div>
 
-        {/* Origin Selector: Live GPS vs Town Station Hub */}
-        <div className="px-3 pt-2.5 pb-2 bg-[#FFFDE6] border-b-[2px] border-black space-y-1.5">
+        {/* Smart Origin Indicator & Selector */}
+        <div className="px-3 pt-2.5 pb-2 bg-[#FFFDE6] border-b-[2px] border-black space-y-2">
+          {/* Status Chip */}
           <div className="flex items-center justify-between text-[10px] font-black uppercase text-black">
-            <span>Calculate Route From:</span>
-            <span className="text-[#0B3BF4]">
-              {originMode === 'live' ? '📍 Live GPS' : '🚉 Station Hub'}
-            </span>
+            <span>STARTING POINT:</span>
+            {isWithin10Km ? (
+              <span className="bg-emerald-100 border border-emerald-600 text-emerald-900 px-2 py-0.5 rounded-full text-[9px] font-black flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Within 10 km of Current Location
+              </span>
+            ) : (
+              <span className="bg-blue-100 border border-blue-600 text-[#0B3BF4] px-2 py-0.5 rounded-full text-[9px] font-black">
+                📍 Outside 10 km Radius
+              </span>
+            )}
           </div>
 
+          {/* 2-Option Origin Switcher */}
           <div className="grid grid-cols-2 gap-1.5">
-            {/* Option A: Town Station Hub */}
-            <button
-              type="button"
-              onClick={() => setOriginMode('hub')}
-              className={`p-1.5 rounded-xl border-[2px] text-left transition shadow-[0_1.5px_0_0_#000000] cursor-pointer ${
-                originMode === 'hub'
-                  ? 'bg-black text-[#FFE500] border-black'
-                  : 'bg-white text-black border-black/30 hover:bg-gray-100'
-              }`}
-            >
-              <div className="text-[9px] font-black truncate">🚉 {townHub.name}</div>
-              <div className="text-[10px] font-bold mt-0.5 flex items-center justify-between">
-                <span>{townHubDist.toFixed(1)} km</span>
-                <span className={originMode === 'hub' ? 'text-emerald-400' : 'text-emerald-700'}>
-                  ₹{Math.round(30 + Math.max(0, townHubDist - 1.5) * 15)}
-                </span>
-              </div>
-            </button>
-
-            {/* Option B: Live GPS */}
+            {/* Option A: Current Location */}
             <button
               type="button"
               onClick={() => setOriginMode('live')}
               disabled={liveGpsDist === null}
-              className={`p-1.5 rounded-xl border-[2px] text-left transition shadow-[0_1.5px_0_0_#000000] cursor-pointer ${
+              className={`p-2 rounded-xl border-[2px] text-left transition shadow-[0_1.5px_0_0_#000000] cursor-pointer ${
                 originMode === 'live'
                   ? 'bg-black text-[#FFE500] border-black'
                   : 'bg-white text-black border-black/30 hover:bg-gray-100'
               } disabled:opacity-40`}
             >
-              <div className="text-[9px] font-black truncate">
-                📍 {isUserInSameCity ? 'Your Live Location' : 'Live GPS (Distant)'}
+              <div className="flex items-center justify-between">
+                <span className="text-[9.5px] font-black truncate flex items-center gap-1">
+                  <Navigation size={10} />
+                  <span>Current Location</span>
+                </span>
+                {isWithin10Km && (
+                  <span className="text-[7.5px] font-black bg-emerald-500 text-white px-1 py-0.2 rounded">
+                    &lt;10km
+                  </span>
+                )}
               </div>
-              <div className="text-[10px] font-bold mt-0.5 flex items-center justify-between">
+              <div className="text-[10px] font-bold mt-1 flex items-center justify-between">
                 <span>{liveGpsDist !== null ? `${liveGpsDist.toFixed(1)} km` : 'No GPS'}</span>
                 {liveGpsDist !== null && (
                   <span className={originMode === 'live' ? 'text-emerald-400' : 'text-emerald-700'}>
@@ -416,9 +427,52 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
                 )}
               </div>
             </button>
+
+            {/* Option B: City Station Hub */}
+            <button
+              type="button"
+              onClick={() => setOriginMode('city')}
+              className={`p-2 rounded-xl border-[2px] text-left transition shadow-[0_1.5px_0_0_#000000] cursor-pointer ${
+                originMode === 'city'
+                  ? 'bg-black text-[#FFE500] border-black'
+                  : 'bg-white text-black border-black/30 hover:bg-gray-100'
+              }`}
+            >
+              <div className="text-[9.5px] font-black truncate">
+                🚉 {activeHub.city} Hub
+              </div>
+              <div className="text-[10px] font-bold mt-1 flex items-center justify-between">
+                <span>{hubDist.toFixed(1)} km</span>
+                <span className={originMode === 'city' ? 'text-emerald-400' : 'text-emerald-700'}>
+                  ₹{Math.round(30 + Math.max(0, hubDist - 1.5) * 15)}
+                </span>
+              </div>
+            </button>
           </div>
 
-          <div className="text-[9px] font-bold text-gray-600 flex items-center gap-1 truncate">
+          {/* City Hub Switcher Dropdown (lets user select any city: Kochi, Pattambi, Shoranur, Calicut...) */}
+          <div className="flex items-center justify-between gap-1 pt-0.5">
+            <span className="text-[9.5px] font-bold text-gray-700 shrink-0">
+              Select City Hub:
+            </span>
+            <select
+              value={selectedHubKey}
+              onChange={(e) => {
+                setSelectedHubKey(e.target.value);
+                setOriginMode('city');
+              }}
+              className="bg-white text-black text-[10px] font-black border-[1.5px] border-black rounded-lg px-2 py-0.5 outline-none shadow-[0_1px_0_0_#000000] cursor-pointer max-w-[210px] truncate"
+            >
+              {Object.entries(KERALA_TOWN_HUBS).map(([key, hub]) => (
+                <option key={key} value={key}>
+                  {hub.city} ({hub.name})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Active Route Summary */}
+          <div className="text-[9px] font-bold text-gray-600 flex items-center gap-1 truncate pt-0.5 border-t border-black/10">
             <span>Route:</span>
             <span className="font-black text-black truncate">{currentOriginName}</span>
             <span>→</span>
@@ -432,7 +486,7 @@ export default function RideComparatorModal({ isOpen, onClose, destination, user
             <AlertCircle size={15} className="text-amber-700 shrink-0 mt-0.5" />
             <div className="leading-tight">
               <div className="font-black text-amber-950 uppercase text-[10px] tracking-wider">
-                {availability.hubLabel} Availability
+                {activeHub.city} Availability
               </div>
               <div className="text-[10px] font-semibold text-amber-900 mt-0.5">
                 No Uber or Rapido operates in this area. Verified Kerala Stand Auto & Station Taxi rates shown below.
