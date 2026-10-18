@@ -320,7 +320,7 @@ CRITICAL RULES:
         // 3. Fallback client-side known Kerala town detection if network unreachable
         const lowerUrl = trimmed.toLowerCase();
         const townFallbacks = [
-          { pattern: /pattambi/i, lat: 10.8064, lng: 76.1884, name: 'Pattambi, Kerala' },
+          { pattern: /pattambi/i, lat: 10.80486, lng: 76.17802, name: 'Pattambi, Kerala' },
           { pattern: /shoranur/i, lat: 10.7606, lng: 76.2711, name: 'Shoranur, Kerala' },
           { pattern: /kochi|ernakulam/i, lat: 9.9630, lng: 76.2443, name: 'Kochi, Kerala' },
           { pattern: /calicut|kozhikode/i, lat: 11.2588, lng: 75.7804, name: 'Calicut, Kerala' },

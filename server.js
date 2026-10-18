@@ -362,9 +362,28 @@ app.post('/api/maps/resolve', async (req, res) => {
       placeName = decodeURIComponent(placeMatch[1].replace(/\+/g, ' '));
     }
 
-    // Precise Kerala Town coordinates lookup if district-wide center was returned
+    // High-precision geocoding via OpenStreetMap Nominatim for exact place/town coordinates
+    if (placeName && (!lat || finalUrl.includes('/place/'))) {
+      try {
+        const nomRes = await fetch(
+          `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(placeName)}&format=json&limit=1`,
+          { headers: { 'User-Agent': 'SpotUndoo/1.0' } }
+        );
+        if (nomRes.ok) {
+          const nomData = await nomRes.json();
+          if (nomData && nomData[0] && nomData[0].lat && nomData[0].lon) {
+            lat = parseFloat(parseFloat(nomData[0].lat).toFixed(5));
+            lng = parseFloat(parseFloat(nomData[0].lon).toFixed(5));
+          }
+        }
+      } catch (nomErr) {
+        console.warn('Nominatim geocode warning:', nomErr.message);
+      }
+    }
+
+    // Precise Kerala Town coordinates lookup fallback if district-wide center was returned
     const KERALA_TOWN_COORDS = {
-      pattambi: [10.8064, 76.1884],
+      pattambi: [10.80486, 76.17802],
       shoranur: [10.7606, 76.2711],
       kochi: [9.9630, 76.2443],
       ernakulam: [9.9816, 76.2999],
