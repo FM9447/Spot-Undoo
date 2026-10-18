@@ -111,7 +111,7 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F6F9] w-full max-w-md mx-auto px-2.5 sm:px-4 py-4 sm:py-6 flex flex-col justify-between font-sans">
+    <div className="min-h-screen w-full max-w-md mx-auto px-2.5 sm:px-4 py-4 sm:py-6 flex flex-col justify-between font-sans overflow-x-hidden">
       {/* ── Top Hero Card ── */}
       <div className="space-y-3">
         {/* Top Header Pill Row */}
