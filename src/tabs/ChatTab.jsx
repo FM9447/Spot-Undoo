@@ -4,6 +4,7 @@ import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { ollamaChat } from '../utils/ollama';
 import ImageCarousel from '../components/ImageCarousel';
 import InteractiveMap from '../components/InteractiveMap';
+import LocationPickerModal from '../components/LocationPickerModal';
 import { getBackendUrl } from '../utils/apiConfig';
 import { haversineKm } from '../utils/plannerMath';
 import SpotUndooLoadingScreen from '../components/SpotUndooLoadingScreen';
@@ -84,6 +85,7 @@ export default function ChatTab({ location, setLocation, settings }) {
 
   // History modal
   const [showHistory, setShowHistory] = useState(false);
+  const [showLocationModal, setShowLocationModal] = useState(false);
   const [historyItems, setHistoryItems] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
 
@@ -115,34 +117,7 @@ export default function ChatTab({ location, setLocation, settings }) {
     );
   };
 
-  // Searchable City Selector States
-  const [citySearchQuery, setCitySearchQuery] = useState('');
-  const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
-  const cityDropdownRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (cityDropdownRef.current && !cityDropdownRef.current.contains(e.target)) {
-        setIsCityDropdownOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
   const currentCity = KERALA_CITIES[selectedCityKey] || KERALA_CITIES['Shoranur'];
-
-  const filteredCities = Object.entries(KERALA_CITIES).filter(([key, city]) => {
-    if (!citySearchQuery.trim()) return true;
-    const q = citySearchQuery.toLowerCase().trim();
-    return (
-      key.toLowerCase().includes(q) ||
-      (city.name && city.name.toLowerCase().includes(q)) ||
-      (city.displayName && city.displayName.toLowerCase().includes(q)) ||
-      (city.district && city.district.toLowerCase().includes(q)) ||
-      (city.hub?.stationName && city.hub.stationName.toLowerCase().includes(q))
-    );
-  });
 
   const toggleCheckIn = (stopIdentifier) => {
     setVisitedStopIds((prev) =>
@@ -1084,6 +1059,55 @@ If user requests adding budget (e.g. "1000 rs more"), set addedBudget.`;
     }
   };
 
+  const handleLocationModalSelect = (picked) => {
+    setShowLocationModal(false);
+    if (picked.isLive) {
+      if (setLocation) {
+        setLocation({
+          lat: picked.lat,
+          lon: picked.lon,
+          label: 'Your Location (Live GPS)',
+          isLive: true,
+        });
+      }
+      let nearestKey = 'Shoranur';
+      let minDist = 99999;
+      Object.entries(KERALA_CITIES).forEach(([key, city]) => {
+        const d = haversineKm(picked.lat, picked.lon, city.hub.lat, city.hub.lng);
+        if (d < minDist) {
+          minDist = d;
+          nearestKey = key;
+        }
+      });
+      handleCityChange(nearestKey);
+      return;
+    }
+
+    if (picked.isAllKerala) {
+      handleCityChange('Kochi');
+      return;
+    }
+
+    if (picked.cityKey && !picked.spotId) {
+      handleCityChange(picked.cityKey);
+      return;
+    }
+
+    if (picked.spotId) {
+      if (setLocation) {
+        setLocation({
+          lat: picked.lat,
+          lon: picked.lon,
+          label: picked.label,
+          spotId: picked.spotId,
+        });
+      }
+      if (picked.cityKey && KERALA_CITIES[picked.cityKey]) {
+        handleCityChange(picked.cityKey);
+      }
+    }
+  };
+
   const toggleVibe = (vibe) => {
     setSelectedVibes((prev) =>
       prev.includes(vibe) ? prev.filter((v) => v !== vibe) : [...prev, vibe]
@@ -1437,22 +1461,24 @@ Return JSON in this format:
 
           {/* Master Form Card */}
           <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-4">
-            {/* SEARCHABLE CITY SELECTOR */}
-            <div className="space-y-1.5 relative" ref={cityDropdownRef}>
+            {/* GOOGLE MAPS STYLE LOCATION & STARTING POINT SELECTOR */}
+            <div className="space-y-1.5">
               <label className="text-[11px] font-black uppercase tracking-wider text-black flex items-center justify-between">
-                <span>CITY</span>
-                <span className="text-[#0B3BF4] font-bold">📍 Active Pin</span>
+                <span>STARTING POINT / REGION</span>
+                <span className="text-[#0B3BF4] font-bold">📍 Google Maps Style</span>
               </label>
 
-              {/* Trigger Button showing currently active city */}
+              {/* Trigger Button showing currently active location or city */}
               <button
                 type="button"
-                onClick={() => setIsCityDropdownOpen((prev) => !prev)}
-                className="w-full bg-[#F4F6F9] border-[2px] border-black rounded-2xl px-3 py-2.5 text-xs font-black text-black outline-none shadow-[0_2px_0_0_#000000] flex items-center justify-between cursor-pointer hover:bg-gray-100 transition active:translate-y-0.5"
+                onClick={() => setShowLocationModal(true)}
+                className="w-full bg-[#F4F6F9] hover:bg-gray-100 border-[2px] border-black rounded-2xl px-3 py-2.5 text-xs font-black text-black outline-none shadow-[0_2px_0_0_#000000] flex items-center justify-between cursor-pointer transition active:translate-y-0.5"
               >
                 <div className="flex items-center gap-2 truncate text-left">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 inline-block ring-2 ring-emerald-300" />
-                  <span className="truncate">{currentCity.displayName}</span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 inline-block ring-2 ring-emerald-300 animate-pulse" />
+                  <span className="truncate">
+                    {location?.label || currentCity.displayName}
+                  </span>
                   {currentCity.district && (
                     <span className="text-[9px] bg-black text-white px-1.5 py-0.5 rounded-full uppercase shrink-0 font-bold">
                       {currentCity.district}
@@ -1460,105 +1486,12 @@ Return JSON in this format:
                   )}
                 </div>
                 <div className="flex items-center gap-1.5 text-gray-500 shrink-0 ml-1">
-                  <Search size={13} className="text-gray-400" />
-                  <ChevronDown
-                    size={14}
-                    className={`transition-transform duration-200 ${
-                      isCityDropdownOpen ? 'rotate-180 text-black' : ''
-                    }`}
-                  />
+                  <span className="text-[10px] font-black bg-white border border-black rounded-full px-2 py-0.5 shadow-sm text-black">
+                    Change
+                  </span>
+                  <ChevronDown size={14} className="text-black" />
                 </div>
               </button>
-
-              {/* Dropdown Panel with Search Bar & Filtered Cities List */}
-              {isCityDropdownOpen && (
-                <div className="absolute top-full left-0 right-0 mt-1.5 z-40 bg-white border-[2.5px] border-black rounded-2xl p-2.5 shadow-[0_6px_0_0_#000000] space-y-2 animate-in fade-in duration-150">
-                  {/* Search Input Field */}
-                  <div className="relative flex items-center">
-                    <Search
-                      size={14}
-                      className="absolute left-3 text-gray-400 pointer-events-none"
-                    />
-                    <input
-                      type="text"
-                      autoFocus
-                      value={citySearchQuery}
-                      onChange={(e) => setCitySearchQuery(e.target.value)}
-                      placeholder="Search city, district, or station..."
-                      className="w-full bg-[#F4F6F9] border-[1.5px] border-black rounded-xl pl-9 pr-8 py-2 text-xs font-bold text-black outline-none focus:ring-2 focus:ring-[#0B3BF4]/30 placeholder:text-gray-400"
-                    />
-                    {citySearchQuery && (
-                      <button
-                        type="button"
-                        onClick={() => setCitySearchQuery('')}
-                        className="absolute right-2.5 text-gray-400 hover:text-black p-0.5"
-                      >
-                        <X size={13} />
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Filtered Cities Scrollable List */}
-                  <div className="max-h-56 overflow-y-auto space-y-1 pr-1 scrollbar-thin">
-                    {filteredCities.length === 0 ? (
-                      <div className="p-3 text-center text-xs font-bold text-gray-400">
-                        No Kerala cities found matching "{citySearchQuery}"
-                      </div>
-                    ) : (
-                      filteredCities.map(([key, city]) => {
-                        const isSelected = selectedCityKey === key;
-                        return (
-                          <button
-                            key={key}
-                            type="button"
-                            onClick={() => {
-                              handleCityChange(key);
-                              setIsCityDropdownOpen(false);
-                              setCitySearchQuery('');
-                            }}
-                            className={`w-full text-left px-2.5 py-2 rounded-xl text-xs font-bold flex items-center justify-between transition cursor-pointer ${
-                              isSelected
-                                ? 'bg-[#0B3BF4] text-white border border-black shadow-[0_1px_0_0_#000000]'
-                                : 'hover:bg-[#F4F6F9] text-black'
-                            }`}
-                          >
-                            <div className="truncate text-left">
-                              <div className="font-black flex items-center gap-1.5 truncate">
-                                <span className="truncate">{city.name}</span>
-                                {city.district && (
-                                  <span
-                                    className={`text-[8.5px] px-1.5 py-0.2 rounded-full uppercase font-bold shrink-0 ${
-                                      isSelected
-                                        ? 'bg-white text-black'
-                                        : 'bg-gray-200 text-gray-700'
-                                    }`}
-                                  >
-                                    {city.district}
-                                  </span>
-                                )}
-                              </div>
-                              <div
-                                className={`text-[10px] truncate mt-0.5 ${
-                                  isSelected ? 'text-blue-100' : 'text-gray-500'
-                                }`}
-                              >
-                                🚉 {city.hub.stationName}
-                              </div>
-                            </div>
-                            {isSelected && (
-                              <Check
-                                size={14}
-                                className="shrink-0 ml-1 text-white"
-                                strokeWidth={3}
-                              />
-                            )}
-                          </button>
-                        );
-                      })
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Mode */}
@@ -1699,11 +1632,20 @@ Return JSON in this format:
               <ArrowLeft size={13} strokeWidth={2.5} />
               <span>New Plan</span>
             </button>
-            <div className="flex items-center gap-1.5 px-2">
-              <span className="font-black text-xs text-black">
-                {currentCity.name} • ₹{maxBudget} Max
+            <button
+              type="button"
+              onClick={() => setShowLocationModal(true)}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-black/30 bg-[#F4F6F9] hover:bg-gray-100 transition cursor-pointer active:translate-y-0.5"
+              title="Change starting point or region"
+            >
+              <MapPin size={12} className="text-[#0B3BF4] shrink-0" strokeWidth={2.5} />
+              <span className="font-black text-xs text-black truncate max-w-[130px] sm:max-w-[200px]">
+                {location?.label || currentCity.name}
               </span>
-            </div>
+              <span className="text-[10px] text-gray-500 font-bold shrink-0">
+                • ₹{maxBudget}
+              </span>
+            </button>
             <button
               onClick={loadHistory}
               className="text-xs font-black px-2.5 py-1 rounded-full border-[2px] border-black bg-white text-black hover:bg-gray-100 shadow-[0_2px_0_0_#000000] flex items-center gap-1"
@@ -2472,6 +2414,15 @@ Return JSON in this format:
           </div>
         </div>
       )}
+
+      {/* Location Picker Modal (Google Maps Style) */}
+      <LocationPickerModal
+        isOpen={showLocationModal}
+        onClose={() => setShowLocationModal(false)}
+        currentLocation={location}
+        onSelectLocation={handleLocationModalSelect}
+        showAllKeralaOption={false}
+      />
     </div>
   );
 }

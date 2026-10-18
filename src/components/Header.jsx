@@ -4,7 +4,7 @@ import SettingsModal from './SettingsModal';
 
 const DESKTOP_NAV_ITEMS = [
   { id: 'explore', label: 'Explore', icon: Compass },
-  { id: 'planner', label: 'Planner', icon: Sparkles },
+  { id: 'planner', label: 'Plan', icon: Sparkles },
   { id: 'upload', label: 'Add Spot', icon: MapPin },
   { id: 'debug', label: 'LLM Debug', icon: Terminal },
 ];

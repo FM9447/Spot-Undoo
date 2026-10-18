@@ -5,6 +5,7 @@ import { haversineKm } from '../utils/plannerMath';
 import InteractiveMap from '../components/InteractiveMap';
 import ImageCarousel from '../components/ImageCarousel';
 import RideComparatorModal from '../components/RideComparatorModal';
+import LocationPickerModal from '../components/LocationPickerModal';
 import { getBackendUrl } from '../utils/apiConfig';
 
 const CATEGORIES = ['All Spots', '💎 Hidden Spots', 'Food', 'Gaming & Chill', 'Night'];
@@ -329,6 +330,53 @@ export default function ExploreTab({ location, setLocation }) {
     }
   };
 
+  const handleLocationModalSelect = (picked) => {
+    setShowLocationModal(false);
+    if (picked.isLive) {
+      setSelectedCityFilter('Your Location');
+      if (setLocation) {
+        setLocation({
+          lat: picked.lat,
+          lon: picked.lon,
+          label: 'Phone GPS (Live)',
+        });
+      }
+      setCityToast('📍 Live GPS active! Showing spots nearest to you.');
+      setTimeout(() => setCityToast(''), 4500);
+      return;
+    }
+
+    if (picked.isAllKerala) {
+      setSelectedCityFilter('All Cities');
+      setCityToast('🌴 Exploring all spots across Kerala!');
+      setTimeout(() => setCityToast(''), 4500);
+      return;
+    }
+
+    if (picked.cityKey && !picked.spotId) {
+      handleCitySelect(picked.cityKey);
+      return;
+    }
+
+    if (picked.spotId) {
+      setSelectedCityFilter('All Cities');
+      if (setLocation) {
+        setLocation({
+          lat: picked.lat,
+          lon: picked.lon,
+          label: picked.label,
+          spotId: picked.spotId,
+        });
+      }
+      const spotObj = allSpots.find((s) => s.id === picked.spotId);
+      if (spotObj) {
+        setSelectedSpot(spotObj);
+      }
+      setCityToast(`📍 Selected "${picked.label}"! Distances calculated from here.`);
+      setTimeout(() => setCityToast(''), 4500);
+    }
+  };
+
   const usePhoneGPS = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -499,140 +547,14 @@ export default function ExploreTab({ location, setLocation }) {
         })}
       </div>
 
-      {/* Location Selection Modal (Neo-Brutalist Design) */}
-      {showLocationModal && (
-        <div className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-sm bg-white border-[3px] border-black rounded-[28px] p-4 shadow-[0_6px_0_0_#000000] space-y-3 max-h-[85vh] flex flex-col">
-            <div className="flex items-center justify-between pb-1 border-b-[2px] border-black">
-              <div className="flex items-center gap-2">
-                <MapPin size={18} className="text-[#0B3BF4]" strokeWidth={2.5} />
-                <h3 className="text-base font-black text-black tracking-tight">SELECT LOCATION</h3>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowLocationModal(false);
-                  setLocationSearchQuery('');
-                }}
-                className="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 border-[1.5px] border-black flex items-center justify-center font-black text-xs cursor-pointer shadow-[0_1px_0_0_#000000]"
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Modal Search Bar */}
-            <div className="flex items-center gap-2 bg-[#F4F6F9] border-[2px] border-black rounded-2xl px-3 py-2">
-              <Search size={14} className="text-gray-400 shrink-0" strokeWidth={2.5} />
-              <input
-                type="text"
-                autoFocus
-                value={locationSearchQuery}
-                onChange={(e) => setLocationSearchQuery(e.target.value)}
-                placeholder="Search city, district, or station..."
-                className="w-full text-xs font-bold text-black placeholder-gray-400 outline-none bg-transparent"
-              />
-              {locationSearchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setLocationSearchQuery('')}
-                  className="text-xs text-gray-400 hover:text-black font-black cursor-pointer"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-
-            {/* Scrollable list */}
-            <div className="flex-1 overflow-y-auto space-y-2 pr-1 scrollbar-thin">
-              {/* Option 1: Your Location (Live GPS) */}
-              <button
-                type="button"
-                onClick={() => handleCitySelect('Your Location')}
-                className={`w-full text-left p-3 rounded-2xl border-[2px] border-black flex items-center justify-between transition cursor-pointer shadow-[0_2px_0_0_#000000] active:translate-y-0.5 ${
-                  selectedCityFilter === 'Your Location'
-                    ? 'bg-[#0B3BF4] text-white'
-                    : 'bg-[#EFF6FF] text-black hover:bg-blue-100'
-                }`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-emerald-300 animate-pulse" />
-                  <div>
-                    <div className="text-xs font-black">Your Location (Live GPS)</div>
-                    <div className={`text-[10px] mt-0.5 ${selectedCityFilter === 'Your Location' ? 'text-blue-100' : 'text-gray-500'}`}>
-                      {location?.label || 'Nearest spots calculated live'}
-                    </div>
-                  </div>
-                </div>
-                {selectedCityFilter === 'Your Location' && <Check size={16} strokeWidth={3} className="text-white shrink-0" />}
-              </button>
-
-              {/* Option 2: All Kerala Spots */}
-              <button
-                type="button"
-                onClick={() => handleCitySelect('All Cities')}
-                className={`w-full text-left p-2.5 rounded-2xl border-[2px] border-black flex items-center justify-between transition cursor-pointer shadow-[0_2px_0_0_#000000] active:translate-y-0.5 ${
-                  selectedCityFilter === 'All Cities'
-                    ? 'bg-[#0B3BF4] text-white'
-                    : 'bg-white text-black hover:bg-gray-50'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-base">🌴</span>
-                  <div>
-                    <div className="text-xs font-black">All Kerala Spots</div>
-                    <div className={`text-[10px] ${selectedCityFilter === 'All Cities' ? 'text-blue-100' : 'text-gray-500'}`}>
-                      View all 100+ spots across Kerala
-                    </div>
-                  </div>
-                </div>
-                {selectedCityFilter === 'All Cities' && <Check size={16} strokeWidth={3} className="text-white shrink-0" />}
-              </button>
-
-              {/* Filtered Kerala Cities */}
-              {Object.entries(KERALA_CITIES)
-                .filter(([key, city]) => {
-                  const q = locationSearchQuery.toLowerCase().trim();
-                  if (!q) return true;
-                  return (
-                    city.name.toLowerCase().includes(q) ||
-                    (city.district || '').toLowerCase().includes(q) ||
-                    (city.hub?.stationName || '').toLowerCase().includes(q)
-                  );
-                })
-                .map(([key, city]) => {
-                  const isSelected = selectedCityFilter === key;
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => handleCitySelect(key)}
-                      className={`w-full text-left p-2.5 rounded-2xl border-[2px] border-black flex items-center justify-between transition cursor-pointer shadow-[0_2px_0_0_#000000] active:translate-y-0.5 ${
-                        isSelected
-                          ? 'bg-[#0B3BF4] text-white'
-                          : 'bg-white text-black hover:bg-gray-50'
-                      }`}
-                    >
-                      <div className="min-w-0 pr-2">
-                        <div className="text-xs font-black flex items-center gap-1.5">
-                          <span>{city.name}</span>
-                          {city.district && (
-                            <span className={`text-[8.5px] px-1.5 py-0.2 rounded-full uppercase font-bold shrink-0 ${isSelected ? 'bg-white text-black' : 'bg-gray-200 text-gray-700'}`}>
-                              {city.district}
-                            </span>
-                          )}
-                        </div>
-                        <div className={`text-[10px] truncate mt-0.5 ${isSelected ? 'text-blue-100' : 'text-gray-500'}`}>
-                          🚉 {city.hub.stationName} • {city.spots.length} spots
-                        </div>
-                      </div>
-                      {isSelected && <Check size={16} strokeWidth={3} className="text-white shrink-0" />}
-                    </button>
-                  );
-                })}
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Location Selection Modal (Google Maps Style) */}
+      <LocationPickerModal
+        isOpen={showLocationModal}
+        onClose={() => setShowLocationModal(false)}
+        currentLocation={location}
+        onSelectLocation={handleLocationModalSelect}
+        showAllKeralaOption={true}
+      />
 
       {/* 3. View Content (OSM Live Map / Cartoon Canvas / Grid) */}
       {viewMode === 'osm' ? (
