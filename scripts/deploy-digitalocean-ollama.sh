@@ -45,7 +45,6 @@ sleep 4
 # 5. Pull lightweight models optimized for mobile/cloud inference
 echo "📥 Pulling optimized models for Spot-Undoo..."
 ollama pull qwen2.5:3b
-ollama pull gemma:2b || true
 
 # 6. Verify health
 echo "🔍 Verifying running models..."

@@ -232,7 +232,7 @@ export default function LLMDebugTab({ settings }) {
         )}
       </div>
 
-      {/* 5. Gemma 4 Thinking Trace Accordion */}
+      {/* 5. Qwen Thinking Trace Accordion */}
       <div className="bg-white border-[2.5px] border-black rounded-2xl p-3 shadow-[0_3px_0_0_#000000] space-y-2">
         <div
           onClick={() => setThinkingOpen(!thinkingOpen)}
