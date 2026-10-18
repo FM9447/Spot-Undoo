@@ -5,7 +5,6 @@ import { haversineKm } from '../utils/plannerMath';
 import InteractiveMap from '../components/InteractiveMap';
 import ImageCarousel from '../components/ImageCarousel';
 import { getBackendUrl } from '../utils/apiConfig';
-import CartoonMapBackground from '../components/CartoonMapBackground';
 
 const CATEGORIES = ['All Spots', '💎 Hidden Spots', 'Food', 'Gaming & Chill', 'Night'];
 const CITIES_LIST = ['All Cities', 'Shoranur', 'Kochi', 'Calicut', 'Palakkad', 'Trivandrum', 'Kollam', 'Wayanad'];
@@ -405,25 +404,62 @@ export default function ExploreTab({ location, setLocation }) {
           ref={trailContainerRef}
           className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[520px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
         >
-          {/* Dynamic Illustrated Background Canvas: Full Cartoon Vector Map with River / Road / Pinboard themes */}
+          {/* Dynamic Illustrated Background Canvas: Simple Clean Path */}
           <svg
             className="absolute inset-0 w-full pointer-events-none"
             style={{ height: `${trailDimensions.height}px` }}
             width={trailDimensions.width}
             height={trailDimensions.height}
           >
-            {/* Rich Cartoon Vector Map Background: Railways, Highways, Nature Reserves, Coordinates & Compass */}
-            <CartoonMapBackground
-              width={trailDimensions.width}
-              height={trailDimensions.height}
-              variant={canvasTheme}
-              locationLabel={selectedCityFilter !== 'All Cities' ? selectedCityFilter : 'Kerala'}
-            />
+            <defs>
+              <pattern id="trailGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <circle cx="20" cy="20" r="0.8" fill="#CBD5E1" opacity="0.6" />
+              </pattern>
+              <linearGradient id="riverWaterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#BAE6FD" />
+                <stop offset="50%" stopColor="#7DD3FC" />
+                <stop offset="100%" stopColor="#BAE6FD" />
+              </linearGradient>
+            </defs>
 
-            {/* THEME 1: SCENIC KERALA BACKWATERS RIVER (Default) */}
+            {/* Subtle Map Coordinates Dot Grid */}
+            <rect width="100%" height="100%" fill="url(#trailGrid)" />
+
+            {/* Subtle Topographic Elevation Contour Lines */}
+            {Array.from({ length: Math.ceil(trailDimensions.height / 220) + 1 }).map((_, cIdx) => {
+              const yBase = cIdx * 220 + 80;
+              return (
+                <g key={cIdx} opacity="0.38">
+                  <path
+                    d={`M 0 ${yBase} Q ${trailDimensions.width * 0.25} ${yBase - 35}, ${trailDimensions.width * 0.5} ${yBase + 25} T ${trailDimensions.width} ${yBase - 15}`}
+                    fill="none"
+                    stroke="#CBD5E1"
+                    strokeWidth="1.2"
+                    strokeDasharray="4 6"
+                  />
+                  <text
+                    x={trailDimensions.width - 45}
+                    y={yBase - 8}
+                    fill="#94A3B8"
+                    fontSize="7"
+                    fontWeight="800"
+                    fontFamily="monospace"
+                  >
+                    {cIdx * 35 + 20}m
+                  </text>
+                  <path
+                    d={`M 0 ${yBase + 110} Q ${trailDimensions.width * 0.35} ${yBase + 140}, ${trailDimensions.width * 0.7} ${yBase + 85} T ${trailDimensions.width} ${yBase + 120}`}
+                    fill="none"
+                    stroke="#E2E8F0"
+                    strokeWidth="1"
+                  />
+                </g>
+              );
+            })}
+
+            {/* Simple Scenic Path: Kerala Backwaters River (Default) */}
             {canvasTheme === 'river' && (
               <g>
-                {/* River Bank Foam / Sandy Shore */}
                 <path
                   d={meanderingPath}
                   fill="none"
@@ -432,16 +468,14 @@ export default function ExploreTab({ location, setLocation }) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                {/* Flowing Water Gradient */}
                 <path
                   d={meanderingPath}
                   fill="none"
-                  stroke="url(#bgRiverGrad)"
+                  stroke="url(#riverWaterGrad)"
                   strokeWidth="24"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                {/* Water Surface Ripples */}
                 <path
                   d={meanderingPath}
                   fill="none"
@@ -454,10 +488,9 @@ export default function ExploreTab({ location, setLocation }) {
               </g>
             )}
 
-            {/* THEME 2: SCENIC COUNTRY EXPEDITION ROAD */}
+            {/* Simple Scenic Path: Country Expedition Road */}
             {canvasTheme === 'road' && (
               <g>
-                {/* Road Shoulder */}
                 <path
                   d={meanderingPath}
                   fill="none"
@@ -466,7 +499,6 @@ export default function ExploreTab({ location, setLocation }) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                {/* Road Asphalt */}
                 <path
                   d={meanderingPath}
                   fill="none"
@@ -475,7 +507,6 @@ export default function ExploreTab({ location, setLocation }) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                {/* Yellow Dashed Center Line */}
                 <path
                   d={meanderingPath}
                   fill="none"
@@ -487,7 +518,7 @@ export default function ExploreTab({ location, setLocation }) {
               </g>
             )}
 
-            {/* THEME 3: PINBOARD (Clean map canvas with no line cutting through cards) */}
+            {/* Pinboard: Clean canvas with zero line */}
           </svg>
 
           {/* Floating Top Control: Location Hub Barometer + Theme Selector [River | Road | Board] + Live Explore */}

@@ -7,7 +7,6 @@ import InteractiveMap from '../components/InteractiveMap';
 import { getBackendUrl } from '../utils/apiConfig';
 import { haversineKm } from '../utils/plannerMath';
 import SpotUndooLoadingScreen from '../components/SpotUndooLoadingScreen';
-import CartoonMapBackground from '../components/CartoonMapBackground';
 
 const MODES = [
   { id: 'layover', label: '🚆 Layover (Train/Flight)' },
@@ -1815,19 +1814,43 @@ Return JSON in this format:
               ref={trailContainerRef}
               className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[460px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
             >
-              {/* Dynamic Illustrated Background Canvas: Full Cartoon Vector Map & Dotted Trail */}
+              {/* Clean Minimal Background Canvas: Subtle Dot Grid & Dotted Trail Path */}
               <svg
                 className="absolute inset-0 w-full pointer-events-none"
                 style={{ height: `${trailDimensions.height}px` }}
                 width={trailDimensions.width}
                 height={trailDimensions.height}
               >
-                {/* Rich Cartoon Map Layer: Rivers, Railways, Highways, Green Pastures & Compass */}
-                <CartoonMapBackground
-                  width={trailDimensions.width}
-                  height={trailDimensions.height}
-                  locationLabel={currentCity?.name || 'Kerala'}
-                />
+                <defs>
+                  <pattern id="chatTrailGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="20" cy="20" r="0.8" fill="#CBD5E1" opacity="0.6" />
+                  </pattern>
+                </defs>
+
+                {/* Subtle Coordinate Dot Grid */}
+                <rect width="100%" height="100%" fill="url(#chatTrailGrid)" />
+
+                {/* Gentle, Subtle Elevation Contours */}
+                {Array.from({ length: Math.ceil(trailDimensions.height / 220) + 1 }).map((_, cIdx) => {
+                  const yBase = cIdx * 220 + 80;
+                  return (
+                    <g key={cIdx} opacity="0.35">
+                      <path
+                        d={`M 0 ${yBase} Q ${trailDimensions.width * 0.25} ${yBase - 35}, ${trailDimensions.width * 0.5} ${yBase + 25} T ${trailDimensions.width} ${yBase - 15}`}
+                        fill="none"
+                        stroke="#CBD5E1"
+                        strokeWidth="1.2"
+                        strokeDasharray="4 6"
+                      />
+                      <path
+                        d={`M 0 ${yBase + 110} Q ${trailDimensions.width * 0.35} ${yBase + 140}, ${trailDimensions.width * 0.7} ${yBase + 85} T ${trailDimensions.width} ${yBase + 120}`}
+                        fill="none"
+                        stroke="#E2E8F0"
+                        strokeWidth="1"
+                      />
+                    </g>
+                  );
+                })}
 
                 {/* Pure Dotted Path Running Directly Through All Red Push-Pins */}
                 {measuredPath.map((seg, sIdx) => (
