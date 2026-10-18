@@ -105,8 +105,16 @@ app.get('/api/plans', async (req, res) => {
   try {
     const { userEmail } = req.query;
     let query = {};
-    if (userEmail) {
-      query.userEmail = userEmail.toLowerCase().trim();
+    if (userEmail && userEmail !== 'all') {
+      const cleanEmail = userEmail.toLowerCase().trim();
+      query = {
+        $or: [
+          { userEmail: cleanEmail },
+          { userEmail: 'guest@spotundoo.local' },
+          { userEmail: 'hadhy@spotundoo.local' },
+          { userEmail: { $exists: false } }
+        ]
+      };
     }
     const docs = await db.collection('plans')
       .find(query)
