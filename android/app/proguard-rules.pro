@@ -12,10 +12,20 @@
 #   public *;
 #}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Keep attributes for error debugging
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Capacitor Core & Bridge
+-keep public class com.getcapacitor.** { *; }
+-keep public class * extends com.getcapacitor.Plugin { *; }
+-keepclassmembers class * extends com.getcapacitor.Plugin {
+    @com.getcapacitor.PluginMethod public *;
+}
+
+# App package
+-keep public class com.spotundoo.app.** { *; }
+
+# Cordova Plugin Bridge
+-keep public class org.apache.cordova.** { *; }
+

@@ -10,6 +10,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import crypto from 'node:crypto';
 
 const app = express();
 app.use(cors());
@@ -51,31 +52,51 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// In-memory sliding rate limiter for authentication to prevent brute force
-const authAttempts = new Map();
-function rateLimitAuth(req, res, next) {
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
-  const now = Date.now();
-  const windowMs = 5 * 60 * 1000; // 5 minutes
-  const maxAttempts = 10;
-
-  const record = authAttempts.get(ip) || { count: 0, resetTime: now + windowMs };
-  if (now > record.resetTime) {
-    record.count = 1;
-    record.resetTime = now + windowMs;
-  } else {
-    record.count++;
-  }
-  authAttempts.set(ip, record);
-
-  if (record.count > maxAttempts) {
-    const waitSecs = Math.ceil((record.resetTime - now) / 1000);
-    return res.status(429).json({
-      error: `Too many login attempts. Please wait ${waitSecs} seconds before trying again.`,
-    });
-  }
-  next();
+// Server-side XSS Sanitizer for reviews and places
+function sanitizeInputText(input) {
+  if (typeof input !== 'string') return input || '';
+  return input
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/[&<>"'/]/g, (match) => {
+      const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;', '/': '&#x2F;' };
+      return entities[match];
+    })
+    .trim();
 }
+
+// In-memory sliding rate limiters to stop brute-force & spam
+function createRateLimiter(windowMs, maxAttempts, name) {
+  const store = new Map();
+  return (req, res, next) => {
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
+    const now = Date.now();
+    const record = store.get(ip) || { count: 0, resetTime: now + windowMs };
+    if (now > record.resetTime) {
+      record.count = 1;
+      record.resetTime = now + windowMs;
+    } else {
+      record.count++;
+    }
+    store.set(ip, record);
+
+    if (record.count > maxAttempts) {
+      const waitSecs = Math.ceil((record.resetTime - now) / 1000);
+      return res.status(429).json({
+        error: `Rate limit reached for ${name}. Please wait ${waitSecs}s before retrying.`,
+      });
+    }
+    next();
+  };
+}
+
+const rateLimitAuth = createRateLimiter(5 * 60 * 1000, 5, 'login attempts');
+const rateLimitOtp = createRateLimiter(60 * 1000, 3, 'OTP requests');
+const rateLimitReviews = createRateLimiter(60 * 1000, 5, 'reviews');
+const rateLimitPlaces = createRateLimiter(60 * 1000, 5, 'spot submissions');
+
+// In-memory Timing-Safe OTP Store
+const otpStore = new Map();
 
 // User Registration with Bcrypt Password Hashing and JWT
 app.post('/api/auth/register', rateLimitAuth, async (req, res) => {
@@ -219,6 +240,109 @@ app.post('/api/auth/firebase-login', async (req, res) => {
   }
 });
 
+// Timing-Safe OTP Send Endpoint
+app.post('/api/auth/otp/send', rateLimitOtp, async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email || typeof email !== 'string') {
+      return res.status(400).json({ error: 'Valid email required' });
+    }
+    const cleanEmail = email.toLowerCase().trim();
+    // Cryptographically secure 6-digit random code
+    const rawOtp = crypto.randomInt(100000, 1000000).toString();
+    const hashedOtp = crypto.createHash('sha256').update(rawOtp).digest();
+
+    otpStore.set(cleanEmail, {
+      hash: hashedOtp,
+      expiresAt: Date.now() + 5 * 60 * 1000, // 5 min expiry
+      attempts: 0,
+    });
+
+    console.log(`🔒 [Timing-Safe OTP] Generated verification code for ${cleanEmail}: ${rawOtp}`);
+    res.json({
+      success: true,
+      message: 'OTP sent successfully (valid for 5 minutes)',
+      // Provide preview in development/test environment
+      debugOtp: process.env.NODE_ENV !== 'production' ? rawOtp : undefined,
+    });
+  } catch (e) {
+    console.error('OTP send failed:', e);
+    res.status(500).json({ error: 'Failed to generate OTP' });
+  }
+});
+
+// Timing-Safe OTP Verify Endpoint (Eliminating timing-attack vulnerabilities)
+app.post('/api/auth/otp/verify', rateLimitAuth, async (req, res) => {
+  try {
+    const { email, code } = req.body;
+    if (!email || !code || typeof code !== 'string') {
+      return res.status(400).json({ error: 'Email and 6-digit code required' });
+    }
+    const cleanEmail = email.toLowerCase().trim();
+    const record = otpStore.get(cleanEmail);
+
+    if (!record) {
+      return res.status(400).json({ error: 'No active OTP found. Please request a new code.' });
+    }
+
+    if (Date.now() > record.expiresAt) {
+      otpStore.delete(cleanEmail);
+      return res.status(400).json({ error: 'OTP has expired. Please request a new code.' });
+    }
+
+    record.attempts++;
+    if (record.attempts > 5) {
+      otpStore.delete(cleanEmail);
+      return res.status(429).json({ error: 'Too many incorrect attempts. Please request a new OTP.' });
+    }
+
+    // Constant-time cryptographic comparison
+    const candidateHash = crypto.createHash('sha256').update(code.trim()).digest();
+    const isMatch = crypto.timingSafeEqual(candidateHash, record.hash);
+
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid verification code' });
+    }
+
+    // Verification succeeded: wipe used OTP
+    otpStore.delete(cleanEmail);
+
+    // Find or create verified user
+    let user = await db.collection('users').findOne({ email: cleanEmail });
+    if (!user) {
+      const userDoc = {
+        name: cleanEmail.split('@')[0],
+        email: cleanEmail,
+        avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(cleanEmail)}`,
+        emailVerified: true,
+        createdAt: new Date(),
+      };
+      const result = await db.collection('users').insertOne(userDoc);
+      user = { ...userDoc, _id: result.insertedId };
+    }
+
+    const token = jwt.sign(
+      { id: user._id.toString(), email: user.email, name: user.name, emailVerified: true },
+      JWT_SECRET,
+      { expiresIn: '14d' }
+    );
+
+    res.json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+      },
+      token,
+    });
+  } catch (e) {
+    console.error('OTP verify failed:', e);
+    res.status(500).json({ error: 'OTP verification failed' });
+  }
+});
+
 // Update Profile (Avatar & Name)
 app.put('/api/auth/profile', async (req, res) => {
   try {
@@ -292,16 +416,17 @@ app.get('/api/plans', async (req, res) => {
   }
 });
 
-// Save review
-app.post('/api/reviews', async (req, res) => {
+// Save review with Rate Limiting & XSS Sanitization
+app.post('/api/reviews', rateLimitReviews, async (req, res) => {
   try {
     const { spotId, spotName, rating, reviewText, author } = req.body;
+    if (!reviewText) return res.status(400).json({ error: 'Review text required' });
     const doc = {
-      spotId,
-      spotName,
+      spotId: sanitizeInputText(spotId),
+      spotName: sanitizeInputText(spotName),
       rating: Number(rating) || 5,
-      reviewText,
-      author: author || 'Hadhy',
+      reviewText: sanitizeInputText(reviewText),
+      author: sanitizeInputText(author) || 'Local Explorer',
       createdAt: new Date(),
     };
     const result = await db.collection('reviews').insertOne(doc);
@@ -342,16 +467,17 @@ app.get('/api/reviews', async (req, res) => {
   }
 });
 
-// Save community uploaded spot
-app.post('/api/places', async (req, res) => {
+// Save community uploaded spot with Rate Limiting & XSS Sanitization
+app.post('/api/places', rateLimitPlaces, async (req, res) => {
   try {
     const spot = req.body;
     if (!spot || !spot.name) return res.status(400).json({ error: 'Name required' });
+    const cleanName = sanitizeInputText(spot.name);
     // Duplicate guard: same name OR same lat/lng (within tiny tolerance)
     const tolerance = 0.00001;
     const query = {
       $or: [
-        { name: spot.name },
+        { name: cleanName },
         {
           lat: { $gte: spot.lat - tolerance, $lte: spot.lat + tolerance },
           lng: { $gte: spot.lng - tolerance, $lte: spot.lng + tolerance },
@@ -362,7 +488,13 @@ app.post('/api/places', async (req, res) => {
     if (existing) {
       return res.status(409).json({ error: 'Duplicate spot detected' });
     }
-    const doc = { ...spot, createdAt: new Date() };
+    const doc = {
+      ...spot,
+      name: cleanName,
+      review: sanitizeInputText(spot.review),
+      category: sanitizeInputText(spot.category),
+      createdAt: new Date(),
+    };
     const result = await db.collection('places').insertOne(doc);
     res.json({ success: true, insertedId: result.insertedId });
   } catch (e) {

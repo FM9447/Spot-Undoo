@@ -6,6 +6,7 @@ import { getBackendUrl, getGroqApiKey } from '../utils/apiConfig';
 import { uploadImageToFirebase } from '../utils/firebaseStorage';
 import { haversineKm } from '../utils/plannerMath';
 import { nearestCityKey, acquireGPS } from '../utils/gps';
+import { sanitizeText } from '../utils/sanitize';
 
 const CATEGORIES = [
   { id: 'Hidden', label: '💎 Hidden' },
@@ -591,12 +592,16 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
     }
 
     const cityObj = KERALA_CITIES[selectedCityKey] || KERALA_CITIES['Shoranur'];
+    const cleanSpotName = sanitizeText(spotName.trim());
+    const cleanArea = sanitizeText(specificArea.trim());
+    const cleanReview = sanitizeText(review.trim());
+
     const newSpot = {
       id: `user-${Date.now()}`,
-      name: spotName.trim(),
+      name: cleanSpotName,
       cityKey: selectedCityKey,
       cityName: cityObj.name,
-      area: specificArea.trim() || cityObj.name,
+      area: cleanArea || cityObj.name,
       category: category === 'Hidden' ? 'Hidden Spots' : category,
       badge: aiTags[0]?.replace('#', '') || 'Community Spot',
       lat: checkLat,
@@ -606,7 +611,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
       rating: 5.0,
       reviewCount: 1,
       distanceKm: 1.5,
-      distanceText: `Near ${specificArea.trim() || cityObj.name}`,
+      distanceText: `Near ${cleanArea || cityObj.name}`,
       schedule: 'Flexible visit',
       transitText: 'Auto • 5m (₹25)',
       returnText: '5m back (₹25)',
@@ -616,11 +621,11 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
       links: [
         mapsLink.trim() ||
           `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-            spotName.trim() + ' ' + (specificArea.trim() || cityObj.name)
+            cleanSpotName + ' ' + (cleanArea || cityObj.name)
           )}`,
       ],
-      review: review.trim(),
-      tags: [...aiTags.map((t) => t.replace('#', '')), specificArea.trim()].filter(Boolean),
+      review: cleanReview,
+      tags: [...aiTags.map((t) => t.replace('#', '')), cleanArea].filter(Boolean),
       userUploaded: true,
     };
 

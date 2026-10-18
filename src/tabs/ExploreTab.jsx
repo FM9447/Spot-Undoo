@@ -7,6 +7,7 @@ import ImageCarousel from '../components/ImageCarousel';
 import RideComparatorModal from '../components/RideComparatorModal';
 import LocationPickerModal from '../components/LocationPickerModal';
 import { getBackendUrl } from '../utils/apiConfig';
+import { sanitizeText } from '../utils/sanitize';
 
 const CATEGORIES = ['All Spots', '💎 Hidden Spots', 'Food', 'Gaming & Chill', 'Night'];
 const CITIES_LIST = ['Your Location', 'All Cities', 'Shoranur', 'Pattambi', 'Kochi', 'Calicut', 'Palakkad', 'Trivandrum', 'Kollam', 'Wayanad'];
@@ -1163,11 +1164,12 @@ export default function ExploreTab({ location, setLocation }) {
               <button
                 type="button"
                 onClick={async () => {
-                  if (!userReviewText.trim()) return;
+                  const cleanedText = sanitizeText(userReviewText.trim());
+                  if (!cleanedText) return;
                   const spotKey = selectedSpot.id || selectedSpot.name;
                   const newReview = {
                     rating: userRating,
-                    text: userReviewText.trim(),
+                    text: cleanedText,
                     author: 'Local Explorer',
                     date: new Date().toLocaleDateString(),
                   };
@@ -1185,7 +1187,7 @@ export default function ExploreTab({ location, setLocation }) {
                       spotId: spotKey,
                       spotName: selectedSpot.name,
                       rating: userRating,
-                      reviewText: userReviewText.trim(),
+                      reviewText: cleanedText,
                       author: 'Local Explorer',
                     }),
                   }).catch(console.warn);
@@ -1196,7 +1198,7 @@ export default function ExploreTab({ location, setLocation }) {
                   // 4. Update selectedSpot rating & review count
                   setSelectedSpot((prev) => ({
                     ...prev,
-                    review: userReviewText.trim(),
+                    review: cleanedText,
                     rating: Number(
                       (
                         ((prev.rating || 4.5) * (prev.reviewCount || 10) + userRating) /
