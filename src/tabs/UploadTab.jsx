@@ -512,19 +512,45 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
       // Downscale first selected image on HTML5 Canvas to 512px max JPEG (0.7 quality)
       const base64Img = await resizeImageToBase64(files[0], 512, 0.7);
 
-      // Call Edge AI Vision
-      const res = await ollamaChat({
-        baseUrl: settings.baseUrl,
-        model: settings.model,
-        messages: [
-          {
-            role: 'user',
-            content:
-              'Analyze this Kerala travel spot photo and return JSON: {"verified": true, "caption": "short 1-line description", "vibe_tags": ["#tag1", "#tag2", "#tag3", "#tag4"], "tip": "one insider tip"}',
-            images: [base64Img],
-          },
-        ],
-      });
+      let res = null;
+
+      // 1. Try Cloud Vision (Gemini Flash Vision) via backend
+      try {
+        const backendUrl = getBackendUrl();
+        const vRes = await fetch(`${backendUrl}/api/ai/vision-verify`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            imageBase64: base64Img,
+            mimeType: 'image/jpeg',
+            prompt: 'Analyze this Kerala travel spot photo and return JSON: {"verified": true, "caption": "short 1-line description", "vibe_tags": ["#tag1", "#tag2", "#tag3", "#tag4"], "tip": "one insider tip"}'
+          })
+        });
+        if (vRes.ok) {
+          const vData = await vRes.json();
+          if (vData.success && (vData.vibe_tags || vData.caption)) {
+            res = vData;
+          }
+        }
+      } catch (cloudErr) {
+        console.warn('Backend Cloud Vision verify unavailable, trying local Ollama:', cloudErr.message);
+      }
+
+      // 2. Fall back to Edge AI Vision (Ollama)
+      if (!res) {
+        res = await ollamaChat({
+          baseUrl: settings.baseUrl,
+          model: settings.model,
+          messages: [
+            {
+              role: 'user',
+              content:
+                'Analyze this Kerala travel spot photo and return JSON: {"verified": true, "caption": "short 1-line description", "vibe_tags": ["#tag1", "#tag2", "#tag3", "#tag4"], "tip": "one insider tip"}',
+              images: [base64Img],
+            },
+          ],
+        });
+      }
 
       if (res && res.vibe_tags) {
         setAiTags(res.vibe_tags);

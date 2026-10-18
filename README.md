@@ -36,9 +36,9 @@ app_port: 7860
 
 ## 🌟 Overview
 
-**Spot-Undoo** is an open-source, privacy-first travel companion and micro-exploration engine tailored for Kerala. Traditional navigation and travel apps (Google Maps, TripAdvisor) funnel millions of tourists toward the same commercial bottlenecks while ignoring the quiet backwater channels, century-old bakeries, and heritage alleyways that embody the true soul of God's Own Country.
+**Spot-Undoo** is an open-source, privacy-first travel companion, itinerary generator, and micro-exploration engine tailored for **all 14 districts across the entire state of Kerala**. Traditional navigation and travel apps (Google Maps, TripAdvisor) funnel millions of tourists toward the same commercial bottlenecks while ignoring the quiet backwater channels, century-old bakeries, and heritage alleyways that embody the true soul of God's Own Country.
 
-Spot-Undoo solves this by pairing **locally hosted open-weight Edge AI** (fine-tuned **Qwen 2.5:3B** running on Ollama) with **MongoDB Atlas** for crowd-sourced review persistence and community gem verification. 
+Spot-Undoo solves this by pairing **locally hosted open-weight Edge AI** (fine-tuned **Qwen 2.5:3B** running on Ollama) and **Cloud AI** (**Groq Qwen 3.8 27B** & **Google Gemini Flash Latest / 3.8**) with **MongoDB Atlas** for crowd-sourced review persistence and community gem verification. 
 
 Whether you have a 45-minute train layover at **Shoranur Junction**, an evening before a flight from **Kochi**, or a weekend exploring **Wayanad**, Spot-Undoo plans deterministic, budget-guaranteed itineraries on the fly—completely offline or across a private local Wi-Fi network with zero per-token cloud API fees.
 
@@ -61,43 +61,48 @@ Whether you have a 45-minute train layover at **Shoranur Junction**, an evening 
 
 ## ✨ Core Features
 
-### 1. 🧠 Edge AI Itinerary Synthesis (Qwen 2.5:3B)
-- **Local On-Device Reasoning**: Runs on an edge laptop or local home server using Ollama (`spot-undo-qwen` / `qwen2.5:3b`).
-- **Strict Budget & Time Adherence**: Uses deterministic Haversine & transit math combined with LLM route curation to ensure travelers never miss a train or exceed their budget.
+### 1. 🧠 Multi-Tier AI Synthesis Engine (Groq + Gemini + Ollama)
+- **Tier 1 (Cloud Groq Qwen 3.8 27B)**: Ultra-fast sub-second cloud itinerary generation and story polishing.
+- **Tier 2 (Google Gemini Flash & Vision)**: Multimodal spot image verification, hashtag generation, and automated cloud fallback for structured JSON travel itineraries.
+- **Tier 3 (Edge AI On-Device Inference)**: Runs completely offline on local machines or LAN servers using Ollama (`spot-undo-qwen` / `qwen2.5:3b`).
+- **Tier 4 (Deterministic Heuristic Engine)**: Mathematical Haversine & transit routing fallback when all models are offline.
 - **Three Diverse Output Plans**:
   - **Plan 1 (Mood & Vibe Match)**: Tailored to user's desired atmosphere (Street Food, Chill, Chai & View).
   - **Plan 2 (Ultra-Budget Saver)**: Prioritizes low-cost or free public spots and walking routes.
   - **Plan 3 (Hidden Gem Route)**: Focuses on heritage, off-beat trails, and local artisan spots.
 
-  - **Plan 3 (Hidden Gem Route)**: Focuses on heritage, off-beat trails, and local artisan spots.
+### 2. 🗺️ All-Kerala Coverage (14 Districts, 72+ Hubs, 400+ Curated Spots)
+- Complete coverage across every Kerala district from Kasaragod to Thiruvananthapuram:
+  - 🚆 **Central Transit Corridors**: Shoranur Jn, Pattambi, Thrissur, Palakkad, Ottapalam, Aluva, Ernakulam.
+  - 🌊 **Coastal & Backwater Hubs**: Fort Kochi, Cherai, Varkala, Kovalam, Alappuzha, Kumarakom, Kollam, Bekal.
+  - 🍲 **Malabar Cultural Cities**: Calicut (Kozhikode), Thalassery, Kannur, Manjeri, Malappuram, Tirur.
+  - ⛰️ **Highland & Plantation Zones**: Munnar, Wayanad (Kalpetta, Sulthan Bathery), Vagamon, Thekkady, Ponmudi.
+  - 🏛️ **Heritage & Pilgrimage Hubs**: Trivandrum Central, Guruvayur, Kodungallur, Aranmula, Sabarimala Gateway.
 
-### 2. 🗺️ 8 Curated Kerala Hubs & 75+ Verified Spots
-- Comprehensive datasets with authentic photography, coordinate bounds, expense ratings, and local reviews across:
-  - 🚆 **Shoranur Jn Hub** (Major railway junction & river basin)
-  - 🌾 **Pattambi Hub** (Rayiranellur Mala, Nila Riverbank, Nercha Ground, Ongallur Tali Temple)
-  - 🌊 **Kochi / Ernakulam** (Fort Kochi alleys, Water Metro, Mattancherry)
-  - 🍲 **Calicut / Kozhikode** (SM Street, Paragon, Beach food stalls)
-  - 🏰 **Palakkad Town** (Fort, Malampuzha, Kava)
-  - 🏛️ **Trivandrum Central** (Padmanabhaswamy heritage, Chalai Bazaar)
-  - ⚓ **Kollam Jn** (Ashtamudi Lake, Munroe Island, Thangassery)
-  - ⛰️ **Wayanad / Kalpetta** (Tea estates, Chembra, Edakkal)
+### 3. 🛡️ Enterprise Security Suite
+- **XSS Sanitization**: Automated input sanitization and entity encoding across all user reviews and uploaded spot names.
+- **Sliding-Window IP Rate Limiting**: Enforced rate limits on OTP requests (3/min), review submissions (5/min), spot uploads (5/min), and authentication (5/5min).
+- **Timing-Safe OTP Verification**: Cryptographic constant-time comparison (`crypto.timingSafeEqual` with SHA-256) eliminating timing side-channel attacks on 6-digit verification codes.
+- **Content Security Policy (CSP)**: Strict origins (`accounts.google.com`, `*.firebaseapp.com`, `openstreetmap.org`, `wikimedia.org`) with `nosniff` and `SAMEORIGIN` clickjacking protection.
+- **APK Release Obfuscation**: Android R8 / ProGuard code minification and resource shrinking enabled in `android/app/build.gradle` and `proguard-rules.pro`.
 
-### 3. 📍 Smart Location Engine & Google Maps Link Parser
+### 4. 📍 Smart Location Engine & Google Maps Link Parser
 - **Instant Coordinate Extraction**: Paste any Google Maps URL (including short links like `maps.app.goo.gl`, `@lat,lng`, `!3dlat!4dlng`, or `query=lat,lng`) to automatically extract coordinates and place titles.
 - **Auto-Fill Live GPS**: One-tap acquisition of live device coordinates, automatically generating a valid Google Maps search URL and detecting the nearest regional hub and landmark area.
 - **Duplication Safeguard**: Automatically warns when a spot is already recorded within a 100-meter radius.
 
-### 4. 🎨 Dual Exploration Canvas & Neo-Brutalist Design
+### 5. 🎨 Dual Exploration Canvas & Neo-Brutalist Design
 - **Neo-Brutalist Adventure Canvas**: Stylized, high-contrast river-road trail mapping each stop with duration chips and transit pills.
 - **Interactive OpenStreetMap Canvas**: Full GIS map with automatic zoom-centering, custom marker pins, and live GPS alignment.
 - **Dynamic Multi-Screen Layout**: Fluid responsive design that scales seamlessly from Android & iOS smartphones up to ultra-wide desktop displays with a centered Neo-brutalist navigation bar.
 
-### 5. 🍃 MongoDB Atlas Cloud & Firebase Storage
+### 6. 🍃 MongoDB Atlas Cloud & Firebase Auth/Storage
+- **Authentication**: Seamless Google Sign-In, Firebase Anonymous test access, and bcrypt password hashing.
 - **Community Hidden Spots**: Travelers can contribute new gems directly from their phone with photo uploads stored on Firebase Storage.
 - **Real-Time Ratings & Reviews**: Synced directly to a MongoDB Atlas cloud cluster.
 - **Saved Plan History**: Retrieve previously generated itineraries with a single tap.
 
-### 6. 📱 Android Native APK & PWA (Zero-Config Mobile LAN Access)
+### 7. 📱 Android Native APK & PWA (Zero-Config Mobile LAN Access)
 - Full Capacitor-powered Android native build (`SpotUndoo-v1.0.apk`) and Progressive Web App (PWA).
 - Host backend & AI on a laptop; connect from any Android or iPhone on the same Wi-Fi network with dynamic backend network routing.
 

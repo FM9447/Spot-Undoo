@@ -69,7 +69,8 @@ function sanitizeInputText(input) {
 function createRateLimiter(windowMs, maxAttempts, name) {
   const store = new Map();
   return (req, res, next) => {
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
+    const rawIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
+    const ip = typeof rawIp === 'string' ? rawIp.split(',')[0].trim() : 'unknown';
     const now = Date.now();
     const record = store.get(ip) || { count: 0, resetTime: now + windowMs };
     if (now > record.resetTime) {
@@ -274,8 +275,9 @@ app.post('/api/auth/otp/send', rateLimitOtp, async (req, res) => {
 // Timing-Safe OTP Verify Endpoint (Eliminating timing-attack vulnerabilities)
 app.post('/api/auth/otp/verify', rateLimitAuth, async (req, res) => {
   try {
-    const { email, code } = req.body;
-    if (!email || !code || typeof code !== 'string') {
+    const { email, code, otp } = req.body;
+    const candidateCode = (code || otp || '').toString().trim();
+    if (!email || !candidateCode) {
       return res.status(400).json({ error: 'Email and 6-digit code required' });
     }
     const cleanEmail = email.toLowerCase().trim();
@@ -297,7 +299,7 @@ app.post('/api/auth/otp/verify', rateLimitAuth, async (req, res) => {
     }
 
     // Constant-time cryptographic comparison
-    const candidateHash = crypto.createHash('sha256').update(code.trim()).digest();
+    const candidateHash = crypto.createHash('sha256').update(candidateCode).digest();
     const isMatch = crypto.timingSafeEqual(candidateHash, record.hash);
 
     if (!isMatch) {
@@ -713,66 +715,126 @@ app.post('/api/audio/tts', async (req, res) => {
   }
 });
 
-// AI Itinerary Planner endpoint powered by Groq (Qwen 3.8 27B)
+// High-performance Gemini Flash helper for text & JSON generation
+async function callGeminiFlash(prompt, responseMimeType = 'application/json') {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error('No GEMINI_API_KEY configured');
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      ...(responseMimeType ? { generationConfig: { responseMimeType } } : {})
+    })
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Gemini Flash error (${res.status}): ${errText}`);
+  }
+
+  const data = await res.json();
+  const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  return rawText;
+}
+
+// Multimodal Gemini Vision analysis for spot photo verification
+async function callGeminiVision(imageBase64, prompt = '', mimeType = 'image/jpeg') {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error('No GEMINI_API_KEY configured');
+
+  const cleanB64 = imageBase64.replace(/^data:[^;]+;base64,/, '');
+  const userPrompt = prompt || 'Analyze this Kerala travel spot photo and return JSON: {"verified": true, "caption": "short 1-line description", "vibe_tags": ["#tag1", "#tag2", "#tag3", "#tag4"], "tip": "one insider tip"}';
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{
+        parts: [
+          { text: userPrompt },
+          { inline_data: { mime_type: mimeType, data: cleanB64 } }
+        ]
+      }],
+      generationConfig: { responseMimeType: 'application/json' }
+    })
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Gemini Vision error (${res.status}): ${errText}`);
+  }
+
+  const data = await res.json();
+  const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
+  return JSON.parse(rawText);
+}
+
+// AI Itinerary Planner endpoint powered by Groq (Qwen 3.8 27B) with Gemini Flash fallback
 app.post('/api/ai/plan', async (req, res) => {
   try {
     const { prompt } = req.body;
     if (!prompt) return res.status(400).json({ error: 'Prompt is required' });
 
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return res.status(503).json({ error: 'No GROQ_API_KEY configured' });
-    }
-
-    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'qwen/qwen3.8-27b',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an expert Kerala travel itinerary planner. Return ONLY a valid JSON object matching the requested schema with key "plans". Do not wrap in markdown quotes.'
+    // 1. Try Groq (Qwen 3.8 27B) first
+    if (process.env.GROQ_API_KEY) {
+      try {
+        const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+            'Content-Type': 'application/json',
           },
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        temperature: 0.6,
-        response_format: { type: 'json_object' }
-      }),
-    });
+          body: JSON.stringify({
+            model: 'qwen/qwen3.8-27b',
+            messages: [
+              {
+                role: 'system',
+                content: 'You are an expert Kerala travel itinerary planner. Return ONLY a valid JSON object matching the requested schema with key "plans". Do not wrap in markdown quotes.'
+              },
+              { role: 'user', content: prompt }
+            ],
+            temperature: 0.6,
+            response_format: { type: 'json_object' }
+          }),
+        });
 
-    if (!groqRes.ok) {
-      const errText = await groqRes.text();
-      console.error('Groq API error:', errText);
-      return res.status(groqRes.status).json({ error: `Groq error: ${errText}` });
+        if (groqRes.ok) {
+          const data = await groqRes.json();
+          const rawContent = data.choices?.[0]?.message?.content || '{}';
+          return res.json(JSON.parse(rawContent));
+        }
+        console.warn('Groq failed, attempting Gemini Flash fallback...');
+      } catch (groqErr) {
+        console.warn('Groq exception, attempting Gemini Flash fallback:', groqErr.message);
+      }
     }
 
-    const data = await groqRes.json();
-    const rawContent = data.choices?.[0]?.message?.content || '{}';
-    const parsed = JSON.parse(rawContent);
-    res.json(parsed);
+    // 2. Fallback to Google Gemini Flash
+    if (process.env.GEMINI_API_KEY) {
+      try {
+        const geminiPrompt = `${prompt}\n\nIMPORTANT: Return ONLY valid JSON with key "plans".`;
+        const rawText = await callGeminiFlash(geminiPrompt, 'application/json');
+        return res.json(JSON.parse(rawText));
+      } catch (gemErr) {
+        console.warn('Gemini Flash planning fallback failed:', gemErr.message);
+      }
+    }
+
+    res.status(503).json({ error: 'Neither Groq nor Gemini API is available' });
   } catch (err) {
     console.error('AI plan generation error:', err);
     res.status(500).json({ error: err.message || 'AI planning generation failed' });
   }
 });
 
-// Community Spot Story / Review Polisher powered by Groq (Qwen 3.8 27B)
+// Community Spot Story / Review Polisher powered by Groq & Gemini Flash
 app.post('/api/ai/enhance-story', async (req, res) => {
   try {
     const { draft, spotName, city, category, avgCost } = req.body;
-    const apiKey = process.env.GROQ_API_KEY;
-
-    if (!apiKey) {
-      return res.status(503).json({ error: 'No GROQ_API_KEY configured' });
-    }
-
     const effectiveName = (spotName || '').trim() || 'Hidden Kerala Spot';
     const effectiveCity = (city || '').trim() || 'Kerala';
     const effectiveCategory = (category || '').trim() || 'Hidden Spot';
@@ -789,34 +851,69 @@ CRITICAL RULES:
 - Output ONLY the polished review text without quotes or markdown.`
       : `Write a short, simple, grounded 1-to-2 sentence community note for "${effectiveName}" in ${effectiveCity} (${effectiveCategory}). Keep it honest, pleasant, and under 25 words without exaggerations or fake claims. Output ONLY the text without quotes.`;
 
-    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'qwen/qwen3.8-27b',
-        messages: [{ role: 'user', content: prompt }],
-        temperature: 0.5,
-        max_tokens: 100,
-      }),
-    });
+    // 1. Try Groq first
+    if (process.env.GROQ_API_KEY) {
+      try {
+        const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'qwen/qwen3.8-27b',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.5,
+            max_tokens: 100,
+          }),
+        });
 
-    if (!groqRes.ok) {
-      const errText = await groqRes.text();
-      console.error('Groq enhance-story error:', errText);
-      return res.status(groqRes.status).json({ error: errText });
+        if (groqRes.ok) {
+          const data = await groqRes.json();
+          const resultText = data.choices?.[0]?.message?.content?.trim() || '';
+          const cleanStory = resultText.replace(/^["']|["']$/g, '').trim();
+          return res.json({ success: true, story: cleanStory });
+        }
+      } catch (e) {
+        console.warn('Groq enhance-story failed, trying Gemini:', e.message);
+      }
     }
 
-    const data = await groqRes.json();
-    const resultText = data.choices?.[0]?.message?.content?.trim() || '';
-    const cleanStory = resultText.replace(/^["']|["']$/g, '').trim();
+    // 2. Fallback to Gemini Flash
+    if (process.env.GEMINI_API_KEY) {
+      try {
+        const rawText = await callGeminiFlash(prompt, '');
+        const cleanStory = rawText.replace(/^["']|["']$/g, '').trim();
+        return res.json({ success: true, story: cleanStory });
+      } catch (gemErr) {
+        console.warn('Gemini enhance-story fallback failed:', gemErr.message);
+      }
+    }
 
-    res.json({ success: true, story: cleanStory });
+    res.status(503).json({ error: 'AI enhancement unavailable' });
   } catch (err) {
     console.error('Enhance story error:', err);
     res.status(500).json({ error: err.message || 'Story enhancement failed' });
+  }
+});
+
+// Spot Photo Verification powered by Gemini Flash Vision
+app.post('/api/ai/vision-verify', async (req, res) => {
+  try {
+    const { imageBase64, mimeType = 'image/jpeg', prompt } = req.body;
+    if (!imageBase64) {
+      return res.status(400).json({ error: 'imageBase64 required' });
+    }
+
+    if (process.env.GEMINI_API_KEY) {
+      const result = await callGeminiVision(imageBase64, prompt, mimeType);
+      return res.json({ success: true, ...result });
+    }
+
+    res.status(503).json({ error: 'Gemini Vision unavailable' });
+  } catch (err) {
+    console.error('Vision verify error:', err);
+    res.status(500).json({ error: err.message || 'Vision verification failed' });
   }
 });
 
@@ -825,6 +922,7 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     db: !!db,
     groq: !!process.env.GROQ_API_KEY,
+    gemini: !!process.env.GEMINI_API_KEY,
     elevenlabs: !!process.env.ELEVENLABS_API_KEY,
     time: new Date()
   });
