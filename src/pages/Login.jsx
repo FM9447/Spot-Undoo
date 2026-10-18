@@ -477,22 +477,24 @@ export default function Login({ onLogin }) {
             )}
           </button>
 
-          {/* Anonymous Test Mode Button */}
-          <button
-            type="button"
-            disabled={anonLoading}
-            onClick={handleAnonymousSignIn}
-            className="w-full bg-[#FEF08A] hover:bg-yellow-200 active:translate-y-0.5 border-[2.5px] border-black rounded-2xl py-2.5 text-black font-black text-xs flex items-center justify-center gap-1.5 shadow-[0_2.5px_0_0_#000000] transition cursor-pointer disabled:opacity-60"
-          >
-            {anonLoading ? (
-              <>
-                <Loader2 size={15} className="animate-spin text-black" />
-                <span>Entering Test Mode...</span>
-              </>
-            ) : (
-              <span>⚡ Anonymous Test Access / Instant Mode</span>
-            )}
-          </button>
+          {/* Anonymous Test Mode Button (Hidden - only visible when ?agent_test=true for agent testing) */}
+          {typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('agent_test') === 'true' && (
+            <button
+              type="button"
+              disabled={anonLoading}
+              onClick={handleAnonymousSignIn}
+              className="w-full bg-[#FEF08A] hover:bg-yellow-200 active:translate-y-0.5 border-[2.5px] border-black rounded-2xl py-2.5 text-black font-black text-xs flex items-center justify-center gap-1.5 shadow-[0_2.5px_0_0_#000000] transition cursor-pointer disabled:opacity-60"
+            >
+              {anonLoading ? (
+                <>
+                  <Loader2 size={15} className="animate-spin text-black" />
+                  <span>Entering Test Mode...</span>
+                </>
+              ) : (
+                <span>⚡ Agent Test Access Mode</span>
+              )}
+            </button>
+          )}
         </form>
       </div>
 
