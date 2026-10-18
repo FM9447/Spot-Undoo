@@ -1705,60 +1705,58 @@ Return JSON in this format:
           ) : (
             /* VIEW MODE 2: Scrollable Neo-Brutalist Trail Canvas (Calibrated for ~3 compact Polaroid cards + scroll) */
             <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[460px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
-              {/* Dynamic Trail SVG Line: Starts at circular START at top, terminates at END at bottom */}
+              {/* Dynamic Trail SVG Line: Sequential dotted line connecting Start -> Pin 1 -> Pin 2 -> Pin 3 -> Safe Return */}
               {(() => {
                 const stops = currentPlan.stops || [];
                 const stopsCount = stops.length;
-                const stepGap = 138;
+                const stepGap = 162;
                 const stopNodes = stops.map((_, sIdx) => {
                   const isLeft = sIdx % 2 === 0;
                   return {
-                    cx: isLeft ? 26 : 330,
-                    cy: 120 + sIdx * stepGap,
+                    cx: isLeft ? 90 : 270,
+                    cy: 88 + sIdx * stepGap,
                     idx: sIdx,
                   };
                 });
 
-                const endCy = stopsCount === 0 ? 90 : 70 + stopsCount * stepGap + 14;
+                const endCy = stopsCount === 0 ? 80 : 88 + stopsCount * stepGap - 10;
                 const endPoint = { cx: 180, cy: endCy };
-                const svgHeight = endCy + 70;
+                const svgHeight = endCy + 60;
 
                 // Build individual curved segments so visited sections become grey & white
                 const segments = [];
                 if (stopNodes.length > 0) {
-                  // Segment 0: Station Hub Circular Start -> Stop 0
+                  // Segment 0: Circular Start -> Pin 1
                   const isFirstVisited = visitedStopIds.includes(stops[0]?.id || stops[0]?.name);
                   segments.push({
-                    d: `M 26 24 C 26 65, ${stopNodes[0].cx} ${stopNodes[0].cy - 35}, ${stopNodes[0].cx} ${stopNodes[0].cy}`,
+                    d: `M 28 24 C 28 60, 90 40, ${stopNodes[0].cx} ${stopNodes[0].cy}`,
                     isVisited: isFirstVisited,
                   });
 
-                  // Stop i -> Stop i+1
+                  // Sequential Segments: Pin i -> Pin i+1 (1 connects to 2, 2 connects to 3, etc.)
                   for (let i = 0; i < stopNodes.length - 1; i++) {
                     const curr = stopNodes[i];
                     const next = stopNodes[i + 1];
-                    const midY = (curr.cy + next.cy) / 2;
-                    const c1x = curr.cx > next.cx ? curr.cx - 60 : curr.cx + 60;
-                    const c2x = next.cx < curr.cx ? next.cx - 50 : next.cx + 50;
                     const isNextVisited = visitedStopIds.includes(stops[i + 1]?.id || stops[i + 1]?.name);
+                    const c1x = curr.cx === 90 ? 150 : 210;
+                    const c2x = next.cx === 270 ? 210 : 150;
                     segments.push({
-                      d: `M ${curr.cx} ${curr.cy} C ${c1x} ${midY - 10}, ${c2x} ${midY + 10}, ${next.cx} ${next.cy}`,
+                      d: `M ${curr.cx} ${curr.cy} C ${c1x} ${curr.cy + 55}, ${c2x} ${next.cy - 55}, ${next.cx} ${next.cy}`,
                       isVisited: isNextVisited,
                     });
                   }
 
-                  // Last Stop -> Final Destination Safe Return
+                  // Last Stop Pin -> Safe Return
                   const last = stopNodes[stopNodes.length - 1];
-                  const lastMidY = (last.cy + endCy) / 2;
-                  const cLastX = last.cx > 180 ? 250 : 110;
                   const allStopsVisited = stops.length > 0 && stops.every((s) => visitedStopIds.includes(s.id || s.name));
+                  const cLastX = last.cx === 90 ? 120 : 240;
                   segments.push({
-                    d: `M ${last.cx} ${last.cy} C ${cLastX} ${lastMidY}, 180 ${endCy - 15}, ${endPoint.cx} ${endPoint.cy}`,
+                    d: `M ${last.cx} ${last.cy} C ${cLastX} ${last.cy + 45}, 180 ${endCy - 20}, ${endPoint.cx} ${endPoint.cy}`,
                     isVisited: allStopsVisited,
                   });
                 } else {
                   segments.push({
-                    d: `M 180 30 C 180 30, 180 60, ${endPoint.cx} ${endPoint.cy}`,
+                    d: `M 180 24 C 180 40, 180 60, ${endPoint.cx} ${endPoint.cy}`,
                     isVisited: false,
                   });
                 }
@@ -1768,75 +1766,37 @@ Return JSON in this format:
                     className="absolute inset-0 w-full pointer-events-none"
                     style={{ height: `${svgHeight}px` }}
                     viewBox={`0 0 360 ${svgHeight}`}
+                    preserveAspectRatio="none"
                   >
-                    <defs>
-                      <linearGradient id="neonCyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#38BDF8" />
-                        <stop offset="50%" stopColor="#06B6D4" />
-                        <stop offset="100%" stopColor="#0284C7" />
-                      </linearGradient>
-                      <filter id="trailGlow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feDropShadow dx="0" dy="1" stdDeviation="3" floodColor="#38BDF8" floodOpacity="0.45" />
-                      </filter>
-                    </defs>
-
-                    {/* Segment rendering: Visited = Grey & White, Upcoming = Deep Slate & Electric Cyan */}
+                    {/* Pure Dotted Path: Visited = Grey & White, Upcoming = Electric Blue */}
                     {segments.map((seg, sIdx) => (
-                      <g key={sIdx}>
-                        {/* Outer Casing */}
-                        <path
-                          d={seg.d}
-                          fill="none"
-                          stroke={seg.isVisited ? '#9CA3AF' : '#090D16'}
-                          strokeWidth={seg.isVisited ? '8' : '9'}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        {/* Inner Line */}
-                        <path
-                          d={seg.d}
-                          fill="none"
-                          stroke={seg.isVisited ? '#FFFFFF' : 'url(#neonCyanGlow)'}
-                          strokeWidth={seg.isVisited ? '4' : '4.5'}
-                          strokeDasharray={seg.isVisited ? '7 6' : '9 5'}
-                          strokeLinecap="round"
-                          filter={seg.isVisited ? undefined : 'url(#trailGlow)'}
-                        />
-                      </g>
+                      <path
+                        key={sIdx}
+                        d={seg.d}
+                        fill="none"
+                        stroke={seg.isVisited ? '#9CA3AF' : '#0B3BF4'}
+                        strokeWidth="3.5"
+                        strokeDasharray="6 6"
+                        strokeLinecap="round"
+                      />
                     ))}
 
-                    {/* Start Waypoint Node (Top left at circular Start emblem) */}
-                    <circle cx="26" cy="24" r="5.5" fill="#10B981" stroke="#090D16" strokeWidth="2" />
+                    {/* Start Waypoint Node (at Start circle) */}
+                    <circle cx="28" cy="24" r="5" fill="#10B981" stroke="#000000" strokeWidth="2" />
 
-                    {/* Dynamic Waypoint Nodes: Visited = White circle with grey border; Unvisited = Cyan */}
-                    {stopNodes.map((node, i) => {
-                      const isReached = visitedStopIds.includes(stops[i]?.id || stops[i]?.name);
-                      return (
-                        <circle
-                          key={i}
-                          cx={node.cx}
-                          cy={node.cy}
-                          r="6"
-                          fill={isReached ? '#FFFFFF' : '#06B6D4'}
-                          stroke={isReached ? '#9CA3AF' : '#090D16'}
-                          strokeWidth="2.5"
-                        />
-                      );
-                    })}
-
-                    {/* END Waypoint Node placed exactly at the top center of the SAFE RETURN box */}
-                    <circle cx={endPoint.cx} cy={endPoint.cy} r="6" fill="#F59E0B" stroke="#090D16" strokeWidth="2" />
+                    {/* Safe Return Destination Node */}
+                    <circle cx={endPoint.cx} cy={endPoint.cy} r="5" fill="#F59E0B" stroke="#000000" strokeWidth="2" />
                   </svg>
                 );
               })()}
 
               {/* TOP HEADER: CIRCULAR START NODE & STATION HUB */}
-              <div className="relative z-10 flex items-center justify-between mb-4 px-0.5">
+              <div className="relative z-10 flex items-center justify-between mb-3 px-0.5">
                 <div className="flex items-center gap-2 min-w-0">
-                  {/* Clean Circular Start Node Matching Neo-Brutalist Theme */}
-                  <div className="w-12 h-12 rounded-full bg-[#10B981] border-[2.5px] border-black flex flex-col items-center justify-center shadow-[0_2.5px_0_0_#000000] text-white shrink-0">
-                    <span className="text-[9px] font-black uppercase tracking-wider leading-none">START</span>
-                    <span className="text-[10px] font-black leading-none mt-0.5 text-emerald-100">{currentPlan.startTime || '14:00'}</span>
+                  {/* Clean Circular Start Node */}
+                  <div className="w-11 h-11 rounded-full bg-[#10B981] border-[2.5px] border-black flex flex-col items-center justify-center shadow-[0_2px_0_0_#000000] text-white shrink-0">
+                    <span className="text-[8.5px] font-black uppercase tracking-wider leading-none">START</span>
+                    <span className="text-[9.5px] font-black leading-none mt-0.5 text-emerald-100">{currentPlan.startTime || '14:00'}</span>
                   </div>
 
                   <div className="bg-white border-[2px] border-black rounded-2xl px-3 py-1.5 text-xs font-black text-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5 truncate">
@@ -1856,8 +1816,8 @@ Return JSON in this format:
                 </button>
               </div>
 
-              {/* Dynamic Trail Steps with Live GPS Distance & Check-in */}
-              <div className="relative z-10 space-y-3">
+              {/* Dynamic Trail Steps: Sequential Cards with Red Push-Pins on the Dotted Path */}
+              <div className="relative z-10 space-y-4">
                 {(currentPlan.stops || []).length === 0 && (
                   <div className="py-4 px-3 text-center bg-white/70 border-[2px] border-dashed border-gray-400 rounded-2xl shadow-[0_2px_0_0_#000000]">
                     <p className="text-xs font-black text-black">Route cleared</p>
@@ -1879,10 +1839,10 @@ Return JSON in this format:
                   const isNearby = distMeters !== null && distMeters <= 250;
 
                   return (
-                    <div key={sIdx} className="space-y-1">
-                      {/* Transit pill & GPS Check-in badge above card */}
-                      <div className={`flex items-center gap-1.5 ${isLeft ? 'justify-start pl-10' : 'justify-end pr-10'}`}>
-                        <span className={`border-[1.5px] rounded-full px-2.5 py-0.5 text-[10px] font-black shadow-[0_1px_0_0_#000000] ${
+                    <div key={sIdx} className={`w-1/2 flex flex-col items-center ${isLeft ? '' : 'ml-auto'}`}>
+                      {/* Transit pill & GPS Check-in badge directly above the card */}
+                      <div className="flex items-center gap-1 mb-2">
+                        <span className={`border-[1.5px] rounded-full px-2 py-0.5 text-[9px] font-black shadow-[0_1px_0_0_#000000] ${
                           isReached
                             ? 'bg-[#F3F4F6] border-gray-300 text-gray-500'
                             : 'bg-[#FEF3C7] border-black text-black'
@@ -1890,11 +1850,10 @@ Return JSON in this format:
                           {stop.transitPill || '🚶 8m • Free'}
                         </span>
 
-                        {/* GPS Check-In Button / Reached Status */}
                         <button
                           type="button"
                           onClick={() => toggleCheckIn(stopId)}
-                          className={`text-[9px] font-black px-2 py-0.5 rounded-full border flex items-center gap-1 shadow-[0_1px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer ${
+                          className={`text-[8.5px] font-black px-1.5 py-0.5 rounded-full border flex items-center gap-1 shadow-[0_1px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer ${
                             isReached
                               ? 'bg-[#E5E7EB] text-gray-700 border-gray-400'
                               : isNearby
@@ -1905,176 +1864,86 @@ Return JSON in this format:
                         >
                           {isReached ? (
                             <>
-                              <Check size={9} strokeWidth={3} className="text-gray-700" />
+                              <Check size={8} strokeWidth={3} className="text-gray-700" />
                               <span>Visited</span>
                             </>
                           ) : isNearby ? (
                             <>
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping inline-block" />
-                              <span>At Spot ({distMeters}m)</span>
+                              <span>At Spot</span>
                             </>
                           ) : (
                             <>
-                              <Navigation size={8} />
-                              <span>{distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}km`} away` : 'Check In'}</span>
+                              <Navigation size={7} />
+                              <span>{distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}k`}` : 'Check In'}</span>
                             </>
                           )}
                         </button>
                       </div>
 
-                      {isLeft ? (
-                        <div className="flex items-center gap-2 pl-0.5">
-                          {/* Left Number Waypoint Circle */}
+                      {/* Compact Polaroid Snapshot Card: Pinned right onto the dotted path */}
+                      <div
+                        onClick={() => setSelectedSpot(stop.data || stop)}
+                        className={`relative rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition w-[155px] ${
+                          isLeft ? '-rotate-1 hover:rotate-0' : 'rotate-1 hover:rotate-0'
+                        } ${
+                          isReached
+                            ? 'bg-white/85 border-[1.8px] border-gray-400 opacity-80'
+                            : 'bg-white border-[2px] border-black'
+                        }`}
+                      >
+                        {/* 3D Push-Pin with Number Pinned Directly on the Dotted Trail Path */}
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
                           <div
-                            onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`w-6 h-6 rounded-full border-[2px] font-black text-[11px] flex items-center justify-center shrink-0 shadow-[0_1.5px_0_0_#000000] transition cursor-pointer hover:scale-105 active:scale-95 ${
+                            className={`w-5 h-5 rounded-full border-[1.5px] shadow-[0_2px_0_0_rgba(0,0,0,0.4)] flex items-center justify-center font-black text-[10px] ${
                               isReached
-                                ? 'bg-[#E5E7EB] text-gray-600 border-gray-400'
-                                : 'bg-[#0B3BF4] text-white border-black'
+                                ? 'bg-[#E5E7EB] text-gray-700 border-gray-500'
+                                : 'bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-black text-white ring-1 ring-red-300/60'
                             }`}
                           >
-                            {isReached ? <Check size={12} className="text-gray-700" strokeWidth={3} /> : sIdx + 1}
-                          </div>
-
-                          {/* Compact Polaroid Snapshot Card */}
-                          <div
-                            onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`relative rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[175px] w-full -rotate-1 hover:rotate-0 ${
-                              isReached
-                                ? 'bg-white/85 border-[1.8px] border-gray-400 opacity-80'
-                                : 'bg-white border-[2px] border-black'
-                            }`}
-                          >
-                            {/* Realistic 3D Red Push-Pin Pinned at Top Center */}
-                            <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
-                              <div
-                                className={`w-3.5 h-3.5 rounded-full border-[1.2px] shadow-[0_1.5px_0_0_rgba(0,0,0,0.35)] flex items-center justify-center ${
-                                  isReached
-                                    ? 'bg-gradient-to-br from-gray-300 to-gray-500 border-gray-600'
-                                    : 'bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-black ring-1 ring-red-300/60'
-                                }`}
-                              >
-                                <div className="w-1 h-1 rounded-full bg-white/70" />
-                              </div>
-                            </div>
-
-                            {/* Polaroid Photo Frame */}
-                            <div className="relative w-full h-20 rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
-                              <img
-                                src={stop.photo || currentCity.spots[0]?.photo}
-                                alt={stop.name}
-                                className={`w-full h-full object-cover ${
-                                  isReached ? 'grayscale contrast-110 opacity-75' : ''
-                                }`}
-                              />
-                              <div className="absolute top-1 right-1">
-                                {isReached ? (
-                                  <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[6.5px] px-1 py-0.2 rounded uppercase">
-                                    VISITED
-                                  </span>
-                                ) : (
-                                  <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] px-1 py-0.2 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
-                                    {stop.badge || stop.category || 'SPOT'}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Polaroid Bottom Chin */}
-                            <div className="px-0.5 space-y-0.5">
-                              <div className="font-black text-[10px] text-black truncate leading-tight">
-                                {stop.name}
-                              </div>
-                              <div className={`text-[9px] font-bold flex items-center justify-between ${isReached ? 'text-gray-500' : 'text-emerald-700'}`}>
-                                <span>{stop.costText || (stop.expense === 0 ? 'Free' : `₹${stop.expense}`) + ` • ${stop.spendTime || 30}m`}</span>
-                                <span className="flex items-center gap-0.5">{stop.rating || stop.data?.rating || 5} ⭐</span>
-                              </div>
-                              <div className="text-[8.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                                <span className="truncate max-w-[125px]">
-                                  📍 {distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}km`}` : (stop.distanceText || '0.8 km')}
-                                </span>
-                                <span className={isReached ? 'text-gray-400 font-black text-[9px]' : 'text-[#0B3BF4] font-black text-[9px]'}>↗</span>
-                              </div>
-                            </div>
+                            {isReached ? <Check size={11} strokeWidth={3} className="text-gray-700" /> : sIdx + 1}
                           </div>
                         </div>
-                      ) : (
-                        <div className="flex items-center justify-end gap-2 pr-0.5">
-                          {/* Compact Polaroid Snapshot Card (Right-Aligned) */}
-                          <div
-                            onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`relative rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[175px] w-full rotate-1 hover:rotate-0 ${
-                              isReached
-                                ? 'bg-white/85 border-[1.8px] border-gray-400 opacity-80'
-                                : 'bg-white border-[2px] border-black'
+
+                        {/* Polaroid Photo Frame */}
+                        <div className="relative w-full h-[72px] rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                          <img
+                            src={stop.photo || currentCity.spots[sIdx % currentCity.spots.length]?.photo}
+                            alt={stop.name}
+                            className={`w-full h-full object-cover ${
+                              isReached ? 'grayscale contrast-110 opacity-75' : ''
                             }`}
-                          >
-                            {/* Realistic 3D Red Push-Pin Pinned at Top Center */}
-                            <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
-                              <div
-                                className={`w-3.5 h-3.5 rounded-full border-[1.2px] shadow-[0_1.5px_0_0_rgba(0,0,0,0.35)] flex items-center justify-center ${
-                                  isReached
-                                    ? 'bg-gradient-to-br from-gray-300 to-gray-500 border-gray-600'
-                                    : 'bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-black ring-1 ring-red-300/60'
-                                }`}
-                              >
-                                <div className="w-1 h-1 rounded-full bg-white/70" />
-                              </div>
-                            </div>
-
-                            {/* Polaroid Photo Frame */}
-                            <div className="relative w-full h-20 rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
-                              <img
-                                src={stop.photo || currentCity.spots[1]?.photo}
-                                alt={stop.name}
-                                className={`w-full h-full object-cover ${
-                                  isReached ? 'grayscale contrast-110 opacity-75' : ''
-                                }`}
-                              />
-                              <div className="absolute top-1 right-1">
-                                {isReached ? (
-                                  <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[6.5px] px-1 py-0.2 rounded uppercase">
-                                    VISITED
-                                  </span>
-                                ) : (
-                                  <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] px-1 py-0.2 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
-                                    {stop.badge || stop.category || 'SPOT'}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Polaroid Bottom Chin */}
-                            <div className="px-0.5 space-y-0.5">
-                              <div className="font-black text-[10px] text-black truncate leading-tight">
-                                {stop.name}
-                              </div>
-                              <div className={`text-[9px] font-bold flex items-center justify-between ${isReached ? 'text-gray-500' : 'text-emerald-700'}`}>
-                                <span>{stop.costText || (stop.expense === 0 ? 'Free' : `₹${stop.expense}`) + ` • ${stop.spendTime || 30}m`}</span>
-                                <span className="flex items-center gap-0.5">{stop.rating || stop.data?.rating || 5} ⭐</span>
-                              </div>
-                              <div className="text-[8.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                                <span className="truncate max-w-[125px]">
-                                  📍 {distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}km`}` : (stop.distanceText || '0.8 km')}
-                                </span>
-                                <span className={isReached ? 'text-gray-400 font-black text-[9px]' : 'text-[#0B3BF4] font-black text-[9px]'}>↗</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Right Number Waypoint Circle */}
-                          <div
-                            onClick={() => setSelectedSpot(stop.data || stop)}
-                            className={`w-6 h-6 rounded-full border-[2px] font-black text-[11px] flex items-center justify-center shrink-0 shadow-[0_1.5px_0_0_#000000] transition cursor-pointer hover:scale-105 active:scale-95 ${
-                              isReached
-                                ? 'bg-[#E5E7EB] text-gray-600 border-gray-400'
-                                : 'bg-[#0B3BF4] text-white border-black'
-                            }`}
-                          >
-                            {isReached ? <Check size={12} className="text-gray-700" strokeWidth={3} /> : sIdx + 1}
+                          />
+                          <div className="absolute top-1 right-1">
+                            {isReached ? (
+                              <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[6.5px] px-1 py-0.2 rounded uppercase">
+                                VISITED
+                              </span>
+                            ) : (
+                              <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] px-1 py-0.2 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
+                                {stop.badge || stop.category || 'SPOT'}
+                              </span>
+                            )}
                           </div>
                         </div>
-                      )}
+
+                        {/* Polaroid Bottom Chin */}
+                        <div className="px-0.5 space-y-0.5">
+                          <div className="font-black text-[10px] text-black truncate leading-tight">
+                            {stop.name}
+                          </div>
+                          <div className={`text-[8.5px] font-bold flex items-center justify-between ${isReached ? 'text-gray-500' : 'text-emerald-700'}`}>
+                            <span>{stop.costText || (stop.expense === 0 ? 'Free' : `₹${stop.expense}`) + ` • ${stop.spendTime || 30}m`}</span>
+                            <span className="flex items-center gap-0.5">{stop.rating || stop.data?.rating || 5} ⭐</span>
+                          </div>
+                          <div className="text-[8px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                            <span className="truncate max-w-[110px]">
+                              📍 {distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}km`}` : (stop.distanceText || '0.8 km')}
+                            </span>
+                            <span className={isReached ? 'text-gray-400 font-black text-[8.5px]' : 'text-[#0B3BF4] font-black text-[8.5px]'}>↗</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   );
                 })}

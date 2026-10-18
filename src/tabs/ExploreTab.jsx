@@ -334,45 +334,98 @@ export default function ExploreTab({ location, setLocation }) {
           userLocation={location}
         />
       ) : viewMode === 'cartoon' ? (
-        <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[640px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
-          {/* Stylized River / Road Background Canvas SVG with dynamic height */}
+        <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[520px] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
+          {/* Dynamic Trail SVG Line: Sequential dotted line connecting Start -> Pin 1 -> Pin 2 -> Pin 3 -> End */}
           {(() => {
-            const svgH = Math.max(520, filteredSpots.length * 110 + 90);
+            const spotsCount = filteredSpots.length;
+            const stepGap = 160;
+            const stopNodes = filteredSpots.map((_, sIdx) => {
+              const isLeft = sIdx % 2 === 0;
+              return {
+                cx: isLeft ? 90 : 270,
+                cy: 82 + sIdx * stepGap,
+                idx: sIdx,
+              };
+            });
+
+            const endCy = spotsCount === 0 ? 80 : 82 + spotsCount * stepGap - 10;
+            const endPoint = { cx: 180, cy: endCy };
+            const svgHeight = endCy + 60;
+
+            const segments = [];
+            if (stopNodes.length > 0) {
+              // Segment 0: Circular Start -> Pin 1
+              segments.push(`M 28 24 C 28 55, 90 40, ${stopNodes[0].cx} ${stopNodes[0].cy}`);
+
+              // Sequential Segments: Pin i -> Pin i+1 (1 connects to 2, 2 connects to 3, etc.)
+              for (let i = 0; i < stopNodes.length - 1; i++) {
+                const curr = stopNodes[i];
+                const next = stopNodes[i + 1];
+                const c1x = curr.cx === 90 ? 150 : 210;
+                const c2x = next.cx === 270 ? 210 : 150;
+                segments.push(
+                  `M ${curr.cx} ${curr.cy} C ${c1x} ${curr.cy + 55}, ${c2x} ${next.cy - 55}, ${next.cx} ${next.cy}`
+                );
+              }
+
+              // Last Stop Pin -> End Terminal Box
+              const last = stopNodes[stopNodes.length - 1];
+              const cLastX = last.cx === 90 ? 120 : 240;
+              segments.push(
+                `M ${last.cx} ${last.cy} C ${cLastX} ${last.cy + 45}, 180 ${endCy - 20}, ${endPoint.cx} ${endPoint.cy}`
+              );
+            } else {
+              segments.push(`M 180 24 C 180 40, 180 60, ${endPoint.cx} ${endPoint.cy}`);
+            }
+
             return (
               <svg
-                className="absolute inset-0 w-full pointer-events-none opacity-60"
-                style={{ height: `${svgH}px` }}
-                viewBox={`0 0 360 ${svgH}`}
+                className="absolute inset-0 w-full pointer-events-none"
+                style={{ height: `${svgHeight}px` }}
+                viewBox={`0 0 360 ${svgHeight}`}
+                preserveAspectRatio="none"
               >
-                <path
-                  d={`M 60 0 C 180 80, 240 180, 140 280 S 260 400, 180 500 S 240 680, 150 ${svgH}`}
-                  fill="none"
-                  stroke="#BAE6FD"
-                  strokeWidth="28"
-                  strokeLinecap="round"
-                />
-                <path
-                  d={`M 60 0 C 180 80, 240 180, 140 280 S 260 400, 180 500 S 240 680, 150 ${svgH}`}
-                  fill="none"
-                  stroke="#38BDF8"
-                  strokeWidth="4"
-                  strokeDasharray="6 6"
-                  strokeLinecap="round"
-                />
+                {/* Pure Dotted Path */}
+                {segments.map((d, sIdx) => (
+                  <path
+                    key={sIdx}
+                    d={d}
+                    fill="none"
+                    stroke="#0B3BF4"
+                    strokeWidth="3.5"
+                    strokeDasharray="6 6"
+                    strokeLinecap="round"
+                  />
+                ))}
+
+                {/* Start Waypoint Node (at Start circle) */}
+                <circle cx="28" cy="24" r="5" fill="#10B981" stroke="#000000" strokeWidth="2" />
+
+                {/* End Destination Node */}
+                <circle cx={endPoint.cx} cy={endPoint.cy} r="5" fill="#F59E0B" stroke="#000000" strokeWidth="2" />
               </svg>
             );
           })()}
 
-          {/* Floating Top Control: Live Explore */}
-          <div className="relative z-10 flex items-center justify-between mb-2">
-            <div />
+          {/* Floating Top Control: Start Emblem & Live Explore */}
+          <div className="relative z-10 flex items-center justify-between mb-3 px-0.5">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-11 h-11 rounded-full bg-[#10B981] border-[2.5px] border-black flex flex-col items-center justify-center shadow-[0_2px_0_0_#000000] text-white shrink-0">
+                <span className="text-[8.5px] font-black uppercase tracking-wider leading-none">START</span>
+                <span className="text-[9.5px] font-black leading-none mt-0.5 text-emerald-100">HUB</span>
+              </div>
+              <div className="bg-white border-[2px] border-black rounded-2xl px-3 py-1.5 text-xs font-black text-black shadow-[0_2px_0_0_#000000] truncate">
+                <span>📍 {selectedCityFilter} Trail</span>
+              </div>
+            </div>
+
             <button
               onClick={() => setSelectedSpot(filteredSpots[0] || allSpots[0])}
-              className="bg-white border-[2px] border-black rounded-full px-3 py-1 flex items-center gap-1.5 text-xs font-black shadow-[0_2px_0_0_#000000] hover:bg-emerald-50 active:translate-y-0.5"
+              className="bg-white border-[2px] border-black rounded-full px-2.5 py-1 flex items-center gap-1.5 text-[10px] font-black shadow-[0_2px_0_0_#000000] hover:bg-emerald-50 active:translate-y-0.5 shrink-0"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-ping" />
               <span>Live Explore</span>
-              <Navigation2 size={12} className="text-[#0B3BF4] fill-[#0B3BF4]" />
+              <Navigation2 size={11} className="text-[#0B3BF4] fill-[#0B3BF4]" />
             </button>
           </div>
 
@@ -405,23 +458,31 @@ export default function ExploreTab({ location, setLocation }) {
                 return (
                   <div
                     key={spot.id || spot.name}
-                    className={`flex ${isLeft ? 'justify-start pl-2' : 'justify-end pr-2'}`}
+                    className={`w-1/2 flex flex-col items-center ${isLeft ? '' : 'ml-auto'}`}
                   >
+                    {/* Category pill directly above card */}
+                    <div className="flex items-center gap-1 mb-2">
+                      <span className="border-[1.5px] border-black rounded-full px-2 py-0.5 text-[9px] font-black bg-[#FEF3C7] text-black shadow-[0_1px_0_0_#000000]">
+                        {spot.category || 'Spot'}
+                      </span>
+                    </div>
+
+                    {/* Compact Polaroid Snapshot Card: Pinned right onto the dotted path */}
                     <div
                       onClick={() => setSelectedSpot(spot)}
-                      className={`relative bg-white border-[2px] border-black rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[175px] w-full ${
+                      className={`relative bg-white border-[2px] border-black rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition w-[155px] ${
                         isLeft ? '-rotate-1 hover:rotate-0' : 'rotate-1 hover:rotate-0'
                       } ${isSelected ? 'ring-2 ring-[#0B3BF4]' : ''}`}
                     >
-                      {/* Realistic 3D Red Push-Pin Pinned at Top Center */}
-                      <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
-                        <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-[1.2px] border-black shadow-[0_1.5px_0_0_rgba(0,0,0,0.35)] ring-1 ring-red-300/60 flex items-center justify-center">
-                          <div className="w-1 h-1 rounded-full bg-white/70" />
+                      {/* 3D Push-Pin with Number Pinned Directly on the Dotted Trail Path */}
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
+                        <div className="w-5 h-5 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-[1.5px] border-black shadow-[0_2px_0_0_rgba(0,0,0,0.4)] ring-1 ring-red-300/60 flex items-center justify-center font-black text-[10px] text-white">
+                          {idx + 1}
                         </div>
                       </div>
 
                       {/* Photo Frame */}
-                      <div className="relative w-full h-20 rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                      <div className="relative w-full h-[72px] rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                         <img
                           src={spot.photo || spot.photos?.[0]}
                           alt={spot.name}
@@ -441,15 +502,15 @@ export default function ExploreTab({ location, setLocation }) {
                         <div className="font-black text-[10px] text-black truncate leading-tight">
                           {spot.name}
                         </div>
-                        <div className="text-[9px] font-bold text-emerald-700 flex items-center justify-between">
+                        <div className="text-[8.5px] font-bold text-emerald-700 flex items-center justify-between">
                           <span>{spot.expense === 0 ? 'Free' : `₹${spot.expense}`}</span>
                           <span className="flex items-center gap-0.5">{spot.rating || 4.8} ⭐</span>
                         </div>
-                        <div className="text-[8.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                          <span className="truncate max-w-[125px]">
+                        <div className="text-[8px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                          <span className="truncate max-w-[110px]">
                             📍 {spot.distanceKm ? `${spot.distanceKm} km` : spot.transitText || 'Near station'}
                           </span>
-                          <span className="text-[#0B3BF4] font-black text-[9px]">↗</span>
+                          <span className="text-[#0B3BF4] font-black text-[8.5px]">↗</span>
                         </div>
                       </div>
                     </div>
@@ -459,11 +520,25 @@ export default function ExploreTab({ location, setLocation }) {
             </div>
           )}
 
-          {/* Floating Bottom Control: Nearby Count */}
-          <div className="relative z-10 flex justify-end mt-2">
-            <div className="bg-white border-[2px] border-black rounded-full px-3 py-1 flex items-center gap-1.5 text-xs font-black shadow-[0_2px_0_0_#000000]">
-              <span>🎯</span>
-              <span>{filteredSpots.length} spots nearby</span>
+          {/* Bottom Safe Return / End Terminal Banner */}
+          <div className="relative z-10 mt-4 mb-1">
+            <div className="bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-2.5 px-3 flex items-center justify-between shadow-[0_3px_0_0_#000000]">
+              <div className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-black text-amber-400 font-black text-xs flex items-center justify-center shrink-0">
+                  🏁
+                </span>
+                <div className="leading-tight text-left">
+                  <div className="text-[9px] font-black uppercase tracking-wider text-black/80">
+                    END OF TRAIL
+                  </div>
+                  <div className="font-black text-[11px] text-black">
+                    {filteredSpots.length} Spots in {selectedCityFilter}
+                  </div>
+                </div>
+              </div>
+              <div className="bg-black text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shrink-0">
+                Safe Return
+              </div>
             </div>
           </div>
         </div>
