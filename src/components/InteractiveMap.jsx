@@ -73,12 +73,11 @@ export default function InteractiveMap({
     return () => window.removeEventListener('avada_map_style_changed', handleStyleChange);
   }, []);
 
-  // Smooth map loading overlay
+  // Clean map loading indicator only once on initial mount
   useEffect(() => {
-    setMapLoading(true);
-    const t = setTimeout(() => setMapLoading(false), 800);
+    const t = setTimeout(() => setMapLoading(false), 300);
     return () => clearTimeout(t);
-  }, [center?.[0], center?.[1], spots.length]);
+  }, []);
 
   // Initialize Map
   useEffect(() => {
@@ -90,11 +89,16 @@ export default function InteractiveMap({
         zoom: zoom,
         zoomControl: false,
         scrollWheelZoom: true,
+        preferCanvas: true,
       });
 
-      // Track zoom level dynamically
-      map.on('zoomend', () => {
-        setCurrentZoom(map.getZoom());
+      // Track zoom level smoothly with debounce
+      let zoomTimer = null;
+      map.on('zoomend moveend', () => {
+        if (zoomTimer) clearTimeout(zoomTimer);
+        zoomTimer = setTimeout(() => {
+          setCurrentZoom(map.getZoom());
+        }, 120);
       });
 
       // Avada OpenStreetMap Tile Layer (100% Free, Zero API Key, Zero Watermarks)
@@ -177,16 +181,20 @@ export default function InteractiveMap({
       markersRef.current.push(userMarker);
     }
 
-    const prevSpotsKey = spots.map((s) => s.id || s.name).join(',');
-    const shouldFitBounds = prevSpotsKeyRef.current !== prevSpotsKey;
-    prevSpotsKeyRef.current = prevSpotsKey;
+    const viewBounds = map.getBounds ? map.getBounds().pad(0.35) : null;
 
-    // Spot Markers with Dynamic Multi-Level Zoom Scaling
+    // Spot Markers with Dynamic Multi-Level Zoom Scaling & Viewport Culling
     spots.forEach((spot, idx) => {
       if (!spot.lat || !spot.lng) return;
       routeLatLngs.push([spot.lat, spot.lng]);
 
       const isSelected = selectedSpot && (selectedSpot.id === spot.id || selectedSpot.name === spot.name);
+
+      // Viewport culling: when zoomed in, only render spots within viewport to guarantee buttery smooth 60fps
+      if (currentZoom >= 9.5 && !showRoute && viewBounds && !isSelected) {
+        if (!viewBounds.contains([spot.lat, spot.lng])) return;
+      }
+
       const spotPhoto = getRealSpotPhoto(spot);
       const priceText = spot.expense === 0 ? 'FREE' : (spot.expense ? `₹${spot.expense}` : (spot.fare ? `₹${spot.fare}` : 'FREE'));
       const cat = (spot.category || '').toLowerCase();
@@ -545,13 +553,6 @@ export default function InteractiveMap({
         </div>
       )}
 
-      {/* Floating Zoom Indicator in Explore mode when zoomed out */}
-      {currentZoom < 8.5 && !showRoute && (
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[400] bg-white/95 backdrop-blur border-[2px] border-black rounded-full px-3.5 py-1 text-[11px] font-black text-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5 pointer-events-none select-none animate-bounce">
-          <span>🔍</span>
-          <span>Zoom in to view local photo cards</span>
-        </div>
-      )}
 
       {/* Cartoon Compass Rose Badge */}
       <div className="absolute top-3 right-12 z-[400] bg-white border-[2px] border-black rounded-full px-2 py-0.5 text-[9px] font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1 select-none pointer-events-none">

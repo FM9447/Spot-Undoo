@@ -805,7 +805,21 @@ app.post('/api/ai/plan', async (req, res) => {
         if (groqRes.ok) {
           const data = await groqRes.json();
           const rawContent = data.choices?.[0]?.message?.content || '{}';
-          return res.json(JSON.parse(rawContent));
+          const parsed = JSON.parse(rawContent);
+          // Strict server-side stop deduplication: never allow repeat visits in any plan
+          if (Array.isArray(parsed?.plans)) {
+            parsed.plans = parsed.plans.map((p) => {
+              const seen = new Set();
+              const uniqueStops = (p.stops || []).filter((s) => {
+                const k = (s.name || s.location || '').toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
+                if (!k || seen.has(k)) return false;
+                seen.add(k);
+                return true;
+              });
+              return { ...p, stops: uniqueStops };
+            });
+          }
+          return res.json(parsed);
         }
         console.warn('Groq failed, attempting Gemini Flash fallback...');
       } catch (groqErr) {
@@ -816,9 +830,22 @@ app.post('/api/ai/plan', async (req, res) => {
     // 2. Fallback to Google Gemini Flash
     if (process.env.GEMINI_API_KEY) {
       try {
-        const geminiPrompt = `${prompt}\n\nIMPORTANT: Return ONLY valid JSON with key "plans".`;
+        const geminiPrompt = `${prompt}\n\nIMPORTANT: Return ONLY valid JSON with key "plans". Do not repeat any stop.`;
         const rawText = await callGeminiFlash(geminiPrompt, 'application/json');
-        return res.json(JSON.parse(rawText));
+        const parsed = JSON.parse(rawText);
+        if (Array.isArray(parsed?.plans)) {
+          parsed.plans = parsed.plans.map((p) => {
+            const seen = new Set();
+            const uniqueStops = (p.stops || []).filter((s) => {
+              const k = (s.name || s.location || '').toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
+              if (!k || seen.has(k)) return false;
+              seen.add(k);
+              return true;
+            });
+            return { ...p, stops: uniqueStops };
+          });
+        }
+        return res.json(parsed);
       } catch (gemErr) {
         console.warn('Gemini Flash planning fallback failed:', gemErr.message);
       }

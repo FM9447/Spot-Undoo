@@ -1,4 +1,6 @@
-// Auto-generated full Kerala state database: 72 Cities across all 14 districts (403 curated spots)
+// Kerala Major & Regional Cities - Neo-Brutalist Discovery Database
+// 70+ Cities & Towns with Genuine Geocoordinates and Kerala Regional Spots
+
 export const KERALA_CITIES = {
   "Shoranur": {
     "name": "Shoranur",
@@ -27,11 +29,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Serene stepped ghat overlooking Bharathapuzha. Perfect quiet walk before train.",
         "tags": [
@@ -55,11 +55,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 10m • ₹30",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-          "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Quiet riverside shade with hot pazhampori and chai.",
         "tags": [
@@ -83,11 +81,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 6m • Free",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Medu_Vada.JPG/960px-Medu_Vada.JPG",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Medu_Vada.JPG/960px-Medu_Vada.JPG"
         ],
         "review": "Golden uzhunnu vada hot off the oil pan with coconut chutney.",
         "tags": [
@@ -111,11 +107,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 8m • ₹25",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
-          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "High-speed broadband, esports gaming setups, chilled AC.",
         "tags": [
@@ -139,11 +133,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 18m • ₹65",
         "returnText": "Back to Shoranur Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "Magnificent traditional aristocratic illam where Malayalam movies are shot.",
         "tags": [
@@ -181,11 +173,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 15m • ₹80",
         "returnText": "Back to Pattambi Station",
         "returnCost": 80,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Madhusoodanan_Nair.png/960px-Madhusoodanan_Nair.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Naranathu_Bhranthan_Rayiranellur_Hill.jpg/960px-Naranathu_Bhranthan_Rayiranellur_Hill.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Madhusoodanan_Nair.png/960px-Madhusoodanan_Nair.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Naranathu_Bhranthan_Rayiranellur_Hill.jpg/960px-Naranathu_Bhranthan_Rayiranellur_Hill.jpg"
         ],
         "review": "Legendary hilltop of folklore hero Naranath Bhranthan with sweeping views of the Bharathapuzha valley.",
         "tags": [
@@ -210,11 +200,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Pattambi Station",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
-          "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Quiet sandy riverbank stretch with gentle river breeze and stunning sunset hues over Bharathapuzha.",
         "tags": [
@@ -239,10 +227,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 10m • Free",
         "returnText": "Back to Pattambi Station",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Pattambi_Palam.jpg/960px-Pattambi_Palam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Pattambi_Nercha_Festival.jpg/960px-Pattambi_Nercha_Festival.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Pattambi_Palam.jpg/960px-Pattambi_Palam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Pattambi_Nercha_Festival.jpg/960px-Pattambi_Nercha_Festival.jpg"
         ],
         "review": "Historic site of the renowned annual Pattambi Nercha festival featuring rich cultural traditions and elephant pageants.",
         "tags": [
@@ -266,10 +253,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 4m • Free",
         "returnText": "Back to Pattambi Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Masala_Chai.JPG/960px-Masala_Chai.JPG",
         "photos": [
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Masala_Chai.JPG/960px-Masala_Chai.JPG"
         ],
         "review": "Piping hot kattan chai, fresh crispy banana fritters (pazham pori), and authentic Malabar snacks right near the river bridge.",
         "tags": [
@@ -293,9 +279,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 10m • ₹60",
         "returnText": "Back to Pattambi Station",
         "returnCost": 60,
-        "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "Ancient laterite-stone shrine renowned for intricate wood sculptures and tranquil courtyards.",
         "tags": [
@@ -333,11 +319,9 @@ export const KERALA_CITIES = {
         "transitText": "⛴️ 20m • ₹20 (Water Metro)",
         "returnText": "Back to Ernakulam South Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Kochi%2C_Fishing_nets_at_sunset%2C_Kerala%2C_India.jpg/960px-Kochi%2C_Fishing_nets_at_sunset%2C_Kerala%2C_India.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=800&q=80",
-          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
-          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Kochi%2C_Fishing_nets_at_sunset%2C_Kerala%2C_India.jpg/960px-Kochi%2C_Fishing_nets_at_sunset%2C_Kerala%2C_India.jpg"
         ],
         "review": "Aromatic back-alleys with antique spice warehouses, no crowds.",
         "tags": [
@@ -361,11 +345,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹40",
         "returnText": "Back to Ernakulam South Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
-          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Iconic tender Malabar mutton biryani with ghee aroma.",
         "tags": [
@@ -389,11 +371,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 7m • Free",
         "returnText": "Back to Ernakulam South Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Kulukki_Sarbath_Kerala.jpg/960px-Kulukki_Sarbath_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Kulukki_Sarbath_Kerala.jpg/960px-Kulukki_Sarbath_Kerala.jpg"
         ],
         "review": "Spicy green-chilli kulukki sarbath and hot banana chips.",
         "tags": [
@@ -417,11 +397,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 10m • ₹30",
         "returnText": "Back to Ernakulam South Pl. 1",
         "returnCost": 30,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/d/db/Kochi_Water_Metro_Logo.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Kochi_Water_Metro.jpg/960px-Kochi_Water_Metro.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/d/db/Kochi_Water_Metro_Logo.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-          "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Kochi_Water_Metro.jpg/960px-Kochi_Water_Metro.jpg"
         ],
         "review": "Ultra-modern electric boat cruise overlooking Vembanad backwaters.",
         "tags": [
@@ -445,9 +423,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Kochi Station",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Mangalavanam.JPG/330px-Mangalavanam.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Mangalavanam.JPG/960px-Mangalavanam.JPG",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Mangalavanam.JPG/330px-Mangalavanam.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Mangalavanam.JPG/960px-Mangalavanam.JPG"
         ],
         "review": "Tidal mangrove lake right behind High Court. Roosting hub for migratory water birds.",
         "tags": [
@@ -471,9 +449,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kochi Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/DAM_INDIA.jpg/330px-DAM_INDIA.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/DAM_INDIA.jpg/330px-DAM_INDIA.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Mythological natural stone dam on Periyar river surrounded by virgin wilderness.",
         "tags": [
@@ -497,9 +475,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kochi Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Hill_Palace_by_GV-1.JPG/330px-Hill_Palace_by_GV-1.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Hill_Palace_by_GV-1.JPG/330px-Hill_Palace_by_GV-1.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Largest archaeological museum in Kerala. Former imperial palace of Kochi Maharajas.",
         "tags": [
@@ -537,11 +515,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 7m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Mananachira_Pond_Gardens%2C_Kozhikode2.jpg/960px-Mananachira_Pond_Gardens%2C_Kozhikode2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Mananchira_Square_Calicut.jpg/960px-Mananchira_Square_Calicut.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Mananachira_Pond_Gardens%2C_Kozhikode2.jpg/960px-Mananachira_Pond_Gardens%2C_Kozhikode2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Mananchira_Square_Calicut.jpg/960px-Mananchira_Square_Calicut.jpg"
         ],
         "review": "Clear water reservoir enclosed by traditional red-tile gates.",
         "tags": [
@@ -565,11 +541,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
-          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Legendary Calicut dum biryani with melt-in-mouth chicken.",
         "tags": [
@@ -593,11 +567,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 5m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Kozhikode_Halwa_Sweet.jpg/960px-Kozhikode_Halwa_Sweet.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
-          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80",
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Kozhikode_Halwa_Sweet.jpg/960px-Kozhikode_Halwa_Sweet.jpg"
         ],
         "review": "Pedestrian heritage street with warm black halwa and banana chips.",
         "tags": [
@@ -621,11 +593,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 6m • ₹25",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Kozhikode_Beach_Coastline.jpg/960px-Kozhikode_Beach_Coastline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Kozhikode_Beach_sunset.jpg/960px-Kozhikode_Beach_sunset.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Kozhikode_Beach_Coastline.jpg/960px-Kozhikode_Beach_Coastline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Kozhikode_Beach_sunset.jpg/960px-Kozhikode_Beach_sunset.jpg"
         ],
         "review": "Century-old collapsed shipping pier jutting into Arabian sea waves.",
         "tags": [
@@ -649,11 +619,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 22m • ₹70",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 40,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-          "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg"
         ],
         "review": "Quiet rocky beach where Vasco da Gama landed, serene Arabian sea breeze.",
         "tags": [
@@ -677,11 +645,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 18m • ₹60",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 35,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Beypore_Beach_-_panoramio.jpg/960px-Beypore_Beach_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Beypore_Beach_-_panoramio.jpg/960px-Beypore_Beach_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80",
-          "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Centuries-old wooden shipbuilding yard (Uru) and scenic river walkway into the sea.",
         "tags": [
@@ -705,11 +671,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 5m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg"
         ],
         "review": "Authentic Kozhikode beef biryani and piping hot sulaimani chai right near the station.",
         "tags": [
@@ -733,11 +697,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 6m • Free",
         "returnText": "Back to Kozhikode Main Pl. 1",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Kozhikode_beach_kites.jpg/960px-Kozhikode_beach_kites.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Kozhikode_beach_kites.jpg/960px-Kozhikode_beach_kites.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
-          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Air conditioned esports lounge with RTX gaming rigs and fiber optic connectivity.",
         "tags": [
@@ -760,9 +722,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Calicut Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Tucked inside Western Ghats with misty water reservoirs and wild elephant trails.",
         "tags": [
@@ -786,9 +748,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Calicut Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Thusharagiri_Waterfalls_-_%E0%B4%A4%E0%B5%81%E0%B4%B7%E0%B4%BE%E0%B4%B0%E0%B4%97%E0%B4%BF%E0%B4%B0%E0%B4%BF_%E0%B4%B5%E0%B5%86%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BE%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%82_09.jpg/330px-Thusharagiri_Waterfalls_-_%E0%B4%A4%E0%B5%81%E0%B4%B7%E0%B4%BE%E0%B4%B0%E0%B4%97%E0%B4%BF%E0%B4%B0%E0%B4%BF_%E0%B4%B5%E0%B5%86%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BE%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%82_09.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Thusharagiri_Waterfalls_-_%E0%B4%A4%E0%B5%81%E0%B4%B7%E0%B4%BE%E0%B4%B0%E0%B4%97%E0%B4%BF%E0%B4%B0%E0%B4%BF_%E0%B4%B5%E0%B5%86%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BE%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%82_09.jpg/330px-Thusharagiri_Waterfalls_-_%E0%B4%A4%E0%B5%81%E0%B4%B7%E0%B4%BE%E0%B4%B0%E0%B4%97%E0%B4%BF%E0%B4%B0%E0%B4%BF_%E0%B4%B5%E0%B5%86%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BE%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%82_09.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "Snowy spray waterfall originating from Chalipuzha river. Excellent trekking spot.",
         "tags": [
@@ -812,9 +774,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Calicut Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg"
         ],
         "review": "Known as the Gavi of Malabar. Jaw-dropping valley vistas over Peruvannamuzhi reservoir.",
         "tags": [
@@ -852,11 +814,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Trivandrum Central Pl. 1",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/7/71/0507-KuthiraMalika-Dinakarr.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/7/71/0507-KuthiraMalika-Dinakarr.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "122 carved wooden horses, teakwood silence, historic temple vibe.",
         "tags": [
@@ -880,11 +840,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 6m • Free",
         "returnText": "Back to Trivandrum Central Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Kerala_Banana_Chips_Nendran.jpg/960px-Kerala_Banana_Chips_Nendran.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Kerala_Banana_Chips_Nendran.jpg/960px-Kerala_Banana_Chips_Nendran.jpg"
         ],
         "review": "Fresh hot Trivandrum yellow Boli with sweet condensed milk.",
         "tags": [
@@ -908,11 +866,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 10m • ₹30",
         "returnText": "Back to Trivandrum Central Pl. 1",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Napier_Museum_TVM.jpg/960px-Napier_Museum_TVM.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Napier_Museum_Trivandrum.jpg/960px-Napier_Museum_Trivandrum.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Napier_Museum_TVM.jpg/960px-Napier_Museum_TVM.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
-          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Napier_Museum_Trivandrum.jpg/960px-Napier_Museum_Trivandrum.jpg"
         ],
         "review": "Indo-Saracenic masterpiece nestled under massive rain trees.",
         "tags": [
@@ -936,11 +892,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 8m • ₹25",
         "returnText": "Back to Trivandrum Central Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Masala_Chai.JPG/960px-Masala_Chai.JPG",
         "photos": [
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Masala_Chai.JPG/960px-Masala_Chai.JPG"
         ],
         "review": "18th-century restored Dutch manor for quiet filter coffee.",
         "tags": [
@@ -964,9 +918,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Trivandrum Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ponmudi_Hill_Station_Kerala.jpg/960px-Ponmudi_Hill_Station_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ponmudi_Hill_Station_Kerala.jpg/960px-Ponmudi_Hill_Station_Kerala.jpg"
         ],
         "review": "Chilly hill station 1100m high with 22 hairpin bends, mountain streams, and rolling mist.",
         "tags": [
@@ -990,9 +944,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Trivandrum Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Poovar_Kerala.jpg/330px-Poovar_Kerala.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Poovar_Kerala.jpg/330px-Poovar_Kerala.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Unique spot where lake, river, sea, and beach meet. Accessible only by motorized country boat.",
         "tags": [
@@ -1016,9 +970,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Trivandrum Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Gravity dam, crocodile breeding center, and peaceful reservoir lake cruises.",
         "tags": [
@@ -1042,9 +996,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Trivandrum Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg"
         ],
         "review": "Iconic red-and-white spiral lighthouse overlooking crescent beaches.",
         "tags": [
@@ -1068,9 +1022,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Trivandrum Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "Famous Matsyamatsya 35m sculpture by Kanayi Kunhiraman and airport runway viewing spot.",
         "tags": [
@@ -1108,11 +1062,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹40",
         "returnText": "Back to Palakkad Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Palakkad_Tipu_Fort.jpg/960px-Palakkad_Tipu_Fort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Palakkad_Tipu_Fort.jpg/960px-Palakkad_Tipu_Fort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "Granite fortress surrounded by a tranquil water moat.",
         "tags": [
@@ -1136,11 +1088,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 8m • ₹25",
         "returnText": "Back to Palakkad Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
-          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80",
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Ancient Brahmin settlement with row houses and historic chariot grounds.",
         "tags": [
@@ -1164,11 +1114,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 3m • Free",
         "returnText": "Back to Palakkad Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Retro spiral tables serving filter coffee and beetroot cutlets.",
         "tags": [
@@ -1192,9 +1140,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Palakkad Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg"
         ],
         "review": "One of the last undisturbed tracts of South Western Ghats mountain rain forests in India.",
         "tags": [
@@ -1218,9 +1166,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Palakkad Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Nelliyampathy_Hills_Palakkad.jpg/960px-Nelliyampathy_Hills_Palakkad.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Nelliyampathy_Hills_Palakkad.jpg/960px-Nelliyampathy_Hills_Palakkad.jpg"
         ],
         "review": "Famous for orange farms, bio-tea estates, and the 1000m sheer drop at Seetharkundu viewpoint.",
         "tags": [
@@ -1244,9 +1192,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Palakkad Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Malampuzha_Dam_Palakkad.jpg/960px-Malampuzha_Dam_Palakkad.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Malampuzha_Dam_Palakkad.jpg/960px-Malampuzha_Dam_Palakkad.jpg"
         ],
         "review": "Sculpted rock gardens by Nek Chand, freshwater aquarium, and passenger aerial ropeway.",
         "tags": [
@@ -1270,9 +1218,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Palakkad Station",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Malampuzha_Dam_Navas_10.jpg/330px-Malampuzha_Dam_Navas_10.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/LAN_party_gaming_rigs.jpg/960px-LAN_party_gaming_rigs.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Malampuzha_Dam_Navas_10.jpg/330px-Malampuzha_Dam_Navas_10.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/LAN_party_gaming_rigs.jpg/960px-LAN_party_gaming_rigs.jpg"
         ],
         "review": "Lush green lake banks where the first monsoon clouds hit mainland India.",
         "tags": [
@@ -1310,11 +1258,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thrissur Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Medu_Vada.JPG/960px-Medu_Vada.JPG",
         "photos": [
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Medu_Vada.JPG/960px-Medu_Vada.JPG"
         ],
         "review": "Massive 9-acre hilltop teakwood grove in center of Thrissur Round.",
         "tags": [
@@ -1338,11 +1284,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 7m • ₹25",
         "returnText": "Back to Thrissur Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80",
-          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Kochi king's Dutch-Kerala style palace with sprawling heritage lawns.",
         "tags": [
@@ -1366,11 +1310,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 6m • Free",
         "returnText": "Back to Thrissur Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Paper-thin crispy ghee roast dosa and strong filter coffee.",
         "tags": [
@@ -1394,9 +1336,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Thrissur Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Majestic 80-foot wide waterfall on Chalakudy river. The most photographed falls in Kerala.",
         "tags": [
@@ -1420,9 +1362,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Thrissur Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Fast flowing rocky rapids just 5 km ahead of Athirappilly with herbal medicinal gardens.",
         "tags": [
@@ -1446,9 +1388,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Thrissur Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Known as the oxygen jar of Thrissur. Sunset panoramic views of Thrissur town and Kole wetlands.",
         "tags": [
@@ -1472,9 +1414,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Thrissur Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "Well-maintained coastal beach with children's park and beachside seafood stalls.",
         "tags": [
@@ -1498,9 +1440,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Thrissur Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "Hidden reservoir surrounded by Western Ghats tropical rainforests and bamboo rafting.",
         "tags": [
@@ -1538,11 +1480,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 9m • Free",
         "returnText": "Back to Alappuzha Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80",
-          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg"
         ],
         "review": "Atmospheric 160-year-old rusted iron pier into crashing waves.",
         "tags": [
@@ -1566,11 +1506,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 10m • ₹35",
         "returnText": "Back to Alappuzha Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
-          "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80",
-          "https://images.unsplash.com/photo-1437482078695-dc396327121b?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Home of Nehru Trophy Snake Boat Race. Shaded coconut palm banks.",
         "tags": [
@@ -1594,11 +1532,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 7m • ₹25",
         "returnText": "Back to Alappuzha Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80",
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Spicy Kuttanad duck roast with hot appams and coconut gravy.",
         "tags": [
@@ -1622,9 +1558,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Alappuzha Station",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Marari_Beach_Sunset_01.JPG/330px-Marari_Beach_Sunset_01.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Marari_Beach_Alappuzha.jpg/960px-Marari_Beach_Alappuzha.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Marari_Beach_Sunset_01.JPG/330px-Marari_Beach_Sunset_01.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Marari_Beach_Alappuzha.jpg/960px-Marari_Beach_Alappuzha.jpg"
         ],
         "review": "Pristine white sand, coconut groves, and peaceful fishermen village vibe.",
         "tags": [
@@ -1648,9 +1584,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Alappuzha Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Pathiramanal_Island%2C_Muhamma.jpg/330px-Pathiramanal_Island%2C_Muhamma.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Pathiramanal_Island%2C_Muhamma.jpg/330px-Pathiramanal_Island%2C_Muhamma.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Only reachable by boat on Vembanad Lake. Migratory birds and lush mangrove canopies.",
         "tags": [
@@ -1674,9 +1610,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Alappuzha Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "Farming done 2 meters below sea level along scenic dike canals.",
         "tags": [
@@ -1700,9 +1636,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Alappuzha Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg"
         ],
         "review": "Panoramic 360-degree spiral stairway view of the Arabian Sea and beach pier.",
         "tags": [
@@ -1726,9 +1662,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Alappuzha Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg"
         ],
         "review": "Historic 16th-century Portuguese coastal pilgrimage church on quiet sands.",
         "tags": [
@@ -1752,9 +1688,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Alappuzha Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Famous for Gajendra Moksham mural, Kayamkulam double-edged sword, and quiet gardens.",
         "tags": [
@@ -1778,9 +1714,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Alappuzha Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg"
         ],
         "review": "The go-to local joint for duck roast, Neyyappam, and authentic Kuttanad fish curry.",
         "tags": [
@@ -1818,11 +1754,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 9m • ₹30",
         "returnText": "Back to Kannur Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/St._Angelo_Fort_Kannur.jpg/960px-St._Angelo_Fort_Kannur.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
-          "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/St._Angelo_Fort_Kannur.jpg/960px-St._Angelo_Fort_Kannur.jpg"
         ],
         "review": "16th-century Portuguese coastal fortress overlooking Moppila Bay.",
         "tags": [
@@ -1846,11 +1780,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 22m • ₹80",
         "returnText": "Back to Kannur Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Muzhappilangad_Drive-in_Beach.jpg/960px-Muzhappilangad_Drive-in_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
-          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80",
-          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Muzhappilangad_Drive-in_Beach.jpg/960px-Muzhappilangad_Drive-in_Beach.jpg"
         ],
         "review": "Asia's longest natural drive-in beach with packed golden sands.",
         "tags": [
@@ -1874,11 +1806,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 7m • Free",
         "returnText": "Back to Kannur Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80",
-          "https://images.unsplash.com/photo-1505253758473-96b301b224e0?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Kallummakkaya (spiced fried mussels) and fresh catch of the day.",
         "tags": [
@@ -1902,9 +1832,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Kannur Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Laterite hillock that turns into an ocean of blue flowers during monsoon. Ancient Jewish pond.",
         "tags": [
@@ -1928,9 +1858,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kannur Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Highest geographic peak in Kannur (1372m) with rolling green meadows and observatory tower.",
         "tags": [
@@ -1954,9 +1884,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Kannur Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "Uninhabited island 100 meters off the coast. Walkable during low tide across the seabed.",
         "tags": [
@@ -1980,9 +1910,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kannur Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Popular mountain sunset viewpoint with tent camping and off-road jeep trails.",
         "tags": [
@@ -2020,11 +1950,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 22m • ₹85",
         "returnText": "Back to Kalpetta Hub",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1511497584788-87676104235f?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1511497584788-87676104235f?w=800&q=80",
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Earthen dam lake flanked by rolling tea hills and misty waters.",
         "tags": [
@@ -2048,11 +1976,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 6m • ₹25",
         "returnText": "Back to Kalpetta Hub",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Traditional Kerala sadhya and bamboo biryani served on banana leaves.",
         "tags": [
@@ -2076,11 +2002,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 30m • ₹120",
         "returnText": "Back to Kalpetta Hub",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
-          "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg"
         ],
         "review": "Stone Age petroglyphs carved high inside mountain rock clefts.",
         "tags": [
@@ -2104,9 +2028,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Wayanad Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg"
         ],
         "review": "High altitude naturally heart-shaped lake that never dries up. Rewarding mountain trek.",
         "tags": [
@@ -2130,9 +2054,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Wayanad Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg"
         ],
         "review": "Largest earthen dam in India. Islands formed in the reservoir backwaters with speedboat rides.",
         "tags": [
@@ -2156,9 +2080,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Wayanad Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Inhabited islands on the Kabini river with bamboo rafting and rare flora.",
         "tags": [
@@ -2182,9 +2106,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Wayanad Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Thirunelli_Temple%2C_Brahmagiri_2007.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/6/6b/Thirunelli_Temple%2C_Brahmagiri_2007.jpg"
         ],
         "review": "The Kashi of South India tucked inside dense Brahmagiri wilderness and mountain streams.",
         "tags": [
@@ -2208,9 +2132,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Wayanad Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "One of the rainiest places in India with dramatic views of Thamarassery Churam hairpin bends.",
         "tags": [
@@ -2234,9 +2158,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Wayanad Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg"
         ],
         "review": "Needle rock waterfalls surrounded by evergreen Vellarimala forests and cool bathing pools.",
         "tags": [
@@ -2274,11 +2198,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 6m • ₹25",
         "returnText": "Back to Munnar KSRTC",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Le_mus%C3%A9e_du_th%C3%A9_%28Munnar%2C_Inde%29_%2813694719014%29.jpg/960px-Le_mus%C3%A9e_du_th%C3%A9_%28Munnar%2C_Inde%29_%2813694719014%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Le_mus%C3%A9e_du_th%C3%A9_%28Munnar%2C_Inde%29_%2813694719014%29.jpg/960px-Le_mus%C3%A9e_du_th%C3%A9_%28Munnar%2C_Inde%29_%2813694719014%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-          "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Aromatic tea manufacturing history and fresh garden tea tasting.",
         "tags": [
@@ -2302,11 +2224,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹45",
         "returnText": "Back to Munnar KSRTC",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
-          "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
-          "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Sweeping vista of emerald tea carpets, cardamom plants, and misty cliffs.",
         "tags": [
@@ -2330,11 +2250,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 3m • Free",
         "returnText": "Back to Munnar KSRTC",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80",
-          "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Legendary backpacker cafe serving Kerala parottas and spiced tea.",
         "tags": [
@@ -2358,9 +2276,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Munnar Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "Highest organic tea plantation in the world. Spectacular cloud bed sunrise.",
         "tags": [
@@ -2384,9 +2302,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Munnar Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Anayirankal-1.jpg/330px-Anayirankal-1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Anayirankal-1.jpg/330px-Anayirankal-1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg"
         ],
         "review": "Surrounded by tea plantations and evergreen forests. Wild elephant sightings across the water.",
         "tags": [
@@ -2410,9 +2328,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Munnar Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Kovilkadavu.jpg/330px-Kovilkadavu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Kovilkadavu.jpg/330px-Kovilkadavu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg"
         ],
         "review": "Ancient dolmens, natural sandalwood groves, and sweet local sugarcane jaggery stalls.",
         "tags": [
@@ -2436,9 +2354,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Munnar Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Bhramaram_view_Point%2C_Kanthaloor_ksrtmun2k24_%283%29.jpg/330px-Bhramaram_view_Point%2C_Kanthaloor_ksrtmun2k24_%283%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Bhramaram_view_Point%2C_Kanthaloor_ksrtmun2k24_%283%29.jpg/330px-Bhramaram_view_Point%2C_Kanthaloor_ksrtmun2k24_%283%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg"
         ],
         "review": "Only place in Kerala where apples, oranges, and plums grow. Chilly mountain breeze.",
         "tags": [
@@ -2462,9 +2380,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Munnar Station",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Anchuruli.jpg/330px-Anchuruli.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Mangalavanam.JPG/960px-Mangalavanam.JPG",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Anchuruli.jpg/330px-Anchuruli.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Mangalavanam.JPG/960px-Mangalavanam.JPG"
         ],
         "review": "Huge circular water tunnel carved into the mountain with a breathtaking reservoir view.",
         "tags": [
@@ -2488,9 +2406,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Munnar Station",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Vattavada_Valley.jpg/330px-Vattavada_Valley.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Medu_Vada.JPG/960px-Medu_Vada.JPG",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Vattavada_Valley.jpg/330px-Vattavada_Valley.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Medu_Vada.JPG/960px-Medu_Vada.JPG"
         ],
         "review": "Hidden high-altitude tribal village with stepped terrace farms and zero crowds.",
         "tags": [
@@ -2514,9 +2432,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Munnar Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Kochi_Water_Metro.jpg/960px-Kochi_Water_Metro.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Kochi_Water_Metro.jpg/960px-Kochi_Water_Metro.jpg"
         ],
         "review": "Seven-step cascading waterfall right on the Kochi-Dhanushkodi NH highway.",
         "tags": [
@@ -2540,9 +2458,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Munnar Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Munnar_Overview.jpg/330px-Munnar_Overview.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Munnar_tea_plantations_Kerala.jpg/960px-Munnar_tea_plantations_Kerala.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Munnar_Overview.jpg/330px-Munnar_Overview.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Munnar_tea_plantations_Kerala.jpg/960px-Munnar_tea_plantations_Kerala.jpg"
         ],
         "review": "Legendary local tea and fresh cardamom banana fritters on bazaar street.",
         "tags": [
@@ -2580,11 +2498,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 11m • ₹35",
         "returnText": "Back to Kollam Jn Pl. 1",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Thangassseri_Lighthouse.jpg/960px-Thangassseri_Lighthouse.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Thangassseri_Lighthouse.jpg/960px-Thangassseri_Lighthouse.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
-          "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "144-foot red-and-white striped tower with coastal breakers view.",
         "tags": [
@@ -2608,11 +2524,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 7m • Free",
         "returnText": "Back to Kollam Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Ashtamudi_Kerala.jpg/960px-Ashtamudi_Kerala.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Ashtamudi_Kerala.jpg/960px-Ashtamudi_Kerala.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Palm-fringed gateway to Kerala's most picturesque backwaters.",
         "tags": [
@@ -2636,11 +2550,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 5m • Free",
         "returnText": "Back to Kollam Jn Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Kozhikode_Halwa_Sweet.jpg/960px-Kozhikode_Halwa_Sweet.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=900&q=80",
-          "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=800&q=80",
-          "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Kozhikode_Halwa_Sweet.jpg/960px-Kozhikode_Halwa_Sweet.jpg"
         ],
         "review": "Kollam's world-famous export-quality roasted cashews and sweet halwa.",
         "tags": [
@@ -2664,9 +2576,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kollam Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "World's largest bird sculpture perched on a hilltop with cable car ride.",
         "tags": [
@@ -2690,9 +2602,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kollam Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Hidden canal labyrinths under low-hanging coconut palms. Best sunrise village tour in Kerala.",
         "tags": [
@@ -2716,9 +2628,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kollam Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg"
         ],
         "review": "Stream of milk waterfall falling from 300 ft inside dense Shendurney reserve.",
         "tags": [
@@ -2742,9 +2654,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kollam Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg"
         ],
         "review": "India's first planned eco-tourism destination with canopy walkway and butterfly safari.",
         "tags": [
@@ -2768,9 +2680,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Kollam Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg"
         ],
         "review": "Kerala's largest freshwater lake surrounded by rubber hills and temple monkeys.",
         "tags": [
@@ -2794,9 +2706,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kollam Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "Golden sands with sunset boardwalk and harbor views.",
         "tags": [
@@ -2834,10 +2746,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kottayam Railway Station (KTYM)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "The trek to the peak offers breathtaking panoramic views of the clouds and mountain ranges, making it a must-visit for nature lovers.",
         "tags": [
@@ -2861,10 +2772,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kottayam Railway Station (KTYM)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "One of the oldest mosques in India, its stunning wooden architecture and intricate carvings reflect Kerala's rich heritage.",
         "tags": [
@@ -2888,10 +2798,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kottayam Railway Station (KTYM)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "A local favorite in the heart of Kottayam for authentic Kerala breakfast and vegetarian meals that are consistently fresh and delicious.",
         "tags": [
@@ -2915,10 +2824,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kottayam Railway Station (KTYM)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Kumarakom_Houseboat_Kerala.jpg/960px-Kumarakom_Houseboat_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Kumarakom_Houseboat_Kerala.jpg/960px-Kumarakom_Houseboat_Kerala.jpg"
         ],
         "review": "A serene and quiet retreat located on the banks of Vembanad Lake, perfect for bird watching during the early morning hours.",
         "tags": [
@@ -2942,10 +2850,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kottayam Railway Station (KTYM)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "A popular evening spot where locals gather for walks and relaxation after the bustle of the nearby bus stand and market.",
         "tags": [
@@ -2983,10 +2890,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Varkala Sivagiri Railway Station (VAK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Varkala_Beach_Cliff_View.jpg/960px-Varkala_Beach_Cliff_View.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Varkala_Beach_Cliff_View.jpg/960px-Varkala_Beach_Cliff_View.jpg"
         ],
         "review": "A unique geological formation overlooking the Arabian Sea that serves as the vibrant heart of Varkala's social life.",
         "tags": [
@@ -3010,10 +2916,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Varkala Sivagiri Railway Station (VAK)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Janardhana_swamy_temple.jpg/960px-Janardhana_swamy_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Janardhana_swamy_temple.jpg/960px-Janardhana_swamy_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "This ancient 2,000-year-old temple is the cultural soul of the town, radiating peace and historic significance.",
         "tags": [
@@ -3037,10 +2942,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Varkala Sivagiri Railway Station (VAK)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Varkala_Beach%2C_Varkala%2C_Kerala.jpg/960px-Varkala_Beach%2C_Varkala%2C_Kerala.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Varkala_Beach%2C_Varkala%2C_Kerala.jpg/960px-Varkala_Beach%2C_Varkala%2C_Kerala.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous for its eclectic menu and live music, it is the go-to spot for fresh seafood and international fusion cuisine on the cliff.",
         "tags": [
@@ -3064,10 +2968,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Varkala Sivagiri Railway Station (VAK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A serene escape where the backwaters meet the sea, perfect for those seeking quiet moments away from the main tourist strip.",
         "tags": [
@@ -3091,10 +2994,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Varkala Sivagiri Railway Station (VAK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg"
         ],
         "review": "A quieter stretch of sand south of the main cliff that offers the most breathtaking sunset views in complete tranquility.",
         "tags": [
@@ -3132,10 +3034,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Malappuram Central Bus Terminal",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Kodikuthimala%2C_Malappuram.jpg/960px-Kodikuthimala%2C_Malappuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Kodikuthimala%2C_Malappuram.jpg/960px-Kodikuthimala%2C_Malappuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Often called the Ooty of Malappuram, it offers breathtaking misty hill views that are best experienced during the early morning hours.",
         "tags": [
@@ -3159,10 +3060,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Malappuram Central Bus Terminal",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Tthirumandhamkunnu_Temple.jpg/960px-Tthirumandhamkunnu_Temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Tthirumandhamkunnu_Temple.jpg/960px-Tthirumandhamkunnu_Temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A historic site of great architectural and spiritual significance, known for its traditional Kerala style and the famous Pooram festival.",
         "tags": [
@@ -3186,10 +3086,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Malappuram Central Bus Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "This place is legendary for its authentic Malabar beef biryani, which is widely considered the gold standard in the district.",
         "tags": [
@@ -3213,10 +3112,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Malappuram Central Bus Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "A peaceful, lush green location near the temple pond offering a quiet retreat away from the city chaos.",
         "tags": [
@@ -3240,10 +3138,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Malappuram Central Bus Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "The confluence of the Bharathappuzha and Tirur River with the Arabian Sea creates a stunning sunset point that is perfect for evening walks.",
         "tags": [
@@ -3281,10 +3178,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Manjeri Municipal Bus Terminal",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Near_Cherumb_eco_village.jpg/960px-Near_Cherumb_eco_village.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Near_Cherumb_eco_village.jpg/960px-Near_Cherumb_eco_village.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A breathtaking natural waterfall tucked away in the lush greenery of the Western Ghats near Manjeri.",
         "tags": [
@@ -3308,10 +3204,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Manjeri Municipal Bus Terminal",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Great_Horn_Bill_1.jpg/960px-Great_Horn_Bill_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Great_Horn_Bill_1.jpg/960px-Great_Horn_Bill_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "This heritage site offers a rare glimpse into pristine rainforests and is famous for its historical timber depot.",
         "tags": [
@@ -3335,10 +3230,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Manjeri Municipal Bus Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "You must try the authentic Malabar Biryani which is the culinary pride of the local community here.",
         "tags": [
@@ -3362,10 +3256,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Manjeri Municipal Bus Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "An elevated park offering a quiet, serene environment with a panoramic view of the surrounding hills.",
         "tags": [
@@ -3389,10 +3282,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Manjeri Municipal Bus Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The best spot in the evening to mingle with locals and enjoy a pleasant stroll after sunset.",
         "tags": [
@@ -3430,10 +3322,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Angadipuram Railway Station (AAM)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Known as the Ooty of Malappuram, this hilltop offers breathtaking misty views and is perfect for sunrise trekking.",
         "tags": [
@@ -3457,10 +3348,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Angadipuram Railway Station (AAM)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "An ancient and architecturally significant temple that offers a peaceful glimpse into the historical heritage of the region.",
         "tags": [
@@ -3484,10 +3374,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Angadipuram Railway Station (AAM)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "The go-to spot for authentic Malabar beef biryani that is famous across the district for its consistent and rich flavors.",
         "tags": [
@@ -3511,10 +3400,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Angadipuram Railway Station (AAM)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Cascada_Dynjandi%2C_Vestfir%C3%B0ir%2C_Islandia%2C_2014-08-14%2C_DD_136-138_HDR.JPG/960px-Cascada_Dynjandi%2C_Vestfir%C3%B0ir%2C_Islandia%2C_2014-08-14%2C_DD_136-138_HDR.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Cascada_Dynjandi%2C_Vestfir%C3%B0ir%2C_Islandia%2C_2014-08-14%2C_DD_136-138_HDR.JPG/960px-Cascada_Dynjandi%2C_Vestfir%C3%B0ir%2C_Islandia%2C_2014-08-14%2C_DD_136-138_HDR.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A quiet and lesser-known natural cascade perfect for a refreshing dip away from the bustling city crowds.",
         "tags": [
@@ -3538,10 +3426,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Angadipuram Railway Station (AAM)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Perinthalmanna.jpg/960px-Perinthalmanna.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Perinthalmanna.jpg/960px-Perinthalmanna.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "A popular evening stretch for locals to walk, enjoy the cool breeze, and grab some street-side snacks.",
         "tags": [
@@ -3579,10 +3466,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Tirur Railway Station (TIR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A serene literary heritage site where the father of Malayalam literature, Thunchath Ezhuthachan, started the tradition of teaching.",
         "tags": [
@@ -3606,10 +3492,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Tirur Railway Station (TIR)",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/3/33/Tanur_beach%2C_Malappuram_%281%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/3/33/Tanur_beach%2C_Malappuram_%281%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "An excellent coastal escape near Tirur offering vast stretches of sand and a beautiful view of the Arabian Sea.",
         "tags": [
@@ -3633,10 +3518,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Tirur Railway Station (TIR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous among locals for authentic Malabari Biryani and traditional Kerala non-veg delicacies.",
         "tags": [
@@ -3660,10 +3544,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Tirur Railway Station (TIR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A stunning backwater retreat perfect for boating and watching the sunset away from the city crowd.",
         "tags": [
@@ -3687,10 +3570,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Tirur Railway Station (TIR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The ideal spot for an evening stroll to watch the bustling trains and enjoy the cool breeze.",
         "tags": [
@@ -3728,10 +3610,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Guruvayur Railway Station (GUV)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Beach_Kerala%2CArabian_Sea.jpg/960px-Beach_Kerala%2CArabian_Sea.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Beach_Kerala%2CArabian_Sea.jpg/960px-Beach_Kerala%2CArabian_Sea.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "Famous for the meeting point of the river and the sea, known as Azhimukham, offering stunning sunset views.",
         "tags": [
@@ -3755,10 +3636,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Guruvayur Railway Station (GUV)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Mammiyoor_sree_mahadeva_temple.JPG/960px-Mammiyoor_sree_mahadeva_temple.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Mammiyoor_sree_mahadeva_temple.JPG/960px-Mammiyoor_sree_mahadeva_temple.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A deeply spiritual heritage site considered incomplete without a visit after the Guruvayur Temple pilgrimage.",
         "tags": [
@@ -3782,10 +3662,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Guruvayur Railway Station (GUV)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "The go-to spot for authentic Kerala vegetarian sadhya and traditional breakfast dishes near the temple.",
         "tags": [
@@ -3809,10 +3688,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Guruvayur Railway Station (GUV)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "An incredible sanctuary where dozens of temple elephants are housed in a sprawling, tranquil palace ground.",
         "tags": [
@@ -3836,10 +3714,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Guruvayur Railway Station (GUV)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Guruvayur_temple_east_nada.jpg/960px-Guruvayur_temple_east_nada.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Guruvayur_temple_east_nada.jpg/960px-Guruvayur_temple_east_nada.jpg"
         ],
         "review": "A serene spot for an evening walk to soak in the peaceful temple atmosphere and local evening vibes.",
         "tags": [
@@ -3877,11 +3754,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 24m • ₹90",
         "returnText": "Back to Kasaragod Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "Largest fort in Kerala with iconic sea bastions filmed in Bollywood movies.",
         "tags": [
@@ -3905,11 +3780,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 10m • ₹35",
         "returnText": "Back to Kasaragod Pl. 1",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "17th-century fort overlooking where Chandragiri river joins the sea.",
         "tags": [
@@ -3933,11 +3806,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 5m • Free",
         "returnText": "Back to Kasaragod Pl. 1",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=900&q=80",
-          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Hot Mangalore bajji (goli baje) served with spicy ginger chutney.",
         "tags": [
@@ -3961,9 +3832,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kasaragod Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Dense shola woods, monsoon clouds, and trekking trails on the Karnataka border.",
         "tags": [
@@ -3987,9 +3858,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Kasaragod Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Tellicherry_Fort.jpg/960px-Tellicherry_Fort.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Tellicherry_Fort.jpg/960px-Tellicherry_Fort.jpg"
         ],
         "review": "Only lake temple in Kerala. Set inside a natural spring lake guarded by the temple crocodile.",
         "tags": [
@@ -4013,9 +3884,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Kasaragod Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Known as the Coorg of Kerala with spice plantations, waterfalls, and cool breezes.",
         "tags": [
@@ -4039,9 +3910,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Kasaragod Station",
         "returnCost": 30,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/330px-Bakel_Fort_Beach_Kasaragod7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/330px-Bakel_Fort_Beach_Kasaragod7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "Landscaped beach garden right beneath the giant historic laterite fort walls.",
         "tags": [
@@ -4079,10 +3950,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kanhangad Railway Station (KZE)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A pristine stretch of golden sand offering a spectacular panoramic view of the Arabian Sea near the fort.",
         "tags": [
@@ -4106,10 +3976,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kanhangad Railway Station (KZE)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/960px-Bakel_Fort_Beach_Kasaragod7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/960px-Bakel_Fort_Beach_Kasaragod7.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/960px-Bakel_Fort_Beach_Kasaragod7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/960px-Bakel_Fort_Beach_Kasaragod7.jpg"
         ],
         "review": "The largest and best-preserved fort in Kerala, built by Shivappa Nayaka, providing an iconic vista of the coastline.",
         "tags": [
@@ -4133,10 +4002,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kanhangad Railway Station (KZE)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous for authentic Malabar-style chicken biryani that is a staple for both locals and travelers visiting the town center.",
         "tags": [
@@ -4160,10 +4028,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kanhangad Railway Station (KZE)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A serene and culturally rich temple known for its traditional architectural style and tranquil surroundings away from the crowd.",
         "tags": [
@@ -4187,10 +4054,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kanhangad Railway Station (KZE)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Kanhangad_Combined_places_2018.png/960px-Kanhangad_Combined_places_2018.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Kanhangad_Combined_places_2018.png/960px-Kanhangad_Combined_places_2018.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg"
         ],
         "review": "An ideal spot for an evening stroll where you can watch the sunset while enjoying the fresh coastal breeze.",
         "tags": [
@@ -4228,10 +4094,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thalassery Railway Station (TLY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A stunning, pristine beach where you can walk across the shallow waters to Dharmadam Island during low tide.",
         "tags": [
@@ -4255,10 +4120,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thalassery Railway Station (TLY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Tellicherry_Fort.jpg/960px-Tellicherry_Fort.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Tellicherry_Fort.jpg/960px-Tellicherry_Fort.jpg"
         ],
         "review": "This colonial-era fort offers a great glimpse into history with its massive walls and beautiful views of the Arabian Sea.",
         "tags": [
@@ -4282,10 +4146,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Thalassery Railway Station (TLY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "You cannot leave Thalassery without trying the authentic, flavorful Malabar Biryani from this legendary establishment.",
         "tags": [
@@ -4309,10 +4172,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thalassery Railway Station (TLY)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Overbury%27s_foly.jpg/960px-Overbury%27s_foly.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Overbury%27s_foly.jpg/960px-Overbury%27s_foly.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A serene clifftop park that serves as a quiet retreat with panoramic views of the coastal landscape.",
         "tags": [
@@ -4336,10 +4198,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thalassery Railway Station (TLY)",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Thalassery_Montage.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/d/d7/Thalassery_Montage.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg"
         ],
         "review": "The perfect spot for an evening stroll while watching the sunset over the ruins of the historic sea bridge.",
         "tags": [
@@ -4377,10 +4238,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vadakara Railway Station (BDJ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A serene spot where the Kottakkal River meets the Arabian Sea, perfect for a peaceful sunset walk.",
         "tags": [
@@ -4404,10 +4264,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vadakara Railway Station (BDJ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A historical monument dedicated to the legendary naval chief of the Zamorin, showcasing ancient maritime heritage.",
         "tags": [
@@ -4431,10 +4290,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vadakara Railway Station (BDJ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "An iconic local institution famous for its Malabar biryani and authentic Kerala snacks.",
         "tags": [
@@ -4458,10 +4316,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vadakara Railway Station (BDJ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A culturally significant ancient temple deeply linked to the Vadakkan Pattukal and Kerala's martial art heritage.",
         "tags": [
@@ -4485,10 +4342,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vadakara Railway Station (BDJ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Medu_Vada.JPG/960px-Medu_Vada.JPG",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Medu_Vada.JPG/960px-Medu_Vada.JPG"
         ],
         "review": "The newly developed walkway is the go-to spot for evening strolls with a cool sea breeze.",
         "tags": [
@@ -4526,10 +4382,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Sulthan Bathery KSRTC Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg"
         ],
         "review": "Expect a steep trek to reach these prehistoric rock shelters which offer a stunning panoramic view of the surrounding hills.",
         "tags": [
@@ -4553,10 +4408,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Sulthan Bathery KSRTC Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A serene and well-preserved 13th-century stone temple that served as a storehouse for Tipu Sultan's ammunition.",
         "tags": [
@@ -4580,10 +4434,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Sulthan Bathery KSRTC Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Known for its authentic Malabar biryani and spicy local delicacies, this is a must-visit for food lovers in the town center.",
         "tags": [
@@ -4607,10 +4460,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Sulthan Bathery KSRTC Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Phantom_Rock4.jpg/960px-Phantom_Rock4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Phantom_Rock4.jpg/960px-Phantom_Rock4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "This unique skull-shaped rock formation is tucked away from the main tourist trail, offering a peaceful spot for photography.",
         "tags": [
@@ -4634,10 +4486,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Sulthan Bathery KSRTC Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Karappuzha_Dam.JPG/960px-Karappuzha_Dam.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Karappuzha_Dam.JPG/960px-Karappuzha_Dam.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "Visit during the golden hour to enjoy the calm reservoir waters and the lush greenery that surrounds the dam site.",
         "tags": [
@@ -4675,10 +4526,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Nilambur Road Railway Station (NIL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A beautiful cascading waterfall best visited during the monsoon season for its full flow.",
         "tags": [
@@ -4702,10 +4552,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Nilambur Road Railway Station (NIL)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Great_Horn_Bill_1.jpg/960px-Great_Horn_Bill_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Great_Horn_Bill_1.jpg/960px-Great_Horn_Bill_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "The ancestral residence of the Nilambur royal family is a brilliant example of traditional Kerala architecture.",
         "tags": [
@@ -4729,10 +4578,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Nilambur Road Railway Station (NIL)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "A go-to local spot for authentic Kerala-style biryani and traditional breakfast dishes.",
         "tags": [
@@ -4756,10 +4604,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Nilambur Road Railway Station (NIL)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Nilambur_Teak_Museum_03957.JPG/960px-Nilambur_Teak_Museum_03957.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Nilambur_Teak_Museum_03957.JPG/960px-Nilambur_Teak_Museum_03957.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "An insightful and quiet museum showcasing the rich history of the world's first teak plantation.",
         "tags": [
@@ -4783,10 +4630,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Nilambur Road Railway Station (NIL)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Chaliyar_River_at_Nilambur.jpg/960px-Chaliyar_River_at_Nilambur.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Chaliyar_River_at_Nilambur.jpg/960px-Chaliyar_River_at_Nilambur.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The river banks offer a peaceful atmosphere for an evening stroll as the sun sets over the water.",
         "tags": [
@@ -4824,10 +4670,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Chalakudy Railway Station (CKI)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Known as the Niagara of India, this majestic waterfall is best experienced during the early morning hours to avoid peak crowds.",
         "tags": [
@@ -4851,10 +4696,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Chalakudy Railway Station (CKI)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A historic and spiritually significant architectural landmark that serves as the cultural heart of Chalakudy town.",
         "tags": [
@@ -4878,10 +4722,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Chalakudy Railway Station (CKI)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "A legendary local spot famous for its authentic Kerala-style biryani and traditional meat dishes that locals swear by.",
         "tags": [
@@ -4905,10 +4748,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Chalakudy Railway Station (CKI)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A peaceful and quiet riverside retreat perfect for nature lovers looking to observe diverse butterfly species in a lush setting.",
         "tags": [
@@ -4932,10 +4774,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Chalakudy Railway Station (CKI)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Chalakudy_River_bank_on_a_summer_sunrise.jpg/960px-Chalakudy_River_bank_on_a_summer_sunrise.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Chalakudy_River_bank_on_a_summer_sunrise.jpg/960px-Chalakudy_River_bank_on_a_summer_sunrise.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The best place to unwind during the evening with a refreshing breeze and a scenic sunset view along the riverbank.",
         "tags": [
@@ -4973,10 +4814,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Angamaly for Kalady (AFK)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Malayattoor_-_way_to_the_hill_top.jpg/960px-Malayattoor_-_way_to_the_hill_top.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Malayattoor_-_way_to_the_hill_top.jpg/960px-Malayattoor_-_way_to_the_hill_top.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A steep but spiritual trek offering panoramic views of the Periyar river valley.",
         "tags": [
@@ -5000,10 +4840,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Angamaly for Kalady (AFK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "An architectural marvel featuring one of the largest basilicas in India with stunning woodwork.",
         "tags": [
@@ -5027,10 +4866,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Angamaly for Kalady (AFK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Known for its authentic and aromatic Malabar style biryani that draws crowds from across Ernakulam.",
         "tags": [
@@ -5054,10 +4892,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Angamaly for Kalady (AFK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "A serene and quiet riverside stretch perfect for those looking to escape the town's busy traffic.",
         "tags": [
@@ -5081,10 +4918,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Angamaly for Kalady (AFK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The heart of the town becomes a vibrant hub for evening snacks and street food chatter after sunset.",
         "tags": [
@@ -5122,10 +4958,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Aluva Railway & Metro Station (AWY)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Aluva_Manappuram_Siva_Temple_Main.JPG/960px-Aluva_Manappuram_Siva_Temple_Main.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Aluva_Manappuram_Siva_Temple_Main.JPG/960px-Aluva_Manappuram_Siva_Temple_Main.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A serene riverside temple famous for the annual Sivarathri festival held on the sandbanks of the Periyar river.",
         "tags": [
@@ -5149,10 +4984,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Aluva Railway & Metro Station (AWY)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Aluva_palace.jpg/960px-Aluva_palace.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Aluva_palace.jpg/960px-Aluva_palace.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "This historic Travancore-style palace set on the banks of the Periyar offers a quiet glimpse into royal heritage.",
         "tags": [
@@ -5176,10 +5010,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Aluva Railway & Metro Station (AWY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "A legendary local spot known for authentic Kerala vegetarian breakfast and traditional meals that have defined Aluva's food scene for decades.",
         "tags": [
@@ -5203,10 +5036,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Aluva Railway & Metro Station (AWY)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Fish_net_over_Periyar_River_0.jpg/960px-Fish_net_over_Periyar_River_0.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Fish_net_over_Periyar_River_0.jpg/960px-Fish_net_over_Periyar_River_0.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A peaceful, less-crowded stretch along the riverbank perfect for quiet reflection away from the town center chaos.",
         "tags": [
@@ -5230,10 +5062,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Aluva Railway & Metro Station (AWY)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Aluva_manappuram_temple_-_panoramio.jpg/960px-Aluva_manappuram_temple_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Aluva_manappuram_temple_-_panoramio.jpg/960px-Aluva_manappuram_temple_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "Walking along the bridge during the evening provides a refreshing breeze and a panoramic view of the Periyar sunset.",
         "tags": [
@@ -5271,10 +5102,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Changanassery Railway Station (CGY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A masterpiece of Kerala temple architecture known for its ancient murals and historic significance.",
         "tags": [
@@ -5298,10 +5128,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Changanassery Railway Station (CGY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The best place to catch a serene sunset while watching the backwater boats traverse the canal.",
         "tags": [
@@ -5325,10 +5154,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Changanassery Railway Station (CGY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "An iconic local spot famous for its authentic Kerala breakfast and traditional ghee roast.",
         "tags": [
@@ -5352,10 +5180,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Changanassery Railway Station (CGY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg"
         ],
         "review": "Experience authentic Kuttanad-style spicy fish curry and fresh toddy in a rustic riverside setting.",
         "tags": [
@@ -5379,10 +5206,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Changanassery Railway Station (CGY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "A beautifully maintained heritage church that stands as a symbol of the town's religious harmony.",
         "tags": [
@@ -5420,11 +5246,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 22m • ₹85",
         "returnText": "Back to Pathanamthitta Hub",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-          "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Secret metallurgical alloy mirrors polished completely by hand with velvet.",
         "tags": [
@@ -5448,11 +5272,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 7m • Free",
         "returnText": "Back to Pathanamthitta Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Achankovil_river.jpg/960px-Achankovil_river.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Achankovil_river.jpg/960px-Achankovil_river.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
-          "https://images.unsplash.com/photo-1510414842594-a61752afb394?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Shady bamboo-fringed riverside with clear natural hill water.",
         "tags": [
@@ -5476,11 +5298,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 5m • Free",
         "returnText": "Back to Pathanamthitta Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80",
-          "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80",
-          "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Rich black jaggery and roasted rice payasam cooked in ghee.",
         "tags": [
@@ -5504,9 +5324,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Pathanamthitta Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "Pristine mist-covered forest, wild elephants, gaur, and tranquil lake safari.",
         "tags": [
@@ -5530,9 +5350,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Pathanamthitta Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg"
         ],
         "review": "Pamba river cascading into a wide rocky pool. Magical during monsoons.",
         "tags": [
@@ -5556,9 +5376,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹30",
         "returnText": "Back to Pathanamthitta Station",
         "returnCost": 30,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg"
         ],
         "review": "Historic 1940s massive wooden elephant Kraal and forest elephant rehabilitation camp.",
         "tags": [
@@ -5582,9 +5402,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Pathanamthitta Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "Ancient riverside temple on Pamba river, famous for snake boat races and Aranmula Vallasadya.",
         "tags": [
@@ -5608,9 +5428,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 15m • Free",
         "returnText": "Back to Pathanamthitta Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg"
         ],
         "review": "Quiet hilltop overlooking the Pamba valley with sweeping river panoramas.",
         "tags": [
@@ -5648,10 +5468,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vembanad Boat Jetty Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Kumarakom_Houseboat_Kerala.jpg/960px-Kumarakom_Houseboat_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Kumarakom_Houseboat_Kerala.jpg/960px-Kumarakom_Houseboat_Kerala.jpg"
         ],
         "review": "Visit early in the morning during the migratory season to catch a glimpse of Siberian cranes and egrets in their natural habitat.",
         "tags": [
@@ -5675,10 +5494,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vembanad Boat Jetty Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "An incredible collection of unique driftwood sculptures shaped by nature, housed in a modest building that is a local heritage highlight.",
         "tags": [
@@ -5702,10 +5520,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vembanad Boat Jetty Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Experience authentic Kerala spicy seafood and Karimeen Pollichathu paired with fresh local toddy for a true backwater culinary tradition.",
         "tags": [
@@ -5729,10 +5546,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vembanad Boat Jetty Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/LAN_party_gaming_rigs.jpg/960px-LAN_party_gaming_rigs.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/LAN_party_gaming_rigs.jpg/960px-LAN_party_gaming_rigs.jpg"
         ],
         "review": "A serene and secluded island accessible only by boat, perfect for escaping the crowd and enjoying pristine backwater views.",
         "tags": [
@@ -5756,10 +5572,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vembanad Boat Jetty Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Kumarakom_Houseboat_Kerala.jpg/960px-Kumarakom_Houseboat_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Kumarakom_Houseboat_Kerala.jpg/960px-Kumarakom_Houseboat_Kerala.jpg"
         ],
         "review": "The best spot to watch the sun dip below the Vembanad Lake while local houseboats slowly return to their moorings for the evening.",
         "tags": [
@@ -5797,10 +5612,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Bekal Fort Railway Station (BFR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A pristine stretch of golden sand that offers the most breathtaking view of the Bekal Fort against the Arabian Sea.",
         "tags": [
@@ -5824,10 +5638,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Bekal Fort Railway Station (BFR)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/960px-Bakel_Fort_Beach_Kasaragod7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/960px-Bakel_Fort_Beach_Kasaragod7.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/960px-Bakel_Fort_Beach_Kasaragod7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Bakel_Fort_Beach_Kasaragod7.jpg/960px-Bakel_Fort_Beach_Kasaragod7.jpg"
         ],
         "review": "This centuries-old key-shaped fort provides an incredible historical backdrop and panoramic coastal vistas.",
         "tags": [
@@ -5851,10 +5664,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Bekal Fort Railway Station (BFR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous for their authentic Malabar biryani and fresh local seafood preparations that capture the essence of Kasaragod cuisine.",
         "tags": [
@@ -5878,10 +5690,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Bekal Fort Railway Station (BFR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg"
         ],
         "review": "A much quieter and more secluded alternative to the main beach, perfect for those seeking solitude and quiet reflection.",
         "tags": [
@@ -5905,10 +5716,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Bekal Fort Railway Station (BFR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The ideal spot to end your day, as the sun dips into the ocean creating a stunning display of colors over the rocky coastline.",
         "tags": [
@@ -5946,10 +5756,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Nileshwar Railway Station (NLE)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A pristine and serene coastline perfect for long walks without the typical tourist crowds found elsewhere in Kerala.",
         "tags": [
@@ -5973,10 +5782,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Nileshwar Railway Station (NLE)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "The historical seat of the Nileshwar Rajas offers a glimpse into traditional Kerala architecture and royal heritage.",
         "tags": [
@@ -6000,10 +5808,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Nileshwar Railway Station (NLE)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "An iconic local institution famous for its authentic Malabar biryani and delicious fresh-baked snacks.",
         "tags": [
@@ -6027,10 +5834,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Nileshwar Railway Station (NLE)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Taking a country boat ride here at twilight offers a peaceful escape through lush green mangroves.",
         "tags": [
@@ -6054,10 +5860,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Nileshwar Railway Station (NLE)",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/f/f6/RLWY.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/f/f6/RLWY.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "A favorite spot for local youth to hang out and enjoy the cool evening breeze after the sunset.",
         "tags": [
@@ -6095,10 +5900,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Payyanur Railway Station (PAY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A serene and pristine beach known for its beautiful cliff views and the nearby hillock associated with the Ramayana.",
         "tags": [
@@ -6122,10 +5926,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Payyanur Railway Station (PAY)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Village_Junction%2C_Kunhimangalam_%284471658593%29.jpg/960px-Village_Junction%2C_Kunhimangalam_%284471658593%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Village_Junction%2C_Kunhimangalam_%284471658593%29.jpg/960px-Village_Junction%2C_Kunhimangalam_%284471658593%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Experience the rich cultural heritage and traditional architecture of the sacred groves and temples in this historic village.",
         "tags": [
@@ -6149,10 +5952,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Payyanur Railway Station (PAY)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous for the authentic Thalassery-style chicken biryani that captures the true essence of Malabar spice.",
         "tags": [
@@ -6176,10 +5978,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Payyanur Railway Station (PAY)",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Payyanur.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/0/0b/Payyanur.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A tranquil and quiet retreat along the riverbanks, perfect for nature photography and solitary walks.",
         "tags": [
@@ -6203,10 +6004,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Payyanur Railway Station (PAY)",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Payyanur.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/0/0b/Payyanur.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The go-to evening spot for locals to unwind with a relaxing stroll amidst lush greenery and evening lights.",
         "tags": [
@@ -6244,10 +6044,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Iritty Bus Station / Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A sprawling sanctuary offering lush green landscapes and a great chance to spot wild elephants in their natural habitat.",
         "tags": [
@@ -6271,10 +6070,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Iritty Bus Station / Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "The serene reservoir and the landscaped garden make this an ideal spot for a relaxing afternoon walk by the water.",
         "tags": [
@@ -6298,10 +6096,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Iritty Bus Station / Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Classic colonial-style interiors serving authentic Kerala snacks and filter coffee that locals have enjoyed for generations.",
         "tags": [
@@ -6325,10 +6122,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Iritty Bus Station / Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "A peaceful, less-crowded riverside stretch perfect for quiet reflection and enjoying the gentle flow of the Barapole river.",
         "tags": [
@@ -6352,10 +6148,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Iritty Bus Station / Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The best place to catch the evening breeze and watch the sunset reflections dancing on the river below the iconic bridge.",
         "tags": [
@@ -6393,10 +6188,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mananthavady KSRTC Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg"
         ],
         "review": "Visit during the golden hour to see the islands scattered across the massive reservoir.",
         "tags": [
@@ -6420,10 +6214,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mananthavady KSRTC Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A serene and historically significant site marking the resting place of the Lion of Kerala.",
         "tags": [
@@ -6447,10 +6240,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mananthavady KSRTC Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "An iconic local spot famous for its authentic Malabar biryani and traditional Kerala meals.",
         "tags": [
@@ -6474,10 +6266,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mananthavady KSRTC Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Best experienced during an early morning jeep safari to spot elephants and deer in the wild.",
         "tags": [
@@ -6501,10 +6292,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mananthavady KSRTC Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "A peaceful river delta perfect for walking along the bamboo-lined banks before sunset.",
         "tags": [
@@ -6542,10 +6332,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vythiri Ghat Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Kerala_-_Sentinel_Falls_%2815784346247%29.jpg/960px-Kerala_-_Sentinel_Falls_%2815784346247%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Kerala_-_Sentinel_Falls_%2815784346247%29.jpg/960px-Kerala_-_Sentinel_Falls_%2815784346247%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A breathtaking three-tiered waterfall that requires a short trek through dense forest to reach the base pool.",
         "tags": [
@@ -6569,10 +6358,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vythiri Ghat Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg"
         ],
         "review": "Ancient caves featuring prehistoric petroglyphs that offer a fascinating glimpse into human history.",
         "tags": [
@@ -6596,10 +6384,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vythiri Ghat Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous for their authentic Malabar Biryani and traditional Kerala meals served in a rustic, nostalgic setting.",
         "tags": [
@@ -6623,10 +6410,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vythiri Ghat Hub",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/en/0/0d/PookodeLake.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Pookode_Lake_Wayanad.jpg/960px-Pookode_Lake_Wayanad.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/en/0/0d/PookodeLake.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Pookode_Lake_Wayanad.jpg/960px-Pookode_Lake_Wayanad.jpg"
         ],
         "review": "A serene, natural freshwater lake nestled among evergreen forests, perfect for a quiet pedal boat ride.",
         "tags": [
@@ -6650,10 +6436,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vythiri Ghat Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Blue%2C_Green_%26_White.jpg/960px-Blue%2C_Green_%26_White.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Blue%2C_Green_%26_White.jpg/960px-Blue%2C_Green_%26_White.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "An excellent spot along the winding roads to watch the sunset over the mist-covered hills and expansive plantations.",
         "tags": [
@@ -6691,10 +6476,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Koyilandy Railway Station (QLD)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Kappad_Beach.jpg/960px-Kappad_Beach.jpg"
         ],
         "review": "A historic site where Vasco da Gama landed, known for its pristine beauty and serene atmosphere.",
         "tags": [
@@ -6718,10 +6502,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Koyilandy Railway Station (QLD)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "An iconic colonial-era lighthouse that offers a breathtaking panoramic view of the Arabian Sea.",
         "tags": [
@@ -6745,10 +6528,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Koyilandy Railway Station (QLD)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/KadaloorPointLight_01.jpg/960px-KadaloorPointLight_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/KadaloorPointLight_01.jpg/960px-KadaloorPointLight_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Visit in the early morning or evening to experience the freshest local catch and authentic coastal flavors.",
         "tags": [
@@ -6772,10 +6554,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Koyilandy Railway Station (QLD)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "An ancient and culturally significant temple known for its unique architecture and the famous Kaliyattam festival.",
         "tags": [
@@ -6799,10 +6580,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Koyilandy Railway Station (QLD)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A massive rock formation in the sea that serves as a quiet, scenic escape away from the crowds.",
         "tags": [
@@ -6840,10 +6620,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Thamarassery Churam Gateway",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Thusharagiri_Waterfalls_-_%E0%B4%A4%E0%B5%81%E0%B4%B7%E0%B4%BE%E0%B4%B0%E0%B4%97%E0%B4%BF%E0%B4%B0%E0%B4%BF_%E0%B4%B5%E0%B5%86%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BE%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%82_09.jpg/960px-Thusharagiri_Waterfalls_-_%E0%B4%A4%E0%B5%81%E0%B4%B7%E0%B4%BE%E0%B4%B0%E0%B4%97%E0%B4%BF%E0%B4%B0%E0%B4%BF_%E0%B4%B5%E0%B5%86%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BE%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%82_09.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Thusharagiri_Waterfalls_-_%E0%B4%A4%E0%B5%81%E0%B4%B7%E0%B4%BE%E0%B4%B0%E0%B4%97%E0%B4%BF%E0%B4%B0%E0%B4%BF_%E0%B4%B5%E0%B5%86%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BE%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%82_09.jpg/960px-Thusharagiri_Waterfalls_-_%E0%B4%A4%E0%B5%81%E0%B4%B7%E0%B4%BE%E0%B4%B0%E0%B4%97%E0%B4%BF%E0%B4%B0%E0%B4%BF_%E0%B4%B5%E0%B5%86%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B4%BE%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%82_09.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A majestic three-tiered waterfall perfect for trekking and enjoying the lush Western Ghats mist.",
         "tags": [
@@ -6867,10 +6646,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thamarassery Churam Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Known as the Ooty of Malabar, this high-altitude retreat offers breathtaking valley views and cool weather.",
         "tags": [
@@ -6894,10 +6672,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Thamarassery Churam Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Experience authentic local Malabar chai and crispy pazham pori at this nostalgic roadside hangout.",
         "tags": [
@@ -6921,10 +6698,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thamarassery Churam Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "A hidden trekking paradise that offers challenging trails leading to panoramic vistas of the surrounding peaks.",
         "tags": [
@@ -6948,10 +6724,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thamarassery Churam Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg"
         ],
         "review": "The winding ghat road offers a spectacular sunset point with a bird's-eye view of the hairpin bends.",
         "tags": [
@@ -6989,10 +6764,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kottakkal Arya Vaidya Sala Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A peaceful sanctuary showcasing medicinal plants maintained by the world-renowned Arya Vaidya Sala.",
         "tags": [
@@ -7016,10 +6790,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kottakkal Arya Vaidya Sala Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "An insightful heritage center that narrates the history of Ayurvedic medicine and the legacy of P.S. Varier.",
         "tags": [
@@ -7043,10 +6816,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kottakkal Arya Vaidya Sala Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous for authentic Malabar Biryani which is a culinary landmark in the heart of Kottakkal town.",
         "tags": [
@@ -7070,10 +6842,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kottakkal Arya Vaidya Sala Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/MESCE_Kuttippuram.jpg/960px-MESCE_Kuttippuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/MESCE_Kuttippuram.jpg/960px-MESCE_Kuttippuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "Located a short drive away, the river view from this bridge provides a serene escape from the town rush.",
         "tags": [
@@ -7097,10 +6868,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kottakkal Arya Vaidya Sala Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "The go-to spot for an evening walk or to relax under the trees after a busy day in town.",
         "tags": [
@@ -7138,10 +6908,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ponnani Harbour Port Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A serene backwater spot perfect for a peaceful boat ride during the late afternoon hours.",
         "tags": [
@@ -7165,10 +6934,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ponnani Harbour Port Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Known as the Makkah of Malabar, this historic mosque features unique wooden architecture that is a must-see for history buffs.",
         "tags": [
@@ -7192,10 +6960,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Ponnani Harbour Port Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "An iconic local institution famous for its Malabari Biryani and authentic Kerala-style tea time snacks.",
         "tags": [
@@ -7219,10 +6986,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Ponnani Harbour Port Terminal",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Light_house_in_Ponnani.jpg/960px-Light_house_in_Ponnani.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Light_house_in_Ponnani.jpg/960px-Light_house_in_Ponnani.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "Climb up for a panoramic bird's-eye view of the Arabian Sea meeting the Ponnani estuary.",
         "tags": [
@@ -7246,10 +7012,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ponnani Harbour Port Terminal",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/GKN_Chamravattom_Regulator_Bridge_DSC_0446.JPG/960px-GKN_Chamravattom_Regulator_Bridge_DSC_0446.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/GKN_Chamravattom_Regulator_Bridge_DSC_0446.JPG/960px-GKN_Chamravattom_Regulator_Bridge_DSC_0446.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "The best place in town to catch the sunset while enjoying fresh local street food stalls along the shore.",
         "tags": [
@@ -7287,10 +7052,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Ottapalam Railway Station (OTP)",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "An iconic heritage mansion that is the primary filming location for many legendary Malayalam cinema hits.",
         "tags": [
@@ -7314,10 +7078,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ottapalam Railway Station (OTP)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/View_from_Chamravattam_Bridge_-_panoramio.jpg/960px-View_from_Chamravattam_Bridge_-_panoramio.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The bridge over the Bharathapuzha river is the perfect spot to catch a breathtaking sunset over the tranquil waters.",
         "tags": [
@@ -7341,10 +7104,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ottapalam Railway Station (OTP)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Palakkad_Tipu_Fort.jpg/960px-Palakkad_Tipu_Fort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Palakkad_Tipu_Fort.jpg/960px-Palakkad_Tipu_Fort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "A historic site showcasing remnants of ancient architecture, offering a quiet stroll through local history.",
         "tags": [
@@ -7368,10 +7130,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Ottapalam Railway Station (OTP)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Experience the nostalgic charm and signature beetroot cutlets of this iconic Kerala-wide coffee chain.",
         "tags": [
@@ -7395,10 +7156,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Ottapalam Railway Station (OTP)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Ottapalam_near_Bustand.jpg/960px-Ottapalam_near_Bustand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Ottapalam_near_Bustand.jpg/960px-Ottapalam_near_Bustand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A scenic hill range perfect for light trekking and escaping the crowd in the lush green outskirts of Ottapalam.",
         "tags": [
@@ -7436,10 +7196,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mannarkkad Silent Valley Gateway",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/SAN_BIRDS_48.jpg/960px-SAN_BIRDS_48.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/SAN_BIRDS_48.jpg/960px-SAN_BIRDS_48.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Silent_Valley_National_Park_Forest.jpg/960px-Silent_Valley_National_Park_Forest.jpg"
         ],
         "review": "The core of the Nilgiri Biosphere Reserve offers unparalleled biodiversity and serene evergreen forests.",
         "tags": [
@@ -7463,10 +7222,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mannarkkad Silent Valley Gateway",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Palakkad_Tipu_Fort.jpg/960px-Palakkad_Tipu_Fort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Palakkad_Tipu_Fort.jpg/960px-Palakkad_Tipu_Fort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "A well-preserved historical fort built by Hyder Ali, surrounded by a beautiful moat and lush gardens.",
         "tags": [
@@ -7490,10 +7248,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mannarkkad Silent Valley Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous for its authentic Malabar-style chicken biryani that locals swear by for lunch.",
         "tags": [
@@ -7517,10 +7274,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mannarkkad Silent Valley Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A series of cascading waterfalls tucked away in the forest that provide a perfect refreshing escape.",
         "tags": [
@@ -7544,10 +7300,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mannarkkad Silent Valley Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The hilltop garden near the dam offers a stunning sunset view over the reservoir waters.",
         "tags": [
@@ -7585,10 +7340,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Chittur-Thathamangalam Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A serene dam site surrounded by lush hills that is perfect for a quiet evening walk with panoramic views.",
         "tags": [
@@ -7612,10 +7366,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Chittur-Thathamangalam Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "Famous for the Konganpada festival, this historic temple offers a deep sense of peace and traditional Kerala architecture.",
         "tags": [
@@ -7639,10 +7392,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Chittur-Thathamangalam Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Visit this cultural monument to pay respects to the father of Malayalam language in a quiet, green setting.",
         "tags": [
@@ -7666,10 +7418,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Chittur-Thathamangalam Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Toddy_Shop_%282699390021%29.jpg/960px-Toddy_Shop_%282699390021%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Toddy_Shop_%282699390021%29.jpg/960px-Toddy_Shop_%282699390021%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Authentic local spot to try spicy Kerala fish curry and appam paired with fresh toddy.",
         "tags": [
@@ -7693,10 +7444,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Chittur-Thathamangalam Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Anikode%2C_Chittur.jpg/960px-Anikode%2C_Chittur.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Anikode%2C_Chittur.jpg/960px-Anikode%2C_Chittur.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "A perfect, quiet spot along the riverbank to watch the sunset and reflect in silence.",
         "tags": [
@@ -7734,10 +7484,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kodungallur Temple & Heritage Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Photo_of_Azhikode_Munakkal_Beach.jpg/960px-Photo_of_Azhikode_Munakkal_Beach.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Photo_of_Azhikode_Munakkal_Beach.jpg/960px-Photo_of_Azhikode_Munakkal_Beach.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "The longest beach in Thrissur, perfect for a peaceful walk along the breakwater.",
         "tags": [
@@ -7761,10 +7510,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kodungallur Temple & Heritage Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "An ancient and historically significant temple with deep roots in Kerala's cultural heritage.",
         "tags": [
@@ -7788,10 +7536,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kodungallur Temple & Heritage Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Kodungallur is famous for its unique style of Malabar-influenced biryani that is a must-try for foodies.",
         "tags": [
@@ -7815,10 +7562,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kodungallur Temple & Heritage Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Cheraman_Juma_Palli_%28%E0%B4%9A%E0%B5%87%E0%B4%B0%E0%B4%AE%E0%B4%BE%E0%B5%BB_%E0%B4%9C%E0%B5%81%E0%B4%AE%E0%B4%BE_%E0%B4%AA%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%BF%29.jpg/960px-Cheraman_Juma_Palli_%28%E0%B4%9A%E0%B5%87%E0%B4%B0%E0%B4%AE%E0%B4%BE%E0%B5%BB_%E0%B4%9C%E0%B5%81%E0%B4%AE%E0%B4%BE_%E0%B4%AA%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%BF%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Cheraman_Juma_Palli_%28%E0%B4%9A%E0%B5%87%E0%B4%B0%E0%B4%AE%E0%B4%BE%E0%B5%BB_%E0%B4%9C%E0%B5%81%E0%B4%AE%E0%B4%BE_%E0%B4%AA%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%BF%29.jpg/960px-Cheraman_Juma_Palli_%28%E0%B4%9A%E0%B5%87%E0%B4%B0%E0%B4%AE%E0%B4%BE%E0%B5%BB_%E0%B4%9C%E0%B5%81%E0%B4%AE%E0%B4%BE_%E0%B4%AA%E0%B4%B3%E0%B5%8D%E0%B4%B3%E0%B4%BF%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "Believed to be the first mosque in India, this site offers a quiet and profound historical experience.",
         "tags": [
@@ -7842,10 +7588,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kodungallur Temple & Heritage Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Azheeckal_Beach%2C_Kayamkulam.jpg/960px-Azheeckal_Beach%2C_Kayamkulam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Azheeckal_Beach%2C_Kayamkulam.jpg/960px-Azheeckal_Beach%2C_Kayamkulam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg"
         ],
         "review": "A serene and less crowded spot where the backwaters meet the Arabian Sea, ideal for sunset views.",
         "tags": [
@@ -7883,10 +7628,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Irinjalakuda Railway Station (IJK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A unique historical temple dedicated to Bharata, famous for its grand annual festival and intricate architectural heritage.",
         "tags": [
@@ -7910,10 +7654,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Irinjalakuda Railway Station (IJK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A serene spot away from the city crowd, perfect for watching the local fishing boats and tranquil water views.",
         "tags": [
@@ -7937,10 +7680,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Irinjalakuda Railway Station (IJK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "An iconic local eatery known for authentic Kerala meals and traditional snacks that capture the culinary essence of Irinjalakuda.",
         "tags": [
@@ -7964,10 +7706,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Irinjalakuda Railway Station (IJK)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Sree_Koodalmanikyam_Temple.jpg/960px-Sree_Koodalmanikyam_Temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Sree_Koodalmanikyam_Temple.jpg/960px-Sree_Koodalmanikyam_Temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "A popular evening hub where locals gather for sunset walks and casual conversations in the heart of the town.",
         "tags": [
@@ -7991,10 +7732,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Irinjalakuda Railway Station (IJK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "A short drive away, this historic temple offers stunning river views and a calming atmosphere steeped in local folklore.",
         "tags": [
@@ -8032,10 +7772,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Muziris Heritage Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A beautiful, serene beach perfect for evening strolls with a well-maintained walkway and great sunset views.",
         "tags": [
@@ -8059,10 +7798,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Muziris Heritage Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A unique historical site where a temple, church, mosque, and synagogue coexist, symbolizing the region's religious harmony.",
         "tags": [
@@ -8086,10 +7824,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Muziris Heritage Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Known for authentic Kerala meals and traditional snacks, this is a local favorite for a quick and satisfying lunch.",
         "tags": [
@@ -8113,10 +7850,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Muziris Heritage Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Watch traditional weavers create the famous Chendamangalam handloom sarees in this quiet, culturally rich village setting.",
         "tags": [
@@ -8140,10 +7876,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Muziris Heritage Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The bustling heart of the town, ideal for experiencing local evening life and grabbing some street-side snacks.",
         "tags": [
@@ -8181,10 +7916,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Muvattupuzha River City Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A series of seven cascading waterfalls perfect for a trek through lush green forests.",
         "tags": [
@@ -8208,10 +7942,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Muvattupuzha River City Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "An ancient and architecturally significant heritage church that reflects the rich history of the region.",
         "tags": [
@@ -8235,10 +7968,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Muvattupuzha River City Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous among locals for authentic Kerala meals and traditional breakfast served in a humble setting.",
         "tags": [
@@ -8262,10 +7994,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Muvattupuzha River City Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A serene and quiet spot along the Muvattupuzha river, ideal for those seeking solitude away from city noise.",
         "tags": [
@@ -8289,10 +8020,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Muvattupuzha River City Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "A scenic hillside location offering a breathtaking view of the evening sun dipping behind the Kerala landscape.",
         "tags": [
@@ -8330,10 +8060,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kothamangalam Highrange Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A paradise for birdwatchers, offering lush forest trails and rare sightings of indigenous avian species.",
         "tags": [
@@ -8357,10 +8086,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kothamangalam Highrange Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A historic and architectural marvel that serves as a significant pilgrimage center for the region.",
         "tags": [
@@ -8384,10 +8112,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kothamangalam Highrange Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous among locals for its authentic Kerala breakfast and signature spice-infused curries.",
         "tags": [
@@ -8411,10 +8138,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kothamangalam Highrange Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A quiet retreat surrounded by massive boulders and forest, perfect for a peaceful walk away from the town rush.",
         "tags": [
@@ -8438,10 +8164,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kothamangalam Highrange Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "An ideal spot for an evening stroll to catch the sunset and enjoy a relaxing atmosphere in the center of town.",
         "tags": [
@@ -8479,10 +8204,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Perumbavoor Municipal Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "An excellent place to see rescued elephants in a natural river setting near the Periyar.",
         "tags": [
@@ -8506,10 +8230,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Perumbavoor Municipal Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A serene and sacred ancient forest grove that feels like a hidden portal into Kerala's ecological past.",
         "tags": [
@@ -8533,10 +8256,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Perumbavoor Municipal Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous for authentic Malabar-style beef and chicken biryani that is a staple for locals.",
         "tags": [
@@ -8560,10 +8282,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Perumbavoor Municipal Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "A hidden rocky river stretch where the Periyar creates natural whirlpools and scenic vistas.",
         "tags": [
@@ -8587,10 +8308,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Perumbavoor Municipal Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "A simple public park perfect for an evening walk to escape the bustling traffic of the main road.",
         "tags": [
@@ -8628,10 +8348,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Periyar Tiger Reserve Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Book your boat safari tickets online in advance to spot wild elephants and bison near the lake banks.",
         "tags": [
@@ -8655,10 +8374,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Periyar Tiger Reserve Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "This ancient stone temple offers breathtaking views of the surrounding valleys and is only accessible via forest department permission.",
         "tags": [
@@ -8682,10 +8400,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Periyar Tiger Reserve Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Try the authentic Kerala Sadya or spicy Malabar chicken curry served in a traditional setting.",
         "tags": [
@@ -8709,10 +8426,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Periyar Tiger Reserve Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A serene spot located a few kilometers from Kumily that offers a spectacular view of the plains of Tamil Nadu below.",
         "tags": [
@@ -8736,10 +8452,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Periyar Tiger Reserve Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Enjoy a peaceful evening walking tour through organic spice plantations to learn about medicinal plants and cinnamon trees.",
         "tags": [
@@ -8777,10 +8492,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vagamon Pine Valley Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Vagamon_meadows.JPG/960px-Vagamon_meadows.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Vagamon_Pine_Forest.jpg/960px-Vagamon_Pine_Forest.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Vagamon_meadows.JPG/960px-Vagamon_meadows.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Vagamon_Pine_Forest.jpg/960px-Vagamon_Pine_Forest.jpg"
         ],
         "review": "A serene walk through towering pine trees that is best enjoyed in the early morning fog.",
         "tags": [
@@ -8804,10 +8518,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vagamon Pine Valley Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Kurisumala.JPG/960px-Kurisumala.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Kurisumala.JPG/960px-Kurisumala.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "This historic religious site offers a peaceful atmosphere and breathtaking panoramic views of the surrounding hills.",
         "tags": [
@@ -8831,10 +8544,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vagamon Pine Valley Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Stop here for a hot cup of local Idukki coffee and delicious snacks while overlooking the mist-covered mountains.",
         "tags": [
@@ -8858,10 +8570,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vagamon Pine Valley Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Vagamon_meadows.JPG/960px-Vagamon_meadows.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Vagamon_meadows.JPG/960px-Vagamon_meadows.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A quiet and hidden retreat perfect for those looking to hike away from the main tourist crowds.",
         "tags": [
@@ -8885,10 +8596,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vagamon Pine Valley Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Vagamon_meadows.JPG/960px-Vagamon_meadows.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Vagamon_Pine_Forest.jpg/960px-Vagamon_Pine_Forest.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Vagamon_meadows.JPG/960px-Vagamon_meadows.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Vagamon_Pine_Forest.jpg/960px-Vagamon_Pine_Forest.jpg"
         ],
         "review": "The ultimate sunset spot where the rolling green hills provide a magical backdrop for an evening stroll.",
         "tags": [
@@ -8926,10 +8636,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Thodupuzha Riverfront Terminal",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Thommankuthu_Waterfalls_IMG_20260626_143320766.jpg/960px-Thommankuthu_Waterfalls_IMG_20260626_143320766.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Thommankuthu_Waterfalls_IMG_20260626_143320766.jpg/960px-Thommankuthu_Waterfalls_IMG_20260626_143320766.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A beautiful seven-step waterfall perfect for trekking and enjoying the lush greenery of the Western Ghats.",
         "tags": [
@@ -8953,10 +8662,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thodupuzha Riverfront Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A historic and architecturally significant church known for its vibrant annual feast and heritage value.",
         "tags": [
@@ -8980,10 +8688,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Thodupuzha Riverfront Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "An iconic spot in Thodupuzha famous for authentic Kerala meals and traditional non-vegetarian dishes.",
         "tags": [
@@ -9007,10 +8714,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Thodupuzha Riverfront Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "A serene reservoir perfect for a quiet afternoon boat ride away from the town's hustle.",
         "tags": [
@@ -9034,10 +8740,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thodupuzha Riverfront Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The best place to catch a refreshing evening breeze and a calm sunset along the banks of the Thodupuzha river.",
         "tags": [
@@ -9075,10 +8780,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Marayoor Sandalwood Forest Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A picturesque cascading waterfall that is perfect for a quick dip on the way to Munnar.",
         "tags": [
@@ -9102,10 +8806,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Marayoor Sandalwood Forest Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Fascinating prehistoric burial chambers that offer a deep glimpse into the region's ancient heritage.",
         "tags": [
@@ -9129,10 +8832,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Marayoor Sandalwood Forest Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Watch the traditional process of making the famous Marayoor jaggery and buy the freshest batch straight from the source.",
         "tags": [
@@ -9156,10 +8858,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Marayoor Sandalwood Forest Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "A unique, protected sanctuary where you can walk among the natural sandalwood trees in a serene atmosphere.",
         "tags": [
@@ -9183,10 +8884,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Marayoor Sandalwood Forest Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chembra_Peak_Heart_Lake.jpg/960px-Chembra_Peak_Heart_Lake.jpg"
         ],
         "review": "A calm spot by the river that is perfect for an evening walk and catching a beautiful sunset over the valley.",
         "tags": [
@@ -9224,10 +8924,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Pala Meenachil River Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "The river that defines Pala, perfect for a peaceful evening walk along the banks during sunset.",
         "tags": [
@@ -9251,10 +8950,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Pala Meenachil River Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "An iconic historical landmark with beautiful architecture that stands as the heart of the town.",
         "tags": [
@@ -9278,10 +8976,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Pala Meenachil River Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "A legendary local spot known for authentic Kerala meals and traditional snacks that locals frequent daily.",
         "tags": [
@@ -9305,10 +9002,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Pala Meenachil River Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Vagamon_Pine_Forest.jpg/960px-Vagamon_Pine_Forest.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Vagamon_Pine_Forest.jpg/960px-Vagamon_Pine_Forest.jpg"
         ],
         "review": "A short drive from Pala, these rolling hills offer a quiet, mist-covered escape from the town hustle.",
         "tags": [
@@ -9332,10 +9028,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Pala Meenachil River Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The go-to spot for an evening chill, where locals gather to walk and relax under the twilight sky.",
         "tags": [
@@ -9373,10 +9068,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vaikom Temple Ferry Jetty",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A perfect spot to enjoy the sunset with a calm view of the backwaters and the walkway.",
         "tags": [
@@ -9400,10 +9094,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vaikom Temple Ferry Jetty",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "One of the oldest temples in Kerala known for its stunning traditional architecture and peaceful atmosphere.",
         "tags": [
@@ -9427,10 +9120,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vaikom Temple Ferry Jetty",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous for authentic Kuttanadan fish curry and spicy duck roast paired with fresh toddy.",
         "tags": [
@@ -9454,10 +9146,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Vaikom Temple Ferry Jetty",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A quiet and well-maintained park tucked away from the main town, perfect for a peaceful evening retreat.",
         "tags": [
@@ -9481,10 +9172,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Vaikom Temple Ferry Jetty",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "Great for an evening stroll to watch the local boat traffic and enjoy the cool breeze coming off the lake.",
         "tags": [
@@ -9522,10 +9212,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Cherthala Railway Station (SRTL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A serene beach where the backwaters meet the Arabian Sea, perfect for a quiet evening walk.",
         "tags": [
@@ -9549,10 +9238,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Cherthala Railway Station (SRTL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "An iconic heritage site with deep historical roots and stunning Portuguese-style architecture.",
         "tags": [
@@ -9576,10 +9264,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Cherthala Railway Station (SRTL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Try the authentic spicy duck roast and Karimeen Pollichathu for a true local culinary experience.",
         "tags": [
@@ -9603,10 +9290,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Cherthala Railway Station (SRTL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A peaceful escape offering panoramic views of the Vembanad Lake and a very tranquil atmosphere.",
         "tags": [
@@ -9630,10 +9316,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Cherthala Railway Station (SRTL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "The best spot in the heart of town for a relaxing evening walk among local greenery.",
         "tags": [
@@ -9671,10 +9356,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kayamkulam Junction (KYJ)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Krishnapuram_Palace_in_2021.jpeg/960px-Krishnapuram_Palace_in_2021.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Krishnapuram_Palace_in_2021.jpeg/960px-Krishnapuram_Palace_in_2021.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "An 18th-century palace housing a famous mural of Gajendra Moksham that is a must-see for history lovers.",
         "tags": [
@@ -9698,10 +9382,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kayamkulam Junction (KYJ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A serene backwater spot perfect for watching local fishermen and enjoying a quiet breeze away from the highway noise.",
         "tags": [
@@ -9725,10 +9408,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kayamkulam Junction (KYJ)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Known for its authentic Malabar-style Biryani, this is a staple dining destination for locals and travelers alike.",
         "tags": [
@@ -9752,10 +9434,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kayamkulam Junction (KYJ)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Azheeckal_Beach%2C_Kayamkulam.jpg/960px-Azheeckal_Beach%2C_Kayamkulam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Azheeckal_Beach%2C_Kayamkulam.jpg/960px-Azheeckal_Beach%2C_Kayamkulam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "An incredible sunset point where the backwaters meet the Arabian Sea, offering breathtaking views in the evening.",
         "tags": [
@@ -9779,10 +9460,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kayamkulam Junction (KYJ)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Azheekkal_Bridge_view_from_Harbor_2022_June.jpg/960px-Azheekkal_Bridge_view_from_Harbor_2022_June.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Azheekkal_Bridge_view_from_Harbor_2022_June.jpg/960px-Azheekkal_Bridge_view_from_Harbor_2022_June.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "The bustling heart of the town, perfect for grabbing a local tea and watching the vibrant life of Kayamkulam unfold.",
         "tags": [
@@ -9820,10 +9500,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Chengannur Railway Station (CNGR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A serene hilltop spot with massive rocks that offers a panoramic view of the surrounding lush greenery and is steeped in local folklore.",
         "tags": [
@@ -9847,10 +9526,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Chengannur Railway Station (CNGR)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Chengannur_Mahadeva4.JPG/960px-Chengannur_Mahadeva4.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Chengannur_Mahadeva4.JPG/960px-Chengannur_Mahadeva4.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "An ancient and architecturally significant temple that stands as the heart of Chengannur's rich cultural and religious heritage.",
         "tags": [
@@ -9874,10 +9552,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Chengannur Railway Station (CNGR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "The go-to spot in town for authentic Kerala vegetarian breakfast and traditional meals served in a clean and bustling environment.",
         "tags": [
@@ -9901,10 +9578,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Chengannur Railway Station (CNGR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A quiet and peaceful retreat along the banks of the Pamba river, perfect for those seeking solitude away from the town center.",
         "tags": [
@@ -9928,10 +9604,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Chengannur Railway Station (CNGR)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "A simple evening walk along the town's key transit point provides a great view of the city lights and the movement of the local crowd.",
         "tags": [
@@ -9969,10 +9644,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Haripad Railway Station (HAD)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A serene and pristine beach where the river meets the Arabian Sea, perfect for quiet sunset strolls.",
         "tags": [
@@ -9996,10 +9670,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Haripad Railway Station (HAD)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "An ancient and mystical forest temple dedicated to serpent gods with thousands of stone snake idols.",
         "tags": [
@@ -10023,10 +9696,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Haripad Railway Station (HAD)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "The go-to spot in Haripad for an authentic Kerala vegetarian Sadya and crispy Masala Dosa.",
         "tags": [
@@ -10050,10 +9722,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Haripad Railway Station (HAD)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A peaceful, less-crowded stretch of backwaters ideal for watching country boats pass by in silence.",
         "tags": [
@@ -10077,10 +9748,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Haripad Railway Station (HAD)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Mannarasala_temple.jpg/960px-Mannarasala_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Mannarasala_temple.jpg/960px-Mannarasala_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The vibrant heart of the town, perfect for a quick evening tea and observing the local rush.",
         "tags": [
@@ -10118,10 +9788,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Mavelikara Railway Station (MVLK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "An ancient and historically significant temple with beautiful stone carvings and a serene atmosphere.",
         "tags": [
@@ -10145,10 +9814,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Mavelikara Railway Station (MVLK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A peaceful spot by the river ideal for evening walks and watching the local boat traffic.",
         "tags": [
@@ -10172,10 +9840,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Mavelikara Railway Station (MVLK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A glimpse into the royal history of Travancore with well-preserved architecture.",
         "tags": [
@@ -10199,10 +9866,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Mavelikara Railway Station (MVLK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Famous among locals for authentic Kerala breakfast and traditional plantain leaf meals.",
         "tags": [
@@ -10226,10 +9892,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Mavelikara Railway Station (MVLK)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Visiting during the evening prayer time provides a calming experience with traditional oil lamps glowing everywhere.",
         "tags": [
@@ -10267,10 +9932,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thiruvalla Railway Station (TRVL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A serene spot along the Manimala river perfect for watching the sunset and enjoying the evening breeze.",
         "tags": [
@@ -10294,10 +9958,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thiruvalla Railway Station (TRVL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "One of the oldest and most architecturally significant temples in Kerala, known for its intricate wood carvings and Kathakali performances.",
         "tags": [
@@ -10321,10 +9984,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Thiruvalla Railway Station (TRVL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "The go-to destination in Thiruvalla for authentic Kerala style Biryani and traditional non-vegetarian meals.",
         "tags": [
@@ -10348,10 +10010,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thiruvalla Railway Station (TRVL)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "A peaceful and spiritually significant pilgrim center located on the banks of the Pamba river, ideal for quiet reflection.",
         "tags": [
@@ -10375,10 +10036,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Thiruvalla Railway Station (TRVL)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Sree_Vallabha_Temple_Thiruvalla.jpg/960px-Sree_Vallabha_Temple_Thiruvalla.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Sree_Vallabha_Temple_Thiruvalla.jpg/960px-Sree_Vallabha_Temple_Thiruvalla.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "A wide, well-lit stretch that has become the town's favorite spot for evening jogs and family walks.",
         "tags": [
@@ -10416,10 +10076,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Adoor Central Transit Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A serene and historic landmark that is the heart of Adoor's cultural heritage.",
         "tags": [
@@ -10443,10 +10102,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Adoor Central Transit Terminal",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Pandalam_palace2.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/6/6a/Pandalam_palace2.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "Located just a short drive away, this place is steeped in legend and historical significance.",
         "tags": [
@@ -10470,10 +10128,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Adoor Central Transit Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "A classic spot to enjoy authentic South Indian snacks and coffee with a nostalgic atmosphere.",
         "tags": [
@@ -10497,10 +10154,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Adoor Central Transit Terminal",
         "returnCost": 0,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Gandhi_Park%2CAdoor.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://upload.wikimedia.org/wikipedia/commons/6/6e/Gandhi_Park%2CAdoor.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The best place to soak in the evening hustle and bustle of Adoor town center.",
         "tags": [
@@ -10524,10 +10180,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Adoor Central Transit Terminal",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "A quiet and lush green retreat perfect for those seeking peace and nature outside the city.",
         "tags": [
@@ -10565,10 +10220,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Konni Elephant Reserve Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A unique opportunity to see rescued elephants in a protected forest environment.",
         "tags": [
@@ -10592,10 +10246,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Konni Elephant Reserve Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Famous for its coracle boat rides along the tranquil Kallar river, perfect for nature lovers.",
         "tags": [
@@ -10619,10 +10272,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Konni Elephant Reserve Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg"
         ],
         "review": "An ancient and culturally significant temple known for its powerful deity and traditional architecture.",
         "tags": [
@@ -10646,10 +10298,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Konni Elephant Reserve Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Experience authentic Kerala spice-heavy seafood curries paired with freshly tapped palm toddy.",
         "tags": [
@@ -10673,10 +10324,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Konni Elephant Reserve Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "A serene and quiet retreat tucked away from the main road, best visited after monsoon rains.",
         "tags": [
@@ -10714,10 +10364,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Ranni Pamba River Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A breathtaking waterfall where the water cascades down a rocky path, perfect for nature photography and scenic views.",
         "tags": [
@@ -10741,10 +10390,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ranni Pamba River Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A historically significant site representing the ecumenical heritage of the region, offering a very calm and spiritual atmosphere.",
         "tags": [
@@ -10768,10 +10416,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Ranni Pamba River Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Visit for an authentic taste of local Kerala toddy paired with spicy traditional fish curry and tapioca.",
         "tags": [
@@ -10795,10 +10442,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ranni Pamba River Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A quiet, lush green retreat away from the town center, ideal for those looking to experience the tranquil forest fringes of Ranni.",
         "tags": [
@@ -10822,10 +10468,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ranni Pamba River Station",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The best place to spend the evening watching the sunset over the Pamba river with cool breezes and peaceful surroundings.",
         "tags": [
@@ -10863,10 +10508,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Punalur Suspension Bridge Station (PUU)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/People_on_Punalur_Suspension_Bridge_-_Night_view%2C_2019.jpg/960px-People_on_Punalur_Suspension_Bridge_-_Night_view%2C_2019.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/People_on_Punalur_Suspension_Bridge_-_Night_view%2C_2019.jpg/960px-People_on_Punalur_Suspension_Bridge_-_Night_view%2C_2019.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A historic engineering marvel from the British era, perfect for a short walk and photography.",
         "tags": [
@@ -10890,10 +10534,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Punalur Suspension Bridge Station (PUU)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Punalur_suspension_bridge_1877.jpg/960px-Punalur_suspension_bridge_1877.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Punalur_suspension_bridge_1877.jpg/960px-Punalur_suspension_bridge_1877.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Offers a breathtaking panoramic view of the Kallada River and surrounding lush greenery.",
         "tags": [
@@ -10917,10 +10560,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Punalur Suspension Bridge Station (PUU)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Toddy_Shop_%282699390021%29.jpg/960px-Toddy_Shop_%282699390021%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Toddy_Shop_%282699390021%29.jpg/960px-Toddy_Shop_%282699390021%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Authentic Kerala toddy with spicy traditional fish curry that is a must-try for foodies.",
         "tags": [
@@ -10944,10 +10586,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Punalur Suspension Bridge Station (PUU)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Kallada_river_near_Uppood.jpg/960px-Kallada_river_near_Uppood.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Kallada_river_near_Uppood.jpg/960px-Kallada_river_near_Uppood.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The riverbank is the best spot to spend a quiet evening watching the sunset over the Kallada River.",
         "tags": [
@@ -10971,10 +10612,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Punalur Suspension Bridge Station (PUU)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Kallada_river_near_Uppood.jpg/960px-Kallada_river_near_Uppood.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Kallada_river_near_Uppood.jpg/960px-Kallada_river_near_Uppood.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "A serene and quiet retreat away from the town center, ideal for those seeking peace and nature.",
         "tags": [
@@ -11012,10 +10652,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Karunagappalli Station (KPY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "A serene coastal stretch where the backwaters meet the Arabian Sea, perfect for a peaceful walk.",
         "tags": [
@@ -11039,10 +10678,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Karunagappalli Station (KPY)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Krishnapuram_Palace_in_2021.jpeg/960px-Krishnapuram_Palace_in_2021.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Krishnapuram_Palace_in_2021.jpeg/960px-Krishnapuram_Palace_in_2021.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "An 18th-century architectural marvel known for its Kayamkulam Gajendra mural and beautiful garden.",
         "tags": [
@@ -11066,10 +10704,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Karunagappalli Station (KPY)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/%22Hyderabadi_Dum_Biryani%22.jpg/960px-%22Hyderabadi_Dum_Biryani%22.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "A legendary local spot famous for serving authentic, spicy Malabar biryani that locals swear by.",
         "tags": [
@@ -11093,10 +10730,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Karunagappalli Station (KPY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "A tranquil spiritual retreat located on the banks of the backwaters, offering a quiet environment for reflection.",
         "tags": [
@@ -11120,10 +10756,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Karunagappalli Station (KPY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The go-to evening spot for locals to enjoy the breeze and sunset views over the water.",
         "tags": [
@@ -11161,10 +10796,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kottarakara Kathakali Station (KKZ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A legendary temple famous for its unniyappam prasadam and being the birthplace of Kathakali.",
         "tags": [
@@ -11188,10 +10822,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kottarakara Kathakali Station (KKZ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "While located a short drive away, this massive rock sculpture is a world-renowned landmark for the region.",
         "tags": [
@@ -11215,10 +10848,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kottarakara Kathakali Station (KKZ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Historical site known for its deep connection to the origins of the Kathakali dance form.",
         "tags": [
@@ -11242,10 +10874,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kottarakara Kathakali Station (KKZ)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "A reliable spot for authentic Kerala meals and spicy local chicken dishes in the heart of town.",
         "tags": [
@@ -11269,10 +10900,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kottarakara Kathakali Station (KKZ)",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Kottarakkara_Ganapathi_Temple_2022_September.jpg/960px-Kottarakkara_Ganapathi_Temple_2022_September.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Kottarakkara_Ganapathi_Temple_2022_September.jpg/960px-Kottarakkara_Ganapathi_Temple_2022_September.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "A peaceful urban green space perfect for a quiet evening walk after exploring the town markets.",
         "tags": [
@@ -11310,10 +10940,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kovalam Lighthouse Beach Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "The most iconic beach in Kovalam, perfect for a long walk and climbing the striped lighthouse for a panoramic view.",
         "tags": [
@@ -11337,10 +10966,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kovalam Lighthouse Beach Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A beautiful historical palace built in 1932 that showcases traditional Kerala architecture amidst lush greenery.",
         "tags": [
@@ -11364,10 +10992,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Kovalam Lighthouse Beach Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Highly recommended for authentic Kerala seafood curries served with a stunning ocean view.",
         "tags": [
@@ -11391,10 +11018,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kovalam Lighthouse Beach Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg/960px-Kovalam_Beach_Lighthouse_Thiruvananthapuram_Kerala.jpg"
         ],
         "review": "A much quieter and more peaceful stretch of sand compared to the main beaches, ideal for relaxation.",
         "tags": [
@@ -11418,10 +11044,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Kovalam Lighthouse Beach Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "Head here in the late afternoon to watch the fishing boats return against the backdrop of a vibrant sunset.",
         "tags": [
@@ -11459,10 +11084,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Neyyattinkara Railway Station (NYY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "A deeply spiritual and historically significant temple known for its ancient architecture and peaceful atmosphere.",
         "tags": [
@@ -11486,10 +11110,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Neyyattinkara Railway Station (NYY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/LANRoomPittsburgh.jpg/960px-LANRoomPittsburgh.jpg"
         ],
         "review": "Experience the unique confluence of river, lake, and sea on a serene boat ride through the mangroves.",
         "tags": [
@@ -11513,10 +11136,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Neyyattinkara Railway Station (NYY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Palakkad_Fort_Tipu_Sultan.jpg/960px-Palakkad_Fort_Tipu_Sultan.jpg"
         ],
         "review": "Famous for the historic Aamachira pond and the legendary story of King Marthanda Varma hiding in the jackfruit tree.",
         "tags": [
@@ -11540,10 +11162,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Neyyattinkara Railway Station (NYY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "The go-to spot for authentic Kerala-style spicy beef fry and porotta that locals have been craving for years.",
         "tags": [
@@ -11567,10 +11188,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Neyyattinkara Railway Station (NYY)",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sunrise_at_Cherai_Beach.jpg/960px-Sunrise_at_Cherai_Beach.jpg"
         ],
         "review": "An untouched, quiet stretch where the river meets the sea, perfect for watching a calm sunset away from crowds.",
         "tags": [
@@ -11608,10 +11228,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Nedumangad Koyikkal Palace Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A serene cascading waterfall perfect for a nature trek amidst the dense forests of the Western Ghats.",
         "tags": [
@@ -11635,10 +11254,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Nedumangad Koyikkal Palace Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Sky_view_of_nedumangad_town.jpg/960px-Sky_view_of_nedumangad_town.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Sky_view_of_nedumangad_town.jpg/960px-Sky_view_of_nedumangad_town.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "An ancient historical site that offers a glimpse into the regal past and heritage of the Travancore royals.",
         "tags": [
@@ -11662,10 +11280,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Nedumangad Koyikkal Palace Hub",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "A beloved local staple famous for its authentic Kerala breakfast and traditional banana leaf sadya.",
         "tags": [
@@ -11689,10 +11306,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Nedumangad Koyikkal Palace Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Padmanabhaswamy_Temple_Thiruvananthapuram.jpg/960px-Padmanabhaswamy_Temple_Thiruvananthapuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Padmanabhaswamy_Temple_Thiruvananthapuram.jpg/960px-Padmanabhaswamy_Temple_Thiruvananthapuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/960px-Jatayu_Earth_Centre.jpg"
         ],
         "review": "A quiet, lush green retreat away from the city hustle, ideal for peaceful meditation and walks.",
         "tags": [
@@ -11716,10 +11332,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Nedumangad Koyikkal Palace Hub",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Vamanapuram_river_that_flows_through_Vithura.jpg/960px-Vamanapuram_river_that_flows_through_Vithura.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Vamanapuram_river_that_flows_through_Vithura.jpg/960px-Vamanapuram_river_that_flows_through_Vithura.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Varikkasseri_Nalukettu.jpg"
         ],
         "review": "The perfect evening spot to sit by the riverbank and enjoy a stunning view of the sunset.",
         "tags": [
@@ -11757,10 +11372,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ponmudi Golden Valley Gateway",
         "returnCost": 0,
-        "photo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Morning_at_Ponmudi.jpg/960px-Morning_at_Ponmudi.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ponmudi_Hill_Station_Kerala.jpg/960px-Ponmudi_Hill_Station_Kerala.jpg",
         "photos": [
-          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Morning_at_Ponmudi.jpg/960px-Morning_at_Ponmudi.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ponmudi_Hill_Station_Kerala.jpg/960px-Ponmudi_Hill_Station_Kerala.jpg"
         ],
         "review": "Drive through the 22 hairpin bends to witness breathtaking mist-covered mountains and panoramic vistas.",
         "tags": [
@@ -11784,10 +11398,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Ponmudi Golden Valley Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg"
         ],
         "review": "A refreshing trek through the dense forest leads to this cascading waterfall that is best visited after monsoon.",
         "tags": [
@@ -11811,10 +11424,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ponmudi Golden Valley Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Vazhachal_Falls_Chalakudy.jpg/960px-Vazhachal_Falls_Chalakudy.jpg"
         ],
         "review": "Escape the crowds at the main viewpoint and head to this quieter ridge for a serene experience above the clouds.",
         "tags": [
@@ -11838,10 +11450,9 @@ export const KERALA_CITIES = {
         "transitText": "🛺 12m • ₹35",
         "returnText": "Back to Ponmudi Golden Valley Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80",
-          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Hyderabadi_Chicken_Biryani.jpg/960px-Hyderabadi_Chicken_Biryani.jpg"
         ],
         "review": "Enjoy a hot cup of tea or a simple Kerala meal while looking out over the misty tea plantations.",
         "tags": [
@@ -11865,10 +11476,9 @@ export const KERALA_CITIES = {
         "transitText": "🚶 8m • Free",
         "returnText": "Back to Ponmudi Golden Valley Gateway",
         "returnCost": 0,
-        "photo": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg",
         "photos": [
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
-          "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80"
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kochi_Skyline_Marine_Drive_Night.jpg/960px-Kochi_Skyline_Marine_Drive_Night.jpg"
         ],
         "review": "The road leading towards the sanctuary is perfect for a quiet sunset walk with a high chance of spotting local wildlife.",
         "tags": [
@@ -11880,3 +11490,4 @@ export const KERALA_CITIES = {
     ]
   }
 };
+export default KERALA_CITIES;

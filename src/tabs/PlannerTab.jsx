@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import places from '../data/placesSeed';
+import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { filterCandidates, buildFallbackPlans } from '../utils/plannerMath';
 import { ollamaChat } from '../utils/ollama';
 import { getBackendUrl } from '../utils/apiConfig';
@@ -23,7 +24,8 @@ export default function PlannerTab({ location, settings }) {
 
   const handleOpenStopRides = (stop) => {
     const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
-    const all = [...places, ...stored];
+    const citySpots = Object.values(KERALA_CITIES).flatMap((c) => c.spots || []);
+    const all = [...stored, ...citySpots, ...places];
     const matched = all.find(
       (p) => (p.name || '').toLowerCase() === (stop.name || '').toLowerCase()
     ) || all.find(
@@ -47,11 +49,12 @@ export default function PlannerTab({ location, settings }) {
     const buffer = mode === 'Waiting for Train/Flight' ? 30 : 0;
     const usableTimeMins = timeHrs * 60 - buffer;
     const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
+    const citySpots = Object.values(KERALA_CITIES).flatMap((c) => c.spots || []);
     // Strictly deduplicate combined spots by normalized name
-    const rawAll = [...stored, ...places];
+    const rawAll = [...stored, ...citySpots, ...places];
     const seenMap = new Set();
     const all = rawAll.filter((p) => {
-      const k = (p.name || '').toLowerCase().trim();
+      const k = (p.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
       if (!k || seenMap.has(k)) return false;
       seenMap.add(k);
       return true;
@@ -63,13 +66,27 @@ export default function PlannerTab({ location, settings }) {
     const dedupePlanStops = (planList) => {
       return (planList || []).map((p) => {
         const stopSeen = new Set();
+        let runningCost = 0;
         const cleanStops = (p.stops || []).filter((s) => {
-          const k = (s.name || s.location || '').toLowerCase().trim();
+          const raw = (s.name || s.location || '').toLowerCase();
+          // Strip bracketed text and special chars to detect root duplicate
+          const k = raw.replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
           if (!k || stopSeen.has(k)) return false;
+          // Substring duplicate detection for variations
+          for (const existing of stopSeen) {
+            if (existing.length >= 6 && (k.includes(existing) || existing.includes(k))) {
+              return false;
+            }
+          }
           stopSeen.add(k);
+          runningCost += (s.fare || 0) + (s.expense || 0);
           return true;
         });
-        return { ...p, stops: cleanStops };
+        return {
+          ...p,
+          stops: cleanStops,
+          totalCost: runningCost > 0 ? runningCost : p.totalCost,
+        };
       });
     };
 
@@ -77,8 +94,9 @@ export default function PlannerTab({ location, settings }) {
       if (candidates.length === 0) throw new Error('No candidates match your filters');
       const prompt = `You are a local Kerala travel planner. Based on these ${candidates.length} filtered spots (already within time and budget), create EXACTLY 3 travel plans as JSON.
 
-CRITICAL DEDUPLICATION RULE:
-Every stop within a plan MUST be a completely unique place. DO NOT repeat the same spot or location twice in any itinerary.
+STRICT DEDUPLICATION & TIME RULES:
+1. NEVER REPEAT ANY PLACE. Every single stop across the ENTIRE itinerary must be a strictly unique location.
+2. DO NOT REPEAT PLACES JUST TO FILL EXTRA TIME OR BUDGET. If the user asked for 5 hours or high budget, but unique matching spots only take 2 or 3 hours, DO NOT add duplicate stops to fill time! Stop the plan once all unique spots are visited. Remaining time is leisure buffer.
 
 User preferences: Mode=${mode}, Time=${timeHrs}hrs (usable=${usableTimeMins}min), Budget=₹${budget}, Moods=${[...moods, customMood].filter(Boolean).join(', ')}
 
