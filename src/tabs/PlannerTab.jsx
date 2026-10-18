@@ -3,6 +3,7 @@ import places from '../data/placesSeed';
 import { filterCandidates, buildFallbackPlans } from '../utils/plannerMath';
 import { ollamaChat } from '../utils/ollama';
 import { Loader2, BrainCircuit, IndianRupee, Clock, MapPin } from 'lucide-react';
+import SpotUndooLoadingScreen from '../components/SpotUndooLoadingScreen';
 
 const MOODS = ['Chill', 'Street Food', 'Hidden Nature', 'Gaming', 'Party'];
 const MODES = ['Quick Free Time', 'Waiting for Train/Flight', 'Few Days Trip'];
@@ -93,6 +94,7 @@ Return this JSON structure:
 
   return (
     <div className="p-4 space-y-5">
+      {loading && <SpotUndooLoadingScreen />}
       {/* Mode */}
       <div className="space-y-2">
         <label className="text-xs text-gray-400 uppercase tracking-wider">Mode</label>

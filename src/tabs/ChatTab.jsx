@@ -5,6 +5,7 @@ import { ollamaChat } from '../utils/ollama';
 import ImageCarousel from '../components/ImageCarousel';
 import { getBackendUrl } from '../utils/apiConfig';
 import { haversineKm } from '../utils/plannerMath';
+import SpotUndooLoadingScreen from '../components/SpotUndooLoadingScreen';
 
 const MODES = [
   { id: 'layover', label: '🚆 Layover (Train/Flight)' },
@@ -829,53 +830,13 @@ Return JSON in this format:
 
   return (
     <div className="space-y-3 pb-8">
-      {/* FULLSCREEN AI PROCESSING & LOCATION LOADING MODAL */}
+      {/* BRAND NEW SPOT-UNDOO FULLSCREEN LOADING SCREEN (EXACT MATCH TO MOCKUP) */}
       {loading && (
-        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white border-[3px] border-black rounded-3xl p-6 shadow-[0_10px_0_0_#000000] max-w-sm w-full text-center space-y-4">
-            {/* Animated Pin / Radar Pulse */}
-            <div className="relative w-16 h-16 mx-auto flex items-center justify-center">
-              <div className="absolute inset-0 rounded-full border-4 border-dashed border-[#0B3BF4] animate-spin" />
-              <div className="w-10 h-10 rounded-full bg-amber-400 border-2 border-black flex items-center justify-center font-black text-xl shadow-[0_2px_0_0_#000000]">
-                📍
-              </div>
-            </div>
-
-            <div className="space-y-1">
-              <h3 className="font-black text-lg text-black tracking-tight">
-                Processing Location & Itinerary...
-              </h3>
-              <p className="text-xs font-bold text-gray-600">
-                Anchored to <span className="text-[#0B3BF4] font-black">{currentCity.displayName}</span>
-              </p>
-            </div>
-
-            {/* Live Progress Milestones */}
-            <div className="bg-[#F4F6F9] border-[2px] border-black rounded-2xl p-3 text-left space-y-2 text-xs font-bold">
-              <div className="flex items-center gap-2 text-emerald-800">
-                <CheckCircle2 size={15} className="shrink-0 text-emerald-600" />
-                <span>Station Hub: {currentCity.hub.stationName}</span>
-              </div>
-              <div className="flex items-center gap-2 text-[#0B3BF4] animate-pulse">
-                <Loader2 size={15} className="shrink-0 animate-spin" />
-                <span>LLM reasoning local spots within ₹{maxBudget}...</span>
-              </div>
-              <div className="flex items-center gap-2 text-amber-800">
-                <Clock size={15} className="shrink-0 text-amber-600" />
-                <span>Locking {availableTimeHrs}hr safety return buffer...</span>
-              </div>
-            </div>
-
-            {/* Glowing Gradient Progress Line */}
-            <div className="w-full bg-gray-200 h-2.5 rounded-full border border-black overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-[#0B3BF4] via-cyan-400 to-[#F59E0B] rounded-full animate-pulse w-4/5" />
-            </div>
-
-            <p className="text-[10px] font-black uppercase text-gray-400 tracking-wider">
-              ✦ Spot-Undoo Kerala Edge Intelligence ✦
-            </p>
-          </div>
-        </div>
+        <SpotUndooLoadingScreen
+          title="Good spots are on the way."
+          subtitle="Finding little detours near you..."
+          hubName={currentCity.displayName}
+        />
       )}
 
       {/* VIEW 1: PRE-INTENT PROMPT SCREEN (Exact match to User Screenshot) */}
