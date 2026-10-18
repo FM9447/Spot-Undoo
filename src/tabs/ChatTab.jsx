@@ -295,36 +295,42 @@ export default function ChatTab({ location, setLocation, settings }) {
       }
     }
 
-    // 1. Check for explicit DROP / REMOVE commands
+    // 1. Universal Removal & Exclusion Intent Detection
     const isRemove =
-      lower.includes('remove') ||
-      lower.includes('drop') ||
-      lower.includes('delete') ||
-      lower.includes('cut') ||
-      lower.includes('leave');
+      /\b(?:remove|drop|delete|cut|leave|skip|cancel|omit|exclude|discard|clear|wipe|strip|erase|dump|toss)\b/i.test(lower) ||
+      /\b(?:take|get)\s*(?:out|away|rid|off)\b/i.test(lower) ||
+      /\b(?:leave\s*out)\b/i.test(lower) ||
+      /\b(?:no\s*need|don'?t\s*want|do\s*not\s*want|not\s*interested|without|avoid|hate|dislike)\b/i.test(lower) ||
+      /\b(?:don'?t\s*include|do\s*not\s*include|can\s*we\s*not|no\s*more)\b/i.test(lower) ||
+      /\b(?:minus|\-|less|reduce|fewer)\s*(\d+|one|two|three|four|all)?\s*(?:place|spot|stop)s?\b/i.test(lower) ||
+      /^(?:no|skip|drop|del|rm)\s+/i.test(lower.trim());
 
     const isAdd =
-      lower.includes('add') ||
-      lower.includes('include') ||
-      lower.includes('put') ||
-      lower.includes('want') ||
-      lower.includes('swap');
+      !isRemove &&
+      (/\b(?:add|include|put|want|swap|replace|insert|attach)\b/i.test(lower) ||
+       /^(?:add|put|give)\s+/i.test(lower.trim()));
 
     if (isRemove) {
-      if (lower.includes('1st') || lower.includes('first') || lower.includes('stop 1')) {
+      if (/\b(?:all|everything|entire|whole)\b/i.test(lower)) {
+        modifiedStops = [];
+        actionReason = 'Cleared all stops from route';
+      } else if (/\b(?:1st|first|start|beginning)\b/i.test(lower)) {
         const removed = modifiedStops.shift();
         actionReason = `Dropped 1st stop (${removed?.name || 'first stop'})`;
-      } else if (lower.includes('2nd') || lower.includes('second') || lower.includes('stop 2')) {
+      } else if (/\b(?:2nd|second)\b/i.test(lower)) {
         const removed = modifiedStops.splice(1, 1);
         actionReason = `Dropped 2nd stop (${removed[0]?.name || 'second stop'})`;
-      } else if (lower.includes('3rd') || lower.includes('third') || lower.includes('stop 3')) {
+      } else if (/\b(?:3rd|third)\b/i.test(lower)) {
         const removed = modifiedStops.splice(2, 1);
         actionReason = `Dropped 3rd stop (${removed[0]?.name || 'third stop'})`;
-      } else if (lower.includes('last')) {
+      } else if (/\b(?:4th|fourth)\b/i.test(lower)) {
+        const removed = modifiedStops.splice(3, 1);
+        actionReason = `Dropped 4th stop (${removed[0]?.name || 'fourth stop'})`;
+      } else if (/\b(?:last|end|final)\b/i.test(lower)) {
         const removed = modifiedStops.pop();
         actionReason = `Dropped last stop (${removed?.name || 'last stop'})`;
       } else {
-        // Check if user specifically named a stop currently in modifiedStops
+        // Check if user specifically named or referenced a stop in modifiedStops
         let matchIdx = -1;
         for (let i = 0; i < modifiedStops.length; i++) {
           const sName = (modifiedStops[i].name || '').toLowerCase();
@@ -332,10 +338,11 @@ export default function ChatTab({ location, setLocation, settings }) {
             matchIdx = i;
             break;
           }
+          // Match significant words from stop name
           const words = sName
             .replace(/[^\w\s]/g, '')
             .split(/\s+/)
-            .filter((w) => !['and', 'the', 'walk', 'park', 'spot', 'lane', 'view', 'step', 'steps', 'road', 'near', 'hotel', 'restaurant'].includes(w) && w.length >= 4);
+            .filter((w) => !['and', 'the', 'walk', 'park', 'spot', 'lane', 'view', 'step', 'steps', 'road', 'near', 'hotel', 'restaurant'].includes(w) && w.length >= 3);
           if (words.some((w) => lower.includes(w))) {
             matchIdx = i;
             break;
@@ -346,9 +353,25 @@ export default function ChatTab({ location, setLocation, settings }) {
           const removed = modifiedStops.splice(matchIdx, 1);
           actionReason = `Removed ${removed[0]?.name}`;
         } else if (modifiedStops.length > 0) {
-          // General remove ("remove a place", "remove 1 place", "drop that", "delete place")
-          const removed = modifiedStops.pop();
-          actionReason = `Removed ${removed?.name || 'place'}`;
+          // Parse numerical count if any ("remove 2 places", "drop two spots", "minus 3")
+          const numWords = { one: 1, two: 2, three: 3, four: 4, five: 5, both: 2, a: 1, 'an': 1 };
+          const cMatch = lower.match(/\b(?:remove|drop|delete|cut|skip|omit|minus|less)\s*(\d+|one|two|three|four|five|both|a|an)?\b/i);
+          let countToRemove = 1;
+          if (cMatch && cMatch[1]) {
+            const parsed = parseInt(cMatch[1]);
+            countToRemove = !isNaN(parsed) ? parsed : (numWords[cMatch[1].toLowerCase()] || 1);
+          }
+
+          const removedNames = [];
+          for (let i = 0; i < countToRemove && modifiedStops.length > 0; i++) {
+            const rem = modifiedStops.pop();
+            if (rem?.name) removedNames.push(rem.name);
+          }
+
+          actionReason =
+            removedNames.length > 1
+              ? `Removed ${removedNames.length} stops (${removedNames.join(', ')})`
+              : `Removed ${removedNames[0] || 'place'}`;
         }
       }
     }
