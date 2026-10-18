@@ -53,7 +53,7 @@ export default function Header({ location, setLocation, settings, setSettings, g
   return (
     <>
       {/* ── Main Header Bar (Touches top, left, right with rounded-b bottom radius) ── */}
-      <header className="w-full bg-white border-b-[3px] border-x-[3px] border-black rounded-b-[26px] px-4 pt-3.5 pb-3 flex items-center justify-between shadow-[0_4px_0_0_#000000] mb-3 sticky top-0 z-30">
+      <header className="w-full bg-white border-b-[3px] border-black rounded-b-[26px] px-4 pt-3.5 pb-3 flex items-center justify-between shadow-[0_4px_0_0_#000000] mb-3 sticky top-0 z-30">
         {/* Left: Logo */}
         <div className="flex items-center gap-2">
           <img

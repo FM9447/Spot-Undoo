@@ -86,7 +86,8 @@ export default function App() {
         <Login onLogin={handleLogin} onCancel={() => {}} />
         {showLoading && (
           <div
-            className={`fixed inset-0 z-50 bg-[#F4F6F9] flex flex-col items-center justify-center p-6 bg-[radial-gradient(#CBD5E1_1.2px,transparent_1.2px)] [background-size:16px_16px] transition-all duration-700 ease-out ${
+            style={{ zIndex: 99999 }}
+            className={`fixed inset-0 z-[99999] bg-[#F4F6F9] flex flex-col items-center justify-center p-6 transition-all duration-700 ease-out ${
               fadeLoading ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
             }`}
           >
@@ -107,7 +108,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen w-full max-w-md mx-auto relative flex flex-col font-sans overflow-x-hidden">
+    <div className="min-h-screen w-full sm:max-w-md sm:mx-auto relative flex flex-col font-sans overflow-x-hidden">
       {/* 1. Header (Touches top, left, right full-width) */}
       <Header
         location={location}
@@ -129,7 +130,7 @@ export default function App() {
       />
 
       {/* 2. Main Tab Body */}
-      <main className="flex-1 px-2.5 sm:px-4 pb-24">
+      <main className="flex-1 w-full px-2.5 sm:px-4 pb-24 overflow-x-hidden">
         {activeTab === 'explore' && (
           <ExploreTab location={location} setLocation={setLocation} />
         )}
@@ -150,7 +151,8 @@ export default function App() {
       {/* Loading Overlay with Smooth Fade-Out */}
       {showLoading && (
         <div
-          className={`fixed inset-0 z-50 bg-[#F4F6F9] flex flex-col items-center justify-center p-6 bg-[radial-gradient(#CBD5E1_1.2px,transparent_1.2px)] [background-size:16px_16px] transition-all duration-700 ease-out ${
+          style={{ zIndex: 99999 }}
+          className={`fixed inset-0 z-[99999] bg-[#F4F6F9] flex flex-col items-center justify-center p-6 transition-all duration-700 ease-out ${
             fadeLoading ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
           }`}
         >

@@ -315,31 +315,15 @@ export default function ExploreTab({ location, setLocation }) {
         </div>
       </div>
 
-      {/* 2. Category Filters & View Toggle */}
-      <div className="flex items-center justify-between gap-1 overflow-x-auto pb-1 scrollbar-none">
-        <div className="flex items-center gap-1.5 shrink-0">
-          {CATEGORIES.map((cat) => {
-            const isSelected = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setActiveCategory(cat)}
-                className={`text-xs font-black px-3 py-1 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] active:translate-y-0.5 shrink-0 cursor-pointer ${
-                  isSelected
-                    ? 'bg-[#0B3BF4] text-white'
-                    : 'bg-white text-black hover:bg-gray-100'
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
-        </div>
-
+      {/* 2A. View Switcher Row & Spot Counter */}
+      <div className="flex items-center justify-between gap-2 px-0.5">
+        <span className="text-[11px] font-black text-gray-600 uppercase tracking-wider">
+          {filteredSpots.length} Spots Found
+        </span>
         {/* View Switcher: Map (Default) | Canvas | Grid */}
         <div className="shrink-0 flex items-center bg-white border-[2px] border-black rounded-full p-0.5 shadow-[0_2px_0_0_#000000]">
           <button
+            type="button"
             onClick={() => setViewMode('osm')}
             className={`px-2.5 py-1 rounded-full text-xs font-black transition cursor-pointer ${
               viewMode === 'osm' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
@@ -348,6 +332,7 @@ export default function ExploreTab({ location, setLocation }) {
             🗺️ Map
           </button>
           <button
+            type="button"
             onClick={() => setViewMode('cartoon')}
             className={`px-2 py-1 rounded-full text-xs font-black transition cursor-pointer ${
               viewMode === 'cartoon' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
@@ -356,6 +341,7 @@ export default function ExploreTab({ location, setLocation }) {
             🎨 Canvas
           </button>
           <button
+            type="button"
             onClick={() => setViewMode('grid')}
             className={`px-2 py-1 rounded-full text-xs font-black transition cursor-pointer ${
               viewMode === 'grid' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
@@ -364,6 +350,27 @@ export default function ExploreTab({ location, setLocation }) {
             📱 Grid
           </button>
         </div>
+      </div>
+
+      {/* 2B. Category Filters (Full width horizontal scroll) */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none w-full">
+        {CATEGORIES.map((cat) => {
+          const isSelected = activeCategory === cat;
+          return (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setActiveCategory(cat)}
+              className={`text-xs font-black px-3 py-1 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] active:translate-y-0.5 shrink-0 cursor-pointer ${
+                isSelected
+                  ? 'bg-[#0B3BF4] text-white'
+                  : 'bg-white text-black hover:bg-gray-100'
+              }`}
+            >
+              {cat}
+            </button>
+          );
+        })}
       </div>
 
       {/* 2B. City Region Filter Pills */}
