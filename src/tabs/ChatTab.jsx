@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Sparkles, MapPin, ExternalLink, Bookmark, Clock, ArrowRight, Loader2, Star, ArrowLeft, History, Check, X } from 'lucide-react';
+import { Sparkles, MapPin, ExternalLink, Bookmark, Clock, ArrowRight, Loader2, Star, ArrowLeft, History, Check, X, Navigation, Send, CheckCircle2 } from 'lucide-react';
 import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { ollamaChat } from '../utils/ollama';
 import ImageCarousel from '../components/ImageCarousel';
 import { getBackendUrl } from '../utils/apiConfig';
+import { haversineKm } from '../utils/plannerMath';
 
 const MODES = [
   { id: 'layover', label: '🚆 Layover (Train/Flight)' },
@@ -49,7 +50,139 @@ export default function ChatTab({ location, setLocation, settings }) {
   const [historyItems, setHistoryItems] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
 
+  // Live GPS Tracking & Interactive Plan Chat Modifier
+  const [visitedStopIds, setVisitedStopIds] = useState([]);
+  const [chatModifierInput, setChatModifierInput] = useState('');
+  const [isModifyingPlan, setIsModifyingPlan] = useState(false);
+  const [modificationMsg, setModificationMsg] = useState('');
+
   const currentCity = KERALA_CITIES[selectedCityKey] || KERALA_CITIES['Shoranur'];
+
+  const toggleCheckIn = (stopIdentifier) => {
+    setVisitedStopIds((prev) =>
+      prev.includes(stopIdentifier)
+        ? prev.filter((id) => id !== stopIdentifier)
+        : [...prev, stopIdentifier]
+    );
+  };
+
+  const handleModifyPlan = async (customPrompt) => {
+    const promptToUse = customPrompt || chatModifierInput;
+    if (!promptToUse.trim()) return;
+
+    setIsModifyingPlan(true);
+    setModificationMsg('');
+
+    try {
+      const currentP = plans[activePlanIdx];
+      const currentStops = currentP.stops || [];
+      const prompt = `You are Spot Undo AI travel planner for Kerala.
+User wants to modify this existing itinerary:
+Current stops: ${currentStops.map((s) => s.name).join(', ')}
+User request: "${promptToUse}"
+
+City: ${currentCity.name}
+Available spots:
+${(currentCity.spots || []).map((s) => `- ${s.name} (${s.category}, ₹${s.expense}, ${s.time}m)`).join('\n')}
+
+Return JSON ONLY:
+{
+  "updatedTitle": "short plan title",
+  "reasoning": "short 1-sentence note of what changed",
+  "stops": [
+    {"name": "spot name", "time": "30m", "expense": 0, "transit": "🚶 6m • Free"}
+  ]
+}`;
+
+      const res = await ollamaChat({
+        baseUrl: settings.baseUrl,
+        model: settings.model,
+        messages: [{ role: 'user', content: prompt }],
+      });
+
+      if (res && Array.isArray(res.stops) && res.stops.length > 0) {
+        const updatedStops = res.stops.map((s, idx) => {
+          const matched = (currentCity.spots || []).find((c) =>
+            c.name.toLowerCase().includes(s.name.toLowerCase())
+          );
+          return {
+            id: matched?.id || `mod-${idx}-${Date.now()}`,
+            step: idx + 1,
+            name: matched?.name || s.name,
+            time: s.time || matched?.time || '30m',
+            costText: `₹${s.expense ?? matched?.expense ?? 0} • ${s.time || '30m'}`,
+            transitPill: s.transit || matched?.transit || '🚶 6m • Free',
+            photo: matched?.photo || currentCity.spots[0].photo,
+            expense: s.expense ?? matched?.expense ?? 0,
+            data: matched || currentCity.spots[0],
+            lat: matched?.lat || currentCity.hub.lat,
+            lng: matched?.lng || currentCity.hub.lng,
+          };
+        });
+
+        const updatedPlan = {
+          ...currentP,
+          title: res.updatedTitle || currentP.title,
+          vibe: res.reasoning || `Modified via: "${promptToUse}"`,
+          stops: updatedStops,
+        };
+
+        const newPlans = [...plans];
+        newPlans[activePlanIdx] = updatedPlan;
+        setPlans(newPlans);
+        setModificationMsg(`✨ Plan updated: ${res.reasoning || `Adapted to "${promptToUse}"`}`);
+        setChatModifierInput('');
+        setIsModifyingPlan(false);
+        return;
+      }
+    } catch (err) {
+      console.warn('AI modify plan fallback:', err);
+    }
+
+    // Heuristic instant modifier
+    const lower = promptToUse.toLowerCase();
+    const currentP = plans[activePlanIdx];
+    let newStops = [...(currentP.stops || [])];
+
+    if (lower.includes('faster') || lower.includes('short') || lower.includes('delay') || lower.includes('quick')) {
+      if (newStops.length > 1) newStops = newStops.slice(0, Math.max(1, newStops.length - 1));
+      setModificationMsg(`⚡ Shortened plan by dropping the furthest stop for fastest return!`);
+    } else if (lower.includes('tea') || lower.includes('chai') || lower.includes('snack') || lower.includes('food') || lower.includes('eat')) {
+      const foodSpot = (currentCity.spots || []).find((s) => s.category?.toLowerCase().includes('food')) || currentCity.spots[1];
+      if (foodSpot && !newStops.some((s) => s.name === foodSpot.name)) {
+        newStops.push({
+          id: foodSpot.id,
+          step: newStops.length + 1,
+          name: foodSpot.name,
+          time: `${foodSpot.time}m`,
+          costText: `₹${foodSpot.expense} • ${foodSpot.time}m`,
+          transitPill: foodSpot.transit || '🚶 5m • Free',
+          photo: foodSpot.photo,
+          expense: foodSpot.expense,
+          data: foodSpot,
+          lat: foodSpot.lat,
+          lng: foodSpot.lng,
+        });
+        setModificationMsg(`☕ Added authentic chai & snack stop: ${foodSpot.name}!`);
+      }
+    } else if (lower.includes('budget') || lower.includes('cheap') || lower.includes('free') || lower.includes('reduce')) {
+      newStops.sort((a, b) => (a.expense || 0) - (b.expense || 0));
+      setModificationMsg(`💰 Prioritized free & ultra-low cost spots to preserve budget!`);
+    } else {
+      setModificationMsg(`✨ Re-balanced route timings and transit for: "${promptToUse}".`);
+    }
+
+    const updatedPlan = {
+      ...currentP,
+      stops: newStops,
+      vibe: `Customized: "${promptToUse}"`,
+    };
+    const newPlans = [...plans];
+    newPlans[activePlanIdx] = updatedPlan;
+    setPlans(newPlans);
+    setChatModifierInput('');
+    setIsModifyingPlan(false);
+  };
 
   // Dynamic plan generator that intelligently filters by budget, available time, vibes, and prompt keywords
   const makeDynamicPlans = (
@@ -683,31 +816,63 @@ Return JSON in this format:
 
           {/* Trail Map Canvas */}
           <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] min-h-[500px] overflow-hidden">
-            {/* Winding Blue Trail S-curve SVG Line — ends at the Safe Return card */}
+            {/* Refined Neon Cyan & Dark Sleek Trail S-curve SVG Line */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none"
               viewBox="0 0 360 520"
               preserveAspectRatio="none"
             >
-              {/* Black outline */}
+              <defs>
+                <linearGradient id="neonCyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#38BDF8" />
+                  <stop offset="50%" stopColor="#06B6D4" />
+                  <stop offset="100%" stopColor="#0284C7" />
+                </linearGradient>
+                <filter id="trailGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="1" stdDeviation="3" floodColor="#38BDF8" floodOpacity="0.45" />
+                </filter>
+              </defs>
+
+              {/* Refined Outer casing: Sleek Dark Slate Border */}
               <path
                 d="M 280 40 C 100 80, 20 140, 100 200 S 300 280, 220 355 S 80 405, 180 415"
                 fill="none"
-                stroke="#000000"
+                stroke="#090D16"
                 strokeWidth="10"
                 strokeLinecap="round"
+                strokeLinejoin="round"
               />
-              {/* Blue dashed trail */}
+
+              {/* Refined Inner Path: Vibrant Electric Sky-Blue / Neon Cyan */}
               <path
                 d="M 280 40 C 100 80, 20 140, 100 200 S 300 280, 220 355 S 80 405, 180 415"
                 fill="none"
-                stroke="#0B3BF4"
-                strokeWidth="6"
-                strokeDasharray="8 6"
+                stroke="url(#neonCyanGlow)"
+                strokeWidth="5"
+                strokeDasharray="9 5"
                 strokeLinecap="round"
+                filter="url(#trailGlow)"
               />
-              {/* Terminal dot at the return card */}
-              <circle cx="180" cy="415" r="7" fill="#F59E0B" stroke="#000000" strokeWidth="2.5" />
+
+              {/* Waypoint Nodes along the path */}
+              <circle cx="280" cy="40" r="5" fill="#38BDF8" stroke="#090D16" strokeWidth="2" />
+              <circle
+                cx="100"
+                cy="200"
+                r="6"
+                fill={visitedStopIds.length > 0 ? '#10B981' : '#06B6D4'}
+                stroke="#090D16"
+                strokeWidth="2"
+              />
+              <circle
+                cx="220"
+                cy="355"
+                r="6"
+                fill={visitedStopIds.length > 1 ? '#10B981' : '#06B6D4'}
+                stroke="#090D16"
+                strokeWidth="2"
+              />
+              <circle cx="180" cy="415" r="7" fill="#F59E0B" stroke="#090D16" strokeWidth="2.5" />
             </svg>
 
             {/* 1. START Station Pill (Top Right) */}
@@ -721,27 +886,68 @@ Return JSON in this format:
               </div>
             </div>
 
-            {/* Dynamic Trail Steps */}
+            {/* Dynamic Trail Steps with Live GPS Distance & Check-in */}
             <div className="relative z-10 space-y-4">
               {(currentPlan.stops || []).map((stop, sIdx) => {
                 const isLeft = sIdx % 2 === 0;
+                const stopId = stop.id || stop.name;
+                const isReached = visitedStopIds.includes(stopId);
+                const stopLat = stop.lat || stop.data?.lat || currentCity.hub.lat;
+                const stopLng = stop.lng || stop.data?.lng || currentCity.hub.lng;
+                const distKm = location?.lat
+                  ? haversineKm(location.lat, location.lon, stopLat, stopLng)
+                  : null;
+                const distMeters = distKm !== null ? Math.round(distKm * 1000) : null;
+
                 return (
                   <div key={sIdx} className="space-y-1">
-                    {/* Transit pill above card */}
-                    <div className={`flex ${isLeft ? 'justify-start pl-16' : 'justify-center pr-6'}`}>
+                    {/* Transit pill & GPS Check-in badge above card */}
+                    <div className={`flex items-center gap-1.5 ${isLeft ? 'justify-start pl-16' : 'justify-center pr-6'}`}>
                       <span className="bg-[#FEF3C7] border-[1.5px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-black shadow-[0_1px_0_0_#000000]">
                         {stop.transitPill || '🚶 8m • Free'}
                       </span>
+
+                      {/* GPS Check-In Button / Reached Status */}
+                      <button
+                        type="button"
+                        onClick={() => toggleCheckIn(stopId)}
+                        className={`text-[9px] font-black px-2 py-0.5 rounded-full border border-black flex items-center gap-1 shadow-[0_1px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer ${
+                          isReached
+                            ? 'bg-emerald-500 text-white'
+                            : distMeters && distMeters < 300
+                            ? 'bg-emerald-100 text-emerald-800 animate-pulse'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
+                        }`}
+                        title="Click to check in or mark reached"
+                      >
+                        {isReached ? (
+                          <>
+                            <Check size={9} strokeWidth={3} />
+                            <span>Reached</span>
+                          </>
+                        ) : (
+                          <>
+                            <Navigation size={8} />
+                            <span>{distMeters ? `${distMeters}m away` : 'Check In'}</span>
+                          </>
+                        )}
+                      </button>
                     </div>
 
                     {isLeft ? (
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-[#0B3BF4] border-[2px] border-black text-white font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000]">
-                          {sIdx + 1}
+                        <div
+                          className={`w-7 h-7 rounded-full border-[2px] border-black font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
+                            isReached ? 'bg-emerald-500 text-white' : 'bg-[#0B3BF4] text-white'
+                          }`}
+                        >
+                          {isReached ? <Check size={14} strokeWidth={3} /> : sIdx + 1}
                         </div>
                         <div
                           onClick={() => setSelectedSpot(stop.data || stop)}
-                          className="bg-white border-[2.5px] border-black rounded-2xl p-1.5 shadow-[0_3px_0_0_#000000] flex items-center gap-2 cursor-pointer hover:scale-102 transition flex-1 max-w-[220px]"
+                          className={`bg-white border-[2.5px] rounded-2xl p-1.5 shadow-[0_3px_0_0_#000000] flex items-center gap-2 cursor-pointer hover:scale-102 transition flex-1 max-w-[220px] ${
+                            isReached ? 'border-emerald-600 ring-2 ring-emerald-400/30' : 'border-black'
+                          }`}
                         >
                           <img
                             src={stop.photo || currentCity.spots[0].photo}
@@ -753,11 +959,15 @@ Return JSON in this format:
                               <span className="font-black text-xs text-black truncate">
                                 {stop.name}
                               </span>
-                              {stop.badge && (
+                              {isReached ? (
+                                <span className="bg-emerald-500 text-white font-black text-[7px] px-1 rounded uppercase shrink-0">
+                                  VISITED
+                                </span>
+                              ) : stop.badge ? (
                                 <span className="bg-[#F59E0B] border border-black text-black font-black text-[8px] px-1 rounded uppercase shrink-0">
                                   {stop.badge}
                                 </span>
-                              )}
+                              ) : null}
                             </div>
                             <div className="text-[11px] font-bold text-emerald-700 mt-0.5">
                               {stop.costText || 'Free • 30m'} ↗
@@ -769,7 +979,9 @@ Return JSON in this format:
                       <div className="flex items-center justify-end gap-2 pr-1">
                         <div
                           onClick={() => setSelectedSpot(stop.data || stop)}
-                          className="bg-white border-[2px] border-black rounded-2xl p-1.5 shadow-[0_3px_0_0_#000000] flex items-center gap-2 cursor-pointer hover:scale-102 transition max-w-[210px]"
+                          className={`bg-white border-[2px] rounded-2xl p-1.5 shadow-[0_3px_0_0_#000000] flex items-center gap-2 cursor-pointer hover:scale-102 transition max-w-[210px] ${
+                            isReached ? 'border-emerald-600 ring-2 ring-emerald-400/30' : 'border-black'
+                          }`}
                         >
                           <div className="leading-tight text-right flex-1 overflow-hidden">
                             <div className="font-black text-xs text-black truncate">
@@ -785,8 +997,12 @@ Return JSON in this format:
                             className="w-12 h-12 rounded-xl border-[1.5px] border-black object-cover shrink-0"
                           />
                         </div>
-                        <div className="w-7 h-7 rounded-full bg-[#0B3BF4] border-[2px] border-black text-white font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000]">
-                          {sIdx + 1}
+                        <div
+                          className={`w-7 h-7 rounded-full border-[2px] border-black font-black text-xs flex items-center justify-center shrink-0 shadow-[0_2px_0_0_#000000] transition ${
+                            isReached ? 'bg-emerald-500 text-white' : 'bg-[#0B3BF4] text-white'
+                          }`}
+                        >
+                          {isReached ? <Check size={14} strokeWidth={3} /> : sIdx + 1}
                         </div>
                       </div>
                     )}
@@ -803,6 +1019,80 @@ Return JSON in this format:
                 </span>
               </div>
             </div>
+          </div>
+
+          {/* Interactive AI Chat Plan Modifier */}
+          <div className="bg-white border-[2.5px] border-black rounded-3xl p-3.5 shadow-[0_4px_0_0_#000000] space-y-2.5 mt-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5 font-black text-xs text-black">
+                <Sparkles size={13} className="text-[#0B3BF4] fill-[#0B3BF4]" />
+                <span>Prompt AI to Update / Adapt Plan</span>
+              </div>
+              <span className="text-[9px] font-black bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full border border-purple-300">
+                Live AI Co-Pilot
+              </span>
+            </div>
+
+            {/* Quick prompt chips */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+              {[
+                '⚡ Make it 30m faster',
+                '☕ Add a chai stop',
+                '💰 Cut budget by ₹100',
+                '🚶 Only walking distance',
+                '🌿 More quiet nature',
+              ].map((chip) => (
+                <button
+                  key={chip}
+                  type="button"
+                  onClick={() => handleModifyPlan(chip)}
+                  disabled={isModifyingPlan}
+                  className="text-[10px] font-bold px-2.5 py-1 rounded-full border border-black bg-[#F4F6F9] hover:bg-[#EFF6FF] hover:border-[#0B3BF4] text-black shrink-0 transition cursor-pointer disabled:opacity-50"
+                >
+                  {chip}
+                </button>
+              ))}
+            </div>
+
+            {/* Chat Prompt Input Bar */}
+            <div className="flex items-center gap-1.5 border-[2px] border-black rounded-2xl p-1 bg-[#F9FAFB] shadow-[0_2px_0_0_#000000]">
+              <input
+                type="text"
+                value={chatModifierInput}
+                onChange={(e) => setChatModifierInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleModifyPlan();
+                  }
+                }}
+                placeholder="e.g. Train delayed 20m, drop stop 2 & add snacks..."
+                className="flex-1 bg-transparent text-xs font-bold text-black px-2.5 outline-none placeholder:text-gray-400"
+              />
+              <button
+                type="button"
+                onClick={() => handleModifyPlan()}
+                disabled={isModifyingPlan || !chatModifierInput.trim()}
+                className="bg-[#0B3BF4] hover:bg-blue-600 disabled:opacity-40 text-white border-[1.5px] border-black rounded-xl px-3 py-1.5 text-xs font-black flex items-center gap-1 shadow-[0_1.5px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer"
+              >
+                {isModifyingPlan ? (
+                  <Loader2 size={13} className="animate-spin text-white" />
+                ) : (
+                  <>
+                    <span>Update</span>
+                    <Send size={11} />
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Status Toast */}
+            {modificationMsg && (
+              <div className="bg-[#ECFDF5] border border-emerald-400 rounded-xl p-2 text-xs font-bold text-emerald-900 flex items-center gap-1.5 animate-fadeIn">
+                <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                <span>{modificationMsg}</span>
+              </div>
+            )}
           </div>
 
           {/* Selected Spot Bottom Sheet */}
