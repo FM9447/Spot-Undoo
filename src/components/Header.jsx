@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Cpu, Globe, MapPin, Trash2, CheckCircle2, Loader2, Navigation, X, Settings, LogOut } from 'lucide-react';
+import { uploadImageToFirebase } from '../utils/firebaseStorage';
 
 export default function Header({ location, setLocation, settings, setSettings, gpsStatus = 'idle', onRefreshGPS, onLogout }) {
   const [showProfile, setShowProfile] = useState(false);
@@ -29,7 +30,7 @@ export default function Header({ location, setLocation, settings, setSettings, g
     const reader = new FileReader();
     reader.onload = (event) => {
       const img = new Image();
-      img.onload = () => {
+      img.onload = async () => {
         const canvas = document.createElement('canvas');
         const size = Math.min(img.width, img.height);
         canvas.width = 160;
@@ -39,7 +40,14 @@ export default function Header({ location, setLocation, settings, setSettings, g
         const sy = (img.height - size) / 2;
         ctx.drawImage(img, sx, sy, size, size, 0, 0, 160, 160);
         const compressed = canvas.toDataURL('image/jpeg', 0.8);
-        const updated = { ...currentUser, avatar: compressed };
+        let avatarUrl = compressed;
+        try {
+          const firebaseUrl = await uploadImageToFirebase(compressed, 'avatars');
+          if (firebaseUrl) avatarUrl = firebaseUrl;
+        } catch (err) {
+          console.warn('Firebase avatar upload warning:', err);
+        }
+        const updated = { ...currentUser, avatar: avatarUrl };
         setCurrentUser(updated);
         localStorage.setItem('currentUser', JSON.stringify(updated));
       };

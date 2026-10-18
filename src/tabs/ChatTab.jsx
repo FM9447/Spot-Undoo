@@ -1437,10 +1437,10 @@ Return JSON in this format:
 
           {/* Master Form Card */}
           <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-4">
-            {/* SEARCHABLE CITY / REGION HUB SELECTOR */}
+            {/* SEARCHABLE CITY SELECTOR */}
             <div className="space-y-1.5 relative" ref={cityDropdownRef}>
               <label className="text-[11px] font-black uppercase tracking-wider text-black flex items-center justify-between">
-                <span>SELECT CITY / REGION HUB</span>
+                <span>CITY</span>
                 <span className="text-[#0B3BF4] font-bold">📍 Active Pin</span>
               </label>
 
@@ -1561,10 +1561,10 @@ Return JSON in this format:
               )}
             </div>
 
-            {/* Trip Context Mode */}
+            {/* Mode */}
             <div className="space-y-1.5">
               <label className="text-[11px] font-black uppercase tracking-wider text-black">
-                TRIP CONTEXT MODE
+                MODE
               </label>
               <div className="grid grid-cols-3 gap-1.5">
                 {MODES.map((mode) => {
@@ -1591,22 +1591,21 @@ Return JSON in this format:
               <div className="flex items-center justify-between text-xs font-black">
                 <span>
                   Available Time:{' '}
-                  <span className="text-[#0B3BF4]">{availableTimeHrs} Hours</span>{' '}
-                  <span className="text-gray-500 font-bold">(30m buffer locked)</span>
+                  <span className="text-[#0B3BF4]">{availableTimeHrs} Hours</span>
                 </span>
               </div>
               <div className="relative pt-1">
                 <input
                   type="range"
                   min="1"
-                  max="14"
+                  max="24"
                   value={availableTimeHrs}
                   onChange={(e) => setAvailableTimeHrs(Number(e.target.value))}
                   className="w-full h-3 bg-gray-200 border-[2px] border-black rounded-lg appearance-none cursor-pointer accent-[#0B3BF4]"
                 />
                 <div className="flex justify-between text-[10px] font-bold text-gray-500 mt-1">
                   <span>1 hour</span>
-                  <span>14 hours</span>
+                  <span>24 hours</span>
                 </div>
               </div>
             </div>
@@ -1628,25 +1627,25 @@ Return JSON in this format:
               </span>
             </div>
 
-            {/* Tell us your kind of adventure */}
+            {/* Preferences */}
             <div className="space-y-1.5 pt-1">
               <div className="flex items-center justify-between text-xs font-black text-black">
-                <span>Tell us your kind of adventure</span>
+                <span>Preferences</span>
                 <span className="text-[#0B3BF4]">✦</span>
               </div>
               <textarea
                 value={promptText}
                 onChange={(e) => setPromptText(e.target.value)}
                 rows={3}
-                placeholder="e.g., 'I want quiet nature spots near water, amazing local pazhampori, and a gaming cafe with AC before my 5 PM train...'"
+                placeholder="e.g., quiet nature spots, beach walks, local chai stalls, or specific places you want to visit..."
                 className="w-full bg-white border-[2px] border-black rounded-2xl p-3 text-xs font-bold text-black placeholder-gray-400 outline-none resize-none shadow-[0_2px_0_0_#000000]"
               />
             </div>
 
-            {/* Quick Vibes Tap to Add */}
+            {/* Quick Vibes */}
             <div className="space-y-1.5">
               <label className="text-[10px] font-black uppercase tracking-wider text-black">
-                QUICK VIBES • TAP TO ADD
+                QUICK VIBES
               </label>
               <div className="flex flex-wrap gap-1.5">
                 {VIBE_CHIPS.map((chip) => {
@@ -1682,7 +1681,7 @@ Return JSON in this format:
               </>
             ) : (
               <>
-                <span>Generate 3 AI Travel Plans</span>
+                <span>Generate</span>
                 <span>⚡</span>
               </>
             )}

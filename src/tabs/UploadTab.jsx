@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
-import { Camera, Check, Pencil, Loader2, CheckCircle2, MapPin, Sparkles, Plus } from 'lucide-react';
+import { Camera, Check, Pencil, Loader2, CheckCircle2, MapPin, Sparkles, Plus, Globe, Navigation, AlertTriangle } from 'lucide-react';
 import { ollamaChat, resizeImageToBase64 } from '../utils/ollama';
 import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { getBackendUrl } from '../utils/apiConfig';
+import { uploadImageToFirebase } from '../utils/firebaseStorage';
+import { haversineKm } from '../utils/plannerMath';
 
 const CATEGORIES = [
   { id: 'Hidden', label: '💎 Hidden' },
@@ -18,12 +20,23 @@ export default function UploadTab({ location, settings = {} }) {
   const [selectedCityKey, setSelectedCityKey] = useState(initialCity);
   const [specificArea, setSpecificArea] = useState(initialArea);
 
+  // Exact coordinates (auto-filled from GPS / photo / link, fully editable)
+  const [lat, setLat] = useState(() => (location?.lat ? Number(Number(location.lat).toFixed(5)) : 10.7606));
+  const [lng, setLng] = useState(() => (location?.lon ? Number(Number(location.lon).toFixed(5)) : 76.2711));
+  const [mapsLink, setMapsLink] = useState('');
+  const [duplicateError, setDuplicateError] = useState('');
+  const [publishing, setPublishing] = useState(false);
+
   useEffect(() => {
     if (location?.cityKey && KERALA_CITIES[location.cityKey]) {
       setSelectedCityKey(location.cityKey);
     }
     if (location?.label) {
       setSpecificArea(location.label.replace(/\s*\(Active\)/i, ''));
+    }
+    if (location?.lat && location?.lon) {
+      setLat(Number(Number(location.lat).toFixed(5)));
+      setLng(Number(Number(location.lon).toFixed(5)));
     }
   }, [location]);
 
@@ -63,15 +76,17 @@ export default function UploadTab({ location, settings = {} }) {
 
   const [generatingText, setGeneratingText] = useState(false);
 
-  // Auto-generate realistic Kerala community review/description
+  // Auto-generate realistic Kerala community review/description from whatever is in the box
   const generateAutoDescription = async () => {
     setGeneratingText(true);
     const effectiveCategory = category === 'Hidden' ? 'Hidden Spots' : category;
     const nameStr = spotName.trim() || 'Hidden Kerala Spot';
     const cityStr = specificArea.trim() || selectedCityKey;
+    const baseText = review.trim();
 
-    const prompt = `You are a local Kerala traveler writing a review for "${nameStr}" in ${cityStr} (${effectiveCategory}, approx ₹${avgCost}).
-Return JSON: {"story": "2 short sentences in first-person like a Reddit r/Kerala local. Mention an authentic tip (best path, time to visit, or nearby chai stall). Under 40 words."}`;
+    const prompt = `You are a local Kerala explorer writing a genuine community review for "${nameStr}" in ${cityStr} (${effectiveCategory}, approx ₹${avgCost}).
+User text draft in box: "${baseText || 'Peaceful spot with amazing vibes'}".
+Return JSON: {"story": "Enhance and polish the draft into 2 short, authentic sentences under 40 words like a local traveler with an insider tip (best time, path, or snack)."}`;
 
     try {
       const timeoutPromise = new Promise((_, reject) =>
@@ -95,15 +110,43 @@ Return JSON: {"story": "2 short sentences in first-person like a Reddit r/Kerala
       console.warn('Ollama auto description fallback:', e);
     }
 
-    // Heuristic realistic local descriptions incorporating the actual spot name
-    const templates = {
-      Hidden: `${nameStr} is one of the best hidden viewpoints in ${cityStr} with zero crowd. Take the narrow trail behind the trees at sunset for peaceful panoramic views.`,
-      Food: `${nameStr} in ${cityStr} serves legendary local snacks and piping hot chai. Go around 4:30 PM for fresh-off-the-pan bites at just ₹${avgCost}.`,
-      Gaming: `${nameStr} is a premier hangout in ${cityStr} with fast fiber, cool AC, and high-spec gaming rigs. Friendly community atmosphere.`,
-      Party: `${nameStr} has a lively evening buzz in ${cityStr}. Great open-air breeze, music, and vibrant street snacks right outside.`
-    };
-    setReview(templates[category] || `${nameStr} is a fantastic spot in ${cityStr} that locals love. Perfect for a quick layover visit within ₹${avgCost}.`);
+    setReview(
+      baseText
+        ? `${baseText} Definitely one of the best spots in ${cityStr}. Best visited around sunset with fresh local chai nearby.`
+        : `${nameStr} is one of the finest spots in ${cityStr} with zero crowd and serene views. Fresh local snacks nearby around ₹${avgCost}.`
+    );
     setGeneratingText(false);
+  };
+
+  // Maps link or coordinates parser
+  const handleMapsLinkChange = (val) => {
+    setMapsLink(val);
+    setDuplicateError('');
+    if (!val.trim()) return;
+
+    // Pattern 1: Google Maps /@10.0234,76.3214
+    const atMatch = val.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if (atMatch) {
+      setLat(parseFloat(atMatch[1]));
+      setLng(parseFloat(atMatch[2]));
+      return;
+    }
+
+    // Pattern 2: q=10.0234,76.3214 or ll=10.0234,76.3214
+    const qMatch = val.match(/[?&](?:q|ll)=(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if (qMatch) {
+      setLat(parseFloat(qMatch[1]));
+      setLng(parseFloat(qMatch[2]));
+      return;
+    }
+
+    // Pattern 3: raw "10.0234, 76.3214"
+    const rawMatch = val.match(/(-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
+    if (rawMatch) {
+      setLat(parseFloat(rawMatch[1]));
+      setLng(parseFloat(rawMatch[2]));
+      return;
+    }
   };
 
   // Fast LLM-powered hashtag generator
@@ -159,6 +202,17 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
     const files = Array.from(e.target.files || []);
     if (files.length === 0) return;
 
+    // Auto-acquire current GPS location when photo is added
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setLat(Number(pos.coords.latitude.toFixed(5)));
+          setLng(Number(pos.coords.longitude.toFixed(5)));
+        },
+        () => {}
+      );
+    }
+
     const newPhotos = files.map((file) => ({
       url: URL.createObjectURL(file),
       name: file.name,
@@ -207,10 +261,54 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
     }
   };
 
-  const handlePublish = () => {
+  const handlePublish = async () => {
     if (!spotName.trim()) {
       alert('Please enter a spot name');
       return;
+    }
+
+    setDuplicateError('');
+    const checkLat = Number(lat);
+    const checkLng = Number(lng);
+
+    // 100-Meter Duplicate Check against all existing spots
+    const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
+    const allSpots = [
+      ...stored,
+      ...Object.values(KERALA_CITIES).flatMap((c) => c.spots || [])
+    ];
+    const dup = allSpots.find((p) => {
+      if (!p.lat || !p.lng) return false;
+      const distMeters = haversineKm(checkLat, checkLng, p.lat, p.lng) * 1000;
+      return distMeters <= 100;
+    });
+
+    if (dup) {
+      const dM = Math.round(haversineKm(checkLat, checkLng, dup.lat, dup.lng) * 1000);
+      setDuplicateError(`⚠️ A spot already exists within 100m: "${dup.name}" (${dM}m away).`);
+      alert(`⚠️ Spot already exists within 100m: "${dup.name}" (${dM}m away)`);
+      return;
+    }
+
+    setPublishing(true);
+
+    // Upload photo to Firebase Storage
+    let finalPhotoUrl = photoList[activePhotoIdx]?.url || photoPreview;
+    const activeFile = photoList[activePhotoIdx]?.file;
+    if (activeFile) {
+      try {
+        const firebaseUrl = await uploadImageToFirebase(activeFile, 'spots');
+        if (firebaseUrl) finalPhotoUrl = firebaseUrl;
+      } catch (err) {
+        console.warn('Firebase photo upload warning:', err);
+      }
+    } else if (finalPhotoUrl && finalPhotoUrl.startsWith('data:')) {
+      try {
+        const firebaseUrl = await uploadImageToFirebase(finalPhotoUrl, 'spots');
+        if (firebaseUrl) finalPhotoUrl = firebaseUrl;
+      } catch (err) {
+        console.warn('Firebase photo upload warning:', err);
+      }
     }
 
     const cityObj = KERALA_CITIES[selectedCityKey] || KERALA_CITIES['Shoranur'];
@@ -222,8 +320,8 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
       area: specificArea.trim() || cityObj.name,
       category: category === 'Hidden' ? 'Hidden Spots' : category,
       badge: aiTags[0]?.replace('#', '') || 'Community Spot',
-      lat: cityObj.hub.lat + (Math.random() - 0.5) * 0.02,
-      lng: cityObj.hub.lng + (Math.random() - 0.5) * 0.02,
+      lat: checkLat,
+      lng: checkLng,
       expense: Number(avgCost) || 0,
       spendTime: parseInt(timeNeeded) || 45,
       rating: 5.0,
@@ -234,17 +332,19 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
       transitText: 'Auto • 5m (₹25)',
       returnText: '5m back (₹25)',
       returnCost: 25,
-      photo: photoList[activePhotoIdx]?.url || photoList[0]?.url || photoPreview,
-      photos: photoList.map((p) => p.url),
+      photo: finalPhotoUrl,
+      photos: [finalPhotoUrl],
       links: [
-        `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spotName.trim() + ' ' + (specificArea.trim() || cityObj.name))}`,
+        mapsLink.trim() ||
+          `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+            spotName.trim() + ' ' + (specificArea.trim() || cityObj.name)
+          )}`,
       ],
       review: review.trim(),
       tags: [...aiTags.map((t) => t.replace('#', '')), specificArea.trim()].filter(Boolean),
       userUploaded: true,
     };
 
-    const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
     localStorage.setItem('userSpots', JSON.stringify([newSpot, ...stored]));
 
     // Also persist to MongoDB backend
@@ -254,6 +354,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
       body: JSON.stringify(newSpot),
     }).catch(console.warn);
 
+    setPublishing(false);
     setPublished(true);
     setTimeout(() => setPublished(false), 3500);
   };
@@ -304,7 +405,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
               <div className="w-5 h-5 rounded-full bg-[#0B3BF4] text-white flex items-center justify-center shrink-0">
                 <Camera size={11} />
               </div>
-              <span className="truncate">Tap to add multiple photos from gallery</span>
+              <span className="truncate">Add photos</span>
             </div>
             <div className="text-[10px] font-bold text-gray-500 mt-1 truncate">
               {photoList.length} photo{photoList.length > 1 ? 's' : ''} uploaded • {photoList[activePhotoIdx]?.name || fileName}
@@ -485,10 +586,10 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
 
       {/* 2. Spot Details Form Card */}
       <div className="bg-white border-[2.5px] border-black rounded-3xl p-3.5 shadow-[0_4px_0_0_#000000] space-y-3">
-        {/* City / Hub Selection */}
+        {/* City Selection */}
         <div className="space-y-1">
           <label className="text-[10px] font-black uppercase tracking-wider text-black flex items-center justify-between">
-            <span>WHICH CITY / REGIONAL HUB?</span>
+            <span>CITY</span>
             <span className="text-[#0B3BF4]">📍 Regional Pin</span>
           </label>
           <select
@@ -504,11 +605,11 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
           </select>
         </div>
 
-        {/* Specific Place / Area / Town */}
+        {/* Specific Place / Area / Landmark */}
         <div className="space-y-1">
           <label className="text-[10px] font-black uppercase tracking-wider text-black flex items-center justify-between">
-            <span>WHICH SPECIFIC PLACE / AREA / TOWN IS THIS IN?</span>
-            <span className="text-gray-500 font-bold">Town / Landmark</span>
+            <span>AREA / LANDMARK</span>
+            <span className="text-gray-500 font-bold">Town / Street</span>
           </label>
           <div className="border-[2px] border-black rounded-xl px-3 py-2 bg-white flex items-center justify-between shadow-[0_2px_0_0_#000000]">
             <input
@@ -522,10 +623,10 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
           </div>
         </div>
 
-        {/* Spot Name */}
+        {/* Name */}
         <div className="space-y-1">
           <label className="text-[10px] font-black uppercase tracking-wider text-black">
-            SPOT NAME
+            NAME
           </label>
           <div className="border-[2px] border-black rounded-xl px-3 py-2 bg-white flex items-center justify-between shadow-[0_2px_0_0_#000000]">
             <input
@@ -536,6 +637,82 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
             />
             <Pencil size={13} className="text-gray-500 shrink-0" />
           </div>
+        </div>
+
+        {/* GPS Coordinates & Google Maps Link */}
+        <div className="space-y-1.5 bg-[#F4F6F9] border-[2px] border-black rounded-2xl p-2.5 shadow-[0_1.5px_0_0_#000000]">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-black uppercase tracking-wider text-black flex items-center gap-1">
+              <MapPin size={12} className="text-[#0B3BF4]" />
+              <span>COORDINATES & MAP LINK</span>
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                      setLat(Number(pos.coords.latitude.toFixed(5)));
+                      setLng(Number(pos.coords.longitude.toFixed(5)));
+                    },
+                    () => alert('GPS access denied')
+                  );
+                }
+              }}
+              className="text-[10px] font-black text-[#0B3BF4] hover:underline flex items-center gap-0.5 cursor-pointer"
+            >
+              <Navigation size={10} /> Auto-fill GPS
+            </button>
+          </div>
+
+          {/* Link paste input */}
+          <div className="flex items-center bg-white border-[1.5px] border-black rounded-xl px-2.5 py-1.5 shadow-[0_1px_0_0_#000000]">
+            <Globe size={13} className="text-gray-400 shrink-0 mr-1.5" />
+            <input
+              type="text"
+              value={mapsLink}
+              onChange={(e) => handleMapsLinkChange(e.target.value)}
+              placeholder="Paste Google Maps link or coordinates..."
+              className="w-full text-xs font-bold text-black outline-none bg-transparent placeholder-gray-400"
+            />
+          </div>
+
+          {/* Editable Lat and Lng */}
+          <div className="grid grid-cols-2 gap-2 pt-0.5">
+            <div className="bg-white border-[1.5px] border-black rounded-xl px-2.5 py-1">
+              <span className="text-[9px] font-black text-gray-500 uppercase block">Latitude</span>
+              <input
+                type="number"
+                step="0.00001"
+                value={lat}
+                onChange={(e) => {
+                  setLat(parseFloat(e.target.value) || 0);
+                  setDuplicateError('');
+                }}
+                className="w-full text-xs font-black text-black outline-none bg-transparent"
+              />
+            </div>
+            <div className="bg-white border-[1.5px] border-black rounded-xl px-2.5 py-1">
+              <span className="text-[9px] font-black text-gray-500 uppercase block">Longitude</span>
+              <input
+                type="number"
+                step="0.00001"
+                value={lng}
+                onChange={(e) => {
+                  setLng(parseFloat(e.target.value) || 0);
+                  setDuplicateError('');
+                }}
+                className="w-full text-xs font-black text-black outline-none bg-transparent"
+              />
+            </div>
+          </div>
+
+          {duplicateError && (
+            <div className="bg-red-50 border border-red-500 rounded-xl p-2 text-[11px] font-bold text-red-600 flex items-center gap-1.5">
+              <AlertTriangle size={13} className="shrink-0 text-red-500" />
+              <span>{duplicateError}</span>
+            </div>
+          )}
         </div>
 
         {/* Category */}
@@ -595,7 +772,6 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
                 className="font-black text-sm text-black outline-none w-20"
               />
             </div>
-            <div className="text-[9px] font-bold text-gray-400">layover friendly</div>
           </div>
         </div>
 
@@ -603,7 +779,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
         <div className="space-y-1">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-black uppercase tracking-wider text-black">
-              COMMUNITY TIP / REVIEW
+              COMMUNITY REVIEW
             </span>
             <div className="flex items-center gap-1.5">
               <button
@@ -615,18 +791,15 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
                 {generatingText ? (
                   <>
                     <Loader2 size={10} className="animate-spin text-white" />
-                    <span>Writing Story...</span>
+                    <span>Generating...</span>
                   </>
                 ) : (
                   <>
                     <Sparkles size={10} className="text-yellow-300 fill-yellow-300" />
-                    <span>✨ Auto-Draft Story with AI</span>
+                    <span>Generate using AI</span>
                   </>
                 )}
               </button>
-              <span className="bg-[#FEF3C7] border-[1.5px] border-black text-amber-900 font-black text-[9px] px-2 py-0.5 rounded-full">
-                ★ LOCAL PRO TIP
-              </span>
             </div>
           </div>
           <div className="border-[2px] border-black rounded-2xl p-2.5 bg-[#FFFDF5] shadow-[0_2px_0_0_#000000]">
@@ -634,6 +807,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
               value={review}
               onChange={(e) => setReview(e.target.value)}
               rows={3}
+              placeholder="Type your review or notes here, then tap Generate using AI to polish it..."
               className="w-full text-xs font-semibold text-black bg-transparent outline-none resize-none leading-relaxed"
             />
           </div>
@@ -643,10 +817,20 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
       {/* 3. Publish Button (Amber) */}
       <button
         onClick={handlePublish}
-        className="w-full bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-3.5 font-black text-sm text-black shadow-[0_4px_0_0_#000000] hover:bg-amber-400 active:translate-y-0.5 transition flex items-center justify-center gap-1.5"
+        disabled={publishing}
+        className="w-full bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-3.5 font-black text-sm text-black shadow-[0_4px_0_0_#000000] hover:bg-amber-400 active:translate-y-0.5 transition flex items-center justify-center gap-1.5 disabled:opacity-50 cursor-pointer"
       >
-        <span>PUBLISH SPOT TO LOCAL FEED</span>
-        <span>→</span>
+        {publishing ? (
+          <>
+            <Loader2 size={16} className="animate-spin text-black" />
+            <span>UPLOADING TO FIREBASE...</span>
+          </>
+        ) : (
+          <>
+            <span>PUBLISH</span>
+            <span>→</span>
+          </>
+        )}
       </button>
 
       {/* Success Banner */}
@@ -654,7 +838,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
         <div className="bg-[#ECFDF5] border-[2px] border-black rounded-2xl p-3 flex items-center gap-2 shadow-[0_3px_0_0_#000000] animate-bounce">
           <CheckCircle2 size={18} className="text-emerald-600 shrink-0" />
           <div className="text-xs font-black text-emerald-950">
-            🎉 &quot;{spotName}&quot; published to {specificArea.trim() || selectedCityKey} feed & saved to MongoDB Atlas!
+            🎉 &quot;{spotName}&quot; published to {specificArea.trim() || selectedCityKey} feed & saved to Cloud Storage & Database!
           </div>
         </div>
       )}

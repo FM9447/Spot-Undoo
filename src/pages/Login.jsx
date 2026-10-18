@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Loader2, Sparkles, Camera, Image as ImageIcon } from 'lucide-react';
 import { getBackendUrl } from '../utils/apiConfig';
+import { uploadImageToFirebase } from '../utils/firebaseStorage';
 
 const AVATAR_PRESETS = [
   { id: 'nomad', label: '🎒 Nomad', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=Nomad' },
@@ -28,7 +29,7 @@ export default function Login({ onLogin }) {
     const reader = new FileReader();
     reader.onload = (event) => {
       const img = new Image();
-      img.onload = () => {
+      img.onload = async () => {
         const canvas = document.createElement('canvas');
         const size = Math.min(img.width, img.height);
         canvas.width = 160;
@@ -39,6 +40,14 @@ export default function Login({ onLogin }) {
         ctx.drawImage(img, sx, sy, size, size, 0, 0, 160, 160);
         const compressed = canvas.toDataURL('image/jpeg', 0.8);
         setAvatar(compressed);
+
+        // Upload to Firebase Cloud Storage
+        try {
+          const firebaseUrl = await uploadImageToFirebase(compressed, 'avatars');
+          if (firebaseUrl) setAvatar(firebaseUrl);
+        } catch (err) {
+          console.warn('Firebase avatar upload warning:', err);
+        }
       };
       img.src = event.target.result;
     };
@@ -54,6 +63,11 @@ export default function Login({ onLogin }) {
 
     try {
       if (mode === 'register') {
+        let finalAvatar = avatar;
+        if (avatar && avatar.startsWith('data:')) {
+          finalAvatar = await uploadImageToFirebase(avatar, 'avatars');
+        }
+
         const res = await fetch(`${backendUrl}/api/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -61,7 +75,7 @@ export default function Login({ onLogin }) {
             name: name.trim(),
             email: cleanEmail,
             password,
-            avatar,
+            avatar: finalAvatar,
           }),
         });
         const data = await res.json();

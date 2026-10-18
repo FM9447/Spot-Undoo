@@ -2,7 +2,7 @@ import { Compass, Sparkles, MapPin, Terminal } from 'lucide-react';
 
 const TABS = [
   { id: 'explore', label: 'Explore', icon: Compass },
-  { id: 'planner', label: 'AI Planner', icon: Sparkles },
+  { id: 'planner', label: 'Planner', icon: Sparkles },
   { id: 'upload', label: 'Add Spot', icon: MapPin },
   { id: 'debug', label: 'LLM Debug', icon: Terminal },
 ];

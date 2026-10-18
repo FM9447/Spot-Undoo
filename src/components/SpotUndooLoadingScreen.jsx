@@ -21,18 +21,16 @@ export default function SpotUndooLoadingScreen({
   const currentStep = progressStage !== null && progressStage !== undefined ? progressStage : internalStep;
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#F8FAFC]/96 backdrop-blur-sm flex flex-col items-center justify-center p-6 animate-in fade-in duration-200 bg-[radial-gradient(#CBD5E1_1.2px,transparent_1.2px)] [background-size:18px_18px]">
+    <div className="fixed inset-0 z-50 bg-[#F4F6F9]/96 backdrop-blur-sm flex flex-col items-center justify-center p-6 animate-in fade-in duration-200">
       <div className="flex flex-col items-center w-full max-w-xs text-center space-y-6">
-        {/* Brand Card with Spot-Undoo Logo */}
+        {/* Spot-Undoo Logo without background box */}
         <div className="relative flex items-center justify-center">
-          <div className="absolute -inset-2 bg-blue-500/15 rounded-[36px] blur-xl animate-pulse-glow" />
-          <div className="w-full bg-white border-[3px] border-black rounded-[32px] p-7 shadow-[0_6px_0_0_#000000] flex items-center justify-center relative">
-            <img
-              src="/logo.png"
-              alt="Spot-Undoo"
-              className="w-56 h-auto object-contain select-none animate-heartbeat"
-            />
-          </div>
+          <div className="absolute -inset-6 bg-blue-500/10 rounded-full blur-2xl animate-pulse-glow" />
+          <img
+            src="/logo.png"
+            alt="Spot-Undoo"
+            className="w-48 sm:w-56 h-auto object-contain select-none animate-heartbeat relative"
+          />
         </div>
 
         {/* 6-Segmented Pill Progress Capsule: First 3 Blue, Other 3 Orange */}

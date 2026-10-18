@@ -20,6 +20,14 @@ export default function InteractiveMap({
   const polylineRef = useRef(null);
   const gpsMarkerRef = useRef(null);
   const [gpsLoading, setGpsLoading] = useState(false);
+  const [mapLoading, setMapLoading] = useState(true);
+
+  // Smooth map loading overlay
+  useEffect(() => {
+    setMapLoading(true);
+    const t = setTimeout(() => setMapLoading(false), 800);
+    return () => clearTimeout(t);
+  }, [center?.[0], center?.[1], spots.length]);
 
   // Initialize Map
   useEffect(() => {
@@ -339,6 +347,23 @@ export default function InteractiveMap({
         }
       `}</style>
       <div ref={mapRef} className="w-full h-full z-0" />
+
+      {/* Pulsing Logo Map Loader Overlay */}
+      {mapLoading && (
+        <div className="absolute inset-0 z-[500] bg-[#F4F6F9] flex flex-col items-center justify-center p-4 transition-opacity duration-300 rounded-3xl pointer-events-none">
+          <div className="relative flex flex-col items-center">
+            <div className="absolute -inset-4 bg-blue-500/10 rounded-full blur-xl animate-pulse-glow" />
+            <img
+              src="/logo.png"
+              alt="Loading Map"
+              className="w-32 h-auto object-contain animate-heartbeat select-none relative"
+            />
+            <span className="text-[10px] font-black uppercase tracking-wider text-gray-500 mt-2">
+              Rendering Map...
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Cartoon Compass Rose Badge */}
       <div className="absolute top-3 right-12 z-[400] bg-white border-[2px] border-black rounded-full px-2 py-0.5 text-[9px] font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1 select-none pointer-events-none">
