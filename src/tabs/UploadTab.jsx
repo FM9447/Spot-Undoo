@@ -35,22 +35,70 @@ export default function UploadTab({ settings }) {
   const [verifying, setVerifying] = useState(false);
   const [generatingTags, setGeneratingTags] = useState(false);
   const [published, setPublished] = useState(false);
-  const [customTagInput, setCustomTagInput] = useState('');
-  const [showAddTag, setShowAddTag] = useState(false);
-  const fileInputRef = useRef(null);
+  // Multi-photo state
+  const [photoList, setPhotoList] = useState([
+    {
+      url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80',
+      name: 'kottakkunnu_sunset.jpg',
+      size: '1.2MB'
+    }
+  ]);
+  const [activePhotoIdx, setActivePhotoIdx] = useState(0);
+
+  const [generatingText, setGeneratingText] = useState(false);
+
+  // Auto-generate realistic Kerala community review/description
+  const generateAutoDescription = async () => {
+    setGeneratingText(true);
+    const effectiveCategory = category === 'Hidden' ? 'Hidden Spots' : category;
+    const effectiveCity = specificArea.trim() || selectedCityKey;
+    const prompt = `You are a local Kerala explorer who knows secret spots. Write a short, authentic 2-sentence insider tip/review for:
+Spot: "${spotName.trim() || 'Hidden Kerala Spot'}"
+Category: ${effectiveCategory}
+City / Area: ${effectiveCity}
+Cost: ₹${avgCost} | Time: ${timeNeeded}
+
+Write in first-person like a Reddit r/Kerala traveler. Mention an authentic tip (best time, path to take, or snack to try). Output plain text only, no quotes, under 45 words.`;
+
+    try {
+      const res = await ollamaChat({
+        baseUrl: settings.baseUrl || 'http://localhost:11434',
+        model: settings.model || 'spot-undo-qwen',
+        messages: [{ role: 'user', content: prompt }],
+      });
+      const generated = typeof res === 'string' ? res : res.text || res.content || res.review || res.tip;
+      if (generated && generated.trim()) {
+        setReview(generated.trim());
+        setGeneratingText(false);
+        return;
+      }
+    } catch (e) {
+      console.warn('Ollama auto description fallback:', e);
+    }
+
+    // Heuristic realistic local descriptions
+    const city = specificArea.trim() || selectedCityKey;
+    const templates = {
+      Hidden: `Best kept secret in ${city} with almost no tourists. Follow the narrow mud path behind the banyan trees for the quietest sunset views.`,
+      Food: `Legendary local spot in ${city} serving piping hot snacks and authentic Malabar flavors. Visit around 4 PM for fresh-off-the-pan bites at just ₹${avgCost}.`,
+      Gaming: `Great spot to unwind in ${city} with high-speed fiber, cozy air conditioning, and friendly local gaming community.`,
+      Party: `Vibrant evening hangout spot in ${city} with cool open-air breeze, music, and great street food stalls right outside.`
+    };
+    setReview(templates[category] || `Amazing local spot in ${city} that locals cherish. Perfect for a quick layover visit within ₹${avgCost}.`);
+    setGeneratingText(false);
+  };
 
   // Fast LLM-powered hashtag generator
   const generateQuickTags = async () => {
     setGeneratingTags(true);
     const effectiveCategory = category === 'Hidden' ? 'Hidden Spots' : category;
     const effectiveCity = specificArea.trim() || selectedCityKey;
-    const prompt = `Generate 4 short viral travel hashtags starting with '#' and a 1-sentence catchy description for this Kerala spot:
-Spot Name: ${spotName.trim() || 'Kerala Spot'}
+    const prompt = `Generate 5 viral Instagram/Travel hashtags starting with '#' for this Kerala spot:
+Spot: ${spotName.trim() || 'Kerala Spot'}
 Category: ${effectiveCategory}
-City / Area: ${effectiveCity}
+City: ${effectiveCity}
 
-Return JSON ONLY:
-{"tags": ["#tag1", "#tag2", "#tag3", "#tag4"], "caption": "short 1-line catchy description"}`;
+Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": "short 1-line catchy description"}`;
 
     try {
       const res = await ollamaChat({
@@ -72,37 +120,44 @@ Return JSON ONLY:
     // Instant heuristic fallback
     const cityClean = selectedCityKey.replace(/[^a-zA-Z]/g, '');
     const defaultTagMap = {
-      Hidden: [`#HiddenKerala`, `#${cityClean}Gems`, '#OffbeatTravel', '#SecretSpot'],
-      Food: [`#KeralaEats`, `#${cityClean}Foodie`, '#StreetFoodKerala', '#ChaiVibes'],
-      Gaming: [`#GamingKerala`, `#${cityClean}Gamers`, '#LANParty', '#ChillZone'],
-      Party: [`#KeralaNightlife`, `#${cityClean}Party`, '#WeekendVibes', '#NightOut'],
+      Hidden: [`#HiddenKerala`, `#${cityClean}Gems`, '#OffbeatKerala', '#SecretSpot', '#MonsoonKerala'],
+      Food: [`#KeralaEats`, `#${cityClean}Foodie`, '#StreetFoodKerala', '#ChaiVibes', '#KattanChai'],
+      Gaming: [`#GamingKerala`, `#${cityClean}Gamers`, '#LANParty', '#ChillZone', '#EsportsIndia'],
+      Party: [`#KeralaNightlife`, `#${cityClean}Party`, '#WeekendVibes', '#NightOut', '#KeralaBeats'],
     };
     const fallbackTags = defaultTagMap[category] || [
       `#DiscoverKerala`,
       `#${cityClean}`,
       '#LocalVibe',
-      '#MustVisit',
+      '#KeralaTourism',
+      '#MustVisitKerala',
     ];
     setAiTags(fallbackTags);
-    setAiCaption(`"Must-visit spot in ${effectiveCity} with great local ambiance."`);
+    setAiCaption(`"Must-visit spot in ${effectiveCity} with authentic local flavor."`);
     setGeneratingTags(false);
   };
 
   const handlePhotoSelect = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
 
-    setFileName(file.name);
-    setFileSize(`${(file.size / (1024 * 1024)).toFixed(1)}MB • 512px`);
-    setPhotoPreview(URL.createObjectURL(file));
+    const newPhotos = files.map((file) => ({
+      url: URL.createObjectURL(file),
+      name: file.name,
+      size: `${(file.size / (1024 * 1024)).toFixed(1)}MB`,
+      file
+    }));
+
+    setPhotoList((prev) => [...prev, ...newPhotos]);
+    setActivePhotoIdx(photoList.length);
     setPublished(false);
     setVerifying(true);
 
     try {
-      // 1. Downscale on HTML5 Canvas to 512px max JPEG (0.7 quality) as per specs
-      const base64Img = await resizeImageToBase64(file, 512, 0.7);
+      // Downscale first selected image on HTML5 Canvas to 512px max JPEG (0.7 quality)
+      const base64Img = await resizeImageToBase64(files[0], 512, 0.7);
 
-      // 2. Call Edge AI Vision
+      // Call Edge AI Vision
       const res = await ollamaChat({
         baseUrl: settings.baseUrl,
         model: settings.model,
@@ -110,7 +165,7 @@ Return JSON ONLY:
           {
             role: 'user',
             content:
-              'Analyze this Kerala travel spot photo and return JSON: {"verified": true, "caption": "short 1-line description", "vibe_tags": ["#tag1", "#tag2", "#tag3"], "tip": "one insider tip"}',
+              'Analyze this Kerala travel spot photo and return JSON: {"verified": true, "caption": "short 1-line description", "vibe_tags": ["#tag1", "#tag2", "#tag3", "#tag4"], "tip": "one insider tip"}',
             images: [base64Img],
           },
         ],
@@ -122,12 +177,12 @@ Return JSON ONLY:
       if (res && res.caption) {
         setAiCaption(`"${res.caption}"`);
       }
-      if (res && res.tip && !review) {
-        setReview(res.tip);
+      if (res && res.tip) {
+        setReview((prev) => (prev ? prev : res.tip));
       }
     } catch {
       // Graceful fallback to verified tags
-      setAiTags(['#Riverside', '#BudgetSnack', '#QuietVibe']);
+      setAiTags(['#Riverside', '#BudgetSnack', '#QuietVibe', '#KeralaGems']);
       setAiCaption('"Outdoor seating near water, low crowd, casual local food stall."');
     } finally {
       setVerifying(false);
@@ -161,12 +216,8 @@ Return JSON ONLY:
       transitText: 'Auto • 5m (₹25)',
       returnText: '5m back (₹25)',
       returnCost: 25,
-      photo: photoPreview,
-      photos: [
-        photoPreview,
-        'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80',
-        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
-      ],
+      photo: photoList[activePhotoIdx]?.url || photoList[0]?.url || photoPreview,
+      photos: photoList.map((p) => p.url),
       links: [
         `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spotName.trim() + ' ' + (specificArea.trim() || cityObj.name))}`,
       ],
@@ -202,7 +253,7 @@ Return JSON ONLY:
           type="file"
           ref={fileInputRef}
           accept="image/*"
-          capture="environment"
+          multiple
           onChange={handlePhotoSelect}
           className="hidden"
         />
@@ -215,7 +266,7 @@ Return JSON ONLY:
           {/* Photo Thumbnail with checkmark badge */}
           <div className="relative w-16 h-16 rounded-xl border-[2px] border-black overflow-hidden shrink-0 shadow-[0_2px_0_0_#000000]">
             <img
-              src={photoPreview}
+              src={photoList[activePhotoIdx]?.url || photoPreview}
               alt="Uploaded hidden spot"
               className="w-full h-full object-cover"
             />
@@ -235,18 +286,69 @@ Return JSON ONLY:
               <div className="w-5 h-5 rounded-full bg-[#0B3BF4] text-white flex items-center justify-center shrink-0">
                 <Camera size={11} />
               </div>
-              <span className="truncate">Tap to snap or upload hidden spot photo</span>
+              <span className="truncate">Tap to add multiple photos from gallery</span>
             </div>
             <div className="text-[10px] font-bold text-gray-500 mt-1 truncate">
-              {fileName} • {fileSize}
+              {photoList.length} photo{photoList.length > 1 ? 's' : ''} uploaded • {photoList[activePhotoIdx]?.name || fileName}
             </div>
-            <div className="mt-1">
+            <div className="mt-1 flex items-center gap-1">
               <span className="bg-[#EFF6FF] border border-[#3B82F6] text-[#0B3BF4] font-black text-[9px] px-2 py-0.5 rounded-full inline-block">
                 On-Device Multimodal
+              </span>
+              <span className="bg-[#F3E8FF] border border-purple-400 text-purple-700 font-black text-[9px] px-2 py-0.5 rounded-full inline-block">
+                Multi-Photo Ready
               </span>
             </div>
           </div>
         </div>
+
+        {/* Multi-Photo Carousel Gallery */}
+        {photoList.length > 1 && (
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 scrollbar-none">
+            {photoList.map((p, idx) => {
+              const isActive = activePhotoIdx === idx;
+              return (
+                <div
+                  key={idx}
+                  onClick={() => setActivePhotoIdx(idx)}
+                  className={`relative w-14 h-14 rounded-xl border-[2px] overflow-hidden shrink-0 cursor-pointer transition ${
+                    isActive ? 'border-[#0B3BF4] ring-2 ring-[#0B3BF4]/30 scale-105' : 'border-black hover:opacity-90'
+                  }`}
+                >
+                  <img src={p.url} alt={`photo-${idx}`} className="w-full h-full object-cover" />
+                  {photoList.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPhotoList((prev) => prev.filter((_, i) => i !== idx));
+                        if (activePhotoIdx >= photoList.length - 1) setActivePhotoIdx(Math.max(0, photoList.length - 2));
+                      }}
+                      className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-black/70 hover:bg-red-600 text-white flex items-center justify-center text-[9px] font-black"
+                      title="Remove image"
+                    >
+                      ✕
+                    </button>
+                  )}
+                  {isActive && (
+                    <div className="absolute bottom-0 inset-x-0 bg-[#0B3BF4] text-white text-[8px] font-black text-center py-0.2">
+                      COVER
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="w-14 h-14 rounded-xl border-[2px] border-dashed border-gray-400 bg-gray-50 flex flex-col items-center justify-center text-gray-600 hover:border-black hover:text-black shrink-0 transition"
+              title="Add more photos"
+            >
+              <Plus size={16} strokeWidth={3} />
+              <span className="text-[8px] font-black mt-0.5">+ Photo</span>
+            </button>
+          </div>
+        )}
 
         {/* AI Generated Tags / Caption Green Box (Exact match to Master Screenshot 4 + Quick Generator) */}
         <div className="border-[2px] border-black rounded-2xl p-3 bg-[#ECFDF5] space-y-2 shadow-[0_2px_0_0_#000000]">
@@ -485,9 +587,29 @@ Return JSON ONLY:
             <span className="text-[10px] font-black uppercase tracking-wider text-black">
               COMMUNITY TIP / REVIEW
             </span>
-            <span className="bg-[#FEF3C7] border-[1.5px] border-black text-amber-900 font-black text-[9px] px-2 py-0.5 rounded-full">
-              ★ LOCAL PRO TIP
-            </span>
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={generateAutoDescription}
+                disabled={generatingText}
+                className="bg-purple-600 hover:bg-purple-700 text-white border-[1.5px] border-black text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-[0_1.5px_0_0_#000000] active:translate-y-0.5 flex items-center gap-1 cursor-pointer transition disabled:opacity-50"
+              >
+                {generatingText ? (
+                  <>
+                    <Loader2 size={10} className="animate-spin text-white" />
+                    <span>Writing Story...</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles size={10} className="text-yellow-300 fill-yellow-300" />
+                    <span>✨ Auto-Draft Story with AI</span>
+                  </>
+                )}
+              </button>
+              <span className="bg-[#FEF3C7] border-[1.5px] border-black text-amber-900 font-black text-[9px] px-2 py-0.5 rounded-full">
+                ★ LOCAL PRO TIP
+              </span>
+            </div>
           </div>
           <div className="border-[2px] border-black rounded-2xl p-2.5 bg-[#FFFDF5] shadow-[0_2px_0_0_#000000]">
             <textarea
