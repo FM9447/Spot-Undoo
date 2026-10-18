@@ -33,11 +33,10 @@ export default function InteractiveMap({
         scrollWheelZoom: true,
       });
 
-      // Cartoon-styled CartoDB Voyager Tile Layer
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        maxZoom: 20,
-        subdomains: 'abcd',
-        attribution: '© OpenStreetMap contributors, © CARTO',
+      // OpenStreetMap Tiles (100% Free, Zero Watermark, No API Key Required)
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors',
       }).addTo(map);
 
       // Top-right custom zoom control
@@ -273,7 +272,7 @@ export default function InteractiveMap({
     >
       <style>{`
         .cartoon-map-wrapper .leaflet-tile-pane {
-          filter: saturate(1.42) contrast(1.15) brightness(1.02);
+          filter: saturate(1.55) contrast(1.16) brightness(1.03) hue-rotate(-2deg);
         }
         .cartoon-map-wrapper .leaflet-bar {
           border: 2.5px solid #000000 !important;
