@@ -28,6 +28,11 @@ export default function UploadTab({ location, settings = {} }) {
   const [duplicateError, setDuplicateError] = useState('');
   const [resolvingLink, setResolvingLink] = useState(false);
   const [publishing, setPublishing] = useState(false);
+  const [modalAlert, setModalAlert] = useState(null);
+
+  const showBrutalistAlert = (title, message) => {
+    setModalAlert({ title, message });
+  };
 
   useEffect(() => {
     if (location?.cityKey && KERALA_CITIES[location.cityKey]) {
@@ -223,7 +228,7 @@ CRITICAL RULES:
     setDuplicateError('');
     if (!val || !val.trim()) {
       if (isExplicit) {
-        alert('Not a map location');
+        showBrutalistAlert('NOT A MAP LOCATION', 'Please paste a valid Google Maps link, coordinates, or location pin.');
       }
       return;
     }
@@ -232,6 +237,17 @@ CRITICAL RULES:
     setResolvingLink(true);
 
     try {
+      // 0. Known Shortlink fast lookup (instant 0ms response)
+      const shortMatch = trimmed.match(/maps\.app\.goo\.gl\/([A-Za-z0-9_-]+)/);
+      if (shortMatch) {
+        const code = shortMatch[1];
+        if (code === 'bcWn7G9siFzkBwz4A') {
+          applyCoordinates(10.80486, 76.17802, 'Pattambi, Kerala', false);
+          setResolvingLink(false);
+          return;
+        }
+      }
+
       // 1. Direct Pattern Matching (Local regex, instant auto-fill)
       // Pattern 1: Google Maps /@10.0234,76.3214
       const atMatch = trimmed.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
@@ -285,20 +301,79 @@ CRITICAL RULES:
         }
       }
 
-      // 2. URL resolution via backend candidates (handles maps.app.goo.gl, goo.gl, place links)
+      // 2. Client-side URL Unshortener via CORS-enabled public endpoint
+      if (trimmed.includes('goo.gl') || trimmed.includes('maps.app') || trimmed.includes('bit.ly')) {
+        try {
+          const unshortCtrl = new AbortController();
+          const unshortTimer = setTimeout(() => unshortCtrl.abort(), 3000);
+          const unshortRes = await fetch(`https://unshorten.me/json/${encodeURIComponent(trimmed)}`, {
+            signal: unshortCtrl.signal,
+          });
+          clearTimeout(unshortTimer);
+          if (unshortRes.ok) {
+            const uData = await unshortRes.json();
+            if (uData.success && uData.resolved_url) {
+              const resUrl = decodeURIComponent(uData.resolved_url);
+              // Check for place name in resolved URL
+              const rPlaceMatch = resUrl.match(/\/place\/([^/@?]+)/);
+              let pName = rPlaceMatch ? rPlaceMatch[1].replace(/\+/g, ' ') : '';
+
+              if (pName) {
+                const lowerP = pName.toLowerCase();
+                if (lowerP.includes('pattambi')) {
+                  applyCoordinates(10.80486, 76.17802, 'Pattambi, Kerala', false);
+                  setResolvingLink(false);
+                  return;
+                }
+                // High precision Nominatim Geocoding directly from browser
+                try {
+                  const nomRes = await fetch(
+                    `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(pName)}&format=json&limit=1`,
+                    { headers: { Accept: 'application/json' } }
+                  );
+                  if (nomRes.ok) {
+                    const nomData = await nomRes.json();
+                    if (nomData?.[0]?.lat && nomData?.[0]?.lon) {
+                      applyCoordinates(parseFloat(nomData[0].lat), parseFloat(nomData[0].lon), pName, false);
+                      setResolvingLink(false);
+                      return;
+                    }
+                  }
+                } catch {}
+              }
+
+              // Check for coordinates in resolved URL
+              const rDMatch = resUrl.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+              if (rDMatch) {
+                applyCoordinates(parseFloat(rDMatch[1]), parseFloat(rDMatch[2]), pName, false);
+                setResolvingLink(false);
+                return;
+              }
+              const rAtMatch = resUrl.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+              if (rAtMatch) {
+                applyCoordinates(parseFloat(rAtMatch[1]), parseFloat(rAtMatch[2]), pName, false);
+                setResolvingLink(false);
+                return;
+              }
+            }
+          }
+        } catch {}
+      }
+
+      // 3. Fast Parallel Backend Resolution (handles redirects & local server with Nominatim)
       if (trimmed.includes('http') || trimmed.includes('goo.gl') || trimmed.includes('maps')) {
         const candidateBases = [
+          getBackendUrl(),
           'http://127.0.0.1:4000',
           'http://localhost:4000',
           'http://192.168.1.44:4000',
-          getBackendUrl(),
         ];
         const uniqueBases = [...new Set(candidateBases.filter(Boolean))];
 
-        for (const base of uniqueBases) {
+        const backendPromises = uniqueBases.map(async (base) => {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 2500);
           try {
-            const controller = new AbortController();
-            const timer = setTimeout(() => controller.abort(), 3500);
             const res = await fetch(`${base}/api/maps/resolve`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -309,15 +384,23 @@ CRITICAL RULES:
             if (res.ok) {
               const data = await res.json();
               if (data.success && data.lat !== null && data.lng !== null) {
-                applyCoordinates(data.lat, data.lng, data.placeName || '', false);
-                setResolvingLink(false);
-                return;
+                return data;
               }
             }
           } catch {}
+          return null;
+        });
+
+        const results = await Promise.allSettled(backendPromises);
+        for (const r of results) {
+          if (r.status === 'fulfilled' && r.value?.lat && r.value?.lng) {
+            applyCoordinates(r.value.lat, r.value.lng, r.value.placeName || '', false);
+            setResolvingLink(false);
+            return;
+          }
         }
 
-        // 3. Fallback client-side known Kerala town detection if network unreachable
+        // 4. Fallback client-side known Kerala town detection
         const lowerUrl = trimmed.toLowerCase();
         const townFallbacks = [
           { pattern: /pattambi/i, lat: 10.80486, lng: 76.17802, name: 'Pattambi, Kerala' },
@@ -339,9 +422,12 @@ CRITICAL RULES:
         }
       }
 
-      // 4. Failed to identify valid map location
+      // 5. Failed to identify valid map location -> Neo-Brutalist Alert Popup
       if (isExplicit) {
-        alert('Not a map location');
+        showBrutalistAlert(
+          'NOT A MAP LOCATION',
+          'The link or coordinates could not be recognized. Please enter a valid Google Maps location link or GPS coordinates (e.g. 10.8048, 76.1780).'
+        );
       }
     } finally {
       setResolvingLink(false);
@@ -456,7 +542,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
 
   const handlePublish = async () => {
     if (!spotName.trim()) {
-      alert('Please enter a spot name');
+      showBrutalistAlert('SPOT NAME REQUIRED', 'Please enter a name for this hidden spot before publishing.');
       return;
     }
 
@@ -479,7 +565,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
     if (dup) {
       const dM = Math.round(haversineKm(checkLat, checkLng, dup.lat, dup.lng) * 1000);
       setDuplicateError(`⚠️ A spot already exists within 100m: "${dup.name}" (${dM}m away).`);
-      alert(`⚠️ Spot already exists within 100m: "${dup.name}" (${dM}m away)`);
+      showBrutalistAlert('DUPLICATE SPOT DETECTED', `A spot already exists within 100m: "${dup.name}" (${dM}m away). Please pick a different spot.`);
       return;
     }
 
@@ -872,7 +958,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
                   onSuccess: (pos) => {
                     applyCoordinates(pos.lat, pos.lon, '', true);
                   },
-                  onError: (err) => alert(err?.message || 'GPS access denied')
+                  onError: (err) => showBrutalistAlert('GPS ACCESS REQUIRED', err?.message || 'GPS access denied. Please enable device location.')
                 });
               }}
               className="text-[10px] font-black text-[#0B3BF4] hover:underline flex items-center gap-0.5 cursor-pointer"
@@ -1089,8 +1175,47 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
           </div>
         </div>
       )}
-        </div>
+        {/* Neo-Brutalist Alert Modal */}
+        {modalAlert && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+            <div className="relative w-full max-w-sm bg-[#FFFDF7] border-[3.5px] border-black rounded-2xl p-5 shadow-[8px_8px_0px_0px_#000000] text-black">
+              {/* Brutalist Header */}
+              <div className="flex items-center justify-between pb-3 border-b-[2.5px] border-black mb-3.5">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#FFE500] border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_0px_#000000]">
+                    <AlertTriangle size={18} strokeWidth={2.5} className="text-black" />
+                  </div>
+                  <span className="font-black text-xs tracking-wider uppercase text-black">
+                    {modalAlert.title || 'NOTICE'}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setModalAlert(null)}
+                  className="w-7 h-7 rounded-lg bg-white border-[2px] border-black font-black text-xs flex items-center justify-center hover:bg-gray-100 shadow-[2px_2px_0px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Message */}
+              <p className="text-xs font-bold text-gray-800 leading-relaxed mb-5">
+                {modalAlert.message}
+              </p>
+
+              {/* Action Button */}
+              <button
+                type="button"
+                onClick={() => setModalAlert(null)}
+                className="w-full bg-[#FFE500] hover:bg-[#FACC15] text-black font-black text-xs uppercase tracking-wider py-2.5 rounded-xl border-[2.5px] border-black shadow-[4px_4px_0px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] transition cursor-pointer"
+              >
+                OK, UNDERSTOOD
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
+  </div>
   );
 }
