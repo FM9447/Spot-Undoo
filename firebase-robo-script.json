@@ -1,0 +1,52 @@
+[
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1500,
+    "elementDescriptors": [
+      {
+        "className": "android.view.View",
+        "text": "Explore"
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 3000,
+    "elementDescriptors": [
+      {
+        "className": "android.view.View",
+        "text": "Planner"
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 5000,
+    "elementDescriptors": [
+      {
+        "className": "android.widget.Button",
+        "text": "Generate"
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 7000,
+    "elementDescriptors": [
+      {
+        "className": "android.view.View",
+        "text": "Add Spot"
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 9000,
+    "elementDescriptors": [
+      {
+        "className": "android.view.View",
+        "text": "Explore"
+      }
+    ]
+  }
+]

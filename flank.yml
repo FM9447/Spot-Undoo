@@ -1,0 +1,10 @@
+gcloud:
+  app: android/app/build/outputs/apk/debug/app-debug.apk
+  test: android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+  device:
+    - model: Pixel7
+      version: 33
+      locale: en_IN
+      orientation: portrait
+  timeout: 15m
+  robo-script: firebase-robo-script.json

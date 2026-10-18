@@ -1,0 +1,212 @@
+# ==============================================================================
+# Spot Undoo - Firebase Test Lab & Automated Test Cases Specification
+# Application ID: com.spotundoo.app
+# Target Platform: Android (Capacitor + React Native Hybrid)
+# ==============================================================================
+
+app_info:
+  app_name: "Spot Undoo"
+  package_name: "com.spotundoo.app"
+  version: "1.0.0"
+  test_environment:
+    firebase_project: "spot-undoo-app"
+    storage_bucket: "spot-undoo-app.firebasestorage.app"
+    default_device_model: "Pixel 7"
+    default_android_api: 33
+    default_locale: "en_IN"
+
+# ------------------------------------------------------------------------------
+# Test Suites
+# ------------------------------------------------------------------------------
+test_suites:
+
+  # ----------------------------------------------------------------------------
+  # SUITE 1: Splash & Initial Launch Flow
+  # ----------------------------------------------------------------------------
+  - suite_id: "TC-SUITE-01-LAUNCH"
+    name: "App Launch & Splash Screen"
+    description: "Verify clean launching experience without extra borders or dots."
+    tests:
+      - id: "TC-0101"
+        title: "Clean Splash Screen Animation"
+        preconditions: "App is cleanly launched from background/kill state."
+        steps:
+          - "Launch com.spotundoo.app"
+          - "Observe launch splash screen layout and branding"
+        expected_results:
+          - "Only the pulsing circular Spot Undoo logo is displayed."
+          - "No outer rectangular white box, border strokes, or radial background dots appear."
+          - "After asset load (max 1.5s), screen cleanly transitions to Main Navigation with smooth opacity fade."
+
+      - id: "TC-0102"
+        title: "Edge-to-Edge Responsive Header"
+        preconditions: "User is on Explore or Planner tab."
+        steps:
+          - "Inspect the top header bar across device edges"
+        expected_results:
+          - "Header touches left and right screen edges (w-full, no inset padding on screen boundary)."
+          - "Bottom corners retain neo-brutalist border radius (rounded-b-2xl)."
+          - "Avatar and brand logo are clearly visible without overlapping device status bar notch."
+
+  # ----------------------------------------------------------------------------
+  # SUITE 2: Location & GPS Nearest Spots
+  # ----------------------------------------------------------------------------
+  - suite_id: "TC-SUITE-02-LOCATION"
+    name: "Location Selector & Proximity Engine"
+    description: "Verify Your Location default, searchable city modal, and toast alerts."
+    tests:
+      - id: "TC-0201"
+        title: "Default GPS Location Sorting"
+        preconditions: "Location permission granted."
+        steps:
+          - "Open Explore tab."
+          - "Verify location badge header."
+        expected_results:
+          - "Default badge displays 'Your Location'."
+          - "Spot cards are sorted nearest first using Haversine road-distance metric."
+          - "No 'City:' text prefix is displayed beside the city filters."
+
+      - id: "TC-0202"
+        title: "Location Selection Modal Search"
+        preconditions: "User clicks the Location selector pill."
+        steps:
+          - "Tap on the location trigger pill in header/explore."
+          - "Type 'Kochi' into the modal search bar."
+          - "Select 'Kochi' from filtered list."
+        expected_results:
+          - "Modal opens with instant Neo-Brutalist styling."
+          - "List filters down to matching hubs."
+          - "Upon selection, active city switches to Kochi, map pans to center, and spots refresh."
+          - "Notification toast displays: '📍 Welcome to Kochi! X spots nearby • Y hot food spots & Z hidden gems'."
+
+  # ----------------------------------------------------------------------------
+  # SUITE 3: Interactive OpenStreetMap Component
+  # ----------------------------------------------------------------------------
+  - suite_id: "TC-SUITE-03-MAP"
+    name: "OpenStreetMap Engine & Loading States"
+    description: "Verify pure OSM tiles, custom pins, and pulsing loader overlay."
+    tests:
+      - id: "TC-0301"
+        title: "Map Initial Loading Heartbeat Overlay"
+        preconditions: "User navigates to Explore or AI Planner map."
+        steps:
+          - "Observe the map container while tiles initialize."
+        expected_results:
+          - "Pulsing Spot Undoo logo overlay appears during tile loading."
+          - "Overlay fades out smoothly once map is ready (under 800ms)."
+
+      - id: "TC-0302"
+        title: "Marker Selection & Interactive Cards"
+        preconditions: "Map is loaded with spot pins."
+        steps:
+          - "Tap any spot marker pin on the map."
+        expected_results:
+          - "Selected marker enlarges with high-contrast active pin state."
+          - "Active spot preview card slides into view at the bottom of the map."
+          - "'View Details' and 'Navigate' buttons trigger expected actions."
+
+  # ----------------------------------------------------------------------------
+  # SUITE 4: AI Planner Tab
+  # ----------------------------------------------------------------------------
+  - suite_id: "TC-SUITE-04-PLANNER"
+    name: "Smart Planner & AI Itinerary Generator"
+    description: "Verify simplified labels, 24-hr slider, and clean generation."
+    tests:
+      - id: "TC-0401"
+        title: "Planner Tab Renaming & Clean UI"
+        preconditions: "App bottom navigation is visible."
+        steps:
+          - "Verify bottom navigation tab 2."
+          - "Tap on 'Planner' tab."
+          - "Inspect form field labels."
+        expected_results:
+          - "Tab is named 'Planner' (not 'AI Planner')."
+          - "Form displays 'CITY', 'MODE', and 'Preferences' as labels."
+          - "'(30m buffer locked)' text is removed."
+          - "Quick vibe tags do not display '• TAP TO ADD'."
+          - "Available time slider supports up to 24 hours."
+          - "Action button reads 'Generate'."
+
+      - id: "TC-0402"
+        title: "Generate Travel Plans Execution"
+        preconditions: "User selects Kochi, 4 hours, ₹800 budget."
+        steps:
+          - "Tap 'Generate'."
+          - "Observe loading overlay."
+        expected_results:
+          - "Overlay displays clean pulsing logo without box or dots."
+          - "Returns 3 distinct, fully budgeted itineraries (Best Rated, Ultra-Budget, Hidden Gems)."
+          - "Timeline stops display arrival, spend time, departure, and commute costs."
+
+  # ----------------------------------------------------------------------------
+  # SUITE 5: Add Spot & Duplicate Prevention
+  # ----------------------------------------------------------------------------
+  - suite_id: "TC-SUITE-05-UPLOAD"
+    name: "Upload Spot, GPS Auto-Fill & Duplicates"
+    description: "Verify simplified inputs, 100m proximity check, and AI text polish."
+    tests:
+      - id: "TC-0501"
+        title: "Simplified Form Labels"
+        preconditions: "User navigates to Add Spot / Upload tab."
+        steps:
+          - "Inspect form inputs."
+        expected_results:
+          - "Labels read: 'CITY', 'AREA / LANDMARK', 'NAME'."
+          - "'layover friendly' and '★ LOCAL PRO TIP' are removed."
+          - "Photo button reads 'Add photos'."
+          - "Submission button reads 'PUBLISH'."
+
+      - id: "TC-0502"
+        title: "GPS Auto-Fill & Maps URL Extraction"
+        preconditions: "Add Spot form is open."
+        steps:
+          - "Tap 'GPS Current Location' OR paste Google Maps short/long URL."
+        expected_results:
+          - "Latitude and Longitude are populated automatically."
+          - "Both coordinates remain editable by user."
+
+      - id: "TC-0503"
+        title: "100-Meter Duplicate Spot Prevention"
+        preconditions: "Existing spot exists at (10.0052, 76.3432)."
+        steps:
+          - "Enter coordinates within 50m of existing spot (e.g., 10.0054, 76.3433)."
+          - "Tap 'PUBLISH'."
+        expected_results:
+          - "System triggers duplicate warning: 'Spot Already Exists Nearby! (Within 100m)'."
+          - "Prevents accidental duplicate entry."
+
+      - id: "TC-0504"
+        title: "In-Box 'Generate using AI' Story Polisher"
+        preconditions: "User types rough notes in story textarea."
+        steps:
+          - "Enter 'good tea and spicy banana fry nice evening breeze' into the story field."
+          - "Tap 'Generate using AI'."
+        expected_results:
+          - "AI polishes and expands the text directly in the same textarea."
+          - "Field remains editable by user before publishing."
+
+  # ----------------------------------------------------------------------------
+  # SUITE 6: Firebase Cloud Storage Uploads
+  # ----------------------------------------------------------------------------
+  - suite_id: "TC-SUITE-06-STORAGE"
+    name: "Firebase Cloud Storage Integration"
+    description: "Verify image upload to Firebase Storage bucket spot-undoo-app.firebasestorage.app"
+    tests:
+      - id: "TC-0601"
+        title: "Profile Avatar Upload"
+        preconditions: "User is logged in or editing profile."
+        steps:
+          - "Select a local photo for profile avatar."
+        expected_results:
+          - "Photo is uploaded to Firebase Storage path 'profiles/<uid>_<timestamp>.jpg'."
+          - "Profile avatar updates with permanent HTTPS Firebase download URL."
+
+      - id: "TC-0602"
+        title: "Spot Photo Upload on Publish"
+        preconditions: "User attaches photo in Add Spot form."
+        steps:
+          - "Select spot photo from gallery/camera."
+          - "Complete form and tap 'PUBLISH'."
+        expected_results:
+          - "Photo is uploaded to Firebase Storage path 'spots/<timestamp>_<filename>.jpg'."
+          - "Spot is saved with Firebase Storage download URL and appears on Explore & Map."

@@ -1,7 +1,39 @@
 import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Navigation, MapPin } from 'lucide-react';
+import { Navigation, MapPin, Layers, Sparkles } from 'lucide-react';
+
+const AVADA_TILE_PROVIDERS = {
+  standard: {
+    name: 'Standard OSM',
+    icon: '🗺️',
+    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    options: {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors',
+    },
+  },
+  humanitarian: {
+    name: 'Avada Pastel',
+    icon: '🌿',
+    url: 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+    options: {
+      maxZoom: 19,
+      subdomains: 'abc',
+      attribution: '© OpenStreetMap contributors, HOT',
+    },
+  },
+  topo: {
+    name: 'Avada Topo',
+    icon: '⛰️',
+    url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    options: {
+      maxZoom: 17,
+      subdomains: 'abc',
+      attribution: 'Map: © OpenStreetMap, SRTM | © OpenTopoMap',
+    },
+  },
+};
 
 export default function InteractiveMap({
   center = [10.7606, 76.2711],
@@ -16,11 +48,27 @@ export default function InteractiveMap({
 }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
+  const tileLayerRef = useRef(null);
   const markersRef = useRef([]);
   const polylineRef = useRef(null);
   const gpsMarkerRef = useRef(null);
   const [gpsLoading, setGpsLoading] = useState(false);
   const [mapLoading, setMapLoading] = useState(true);
+  const [mapStyle, setMapStyle] = useState(
+    () => localStorage.getItem('avada_map_style') || 'standard'
+  );
+  const [showStyleMenu, setShowStyleMenu] = useState(false);
+
+  // Sync style changes from Settings modal
+  useEffect(() => {
+    const handleStyleChange = (e) => {
+      if (e.detail && AVADA_TILE_PROVIDERS[e.detail]) {
+        setMapStyle(e.detail);
+      }
+    };
+    window.addEventListener('avada_map_style_changed', handleStyleChange);
+    return () => window.removeEventListener('avada_map_style_changed', handleStyleChange);
+  }, []);
 
   // Smooth map loading overlay
   useEffect(() => {
@@ -41,11 +89,10 @@ export default function InteractiveMap({
         scrollWheelZoom: true,
       });
 
-      // OpenStreetMap Tiles (100% Free, Zero Watermark, No API Key Required)
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors',
-      }).addTo(map);
+      // Avada OpenStreetMap Tile Layer (100% Free, Zero API Key, Zero Watermarks)
+      const provider = AVADA_TILE_PROVIDERS[mapStyle] || AVADA_TILE_PROVIDERS.standard;
+      const tileLayer = L.tileLayer(provider.url, provider.options).addTo(map);
+      tileLayerRef.current = tileLayer;
 
       // Top-right custom zoom control
       L.control.zoom({ position: 'topright' }).addTo(map);
@@ -60,6 +107,21 @@ export default function InteractiveMap({
       }
     };
   }, []);
+
+  // Update Tile Layer dynamically when style changes
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    if (tileLayerRef.current) {
+      tileLayerRef.current.remove();
+    }
+
+    const provider = AVADA_TILE_PROVIDERS[mapStyle] || AVADA_TILE_PROVIDERS.standard;
+    const newTileLayer = L.tileLayer(provider.url, provider.options).addTo(map);
+    tileLayerRef.current = newTileLayer;
+    localStorage.setItem('avada_map_style', mapStyle);
+  }, [mapStyle]);
 
   // Update Markers and Polyline Route when spots or userLocation change
   useEffect(() => {
@@ -394,10 +456,42 @@ export default function InteractiveMap({
         </button>
       </div>
 
-      {/* Attribution / OpenStreetMap pill */}
-      <div className="absolute top-3 left-3 z-[400] bg-white/95 backdrop-blur border-[2px] border-black rounded-full px-2.5 py-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5">
-        <MapPin size={11} className="text-[#F59E0B]" strokeWidth={2.5} />
-        <span>{showRoute ? 'Interactive Cartoon Route' : 'Live Cartoon Map'}</span>
+      {/* Avada OpenStreetMap Style Selector Pill */}
+      <div className="absolute top-3 left-3 z-[400] flex flex-col gap-1.5">
+        <button
+          type="button"
+          onClick={() => setShowStyleMenu(!showStyleMenu)}
+          className="bg-white/95 backdrop-blur border-[2px] border-black rounded-full px-2.5 py-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5 hover:bg-yellow-50 active:scale-95 transition cursor-pointer"
+          title="Switch Avada OpenStreetMap Style"
+        >
+          <span>{AVADA_TILE_PROVIDERS[mapStyle]?.icon || '🗺️'}</span>
+          <span>{AVADA_TILE_PROVIDERS[mapStyle]?.name || 'Avada Map'}</span>
+          <Layers size={11} className="text-[#0B3BF4]" strokeWidth={2.5} />
+        </button>
+
+        {showStyleMenu && (
+          <div className="bg-white border-[2px] border-black rounded-2xl p-1.5 shadow-[0_4px_0_0_#000000] flex flex-col gap-1 min-w-[140px] animate-fade-in">
+            <span className="text-[9px] font-black uppercase text-gray-500 px-2 py-0.5">Avada OSM Styles</span>
+            {Object.entries(AVADA_TILE_PROVIDERS).map(([key, prov]) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => {
+                  setMapStyle(key);
+                  setShowStyleMenu(false);
+                }}
+                className={`flex items-center gap-2 px-2.5 py-1 rounded-xl text-left text-xs font-black transition ${
+                  mapStyle === key
+                    ? 'bg-[#0B3BF4] text-white'
+                    : 'text-black hover:bg-gray-100'
+                }`}
+              >
+                <span>{prov.icon}</span>
+                <span>{prov.name}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
