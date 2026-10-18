@@ -42,10 +42,10 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// User Registration
+// User Registration with Profile Avatar
 app.post('/api/auth/register', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, avatar } = req.body;
     if (!name || !email || !password) {
       return res.status(400).json({ error: 'Name, email, and password required' });
     }
@@ -54,16 +54,23 @@ app.post('/api/auth/register', async (req, res) => {
     if (existing) {
       return res.status(409).json({ error: 'Email already registered' });
     }
+    const defaultAvatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(cleanEmail)}`;
     const userDoc = {
       name: name.trim(),
       email: cleanEmail,
       password, // in real production you would hash with bcrypt
+      avatar: avatar || defaultAvatar,
       createdAt: new Date(),
     };
     const result = await db.collection('users').insertOne(userDoc);
     res.json({
       success: true,
-      user: { id: result.insertedId, name: userDoc.name, email: userDoc.email },
+      user: {
+        id: result.insertedId,
+        name: userDoc.name,
+        email: userDoc.email,
+        avatar: userDoc.avatar,
+      },
       token: Buffer.from(`${cleanEmail}:${userDoc.name}`).toString('base64'),
     });
   } catch (e) {
@@ -72,7 +79,7 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
-// User Login
+// User Login with Profile Avatar
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -84,14 +91,42 @@ app.post('/api/auth/login', async (req, res) => {
     if (!user || user.password !== password) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
+    const defaultAvatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(cleanEmail)}`;
     res.json({
       success: true,
-      user: { id: user._id, name: user.name, email: user.email },
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar || defaultAvatar,
+      },
       token: Buffer.from(`${cleanEmail}:${user.name}`).toString('base64'),
     });
   } catch (e) {
     console.error('Login failed:', e);
     res.status(500).json({ error: 'Login failed' });
+  }
+});
+
+// Update Profile (Avatar & Name)
+app.put('/api/auth/profile', async (req, res) => {
+  try {
+    const { email, name, avatar } = req.body;
+    if (!email) return res.status(400).json({ error: 'Email required' });
+    const cleanEmail = email.toLowerCase().trim();
+    const updateFields = {};
+    if (name) updateFields.name = name.trim();
+    if (avatar) updateFields.avatar = avatar;
+
+    const result = await db.collection('users').findOneAndUpdate(
+      { email: cleanEmail },
+      { $set: updateFields },
+      { returnDocument: 'after' }
+    );
+    res.json({ success: true, user: result.value });
+  } catch (e) {
+    console.error('Profile update failed:', e);
+    res.status(500).json({ error: 'Failed to update profile' });
   }
 });
 

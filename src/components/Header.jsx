@@ -5,24 +5,50 @@ export default function Header({ location, setLocation, settings, setSettings, g
   const [showProfile, setShowProfile] = useState(false);
   const [cleared, setCleared] = useState(false);
   const [timeStr, setTimeStr] = useState('');
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('currentUser') || '{}');
+    } catch {
+      return {};
+    }
+  });
 
   useEffect(() => {
-    const update = () => {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      setTimeStr(`${h}:${m} ${now.getHours() >= 12 ? 'PM' : 'AM'}`);
+    const syncUser = () => {
+      try {
+        setCurrentUser(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+      } catch {}
     };
-    update();
-    const t = setInterval(update, 1000);
-    return () => clearInterval(t);
+    window.addEventListener('storage', syncUser);
+    return () => window.removeEventListener('storage', syncUser);
   }, []);
 
-  const handleClear = () => {
-    localStorage.removeItem('userSpots');
-    setCleared(true);
-    setTimeout(() => setCleared(false), 2000);
+  const handleAvatarChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const size = Math.min(img.width, img.height);
+        canvas.width = 160;
+        canvas.height = 160;
+        const ctx = canvas.getContext('2d');
+        const sx = (img.width - size) / 2;
+        const sy = (img.height - size) / 2;
+        ctx.drawImage(img, sx, sy, size, size, 0, 0, 160, 160);
+        const compressed = canvas.toDataURL('image/jpeg', 0.8);
+        const updated = { ...currentUser, avatar: compressed };
+        setCurrentUser(updated);
+        localStorage.setItem('currentUser', JSON.stringify(updated));
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
   };
+
+  const userAvatar = currentUser.avatar || '/profile.png';
 
   return (
     <>
@@ -40,10 +66,10 @@ export default function Header({ location, setLocation, settings, setSettings, g
           {/* Profile picture — tap to open settings */}
           <button
             onClick={() => setShowProfile(true)}
-            className="w-11 h-11 rounded-full border-[2.5px] border-black overflow-hidden shadow-[0_2px_0_0_#000000] hover:scale-105 transition-transform active:scale-95"
+            className="w-11 h-11 rounded-full border-[2.5px] border-black overflow-hidden shadow-[0_2px_0_0_#000000] hover:scale-105 transition-transform active:scale-95 bg-white"
             title="Profile & Settings"
           >
-            <img src="/profile.png" alt="Profile" className="w-full h-full object-cover" />
+            <img src={userAvatar} alt="Profile" className="w-full h-full object-cover" />
           </button>
         </div>
       </header>
@@ -60,13 +86,19 @@ export default function Header({ location, setLocation, settings, setSettings, g
 
             {/* Profile card */}
             <div className="flex items-center gap-3 bg-[#F4F6F9] border-[2px] border-black rounded-2xl p-3">
-              <img src="/profile.png" alt="Profile" className="w-14 h-14 rounded-full border-[2.5px] border-black object-cover" />
+              <label className="relative w-14 h-14 rounded-full border-[2.5px] border-black overflow-hidden bg-white cursor-pointer group shrink-0" title="Change photo">
+                <img src={userAvatar} alt="Profile" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[10px] text-white font-bold">Edit</span>
+                </div>
+                <input type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
+              </label>
               <div className="flex-1 min-w-0">
                 <div className="font-black text-base text-black truncate">
-                  {JSON.parse(localStorage.getItem('currentUser') || '{}').name || 'Hadhy'}
+                  {currentUser.name || 'Local Explorer'}
                 </div>
                 <div className="text-xs text-gray-500 font-bold truncate">
-                  {JSON.parse(localStorage.getItem('currentUser') || '{}').email || 'Explorer · Spot-Undoo'}
+                  {currentUser.email || 'Explorer · Spot-Undoo'}
                 </div>
                 <div className="text-[11px] text-emerald-600 font-bold mt-0.5">{timeStr}</div>
               </div>

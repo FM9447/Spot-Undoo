@@ -1,17 +1,49 @@
-import { useState } from 'react';
-import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Loader2, Sparkles } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Loader2, Sparkles, Camera, Image as ImageIcon } from 'lucide-react';
 import { getBackendUrl } from '../utils/apiConfig';
+
+const AVATAR_PRESETS = [
+  { id: 'nomad', label: '🎒 Nomad', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=Nomad' },
+  { id: 'kerala', label: '🌴 Kerala', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=Kerala' },
+  { id: 'chai', label: '☕ Chai', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=Chai' },
+  { id: 'explorer', label: '🧭 Scout', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=Explorer' },
+];
 
 export default function Login({ onLogin }) {
   const [mode, setMode] = useState('login'); // 'login' | 'register'
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [avatar, setAvatar] = useState(AVATAR_PRESETS[0].url);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const fileInputRef = useRef(null);
 
   const backendUrl = getBackendUrl();
+
+  const handleCustomAvatar = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const size = Math.min(img.width, img.height);
+        canvas.width = 160;
+        canvas.height = 160;
+        const ctx = canvas.getContext('2d');
+        const sx = (img.width - size) / 2;
+        const sy = (img.height - size) / 2;
+        ctx.drawImage(img, sx, sy, size, size, 0, 0, 160, 160);
+        const compressed = canvas.toDataURL('image/jpeg', 0.8);
+        setAvatar(compressed);
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +57,12 @@ export default function Login({ onLogin }) {
         const res = await fetch(`${backendUrl}/api/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name.trim(), email: cleanEmail, password }),
+          body: JSON.stringify({
+            name: name.trim(),
+            email: cleanEmail,
+            password,
+            avatar,
+          }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Registration failed');
@@ -59,6 +96,7 @@ export default function Login({ onLogin }) {
         const fallbackUser = {
           name: name.trim() || 'Local Explorer',
           email: cleanEmail || 'explorer@spotundoo.local',
+          avatar: avatar || AVATAR_PRESETS[0].url,
         };
         const token = btoa(`${fallbackUser.email}:${fallbackUser.name}`);
         localStorage.setItem('jwt', token);
@@ -83,9 +121,18 @@ export default function Login({ onLogin }) {
             alt="spot-undoo"
             className="h-14 sm:h-16 w-auto object-contain"
           />
-          <span className="bg-white border-[2px] border-black rounded-full px-3.5 py-1.5 text-xs font-black uppercase tracking-wider shadow-[0_2px_0_0_#000000]">
-            {mode === 'login' ? 'GO LOCAL!' : 'JOIN THE CLUB'}
-          </span>
+          <div className="flex items-center gap-1.5">
+            <a
+              href="/spot-undoo.apk"
+              download="SpotUndoo.apk"
+              className="bg-[#10B981] hover:bg-[#059669] text-white border-[2px] border-black rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-wider shadow-[0_2px_0_0_#000000] transition active:translate-y-0.5"
+            >
+              📲 Get APK
+            </a>
+            <span className="bg-white border-[2px] border-black rounded-full px-3 py-1.5 text-xs font-black uppercase tracking-wider shadow-[0_2px_0_0_#000000]">
+              {mode === 'login' ? 'GO LOCAL!' : 'JOIN'}
+            </span>
+          </div>
         </div>
 
         {/* Illustrated S-Curve Map Mini Banner */}
@@ -177,6 +224,64 @@ export default function Login({ onLogin }) {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-3.5">
+          {/* Profile Picture / Avatar Picker (Only in Register mode) */}
+          {mode === 'register' && (
+            <div className="space-y-2 pb-1 bg-[#F4F6F9] border-[2px] border-black rounded-2xl p-3 shadow-[0_1.5px_0_0_#000000]">
+              <label className="text-[11px] font-black uppercase tracking-wider text-black block">
+                Profile Avatar
+              </label>
+              <div className="flex items-center gap-3">
+                {/* Current Avatar Circle with Upload Trigger */}
+                <div
+                  onClick={() => fileInputRef.current?.click()}
+                  className="relative w-14 h-14 rounded-full border-[2.5px] border-black bg-white overflow-hidden shadow-[0_2px_0_0_#000000] cursor-pointer group shrink-0"
+                  title="Click to upload custom photo"
+                >
+                  <img src={avatar} alt="Avatar" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Camera size={16} className="text-white" />
+                  </div>
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    {AVATAR_PRESETS.map((preset) => (
+                      <button
+                        key={preset.id}
+                        type="button"
+                        onClick={() => setAvatar(preset.url)}
+                        className={`px-2 py-1 rounded-xl text-[10px] font-black border transition ${
+                          avatar === preset.url
+                            ? 'bg-[#0B3BF4] text-white border-black shadow-[0_1.5px_0_0_#000000]'
+                            : 'bg-white text-gray-700 border-black/30 hover:border-black'
+                        }`}
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="px-2 py-1 rounded-xl text-[10px] font-black bg-amber-400 text-black border border-black shadow-[0_1.5px_0_0_#000000] flex items-center gap-1 hover:bg-amber-300"
+                    >
+                      <Camera size={11} /> Upload
+                    </button>
+                  </div>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleCustomAvatar}
+                  />
+                  <p className="text-[10px] text-gray-500 font-semibold mt-1">
+                    Select a vibe or tap to upload photo
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Name Field (Only in Register mode) */}
           {mode === 'register' && (
             <div className="space-y-1.5">
