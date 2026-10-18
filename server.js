@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import dns from 'node:dns';
+try { dns.setDefaultResultOrder('ipv4first'); } catch {}
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
@@ -277,45 +279,80 @@ app.get('/api/places', async (req, res) => {
 app.post('/api/maps/resolve', async (req, res) => {
   try {
     const { url } = req.body;
-    if (!url) return res.status(400).json({ error: 'URL required' });
+    if (!url || !url.trim()) {
+      return res.status(400).json({ success: false, error: 'Not a map location' });
+    }
 
-    let finalUrl = url.trim();
-    if (finalUrl.includes('goo.gl') || finalUrl.includes('maps.app.goo.gl')) {
+    let rawInput = url.trim();
+    // Extract actual URL if text and URL are combined (e.g. from Google Maps share button)
+    const urlMatch = rawInput.match(/https?:\/\/[^\s]+/);
+    let targetUrl = urlMatch ? urlMatch[0] : rawInput;
+    let textPrefix = urlMatch && urlMatch.index > 0 ? rawInput.slice(0, urlMatch.index).trim() : null;
+
+    let finalUrl = targetUrl;
+    let lat = null, lng = null, placeName = textPrefix || null;
+
+    // Fast check on targetUrl before making network calls
+    const checkCoords = (str) => {
+      // 1. @lat,lng
+      const at = str.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+      if (at) return [parseFloat(at[1]), parseFloat(at[2])];
+
+      // 2. !3dlat!4dlng
+      const d = str.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+      if (d) return [parseFloat(d[1]), parseFloat(d[2])];
+
+      // 3. query=lat,lng / q=lat,lng / ll=lat,lng / loc:lat,lng
+      const q = str.match(/[?&/](?:query|q|ll|search|loc)[=/](?:loc:)?(-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
+      if (q) return [parseFloat(q[1]), parseFloat(q[2])];
+
+      // 4. geo:lat,lng
+      const geo = str.match(/geo:(-?\d+\.\d+),(-?\d+\.\d+)/);
+      if (geo) return [parseFloat(geo[1]), parseFloat(geo[2])];
+
+      // 5. OpenStreetMap #map=zoom/lat/lng
+      const osm = str.match(/#map=\d+\/(-?\d+\.\d+)\/(-?\d+\.\d+)/);
+      if (osm) return [parseFloat(osm[1]), parseFloat(osm[2])];
+
+      // 6. center=lat,lng or center%3Dlat%2Clng
+      const center = str.match(/(?:center=|center%3D)(-?\d+\.\d+)(?:%2C|,)(-?\d+\.\d+)/i);
+      if (center) return [parseFloat(center[1]), parseFloat(center[2])];
+
+      return [null, null];
+    };
+
+    [lat, lng] = checkCoords(targetUrl);
+
+    // Follow redirects for short links (maps.app.goo.gl, goo.gl, etc.)
+    if (!lat && (targetUrl.includes('goo.gl') || targetUrl.includes('maps.app.goo.gl') || targetUrl.includes('google.com/maps') || targetUrl.startsWith('http'))) {
       try {
-        const resp = await fetch(finalUrl, { method: 'HEAD', redirect: 'follow' });
-        if (resp.url) finalUrl = resp.url;
-      } catch (headErr) {
-        try {
-          const resp = await fetch(finalUrl, { method: 'GET', redirect: 'follow' });
-          if (resp.url) finalUrl = resp.url;
-        } catch {}
-      }
-    }
+        // First try HEAD with manual redirect to read Location header directly
+        const headResp = await fetch(targetUrl, { method: 'HEAD', redirect: 'manual' });
+        const loc = headResp.headers.get('location');
+        if (loc) {
+          finalUrl = loc;
+          [lat, lng] = checkCoords(finalUrl);
+        }
 
-    let lat = null, lng = null, placeName = null;
-
-    // Pattern 1: @lat,lng
-    const atMatch = finalUrl.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
-    if (atMatch) {
-      lat = parseFloat(atMatch[1]);
-      lng = parseFloat(atMatch[2]);
-    }
-
-    // Pattern 2: !3dlat!4dlng
-    if (!lat) {
-      const dMatch = finalUrl.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
-      if (dMatch) {
-        lat = parseFloat(dMatch[1]);
-        lng = parseFloat(dMatch[2]);
-      }
-    }
-
-    // Pattern 3: query=lat,lng or q=lat,lng or ll=lat,lng or search/lat,lng
-    if (!lat) {
-      const qMatch = finalUrl.match(/[?&/](?:query|q|ll|search)[=/](-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
-      if (qMatch) {
-        lat = parseFloat(qMatch[1]);
-        lng = parseFloat(qMatch[2]);
+        // If still no coords, do a GET
+        if (!lat) {
+          const getResp = await fetch(finalUrl, { method: 'GET', redirect: 'follow' });
+          if (getResp.url) {
+            finalUrl = getResp.url;
+            [lat, lng] = checkCoords(finalUrl);
+          }
+          if (!lat) {
+            const bodyText = await getResp.text();
+            [lat, lng] = checkCoords(bodyText);
+            const appStateMatch = bodyText.match(/\[null,null,(-?\d+\.\d+),(-?\d+\.\d+)\]/);
+            if (appStateMatch && !lat) {
+              lat = parseFloat(appStateMatch[1]);
+              lng = parseFloat(appStateMatch[2]);
+            }
+          }
+        }
+      } catch (netErr) {
+        console.warn('Network resolve warning:', netErr.message);
       }
     }
 
@@ -325,10 +362,23 @@ app.post('/api/maps/resolve', async (req, res) => {
       placeName = decodeURIComponent(placeMatch[1].replace(/\+/g, ' '));
     }
 
-    res.json({ success: true, finalUrl, lat, lng, placeName });
+    // Direct raw coordinates check
+    if (!lat) {
+      const rawMatch = rawInput.match(/^(-?\d{1,3}\.\d+)[,\s]+(-?\d{1,3}\.\d+)$/);
+      if (rawMatch) {
+        lat = parseFloat(rawMatch[1]);
+        lng = parseFloat(rawMatch[2]);
+      }
+    }
+
+    if (lat !== null && lng !== null && !isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
+      return res.json({ success: true, finalUrl, lat, lng, placeName });
+    }
+
+    return res.json({ success: false, error: 'Not a map location', lat: null, lng: null });
   } catch (err) {
     console.error('Maps resolve error:', err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: 'Not a map location' });
   }
 });
 

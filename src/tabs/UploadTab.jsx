@@ -26,6 +26,8 @@ export default function UploadTab({ location, settings = {} }) {
   const [lng, setLng] = useState(() => (location?.lon ? Number(Number(location.lon).toFixed(5)) : 76.2711));
   const [mapsLink, setMapsLink] = useState('');
   const [duplicateError, setDuplicateError] = useState('');
+  const [resolvingLink, setResolvingLink] = useState(false);
+  const [mapErrorPopup, setMapErrorPopup] = useState('');
   const [publishing, setPublishing] = useState(false);
 
   useEffect(() => {
@@ -217,60 +219,103 @@ CRITICAL RULES:
     }
   };
 
-  // Maps link or coordinates parser
-  const handleMapsLinkChange = async (val) => {
-    setMapsLink(val);
+  // Maps link or coordinates parser & validator
+  const processMapInput = async (val, isExplicit = false) => {
     setDuplicateError('');
-    if (!val || !val.trim()) return;
+    if (!val || !val.trim()) {
+      if (isExplicit) {
+        setMapErrorPopup('Not a map location');
+        alert('Not a map location');
+      }
+      return;
+    }
 
     const trimmed = val.trim();
+    setResolvingLink(true);
 
-    // Pattern 1: Google Maps /@10.0234,76.3214
-    const atMatch = trimmed.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
-    if (atMatch) {
-      applyCoordinates(parseFloat(atMatch[1]), parseFloat(atMatch[2]), '', false);
-      return;
-    }
-
-    // Pattern 2: !3d10.0234!4d76.3214
-    const dMatch = trimmed.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
-    if (dMatch) {
-      applyCoordinates(parseFloat(dMatch[1]), parseFloat(dMatch[2]), '', false);
-      return;
-    }
-
-    // Pattern 3: query=10.0234,76.3214 or q=10.0234,76.3214 or search/10.0234,76.3214
-    const qMatch = trimmed.match(/[?&/](?:query|q|ll|search)[=/](-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
-    if (qMatch) {
-      applyCoordinates(parseFloat(qMatch[1]), parseFloat(qMatch[2]), '', false);
-      return;
-    }
-
-    // Pattern 4: raw coordinates "10.0234, 76.3214"
-    const rawMatch = trimmed.match(/(-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
-    if (rawMatch && !trimmed.includes('http')) {
-      applyCoordinates(parseFloat(rawMatch[1]), parseFloat(rawMatch[2]), '', false);
-      return;
-    }
-
-    // Pattern 5: URL resolution via backend for short links (maps.app.goo.gl, goo.gl, etc.)
-    if (trimmed.includes('http') || trimmed.includes('goo.gl') || trimmed.includes('maps')) {
-      try {
-        const backendUrl = getBackendUrl();
-        const res = await fetch(`${backendUrl}/api/maps/resolve`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: trimmed }),
-        });
-        if (res.ok) {
-          const data = await res.json();
-          if (data.lat && data.lng) {
-            applyCoordinates(data.lat, data.lng, data.placeName || '', false);
-          }
-        }
-      } catch (err) {
-        console.warn('Backend maps resolve failed:', err);
+    try {
+      // 1. Direct Pattern Matching (Local regex, instant auto-fill)
+      // Pattern 1: Google Maps /@10.0234,76.3214
+      const atMatch = trimmed.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+      if (atMatch) {
+        applyCoordinates(parseFloat(atMatch[1]), parseFloat(atMatch[2]), '', false);
+        setResolvingLink(false);
+        return;
       }
+
+      // Pattern 2: !3d10.0234!4d76.3214
+      const dMatch = trimmed.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+      if (dMatch) {
+        applyCoordinates(parseFloat(dMatch[1]), parseFloat(dMatch[2]), '', false);
+        setResolvingLink(false);
+        return;
+      }
+
+      // Pattern 3: query/q/ll/search/loc
+      const qMatch = trimmed.match(/[?&/](?:query|q|ll|search|loc)[=/](?:loc:)?(-?\d+\.\d+)[,\s]+(-?\d+\.\d+)/);
+      if (qMatch) {
+        applyCoordinates(parseFloat(qMatch[1]), parseFloat(qMatch[2]), '', false);
+        setResolvingLink(false);
+        return;
+      }
+
+      // Pattern 4: geo:lat,lng
+      const geoMatch = trimmed.match(/geo:(-?\d+\.\d+),(-?\d+\.\d+)/);
+      if (geoMatch) {
+        applyCoordinates(parseFloat(geoMatch[1]), parseFloat(geoMatch[2]), '', false);
+        setResolvingLink(false);
+        return;
+      }
+
+      // Pattern 5: OpenStreetMap #map=zoom/lat/lng
+      const osmMatch = trimmed.match(/#map=\d+\/(-?\d+\.\d+)\/(-?\d+\.\d+)/);
+      if (osmMatch) {
+        applyCoordinates(parseFloat(osmMatch[1]), parseFloat(osmMatch[2]), '', false);
+        setResolvingLink(false);
+        return;
+      }
+
+      // Pattern 6: raw coordinates "10.0234, 76.3214"
+      const rawMatch = trimmed.match(/^(-?\d{1,3}\.\d+)[,\s]+(-?\d{1,3}\.\d+)$/);
+      if (rawMatch) {
+        const latVal = parseFloat(rawMatch[1]);
+        const lngVal = parseFloat(rawMatch[2]);
+        if (latVal >= -90 && latVal <= 90 && lngVal >= -180 && lngVal <= 180) {
+          applyCoordinates(latVal, lngVal, '', false);
+          setResolvingLink(false);
+          return;
+        }
+      }
+
+      // 2. URL resolution via backend for short links (maps.app.goo.gl, goo.gl, etc.)
+      if (trimmed.includes('http') || trimmed.includes('goo.gl') || trimmed.includes('maps')) {
+        try {
+          const backendUrl = getBackendUrl();
+          const res = await fetch(`${backendUrl}/api/maps/resolve`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: trimmed }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success && data.lat !== null && data.lng !== null) {
+              applyCoordinates(data.lat, data.lng, data.placeName || '', false);
+              setResolvingLink(false);
+              return;
+            }
+          }
+        } catch (err) {
+          console.warn('Backend maps resolve failed:', err);
+        }
+      }
+
+      // 3. Failed to identify valid map location
+      if (isExplicit) {
+        setMapErrorPopup('Not a map location');
+        alert('Not a map location');
+      }
+    } finally {
+      setResolvingLink(false);
     }
   };
 
@@ -813,10 +858,41 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
             <input
               type="text"
               value={mapsLink}
-              onChange={(e) => handleMapsLinkChange(e.target.value)}
+              onChange={(e) => {
+                setMapsLink(e.target.value);
+                if (e.target.value.includes('http') || e.target.value.includes('goo.gl') || e.target.value.includes(',')) {
+                  processMapInput(e.target.value, false);
+                }
+              }}
+              onPaste={(e) => {
+                const pasted = e.clipboardData?.getData('text');
+                if (pasted) {
+                  e.preventDefault();
+                  setMapsLink(pasted);
+                  processMapInput(pasted, true);
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  processMapInput(mapsLink, true);
+                }
+              }}
               placeholder="Paste Google Maps link or coordinates..."
               className="w-full text-xs font-bold text-black outline-none bg-transparent placeholder-gray-400"
             />
+            {resolvingLink ? (
+              <Loader2 size={13} className="animate-spin text-[#0B3BF4] shrink-0 ml-1" />
+            ) : (
+              <button
+                type="button"
+                onClick={() => processMapInput(mapsLink, true)}
+                className="text-[9px] font-black bg-[#0B3BF4] hover:bg-blue-600 text-white px-2 py-0.5 rounded-lg shrink-0 ml-1 shadow-[0_1px_0_0_#000000] active:translate-y-0.5 cursor-pointer"
+                title="Read and verify map location"
+              >
+                Read
+              </button>
+            )}
           </div>
 
           {/* Editable Lat and Lng */}
@@ -981,6 +1057,30 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
           <CheckCircle2 size={18} className="text-emerald-600 shrink-0" />
           <div className="text-xs font-black text-emerald-950">
             🎉 &quot;{spotName}&quot; published to {specificArea.trim() || selectedCityKey} feed & saved to Cloud Storage & Database!
+          </div>
+        </div>
+      )}
+
+      {/* Invalid Map Location Modal Popup */}
+      {mapErrorPopup && (
+        <div className="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4 backdrop-blur-xs">
+          <div className="bg-white border-[3px] border-black rounded-3xl p-5 max-w-xs w-full shadow-[0_6px_0_0_#000000] text-center space-y-3 animate-in fade-in zoom-in-95 duration-150">
+            <div className="w-12 h-12 bg-red-100 border-[2px] border-black rounded-2xl mx-auto flex items-center justify-center text-red-600 shadow-[0_2px_0_0_#000000]">
+              <AlertTriangle size={24} />
+            </div>
+            <div className="space-y-1">
+              <h3 className="text-base font-black text-black">Not a map location</h3>
+              <p className="text-xs font-bold text-gray-600 leading-snug">
+                The link or text you pasted could not be resolved into a valid map location. Please paste a valid Google Maps location link or coordinates.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setMapErrorPopup('')}
+              className="w-full bg-[#0B3BF4] hover:bg-blue-600 text-white font-black py-2.5 rounded-xl border-[2px] border-black shadow-[0_2.5px_0_0_#000000] active:translate-y-0.5 cursor-pointer text-xs"
+            >
+              OK
+            </button>
           </div>
         </div>
       )}
