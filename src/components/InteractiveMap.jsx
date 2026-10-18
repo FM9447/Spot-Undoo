@@ -52,12 +52,14 @@ export default function InteractiveMap({
   const markersRef = useRef([]);
   const polylineRef = useRef(null);
   const gpsMarkerRef = useRef(null);
+  const prevSpotsKeyRef = useRef('');
   const [gpsLoading, setGpsLoading] = useState(false);
   const [mapLoading, setMapLoading] = useState(true);
   const [mapStyle, setMapStyle] = useState(
     () => localStorage.getItem('avada_map_style') || 'standard'
   );
   const [showStyleMenu, setShowStyleMenu] = useState(false);
+  const [currentZoom, setCurrentZoom] = useState(() => zoom || 12);
 
   // Sync style changes from Settings modal
   useEffect(() => {
@@ -87,6 +89,11 @@ export default function InteractiveMap({
         zoom: zoom,
         zoomControl: false,
         scrollWheelZoom: true,
+      });
+
+      // Track zoom level dynamically
+      map.on('zoomend', () => {
+        setCurrentZoom(map.getZoom());
       });
 
       // Avada OpenStreetMap Tile Layer (100% Free, Zero API Key, Zero Watermarks)
@@ -169,115 +176,227 @@ export default function InteractiveMap({
       markersRef.current.push(userMarker);
     }
 
-    // Spot Markers
+    const prevSpotsKey = spots.map((s) => s.id || s.name).join(',');
+    const shouldFitBounds = prevSpotsKeyRef.current !== prevSpotsKey;
+    prevSpotsKeyRef.current = prevSpotsKey;
+
+    // Spot Markers with Dynamic Multi-Level Zoom Scaling
     spots.forEach((spot, idx) => {
       if (!spot.lat || !spot.lng) return;
       routeLatLngs.push([spot.lat, spot.lng]);
 
       const isSelected = selectedSpot && (selectedSpot.id === spot.id || selectedSpot.name === spot.name);
       const priceText = spot.expense === 0 ? 'FREE' : (spot.expense ? `₹${spot.expense}` : (spot.fare ? `₹${spot.fare}` : 'FREE'));
+      const cat = (spot.category || '').toLowerCase();
+      let pinColor = isSelected ? '#EF4444' : (showRoute ? '#0B3BF4' : '#0B3BF4');
+      if (cat.includes('hidden')) pinColor = isSelected ? '#EF4444' : '#10B981';
+      else if (cat.includes('food')) pinColor = isSelected ? '#EF4444' : '#F97316';
+      else if (cat.includes('game') || cat.includes('gaming')) pinColor = isSelected ? '#EF4444' : '#8B5CF6';
+      else if (cat.includes('party') || cat.includes('night')) pinColor = isSelected ? '#EF4444' : '#EC4899';
 
-      const spotIcon = L.divIcon({
-        className: 'custom-spot-marker',
-        html: `
-          <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
-            <!-- Square Polaroid Card -->
-            <div style="
-              position: relative;
-              width: 64px;
-              background: #ffffff;
-              border: 2px solid #000000;
-              border-radius: 12px;
-              padding: 3px 3px 2px 3px;
-              box-shadow: ${isSelected ? '0 4px 0 0 #0B3BF4' : '0 2.5px 0 0 #000000'};
-              transform: ${isSelected ? 'scale(1.18)' : 'scale(1)'};
-              transition: transform 0.15s ease, box-shadow 0.15s ease;
-              cursor: pointer;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-            ">
-              <!-- Top Red Push-Pin with Number -->
-              <div style="
-                position: absolute;
-                top: -8px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 18px;
-                height: 18px;
-                border-radius: 9999px;
-                background: ${isSelected ? '#EF4444' : (showRoute ? '#0B3BF4' : '#EF4444')};
-                border: 1.5px solid #000000;
-                color: #ffffff;
-                font-size: 9px;
-                font-weight: 900;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 1px 0 0 rgba(0,0,0,0.4);
-                z-index: 10;
-              ">
+      let spotIcon;
+
+      // ── LEVEL 1: Zoom < 8.5 (State-wide / South India view) ──
+      if (currentZoom < 8.5) {
+        if (!showRoute) {
+          // Explore Mode: Minimalist 7px dot pin so all-Kerala view remains clean
+          spotIcon = L.divIcon({
+            className: 'custom-spot-marker-dot',
+            html: `
+              <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 12px; height: 12px; cursor: pointer;">
+                <div style="width: 7px; height: 7px; border-radius: 9999px; background: ${pinColor}; border: 1.5px solid #000; box-shadow: 0 1px 0 0 #000; transition: transform 0.15s ease; ${isSelected ? 'transform: scale(1.6); background: #EF4444;' : ''}"></div>
+              </div>
+            `,
+            iconSize: [12, 12],
+            iconAnchor: [6, 6],
+          });
+        } else {
+          // Plan Mode: Minimal numbered pill
+          spotIcon = L.divIcon({
+            className: 'custom-spot-marker-pill',
+            html: `
+              <div style="width: 18px; height: 18px; border-radius: 9999px; background: ${isSelected ? '#EF4444' : '#0B3BF4'}; border: 2px solid #000; color: #fff; font-size: 9px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 0 #000; cursor: pointer;">
                 ${idx + 1}
               </div>
-
-              <!-- Square Photo Frame -->
+            `,
+            iconSize: [18, 18],
+            iconAnchor: [9, 9],
+          });
+        }
+      }
+      // ── LEVEL 2: 8.5 <= Zoom < 11.0 (Between State and District view) ──
+      else if (currentZoom < 11.0) {
+        spotIcon = L.divIcon({
+          className: 'custom-spot-marker-mini',
+          html: `
+            <div style="position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
               <div style="
-                width: 56px;
-                height: 44px;
+                position: relative;
+                width: 32px;
+                background: #ffffff;
+                border: 1.5px solid #000000;
                 border-radius: 8px;
-                overflow: hidden;
-                border: 1px solid #000000;
-                margin-top: 5px;
-                background: #f1f5f9;
+                padding: 2px;
+                box-shadow: ${isSelected ? '0 2.5px 0 0 #EF4444' : '0 2px 0 0 #000000'};
+                transform: ${isSelected ? 'scale(1.2)' : 'scale(1)'};
+                display: flex;
+                flex-direction: column;
+                align-items: center;
               ">
-                <img
-                  src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}"
-                  style="width: 100%; height: 100%; object-fit: cover;"
-                />
-              </div>
-
-              <!-- Polaroid Bottom Chin -->
-              <div style="width: 100%; text-align: center; margin-top: 2px; line-height: 1.15; padding: 0 1px;">
                 <div style="
+                  position: absolute;
+                  top: -6px;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 9999px;
+                  background: ${pinColor};
+                  border: 1px solid #000000;
+                  color: #ffffff;
                   font-size: 8px;
                   font-weight: 900;
-                  color: #000000;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  white-space: nowrap;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  z-index: 10;
                 ">
-                  ${spot.name}
+                  ${idx + 1}
                 </div>
-                <div style="
-                  font-size: 7px;
-                  font-weight: 800;
-                  color: ${priceText === 'FREE' ? '#059669' : '#D97706'};
-                ">
-                  ${priceText}
+                <div style="width: 26px; height: 18px; border-radius: 5px; overflow: hidden; border: 1px solid #000; margin-top: 4px; background: #f1f5f9;">
+                  <img src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
               </div>
+              <div style="width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid #000000; margin-top: -1px;"></div>
             </div>
-
-            <!-- Bottom Pointer Needle -->
-            <div style="
-              width: 0;
-              height: 0;
-              border-left: 5px solid transparent;
-              border-right: 5px solid transparent;
-              border-top: 5px solid #000000;
-              margin-top: -1px;
-            "></div>
-          </div>
-        `,
-        iconSize: [64, 76],
-        iconAnchor: [32, 76],
-      });
+          `,
+          iconSize: [32, 42],
+          iconAnchor: [16, 42],
+        });
+      }
+      // ── LEVEL 3: 11.0 <= Zoom < 13.5 (District / City Hub view) ──
+      else if (currentZoom < 13.5) {
+        spotIcon = L.divIcon({
+          className: 'custom-spot-marker-med',
+          html: `
+            <div style="position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+              <div style="
+                position: relative;
+                width: 48px;
+                background: #ffffff;
+                border: 2px solid #000000;
+                border-radius: 10px;
+                padding: 2px 2px 1px 2px;
+                box-shadow: ${isSelected ? '0 3px 0 0 #EF4444' : '0 2px 0 0 #000000'};
+                transform: ${isSelected ? 'scale(1.15)' : 'scale(1)'};
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              ">
+                <div style="
+                  position: absolute;
+                  top: -7px;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  width: 16px;
+                  height: 16px;
+                  border-radius: 9999px;
+                  background: ${pinColor};
+                  border: 1.5px solid #000000;
+                  color: #ffffff;
+                  font-size: 8px;
+                  font-weight: 900;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  z-index: 10;
+                ">
+                  ${idx + 1}
+                </div>
+                <div style="width: 42px; height: 30px; border-radius: 6px; overflow: hidden; border: 1px solid #000; margin-top: 4px; background: #f1f5f9;">
+                  <img src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+                <div style="width: 100%; text-align: center; margin-top: 1px; line-height: 1.1; padding: 0 1px;">
+                  <div style="font-size: 7px; font-weight: 900; color: #000; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    ${spot.name}
+                  </div>
+                  <div style="font-size: 6px; font-weight: 800; color: ${priceText === 'FREE' ? '#059669' : '#D97706'};">
+                    ${priceText}
+                  </div>
+                </div>
+              </div>
+              <div style="width: 0; height: 0; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-top: 4.5px solid #000000; margin-top: -1px;"></div>
+            </div>
+          `,
+          iconSize: [48, 62],
+          iconAnchor: [24, 62],
+        });
+      }
+      // ── LEVEL 4: Zoom >= 13.5 (Local Neighborhood / Street view) ──
+      else {
+        spotIcon = L.divIcon({
+          className: 'custom-spot-marker-large',
+          html: `
+            <div style="position: relative; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+              <div style="
+                position: relative;
+                width: 66px;
+                background: #ffffff;
+                border: 2.5px solid #000000;
+                border-radius: 12px;
+                padding: 3px 3px 2px 3px;
+                box-shadow: ${isSelected ? '0 4px 0 0 #EF4444' : '0 3px 0 0 #000000'};
+                transform: ${isSelected ? 'scale(1.15)' : 'scale(1)'};
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              ">
+                <div style="
+                  position: absolute;
+                  top: -9px;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  width: 19px;
+                  height: 19px;
+                  border-radius: 9999px;
+                  background: ${pinColor};
+                  border: 1.5px solid #000000;
+                  color: #ffffff;
+                  font-size: 9px;
+                  font-weight: 900;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  z-index: 10;
+                ">
+                  ${idx + 1}
+                </div>
+                <div style="width: 58px; height: 44px; border-radius: 8px; overflow: hidden; border: 1.5px solid #000; margin-top: 5px; background: #f1f5f9;">
+                  <img src="${spot.photo || spot.photos?.[0] || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80'}" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+                <div style="width: 100%; text-align: center; margin-top: 2px; line-height: 1.15; padding: 0 1px;">
+                  <div style="font-size: 8px; font-weight: 900; color: #000; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    ${spot.name}
+                  </div>
+                  <div style="font-size: 7px; font-weight: 800; color: ${priceText === 'FREE' ? '#059669' : '#D97706'};">
+                    ${priceText}
+                  </div>
+                </div>
+              </div>
+              <div style="width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #000000; margin-top: -1px;"></div>
+            </div>
+          `,
+          iconSize: [66, 82],
+          iconAnchor: [33, 82],
+        });
+      }
 
       const marker = L.marker([spot.lat, spot.lng], { icon: spotIcon }).addTo(map);
 
       marker.on('click', () => {
         if (onSelectSpot) onSelectSpot(spot);
-        map.flyTo([spot.lat, spot.lng], 15, { duration: 0.8 });
+        const targetZoom = currentZoom < 11.5 ? 14 : currentZoom;
+        map.flyTo([spot.lat, spot.lng], targetZoom, { duration: 0.8 });
       });
 
       markersRef.current.push(marker);
@@ -286,11 +405,9 @@ export default function InteractiveMap({
     // Draw route polyline with cartoon double-stroke casing (only when showRoute is enabled)
     if (showRoute && routeLatLngs.length > 1) {
       if (userLocation && userLocation.lat && userLocation.lon) {
-        // Complete the loop back to starting hub
         routeLatLngs.push([userLocation.lat, userLocation.lon]);
       }
 
-      // Outer cartoon casing (thick black outline)
       const casingPolyline = L.polyline(routeLatLngs, {
         color: '#000000',
         weight: 8,
@@ -299,7 +416,6 @@ export default function InteractiveMap({
         lineJoin: 'round',
       }).addTo(map);
 
-      // Inner cartoon dashed path (vibrant blue comic dashed line)
       const innerPolyline = L.polyline(routeLatLngs, {
         color: '#0B3BF4',
         weight: 4.5,
@@ -311,15 +427,15 @@ export default function InteractiveMap({
 
       polylineRef.current = [casingPolyline, innerPolyline];
 
-      // Fit bounds to show entire route with breathing room
-      try {
-        const bounds = innerPolyline.getBounds();
-        if (bounds.isValid()) {
-          map.fitBounds(bounds, { padding: [55, 55], maxZoom: 15 });
-        }
-      } catch {}
-    } else if (!showRoute && routeLatLngs.length > 0) {
-      // Explore Mode: No route, smoothly fit bounds to show all spots in region
+      if (shouldFitBounds) {
+        try {
+          const bounds = innerPolyline.getBounds();
+          if (bounds.isValid()) {
+            map.fitBounds(bounds, { padding: [55, 55], maxZoom: 15 });
+          }
+        } catch {}
+      }
+    } else if (!showRoute && routeLatLngs.length > 0 && shouldFitBounds) {
       try {
         const bounds = L.latLngBounds(routeLatLngs);
         if (bounds.isValid()) {
@@ -327,7 +443,7 @@ export default function InteractiveMap({
         }
       } catch {}
     }
-  }, [spots, selectedSpot, userLocation, onSelectSpot, showRoute]);
+  }, [spots, selectedSpot, userLocation, onSelectSpot, showRoute, currentZoom]);
 
   // Recenter map on user location
   const handleRecenter = () => {
@@ -424,6 +540,14 @@ export default function InteractiveMap({
               Rendering Map...
             </span>
           </div>
+        </div>
+      )}
+
+      {/* Floating Zoom Indicator in Explore mode when zoomed out */}
+      {currentZoom < 8.5 && !showRoute && (
+        <div className="absolute top-3 left-1/2 -translate-x-1/2 z-[400] bg-white/95 backdrop-blur border-[2px] border-black rounded-full px-3.5 py-1 text-[11px] font-black text-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5 pointer-events-none select-none animate-bounce">
+          <span>🔍</span>
+          <span>Zoom in to view local photo cards</span>
         </div>
       )}
 

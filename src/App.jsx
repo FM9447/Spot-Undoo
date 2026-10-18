@@ -8,6 +8,7 @@ import LLMDebugTab from './tabs/LLMDebugTab';
 import { getOllamaUrl } from './utils/apiConfig';
 import Login from './pages/Login';
 import { acquireGPS } from './utils/gps';
+import { logoutUser } from './utils/firebaseAuth';
 
 const DEFAULT_LOCATION = {
   lat: 10.7606,
@@ -24,30 +25,17 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('explore');
   const [location, setLocation] = useState(DEFAULT_LOCATION);
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
-  const initialLoggedIn = typeof window !== 'undefined' && (
-    new URLSearchParams(window.location.search).get('view') === 'login'
-      ? false
-      : true
-  );
-  const [loggedIn, setLoggedIn] = useState(initialLoggedIn);
+  const [loggedIn, setLoggedIn] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const viewParam = new URLSearchParams(window.location.search).get('view');
+    if (viewParam === 'login') return false;
+    const token = localStorage.getItem('jwt');
+    const user = localStorage.getItem('currentUser');
+    return !!(token && user);
+  });
   const [gpsStatus, setGpsStatus] = useState('idle'); // 'idle' | 'acquiring' | 'ok' | 'error'
   const [showLoading, setShowLoading] = useState(true);
   const [fadeLoading, setFadeLoading] = useState(false);
-
-  // Initialize guest profile for instant exploration
-  useEffect(() => {
-    if (!localStorage.getItem('currentUser')) {
-      const defaultUser = {
-        name: 'Local Explorer',
-        email: 'explorer@spotundoo.com',
-        avatar: '/profile.png',
-        bio: 'Hidden Gem Hunter 🌿',
-        homeCity: 'Kochi',
-      };
-      localStorage.setItem('currentUser', JSON.stringify(defaultUser));
-      localStorage.setItem('jwt', 'guest_' + Date.now());
-    }
-  }, []);
 
   // Initial startup screen with smooth ending transition
   useEffect(() => {
@@ -87,8 +75,10 @@ export default function App() {
   }, []);
 
   const handleLogin = () => setLoggedIn(true);
-  const handleLogout = () => {
-    localStorage.removeItem('jwt');
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch {}
     setLoggedIn(false);
   };
 

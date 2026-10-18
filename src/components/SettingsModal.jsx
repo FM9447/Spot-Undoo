@@ -146,6 +146,40 @@ export default function SettingsModal({
           </button>
         </div>
 
+        {/* ── ACTIVE ACCOUNT & LOGOUT HERO CARD ── */}
+        <div className="bg-white border-[2.5px] border-black rounded-2xl p-3 shadow-[0_3px_0_0_#000000] flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-10 h-10 rounded-full border-[2px] border-black overflow-hidden bg-[#FEF08A] shrink-0 shadow-[0_1.5px_0_0_#000000]">
+              <img src={avatar} alt="Avatar" className="w-full h-full object-cover" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-xs font-black text-black truncate max-w-[140px]">{name}</span>
+                <span className="text-[9px] px-1.5 py-0.2 rounded-full border border-black font-black bg-emerald-100 text-emerald-800">
+                  {currentUser?.isAnonymous ? 'Guest' : (currentUser?.email ? 'Member' : 'Active')}
+                </span>
+              </div>
+              <p className="text-[10px] font-bold text-gray-500 truncate max-w-[160px]">{currentUser?.email || 'explorer@spotundoo.com'}</p>
+            </div>
+          </div>
+
+          {onLogout && (
+            <button
+              onClick={() => {
+                if (confirm('Log out from this session and return to login?')) {
+                  onLogout();
+                  onClose();
+                }
+              }}
+              className="bg-rose-500 hover:bg-rose-600 text-white border-[2px] border-black rounded-xl px-3 py-1.5 text-xs font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5 shrink-0 active:scale-95 transition cursor-pointer"
+              title="Log Out of Spot Undoo"
+            >
+              <LogOut size={13} strokeWidth={2.6} />
+              <span>Log Out</span>
+            </button>
+          )}
+        </div>
+
         {/* ── PROFILE SECTION ── */}
         <div className="bg-[#FEF08A] border-[2.5px] border-black rounded-2xl p-4 shadow-[0_3px_0_0_#000000] space-y-3">
           <div className="text-[11px] font-black uppercase tracking-wider text-black flex items-center gap-1.5">
@@ -344,8 +378,11 @@ export default function SettingsModal({
             </button>
             {onLogout && (
               <button
-                onClick={onLogout}
-                className="text-xs font-black text-rose-600 hover:text-rose-700 flex items-center gap-1"
+                onClick={() => {
+                  onLogout();
+                  onClose();
+                }}
+                className="text-xs font-black text-rose-600 hover:text-rose-700 flex items-center gap-1 active:scale-95 transition"
               >
                 <LogOut size={13} />
                 <span>Log Out</span>
