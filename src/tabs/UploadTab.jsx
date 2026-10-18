@@ -40,23 +40,17 @@ export default function UploadTab({ location, settings = {} }) {
     }
   }, [location]);
 
-  const [photoPreview, setPhotoPreview] = useState(
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80'
-  );
-  const [fileName, setFileName] = useState('kottakkunnu_sunset_rock.jpg');
-  const [fileSize, setFileSize] = useState('1.2MB • 512px');
-  const [spotName, setSpotName] = useState('Kottakkunnu Secret Sunset Rock');
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [fileName, setFileName] = useState('');
+  const [fileSize, setFileSize] = useState('');
+  const [spotName, setSpotName] = useState('');
   const [category, setCategory] = useState('Hidden');
   const [avgCost, setAvgCost] = useState('50');
   const [timeNeeded, setTimeNeeded] = useState('45 mins');
-  const [review, setReview] = useState(
-    'Best sunset view in town with zero crowd. Take the narrow mud path behind the old banyan tree. Fresh chai stall nearby costs ₹10.'
-  );
+  const [review, setReview] = useState('');
 
-  const [aiTags, setAiTags] = useState(['#Riverside', '#BudgetSnack', '#QuietVibe']);
-  const [aiCaption, setAiCaption] = useState(
-    '"Outdoor seating near water, low crowd, casual local food stall."'
-  );
+  const [aiTags, setAiTags] = useState([]);
+  const [aiCaption, setAiCaption] = useState('');
 
   const [verifying, setVerifying] = useState(false);
   const [generatingTags, setGeneratingTags] = useState(false);
@@ -65,13 +59,7 @@ export default function UploadTab({ location, settings = {} }) {
   const [customTagInput, setCustomTagInput] = useState('');
 
   // Multi-photo state
-  const [photoList, setPhotoList] = useState([
-    {
-      url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80',
-      name: 'kottakkunnu_sunset.jpg',
-      size: '1.2MB'
-    }
-  ]);
+  const [photoList, setPhotoList] = useState([]);
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
 
   const [generatingText, setGeneratingText] = useState(false);
@@ -84,13 +72,40 @@ export default function UploadTab({ location, settings = {} }) {
     const cityStr = specificArea.trim() || selectedCityKey;
     const baseText = review.trim();
 
-    const prompt = `You are a local Kerala explorer writing a genuine community review for "${nameStr}" in ${cityStr} (${effectiveCategory}, approx ₹${avgCost}).
+    // 1. Try Backend Groq API first (Fast, high quality Qwen model)
+    try {
+      const backendUrl = getBackendUrl();
+      const res = await fetch(`${backendUrl}/api/ai/enhance-story`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          draft: baseText,
+          spotName: nameStr,
+          city: cityStr,
+          category: effectiveCategory,
+          avgCost,
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.story && data.story.trim()) {
+          setReview(data.story.trim());
+          setGeneratingText(false);
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn('Backend enhance-story attempt failed:', err);
+    }
+
+    // 2. Try Local Ollama if configured
+    try {
+      const prompt = `You are a local Kerala explorer writing a genuine community review for "${nameStr}" in ${cityStr} (${effectiveCategory}, approx ₹${avgCost}).
 User text draft in box: "${baseText || 'Peaceful spot with amazing vibes'}".
 Return JSON: {"story": "Enhance and polish the draft into 2 short, authentic sentences under 40 words like a local traveler with an insider tip (best time, path, or snack)."}`;
 
-    try {
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout')), 4000)
+        setTimeout(() => reject(new Error('Timeout')), 3500)
       );
       const res = await Promise.race([
         ollamaChat({
@@ -110,11 +125,15 @@ Return JSON: {"story": "Enhance and polish the draft into 2 short, authentic sen
       console.warn('Ollama auto description fallback:', e);
     }
 
-    setReview(
-      baseText
-        ? `${baseText} Definitely one of the best spots in ${cityStr}. Best visited around sunset with fresh local chai nearby.`
-        : `${nameStr} is one of the finest spots in ${cityStr} with zero crowd and serene views. Fresh local snacks nearby around ₹${avgCost}.`
-    );
+    // 3. Dynamic smart generator if offline (produces fresh, varied reviews on every click)
+    const variations = [
+      `Skip the crowds and head to ${nameStr} in ${cityStr}! ${baseText ? baseText + '.' : 'Serene vibe with soothing breeze.'} Best visited around golden hour with fresh local chai nearby for under ₹${avgCost}.`,
+      `Underrated local gem in ${cityStr}! ${baseText ? baseText + '.' : 'Very few tourists know about this peaceful spot.'} Take the walking lane early morning for zero noise and great photo vantage points.`,
+      `Locals love ${nameStr}. ${baseText ? baseText + ' - truly worth the detour.' : 'Lush greenery and calm surroundings.'} Perfect 45-minute stop; don't miss the small snack stall down the street.`,
+      `A true hidden paradise in ${cityStr}. ${baseText ? baseText + '.' : 'Authentic Kerala charm without the commercial rush.'} Keep small cash ready for ₹${avgCost} entry or snacks; evening hours are magical.`
+    ];
+    const picked = variations[Math.floor(Math.random() * variations.length)];
+    setReview(picked);
     setGeneratingText(false);
   };
 
@@ -383,15 +402,21 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
           className="border-[2px] border-dashed border-black rounded-2xl p-2.5 bg-white flex items-center gap-3 cursor-pointer hover:bg-gray-50 transition"
         >
           {/* Photo Thumbnail with checkmark badge */}
-          <div className="relative w-16 h-16 rounded-xl border-[2px] border-black overflow-hidden shrink-0 shadow-[0_2px_0_0_#000000]">
-            <img
-              src={photoList[activePhotoIdx]?.url || photoPreview}
-              alt="Uploaded hidden spot"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute bottom-1 right-1 w-5 h-5 rounded-md bg-emerald-500 border border-black flex items-center justify-center text-white font-black text-xs">
-              <Check size={12} strokeWidth={3} />
-            </div>
+          <div className="relative w-16 h-16 rounded-xl border-[2px] border-black overflow-hidden shrink-0 shadow-[0_2px_0_0_#000000] bg-gray-100 flex items-center justify-center">
+            {(photoList[activePhotoIdx]?.url || photoPreview) ? (
+              <>
+                <img
+                  src={photoList[activePhotoIdx]?.url || photoPreview}
+                  alt="Uploaded hidden spot"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-1 right-1 w-5 h-5 rounded-md bg-emerald-500 border border-black flex items-center justify-center text-white font-black text-xs">
+                  <Check size={12} strokeWidth={3} />
+                </div>
+              </>
+            ) : (
+              <Camera size={26} className="text-gray-400" />
+            )}
             {verifying && (
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                 <Loader2 size={16} className="text-white animate-spin" />
@@ -408,7 +433,9 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
               <span className="truncate">Add photos</span>
             </div>
             <div className="text-[10px] font-bold text-gray-500 mt-1 truncate">
-              {photoList.length} photo{photoList.length > 1 ? 's' : ''} uploaded • {photoList[activePhotoIdx]?.name || fileName}
+              {photoList.length > 0
+                ? `${photoList.length} photo${photoList.length > 1 ? 's' : ''} uploaded • ${photoList[activePhotoIdx]?.name || fileName}`
+                : 'Tap to add photos from camera or gallery'}
             </div>
             <div className="mt-1 flex items-center gap-1">
               <span className="bg-[#EFF6FF] border border-[#3B82F6] text-[#0B3BF4] font-black text-[9px] px-2 py-0.5 rounded-full inline-block">
@@ -633,6 +660,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
               type="text"
               value={spotName}
               onChange={(e) => setSpotName(e.target.value)}
+              placeholder="e.g. Kottakkunnu Secret Sunset Rock"
               className="w-full text-xs font-black text-black outline-none bg-transparent"
             />
             <Pencil size={13} className="text-gray-500 shrink-0" />
@@ -807,7 +835,7 @@ Return JSON: {"tags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"], "caption": 
               value={review}
               onChange={(e) => setReview(e.target.value)}
               rows={3}
-              placeholder="Type your review or notes here, then tap Generate using AI to polish it..."
+              placeholder="e.g. Best sunset view with zero crowd. Take the narrow mud path behind the banyan tree. Fresh chai stall nearby costs ₹10."
               className="w-full text-xs font-semibold text-black bg-transparent outline-none resize-none leading-relaxed"
             />
           </div>

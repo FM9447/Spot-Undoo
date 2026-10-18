@@ -366,6 +366,60 @@ app.post('/api/ai/plan', async (req, res) => {
   }
 });
 
+// Community Spot Story / Review Polisher powered by Groq (Qwen 3.8 27B)
+app.post('/api/ai/enhance-story', async (req, res) => {
+  try {
+    const { draft, spotName, city, category, avgCost } = req.body;
+    const apiKey = process.env.GROQ_API_KEY;
+
+    if (!apiKey) {
+      return res.status(503).json({ error: 'No GROQ_API_KEY configured' });
+    }
+
+    const effectiveName = (spotName || '').trim() || 'Hidden Kerala Spot';
+    const effectiveCity = (city || '').trim() || 'Kerala';
+    const effectiveCategory = (category || '').trim() || 'Hidden Spot';
+    const userDraft = (draft || '').trim();
+
+    const prompt = `You are a local Kerala travel writer and insider.
+Spot: "${effectiveName}" in ${effectiveCity} (${effectiveCategory}, approx ₹${avgCost || '50'}).
+User rough draft: "${userDraft || 'Peaceful spot with amazing vibes and breeze'}".
+
+Task: Polish and transform this into a genuine, highly engaging, 2-to-3 sentence community review (strictly under 45 words).
+Include a specific authentic local insider tip (e.g. best time to visit, nearby snack stall, chai, or how to reach).
+Return ONLY the polished review text without quotes, markdown, or greetings.`;
+
+    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'qwen/qwen3.8-27b',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.8,
+        max_tokens: 150,
+      }),
+    });
+
+    if (!groqRes.ok) {
+      const errText = await groqRes.text();
+      console.error('Groq enhance-story error:', errText);
+      return res.status(groqRes.status).json({ error: errText });
+    }
+
+    const data = await groqRes.json();
+    const resultText = data.choices?.[0]?.message?.content?.trim() || '';
+    const cleanStory = resultText.replace(/^["']|["']$/g, '').trim();
+
+    res.json({ success: true, story: cleanStory });
+  } catch (err) {
+    console.error('Enhance story error:', err);
+    res.status(500).json({ error: err.message || 'Story enhancement failed' });
+  }
+});
+
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
