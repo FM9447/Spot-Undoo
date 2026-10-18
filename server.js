@@ -169,6 +169,56 @@ app.post('/api/auth/login', rateLimitAuth, async (req, res) => {
   }
 });
 
+// Firebase Social (Google) / Anonymous Sign-In Endpoint
+app.post('/api/auth/firebase-login', async (req, res) => {
+  try {
+    const { email, name, avatar, uid, isAnonymous } = req.body;
+    const cleanEmail = (email || `anon_${uid ? uid.slice(0, 8) : Date.now()}@spotundoo.test`).toLowerCase().trim();
+    const cleanName = name || (isAnonymous ? 'Anonymous Tester' : 'Explorer');
+    const cleanAvatar = avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(cleanEmail)}`;
+
+    let user = await db.collection('users').findOne({ email: cleanEmail });
+    if (!user) {
+      const userDoc = {
+        name: cleanName,
+        email: cleanEmail,
+        avatar: cleanAvatar,
+        firebaseUid: uid || '',
+        isAnonymous: !!isAnonymous,
+        createdAt: new Date(),
+      };
+      const result = await db.collection('users').insertOne(userDoc);
+      user = { ...userDoc, _id: result.insertedId };
+    } else {
+      await db.collection('users').updateOne(
+        { _id: user._id },
+        { $set: { lastLogin: new Date(), avatar: cleanAvatar } }
+      );
+    }
+
+    const token = jwt.sign(
+      { id: user._id.toString(), email: user.email, name: user.name, isAnonymous: !!isAnonymous },
+      JWT_SECRET,
+      { expiresIn: '14d' }
+    );
+
+    res.json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        isAnonymous: !!isAnonymous,
+      },
+      token,
+    });
+  } catch (e) {
+    console.error('Firebase login error:', e);
+    res.status(500).json({ error: 'Social authentication failed' });
+  }
+});
+
 // Update Profile (Avatar & Name)
 app.put('/api/auth/profile', async (req, res) => {
   try {
