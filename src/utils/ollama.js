@@ -80,10 +80,20 @@ export async function ollamaChat({ baseUrl, model, messages }) {
 
   const elapsedMs = Date.now() - startMs;
   const rawContent = data.message?.content || data.response || '{}';
+  let cleanContent = (rawContent || '').trim();
+  if (cleanContent.startsWith('```')) {
+    cleanContent = cleanContent.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+  }
+  const firstBrace = cleanContent.indexOf('{');
+  const lastBrace = cleanContent.lastIndexOf('}');
+  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+    cleanContent = cleanContent.substring(firstBrace, lastBrace + 1);
+  }
+
   let parsed = {};
   let parseError = null;
   try {
-    parsed = JSON.parse(rawContent);
+    parsed = JSON.parse(cleanContent);
   } catch (e) {
     parseError = e.message;
   }

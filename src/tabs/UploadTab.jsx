@@ -67,23 +67,26 @@ export default function UploadTab({ location, settings = {} }) {
   const generateAutoDescription = async () => {
     setGeneratingText(true);
     const effectiveCategory = category === 'Hidden' ? 'Hidden Spots' : category;
-    const effectiveCity = specificArea.trim() || selectedCityKey;
-    const prompt = `You are a local Kerala explorer who knows secret spots. Write a short, authentic 2-sentence insider tip/review for:
-Spot: "${spotName.trim() || 'Hidden Kerala Spot'}"
-Category: ${effectiveCategory}
-City / Area: ${effectiveCity}
-Cost: ₹${avgCost} | Time: ${timeNeeded}
+    const nameStr = spotName.trim() || 'Hidden Kerala Spot';
+    const cityStr = specificArea.trim() || selectedCityKey;
 
-Write in first-person like a Reddit r/Kerala traveler. Mention an authentic tip (best time, path to take, or snack to try). Output plain text only, no quotes, under 45 words.`;
+    const prompt = `You are a local Kerala traveler writing a review for "${nameStr}" in ${cityStr} (${effectiveCategory}, approx ₹${avgCost}).
+Return JSON: {"story": "2 short sentences in first-person like a Reddit r/Kerala local. Mention an authentic tip (best path, time to visit, or nearby chai stall). Under 40 words."}`;
 
     try {
-      const res = await ollamaChat({
-        baseUrl: settings.baseUrl || 'http://localhost:11434',
-        model: settings.model || 'spot-undo-qwen',
-        messages: [{ role: 'user', content: prompt }],
-      });
-      const generated = typeof res === 'string' ? res : res.text || res.content || res.review || res.tip;
-      if (generated && generated.trim()) {
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Timeout')), 4000)
+      );
+      const res = await Promise.race([
+        ollamaChat({
+          baseUrl: settings.baseUrl || 'http://localhost:11434',
+          model: settings.model || 'spot-undo-qwen',
+          messages: [{ role: 'user', content: prompt }],
+        }),
+        timeoutPromise,
+      ]);
+      const generated = res?.story || res?.review || res?.tip || res?.text || res?.content;
+      if (generated && typeof generated === 'string' && generated.trim()) {
         setReview(generated.trim());
         setGeneratingText(false);
         return;
@@ -92,15 +95,14 @@ Write in first-person like a Reddit r/Kerala traveler. Mention an authentic tip 
       console.warn('Ollama auto description fallback:', e);
     }
 
-    // Heuristic realistic local descriptions
-    const city = specificArea.trim() || selectedCityKey;
+    // Heuristic realistic local descriptions incorporating the actual spot name
     const templates = {
-      Hidden: `Best kept secret in ${city} with almost no tourists. Follow the narrow mud path behind the banyan trees for the quietest sunset views.`,
-      Food: `Legendary local spot in ${city} serving piping hot snacks and authentic Malabar flavors. Visit around 4 PM for fresh-off-the-pan bites at just ₹${avgCost}.`,
-      Gaming: `Great spot to unwind in ${city} with high-speed fiber, cozy air conditioning, and friendly local gaming community.`,
-      Party: `Vibrant evening hangout spot in ${city} with cool open-air breeze, music, and great street food stalls right outside.`
+      Hidden: `${nameStr} is one of the best hidden viewpoints in ${cityStr} with zero crowd. Take the narrow trail behind the trees at sunset for peaceful panoramic views.`,
+      Food: `${nameStr} in ${cityStr} serves legendary local snacks and piping hot chai. Go around 4:30 PM for fresh-off-the-pan bites at just ₹${avgCost}.`,
+      Gaming: `${nameStr} is a premier hangout in ${cityStr} with fast fiber, cool AC, and high-spec gaming rigs. Friendly community atmosphere.`,
+      Party: `${nameStr} has a lively evening buzz in ${cityStr}. Great open-air breeze, music, and vibrant street snacks right outside.`
     };
-    setReview(templates[category] || `Amazing local spot in ${city} that locals cherish. Perfect for a quick layover visit within ₹${avgCost}.`);
+    setReview(templates[category] || `${nameStr} is a fantastic spot in ${cityStr} that locals love. Perfect for a quick layover visit within ₹${avgCost}.`);
     setGeneratingText(false);
   };
 

@@ -403,6 +403,117 @@ export const KERALA_CITIES = {
           "Chai & View",
           "Verified"
         ]
+      },
+      {
+        "id": "clt-5",
+        "name": "Kappad Beach Historic Cove",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 11.3855,
+        "lng": 75.7196,
+        "expense": 20,
+        "spendTime": 60,
+        "rating": 4.8,
+        "reviewCount": 182,
+        "distanceKm": 8.5,
+        "transitText": "🛺 22m • ₹70",
+        "returnText": "Back to Kozhikode Main Pl. 1",
+        "returnCost": 40,
+        "photo": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+          "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80",
+          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80"
+        ],
+        "review": "Quiet rocky beach where Vasco da Gama landed, serene Arabian sea breeze.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "clt-6",
+        "name": "Beypore Port & Chaliyar River Walk",
+        "category": "Hidden Spots",
+        "badge": "Hidden Spots",
+        "lat": 11.1633,
+        "lng": 75.8081,
+        "expense": 30,
+        "spendTime": 60,
+        "rating": 4.9,
+        "reviewCount": 210,
+        "distanceKm": 7.2,
+        "transitText": "🛺 18m • ₹60",
+        "returnText": "Back to Kozhikode Main Pl. 1",
+        "returnCost": 35,
+        "photo": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80",
+          "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80",
+          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80"
+        ],
+        "review": "Centuries-old wooden shipbuilding yard (Uru) and scenic river walkway into the sea.",
+        "tags": [
+          "Hidden Spots",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "clt-7",
+        "name": "Hotel Rahmath Traditional Biryani",
+        "category": "Food",
+        "badge": "Food",
+        "lat": 11.2482,
+        "lng": 75.7761,
+        "expense": 160,
+        "spendTime": 40,
+        "rating": 4.9,
+        "reviewCount": 245,
+        "distanceKm": 0.8,
+        "transitText": "🚶 5m • Free",
+        "returnText": "Back to Kozhikode Main Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
+          "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80",
+          "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=800&q=80"
+        ],
+        "review": "Authentic Kozhikode beef biryani and piping hot sulaimani chai right near the station.",
+        "tags": [
+          "Food",
+          "Chai & View",
+          "Verified"
+        ]
+      },
+      {
+        "id": "clt-8",
+        "name": "Matrix LAN & Esports Gaming Cafe",
+        "category": "Gaming & Chill",
+        "badge": "Gaming & Chill",
+        "lat": 11.2512,
+        "lng": 75.7825,
+        "expense": 70,
+        "spendTime": 60,
+        "rating": 4.7,
+        "reviewCount": 98,
+        "distanceKm": 1.1,
+        "transitText": "🚶 6m • Free",
+        "returnText": "Back to Kozhikode Main Pl. 1",
+        "returnCost": 0,
+        "photo": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
+        "photos": [
+          "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
+          "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
+          "https://images.unsplash.com/photo-1612287232252-8706d967b6eb?w=800&q=80"
+        ],
+        "review": "Air conditioned esports lounge with RTX gaming rigs and fiber optic connectivity.",
+        "tags": [
+          "Gaming & Chill",
+          "Verified"
+        ]
       }
     ]
   },

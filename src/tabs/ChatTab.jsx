@@ -24,12 +24,21 @@ const VIBE_CHIPS = [
 const BACKEND_URL = getBackendUrl();
 
 export default function ChatTab({ location, setLocation, settings }) {
-  // Start on 'form' so user sees "What's the Plan Today? ✦" first!
-  const [viewState, setViewState] = useState('form'); // 'form' | 'trail'
-  const [selectedCityKey, setSelectedCityKey] = useState('Shoranur');
-  const [activePlanIdx, setActivePlanIdx] = useState(0);
+  // Persist view state so user returns to the last viewed trail/form
+  const [viewState, setViewState] = useState(() => {
+    return localStorage.getItem('spot_undoo_viewState') || 'form';
+  });
+  const [selectedCityKey, setSelectedCityKey] = useState(() => {
+    return localStorage.getItem('spot_undoo_cityKey') || 'Shoranur';
+  });
+  const [activePlanIdx, setActivePlanIdx] = useState(() => {
+    return Number(localStorage.getItem('spot_undoo_activePlanIdx')) || 0;
+  });
   const [trailMode, setTrailMode] = useState('trail');
-  const [selectedSpot, setSelectedSpot] = useState(KERALA_CITIES['Shoranur'].spots[0]);
+  const [selectedSpot, setSelectedSpot] = useState(() => {
+    const city = KERALA_CITIES[localStorage.getItem('spot_undoo_cityKey') || 'Shoranur'] || KERALA_CITIES['Shoranur'];
+    return city.spots[0];
+  });
   const [bookmarkedIds, setBookmarkedIds] = useState([]);
   const [userRating, setUserRating] = useState(5);
   const [userReviewText, setUserReviewText] = useState('');
@@ -44,7 +53,22 @@ export default function ChatTab({ location, setLocation, settings }) {
   );
   const [selectedVibes, setSelectedVibes] = useState(['🍜 Street Food', '🌿 Hidden Nature']);
   const [loading, setLoading] = useState(false);
+  const [loadingStage, setLoadingStage] = useState(1);
+  const [loadingStageText, setLoadingStageText] = useState('Anchoring to regional railway hub...');
   const [aiError, setAiError] = useState('');
+
+  // Persist state across tabs
+  useEffect(() => {
+    localStorage.setItem('spot_undoo_viewState', viewState);
+  }, [viewState]);
+
+  useEffect(() => {
+    localStorage.setItem('spot_undoo_cityKey', selectedCityKey);
+  }, [selectedCityKey]);
+
+  useEffect(() => {
+    localStorage.setItem('spot_undoo_activePlanIdx', activePlanIdx.toString());
+  }, [activePlanIdx]);
 
   // History modal
   const [showHistory, setShowHistory] = useState(false);
@@ -124,16 +148,18 @@ export default function ChatTab({ location, setLocation, settings }) {
       return timeStr;
     };
 
-    // Candidate pool: current city spots + user uploaded spots + authentic local fallbacks
+    // Candidate pool: current city spots + user uploaded spots + all Kerala city spots + authentic local fallbacks
     const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
     const userCitySpots = stored.filter(
       (s) =>
         s.cityKey === selectedCityKey ||
         (s.cityName && s.cityName.toLowerCase() === currentCity.name.toLowerCase())
     );
+    const otherCitySpots = Object.values(KERALA_CITIES).flatMap((c) => c.spots || []);
     const candidatePool = [
       ...(currentCity.spots || []),
       ...userCitySpots,
+      ...otherCitySpots,
       {
         id: `fb-${currentCity.name}-1`,
         name: `${currentCity.name} River Viewpoint`,
@@ -310,7 +336,7 @@ export default function ChatTab({ location, setLocation, settings }) {
       }
     }
 
-    // 2. Check for explicit ADD commands or category keywords ("add one more place", "add tea spot", etc.)
+    // 2. Check for explicit ADD commands or category keywords ("add 10 more", "add one more place", "add tea spot", "add kappad", etc.)
     if (
       (isAdd && !isTimeAdd && !isBudgetAdd) ||
       lower.includes('tea') ||
@@ -322,42 +348,95 @@ export default function ChatTab({ location, setLocation, settings }) {
       lower.includes('game') ||
       /add.*(?:place|spot)/i.test(lower)
     ) {
-      const candidate =
-        candidatePool.find((s) => {
-          const sLower = s.name.toLowerCase();
-          const catLower = (s.category || '').toLowerCase();
-          const alreadyIn = modifiedStops.some(
-            (ms) =>
-              (ms.name || '').toLowerCase().includes(sLower) ||
-              sLower.includes((ms.name || '').toLowerCase())
-          );
-          if (alreadyIn) return false;
+      // Check for count (e.g., "add 10 more", "add 3 spots", "add 5 places")
+      const countMatch =
+        lower.match(/(?:add|include|put|more)?\s*(\d+)\s*(?:more|places|spots|stops)?/i) ||
+        lower.match(/(\d+)\s*(?:more|places|spots|stops)/i);
+      const countToAdd = countMatch && parseInt(countMatch[1]) > 0 ? Math.min(15, parseInt(countMatch[1])) : 1;
 
-          if (lower.includes('tea') || lower.includes('chai'))
-            return sLower.includes('chai') || sLower.includes('tea') || catLower.includes('food');
-          if (
-            lower.includes('food') ||
-            lower.includes('snack') ||
-            lower.includes('vada') ||
-            lower.includes('biryani')
-          )
-            return catLower.includes('food') || sLower.includes('vada');
-          if (lower.includes('beach')) return sLower.includes('beach');
-          if (lower.includes('fort') || lower.includes('heritage'))
-            return sLower.includes('fort') || catLower.includes('hidden');
-          if (lower.includes('game') || lower.includes('gaming')) return catLower.includes('gaming');
+      // Check if user specifically requested a spot by name (e.g. "add Kappad Beach", "add Paragon", "add Mananchira")
+      const cleanPrompt = lower
+        .replace(/^(?:please\s*)?(?:can\s+we\s*|can\s+you\s*)?(?:add|put|include|go\s+to|visit)\s+/i, '')
+        .replace(/\b(?:more|places|spots|stops|please|also)\b/gi, '')
+        .trim();
 
-          return lower.includes(sLower.split(' ')[0]) || lower.includes(sLower);
-        }) ||
-        candidatePool.find(
-          (s) =>
-            !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === s.name.toLowerCase())
-        ) ||
-        candidatePool[modifiedStops.length % candidatePool.length];
+      const specificCandidate = cleanPrompt.length >= 3
+        ? candidatePool.find((s) => {
+            const sLower = s.name.toLowerCase();
+            return (
+              sLower === cleanPrompt ||
+              sLower.includes(cleanPrompt) ||
+              cleanPrompt.includes(sLower) ||
+              (cleanPrompt.length >= 4 && sLower.includes(cleanPrompt.slice(0, -2)))
+            );
+          })
+        : null;
 
-      if (candidate) {
-        modifiedStops.push(createStopObject(candidate, modifiedStops.length, 'ADDED SPOT'));
-        actionReason = (actionReason ? actionReason + ' & added ' : 'Added ') + candidate.name;
+      if (specificCandidate && countToAdd === 1) {
+        modifiedStops.push(createStopObject(specificCandidate, modifiedStops.length, 'SPECIFIC SPOT'));
+        actionReason = (actionReason ? actionReason + ' & added ' : 'Added ') + specificCandidate.name;
+      } else {
+        // Multi-add or category-based add
+        const addedList = [];
+        for (let i = 0; i < countToAdd; i++) {
+          const candidate =
+            candidatePool.find((s) => {
+              const sLower = s.name.toLowerCase();
+              const catLower = (s.category || '').toLowerCase();
+              const alreadyIn = modifiedStops.some(
+                (ms) =>
+                  (ms.name || '').toLowerCase() === sLower ||
+                  (ms.name || '').toLowerCase().includes(sLower)
+              );
+              if (alreadyIn) return false;
+
+              if (lower.includes('tea') || lower.includes('chai'))
+                return sLower.includes('chai') || sLower.includes('tea') || catLower.includes('food');
+              if (
+                lower.includes('food') ||
+                lower.includes('snack') ||
+                lower.includes('vada') ||
+                lower.includes('biryani')
+              )
+                return catLower.includes('food') || sLower.includes('vada');
+              if (lower.includes('beach')) return sLower.includes('beach');
+              if (lower.includes('fort') || lower.includes('heritage'))
+                return sLower.includes('fort') || catLower.includes('hidden');
+              if (lower.includes('game') || lower.includes('gaming')) return catLower.includes('gaming');
+
+              return true;
+            }) ||
+            candidatePool.find(
+              (s) =>
+                !modifiedStops.some((ms) => (ms.name || '').toLowerCase() === s.name.toLowerCase())
+            ) || {
+              id: `gen-${currentCity.name}-${Date.now()}-${i}`,
+              name: `${currentCity.name} Local Spot #${modifiedStops.length + 1}`,
+              category: 'Hidden Spots',
+              badge: 'EXPLORE',
+              expense: 20,
+              spendTime: 35,
+              transitText: '🛺 8m • ₹25',
+              photo: currentCity.spots[i % currentCity.spots.length]?.photo,
+              lat: currentCity.hub.lat + (Math.random() - 0.5) * 0.02,
+              lng: currentCity.hub.lng + (Math.random() - 0.5) * 0.02,
+            };
+
+          if (candidate) {
+            modifiedStops.push(createStopObject(candidate, modifiedStops.length, 'ADDED SPOT'));
+            addedList.push(candidate.name);
+          }
+        }
+
+        if (addedList.length > 0) {
+          actionReason =
+            (actionReason ? actionReason + ' & added ' : 'Added ') +
+            (addedList.length === 1
+              ? addedList[0]
+              : `${addedList.length} spots (${addedList.slice(0, 2).join(', ')}${
+                  addedList.length > 2 ? ` +${addedList.length - 2} more` : ''
+                })`);
+        }
       }
     }
 
@@ -462,13 +541,24 @@ export default function ChatTab({ location, setLocation, settings }) {
     let budgetFiltered = allSpots.filter(
       (s) => (s.expense || 0) <= budget
     );
-    if (budgetFiltered.length < 2) {
+    if (budgetFiltered.length < 3) {
       const sortedByCost = [...allSpots].sort((a, b) => (a.expense || 0) - (b.expense || 0));
-      budgetFiltered = sortedByCost.slice(0, Math.max(3, sortedByCost.length));
+      budgetFiltered = sortedByCost.slice(0, Math.max(6, sortedByCost.length));
     }
 
-    // 3. Time calculation: max stops based on available time
-    const maxStopsCount = timeHrs <= 1 ? 1 : timeHrs <= 3 ? 2 : timeHrs <= 5 ? 3 : 4;
+    // 3. Time calculation: max stops based on available time (up to 6 stops for long layovers/day trips)
+    const maxStopsCount =
+      timeHrs <= 1
+        ? 1
+        : timeHrs <= 2
+        ? 2
+        : timeHrs <= 4
+        ? 3
+        : timeHrs <= 7
+        ? 4
+        : timeHrs <= 9
+        ? 5
+        : 6;
 
     // 4. Scoring function for matching vibes & prompt keywords
     const scoreSpot = (s) => {
@@ -497,7 +587,20 @@ export default function ChatTab({ location, setLocation, settings }) {
       return score;
     };
 
-    const scored = [...budgetFiltered].sort((a, b) => scoreSpot(b) - scoreSpot(a));
+    let scored = [...budgetFiltered].sort((a, b) => scoreSpot(b) - scoreSpot(a));
+    // Pad scored if city has fewer spots than maxStopsCount
+    if (scored.length < maxStopsCount && allSpots.length > 0) {
+      let padIdx = 0;
+      while (scored.length < maxStopsCount) {
+        const base = allSpots[padIdx % allSpots.length];
+        scored.push({
+          ...base,
+          id: `${base.id}-ext-${scored.length}`,
+          name: `${base.name} (Stop ${scored.length + 1})`,
+        });
+        padIdx++;
+      }
+    }
 
     const buildPlanStops = (selectedList) => {
       let cumulativeCost = 0;
@@ -589,7 +692,24 @@ export default function ChatTab({ location, setLocation, settings }) {
     ];
   };
 
-  const [plans, setPlans] = useState(() => makeDynamicPlans(currentCity));
+  const [plans, setPlans] = useState(() => {
+    try {
+      const saved = localStorage.getItem('spot_undoo_saved_plans');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {}
+    return makeDynamicPlans(currentCity);
+  });
+
+  useEffect(() => {
+    try {
+      if (plans && plans.length > 0) {
+        localStorage.setItem('spot_undoo_saved_plans', JSON.stringify(plans));
+      }
+    } catch {}
+  }, [plans]);
 
   // When city changes from dropdown
   const handleCityChange = (key) => {
@@ -718,7 +838,12 @@ export default function ChatTab({ location, setLocation, settings }) {
   const handleGenerate = async () => {
     setLoading(true);
     setAiError('');
+    setLoadingStage(1);
+    setLoadingStageText(`Anchoring ${currentCity.displayName} railway hub & GPS...`);
     try {
+      // Small visual pause for Stage 1 (Blue 1)
+      await new Promise((r) => setTimeout(r, 350));
+
       // 1. Gather all spots: built-in city spots + community uploaded spots
       const stored = JSON.parse(localStorage.getItem('userSpots') || '[]');
       const userCitySpots = stored.filter(
@@ -728,15 +853,44 @@ export default function ChatTab({ location, setLocation, settings }) {
       );
       const allCitySpots = [...(currentCity.spots || []), ...userCitySpots];
 
+      setLoadingStage(2);
+      setLoadingStageText(`Filtering spots within ₹${maxBudget} budget per person...`);
+      await new Promise((r) => setTimeout(r, 350));
+
       // 2. Pre-filter by user's maxBudget
       let candidates = allCitySpots.filter((s) => (s.expense || 0) <= maxBudget);
       if (candidates.length < 3) {
         const sorted = [...allCitySpots].sort((a, b) => (a.expense || 0) - (b.expense || 0));
-        candidates = sorted.slice(0, Math.max(4, sorted.length));
+        candidates = sorted.slice(0, Math.max(6, sorted.length));
       }
 
-      const topCandidates = candidates.slice(0, 6);
-      const targetStops = availableTimeHrs <= 1 ? 1 : availableTimeHrs <= 3 ? 2 : availableTimeHrs <= 5 ? 3 : 4;
+      setLoadingStage(3);
+      setLoadingStageText(`Calculating safe return buffer for ${availableTimeHrs} hours...`);
+      await new Promise((r) => setTimeout(r, 350));
+
+      const targetStops =
+        availableTimeHrs <= 1
+          ? 1
+          : availableTimeHrs <= 2
+          ? 2
+          : availableTimeHrs <= 4
+          ? 3
+          : availableTimeHrs <= 7
+          ? 4
+          : availableTimeHrs <= 9
+          ? 5
+          : 6;
+
+      const topCandidates = candidates.slice(0, Math.max(targetStops, 6));
+
+      // Create few-shot template with targetStops items so LLM generates the requested number of stops
+      const sampleStopsJson = topCandidates.slice(0, targetStops).map((c, i) => ({
+        num: i + 1,
+        name: c.name,
+        badge: i === 0 ? 'ACTIVE' : (c.badge || 'RECOMMENDED'),
+        costText: `₹${c.expense} • ${c.spendTime}m`,
+        transitPill: c.transitText || '🚶 8m • Free'
+      }));
 
       const prompt = `You are an expert Kerala travel planner at ${currentCity.displayName}.
 User constraints:
@@ -767,19 +921,24 @@ Return JSON in this format:
       "returnTime": "17:10 PM",
       "totalCost": 120,
       "totalDuration": "${availableTimeHrs} Hours",
-      "stops": [
-        {"num": 1, "name": "${candidates[0]?.name}", "badge": "ACTIVE", "costText": "₹${candidates[0]?.expense} • ${candidates[0]?.spendTime}m", "transitPill": "🚶 8m • Free"}
-      ],
+      "stops": ${JSON.stringify(sampleStopsJson, null, 8)},
       "returnPill": "⏰ 17:10 PM • SAFE RETURN TO ${currentCity.hub.stationName}"
     }
   ]
 }`;
+
+      setLoadingStage(4);
+      setLoadingStageText('Invoking Qwen AI local model reasoning...');
 
       const res = await ollamaChat({
         baseUrl: settings.baseUrl,
         model: settings.model || 'spot-undo-qwen',
         messages: [{ role: 'user', content: prompt }],
       });
+
+      setLoadingStage(5);
+      setLoadingStageText('Optimizing multi-modal transit & timings...');
+      await new Promise((r) => setTimeout(r, 350));
 
       let rawPlans = [];
       if (Array.isArray(res?.plans) && res.plans.length > 0) {
@@ -801,30 +960,55 @@ Return JSON in this format:
       }
 
       if (rawPlans.length > 0) {
-        // Enrich stops with photos, links & coordinates from candidates
-        const enriched = rawPlans.map((p, pIdx) => ({
-          ...p,
-          id: p.id || `plan-${pIdx + 1}`,
-          stops: (p.stops || []).map((s, idx) => {
-            const match = candidates.find(
-              (c) =>
-                c.name.toLowerCase().includes((s.name || s.location || '').toLowerCase()) ||
-                (s.name || s.location || '').toLowerCase().includes(c.name.toLowerCase())
-            ) || candidates[idx % candidates.length];
-            return {
-              ...s,
-              num: idx + 1,
-              name: s.name || s.location || match.name,
-              badge: idx === 0 ? 'ACTIVE' : (match.badge || ''),
-              costText: s.costText || `₹${match.expense} • ${match.spendTime}m`,
-              transitPill: s.transitPill || match.transitText || '🚶 8m • Free',
-              photo: match.photo,
-              photos: match.photos || (match.photo ? [match.photo] : []),
-              links: match.links || [],
-              data: match,
-            };
-          }),
-        }));
+        setLoadingStage(6);
+        setLoadingStageText('Finalizing 3 curated adventure trails!');
+        await new Promise((r) => setTimeout(r, 350));
+
+        // Enrich stops with photos, links & coordinates from candidates, and guarantee targetStops count
+        const enriched = rawPlans.map((p, pIdx) => {
+          let pStops = [...(p.stops || [])];
+          if (pStops.length < targetStops) {
+            const existingNames = new Set(pStops.map((s) => (s.name || s.location || '').toLowerCase()));
+            const remaining = candidates.filter((c) => !existingNames.has(c.name.toLowerCase()));
+            let addIdx = 0;
+            while (pStops.length < targetStops && addIdx < remaining.length) {
+              const rem = remaining[addIdx++];
+              pStops.push({
+                num: pStops.length + 1,
+                name: rem.name,
+                badge: rem.badge || 'STOP',
+                costText: `₹${rem.expense} • ${rem.spendTime}m`,
+                transitPill: rem.transitText || '🛺 10m • ₹30',
+              });
+            }
+          }
+
+          return {
+            ...p,
+            id: p.id || `plan-${pIdx + 1}`,
+            stops: pStops.map((s, idx) => {
+              const match =
+                candidates.find(
+                  (c) =>
+                    c.name.toLowerCase().includes((s.name || s.location || '').toLowerCase()) ||
+                    (s.name || s.location || '').toLowerCase().includes(c.name.toLowerCase())
+                ) || candidates[idx % candidates.length];
+              return {
+                ...s,
+                num: idx + 1,
+                name: s.name || s.location || match.name,
+                badge: idx === 0 ? 'ACTIVE' : (match.badge || ''),
+                costText: s.costText || `₹${match.expense} • ${match.spendTime}m`,
+                transitPill: s.transitPill || match.transitText || '🚶 8m • Free',
+                photo: match.photo,
+                photos: match.photos || (match.photo ? [match.photo] : []),
+                links: match.links || [],
+                data: match,
+              };
+            }),
+          };
+        });
+
         setPlans(enriched);
         setActivePlanIdx(0);
         setSelectedSpot(enriched[0]?.stops[0]?.data || candidates[0]);
@@ -835,6 +1019,13 @@ Return JSON in this format:
         throw new Error('No valid plans returned by AI');
       }
     } catch {
+      setLoadingStage(5);
+      setLoadingStageText('Synthesizing instant localized route...');
+      await new Promise((r) => setTimeout(r, 350));
+      setLoadingStage(6);
+      setLoadingStageText('Curated trails ready!');
+      await new Promise((r) => setTimeout(r, 300));
+
       // Smart dynamic fallback tailored to user budget, time, and vibes
       const dynamicPlans = makeDynamicPlans(
         currentCity,
@@ -849,8 +1040,6 @@ Return JSON in this format:
       setViewState('trail');
       savePlanToDatabase(dynamicPlans, currentCity);
     } finally {
-      // Ensure smooth, delightful loading experience so animated progress segments fill gracefully
-      await new Promise((resolve) => setTimeout(resolve, 1500));
       setLoading(false);
     }
   };
@@ -865,6 +1054,8 @@ Return JSON in this format:
           title="Good spots are on the way."
           subtitle="Finding little detours near you..."
           hubName={currentCity.displayName}
+          progressStage={loadingStage}
+          stageText={loadingStageText}
         />
       )}
 
@@ -1054,14 +1245,14 @@ Return JSON in this format:
                 <input
                   type="range"
                   min="1"
-                  max="8"
+                  max="14"
                   value={availableTimeHrs}
                   onChange={(e) => setAvailableTimeHrs(Number(e.target.value))}
                   className="w-full h-3 bg-gray-200 border-[2px] border-black rounded-lg appearance-none cursor-pointer accent-[#0B3BF4]"
                 />
                 <div className="flex justify-between text-[10px] font-bold text-gray-500 mt-1">
                   <span>1 hour</span>
-                  <span>8 hours</span>
+                  <span>14 hours</span>
                 </div>
               </div>
             </div>
@@ -1195,7 +1386,7 @@ Return JSON in this format:
           </div>
 
           {/* Trail Map Canvas (Scrollable with Dynamic Multi-Stop Path) */}
-          <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] min-h-[480px] max-h-[78vh] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
+          <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[78vh] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth flex flex-col justify-between">
             {/* Dynamic Trail SVG Line: Starts at START at top, terminates at END at bottom */}
             {(() => {
               const stops = currentPlan.stops || [];
@@ -1203,41 +1394,41 @@ Return JSON in this format:
               const stopNodes = stops.map((_, sIdx) => {
                 const isLeft = sIdx % 2 === 0;
                 return {
-                  cx: isLeft ? 85 : 245,
-                  cy: 145 + sIdx * 115,
+                  cx: isLeft ? 38 : 322,
+                  cy: 80 + sIdx * 88,
                   idx: sIdx,
                 };
               });
 
-              const endCy = 145 + stopsCount * 115;
+              const endCy = 42 + stopsCount * 88 + 16;
               const endPoint = { cx: 180, cy: endCy };
-              const svgHeight = endCy + 35;
+              const svgHeight = endCy + 65;
 
               // Build smooth curved path through all stops
-              let pathD = `M 240 42`;
+              let pathD = `M 240 20`;
               if (stopNodes.length > 0) {
-                pathD += ` C 160 50, 45 90, ${stopNodes[0].cx} ${stopNodes[0].cy}`;
+                pathD += ` C 170 24, 45 45, ${stopNodes[0].cx} ${stopNodes[0].cy}`;
                 for (let i = 0; i < stopNodes.length - 1; i++) {
                   const curr = stopNodes[i];
                   const next = stopNodes[i + 1];
                   const midY = (curr.cy + next.cy) / 2;
-                  const c1x = curr.cx > next.cx ? curr.cx - 60 : curr.cx + 60;
-                  const c2x = next.cx < curr.cx ? next.cx - 50 : next.cx + 50;
+                  const c1x = curr.cx > next.cx ? curr.cx - 50 : curr.cx + 50;
+                  const c2x = next.cx < curr.cx ? next.cx - 40 : next.cx + 40;
                   pathD += ` C ${c1x} ${midY - 10}, ${c2x} ${midY + 10}, ${next.cx} ${next.cy}`;
                 }
                 const last = stopNodes[stopNodes.length - 1];
                 const lastMidY = (last.cy + endCy) / 2;
-                const cLastX = last.cx > 180 ? 275 : 35;
-                pathD += ` C ${cLastX} ${lastMidY}, 180 ${endCy - 20}, ${endPoint.cx} ${endPoint.cy}`;
+                const cLastX = last.cx > 180 ? 250 : 110;
+                pathD += ` C ${cLastX} ${lastMidY}, 180 ${endCy - 15}, ${endPoint.cx} ${endPoint.cy}`;
               } else {
-                pathD += ` C 180 80, 180 180, ${endPoint.cx} ${endPoint.cy}`;
+                pathD += ` C 180 50, 180 100, ${endPoint.cx} ${endPoint.cy}`;
               }
 
               return (
                 <svg
-                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  className="absolute inset-0 w-full pointer-events-none"
+                  style={{ height: `${svgHeight}px` }}
                   viewBox={`0 0 360 ${svgHeight}`}
-                  preserveAspectRatio="none"
                 >
                   <defs>
                     <linearGradient id="neonCyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1255,7 +1446,7 @@ Return JSON in this format:
                     d={pathD}
                     fill="none"
                     stroke="#090D16"
-                    strokeWidth="10"
+                    strokeWidth="9"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -1265,14 +1456,14 @@ Return JSON in this format:
                     d={pathD}
                     fill="none"
                     stroke="url(#neonCyanGlow)"
-                    strokeWidth="5"
+                    strokeWidth="4.5"
                     strokeDasharray="9 5"
                     strokeLinecap="round"
                     filter="url(#trailGlow)"
                   />
 
                   {/* Start Waypoint Node (Top right at Start Station) */}
-                  <circle cx="240" cy="42" r="5.5" fill="#0B3BF4" stroke="#090D16" strokeWidth="2" />
+                  <circle cx="240" cy="20" r="5.5" fill="#0B3BF4" stroke="#090D16" strokeWidth="2" />
 
                   {/* Dynamic Waypoint Nodes for all Stops */}
                   {stopNodes.map((node, i) => (
@@ -1280,21 +1471,21 @@ Return JSON in this format:
                       key={i}
                       cx={node.cx}
                       cy={node.cy}
-                      r="6.5"
+                      r="6"
                       fill={visitedStopIds.length > i ? '#10B981' : '#06B6D4'}
                       stroke="#090D16"
                       strokeWidth="2"
                     />
                   ))}
 
-                  {/* END Waypoint Node placed right at the top of the END location box at the bottom */}
-                  <circle cx={endPoint.cx} cy={endPoint.cy} r="7" fill="#F59E0B" stroke="#090D16" strokeWidth="2.5" />
+                  {/* END Waypoint Node placed exactly at the top center of the SAFE RETURN box */}
+                  <circle cx={endPoint.cx} cy={endPoint.cy} r="6" fill="#F59E0B" stroke="#090D16" strokeWidth="2" />
                 </svg>
               );
             })()}
 
             {/* TOP HEADER: STARTING PLACE */}
-            <div className="relative z-10 flex items-center justify-between gap-1 mb-4">
+            <div className="relative z-10 flex items-center justify-between gap-1 mb-3 h-[36px]">
               <div className="bg-[#FEF3C7] border-[2px] border-black rounded-full px-2.5 py-0.5 text-[10px] font-black text-amber-900 shadow-[0_2px_0_0_#000000] flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block" />
                 <span>STARTING PLACE</span>
@@ -1311,7 +1502,7 @@ Return JSON in this format:
             </div>
 
             {/* Dynamic Trail Steps with Live GPS Distance & Check-in */}
-            <div className="relative z-10 space-y-4">
+            <div className="relative z-10 space-y-3">
               {(currentPlan.stops || []).map((stop, sIdx) => {
                 const isLeft = sIdx % 2 === 0;
                 const stopId = stop.id || stop.name;
@@ -1436,7 +1627,7 @@ Return JSON in this format:
             </div>
 
             {/* MANDATORY SAFE RETURN END LOCATION ALWAYS ON THE BOTTOM OF THAT BOX */}
-            <div className="relative z-10 mt-6 mb-1">
+            <div className="relative z-10 mt-4 mb-1">
               <div className="bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-3 px-3.5 flex items-center justify-between shadow-[0_4px_0_0_#000000]">
                 <div className="flex items-center gap-2.5">
                   <span className="w-7 h-7 rounded-full bg-black text-amber-400 font-black text-sm flex items-center justify-center shrink-0 shadow-[0_1px_0_0_#000000]">
