@@ -317,26 +317,43 @@ export default function ChatTab({ location, setLocation, settings }) {
       } else if (lower.includes('2nd') || lower.includes('second') || lower.includes('stop 2')) {
         const removed = modifiedStops.splice(1, 1);
         actionReason = `Dropped 2nd stop (${removed[0]?.name || 'second stop'})`;
+      } else if (lower.includes('3rd') || lower.includes('third') || lower.includes('stop 3')) {
+        const removed = modifiedStops.splice(2, 1);
+        actionReason = `Dropped 3rd stop (${removed[0]?.name || 'third stop'})`;
       } else if (lower.includes('last')) {
         const removed = modifiedStops.pop();
         actionReason = `Dropped last stop (${removed?.name || 'last stop'})`;
       } else {
-        const matchIdx = modifiedStops.findIndex((s) => {
-          const sName = (s.name || '').toLowerCase();
-          const firstWord = sName.split(' ')[0];
-          return lower.includes(sName) || (firstWord.length > 3 && lower.includes(firstWord));
-        });
+        // Check if user specifically named a stop currently in modifiedStops
+        let matchIdx = -1;
+        for (let i = 0; i < modifiedStops.length; i++) {
+          const sName = (modifiedStops[i].name || '').toLowerCase();
+          if (lower.includes(sName)) {
+            matchIdx = i;
+            break;
+          }
+          const words = sName
+            .replace(/[^\w\s]/g, '')
+            .split(/\s+/)
+            .filter((w) => !['and', 'the', 'walk', 'park', 'spot', 'lane', 'view', 'step', 'steps', 'road', 'near', 'hotel', 'restaurant'].includes(w) && w.length >= 4);
+          if (words.some((w) => lower.includes(w))) {
+            matchIdx = i;
+            break;
+          }
+        }
+
         if (matchIdx !== -1) {
           const removed = modifiedStops.splice(matchIdx, 1);
           actionReason = `Removed ${removed[0]?.name}`;
-        } else if (modifiedStops.length > 1) {
+        } else if (modifiedStops.length > 0) {
+          // General remove ("remove a place", "remove 1 place", "drop that", "delete place")
           const removed = modifiedStops.pop();
-          actionReason = `Removed ${removed?.name}`;
+          actionReason = `Removed ${removed?.name || 'place'}`;
         }
       }
     }
 
-    // 2. Check for explicit ADD commands or category keywords ("add 10 more", "add one more place", "add tea spot", "add kappad", etc.)
+    // 2. Check for explicit ADD commands or category keywords ("add kappad beach", "add a specific place", "add 10 more", "add tea spot", etc.)
     if (
       (isAdd && !isTimeAdd && !isBudgetAdd) ||
       lower.includes('tea') ||
@@ -348,35 +365,47 @@ export default function ChatTab({ location, setLocation, settings }) {
       lower.includes('game') ||
       /add.*(?:place|spot)/i.test(lower)
     ) {
-      // Check for count (e.g., "add 10 more", "add 3 spots", "add 5 places")
+      // Check for count (e.g. "add 10 more", "add 3 spots", "add 5 places")
       const countMatch =
         lower.match(/(?:add|include|put|more)?\s*(\d+)\s*(?:more|places|spots|stops)?/i) ||
         lower.match(/(\d+)\s*(?:more|places|spots|stops)/i);
       const countToAdd = countMatch && parseInt(countMatch[1]) > 0 ? Math.min(15, parseInt(countMatch[1])) : 1;
 
-      // Check if user specifically requested a spot by name (e.g. "add Kappad Beach", "add Paragon", "add Mananchira")
-      const cleanPrompt = lower
-        .replace(/^(?:please\s*)?(?:can\s+we\s*|can\s+you\s*)?(?:add|put|include|go\s+to|visit)\s+/i, '')
-        .replace(/\b(?:more|places|spots|stops|please|also)\b/gi, '')
-        .trim();
+      // 1. Check if user specified a named spot from candidatePool
+      let specificCandidate = null;
+      const sortedPool = [...candidatePool].sort((a, b) => b.name.length - a.name.length);
 
-      const specificCandidate = cleanPrompt.length >= 3
-        ? candidatePool.find((s) => {
-            const sLower = s.name.toLowerCase();
-            return (
-              sLower === cleanPrompt ||
-              sLower.includes(cleanPrompt) ||
-              cleanPrompt.includes(sLower) ||
-              (cleanPrompt.length >= 4 && sLower.includes(cleanPrompt.slice(0, -2)))
-            );
-          })
-        : null;
+      for (const cand of sortedPool) {
+        const cLower = cand.name.toLowerCase();
+        // Exact full name match
+        if (lower.includes(cLower)) {
+          specificCandidate = cand;
+          break;
+        }
+        // Distinctive words (length >= 4, excluding generic words)
+        const words = cLower
+          .replace(/[^\w\s]/g, '')
+          .split(/\s+/)
+          .filter((w) => !['and', 'the', 'walk', 'park', 'spot', 'lane', 'view', 'step', 'steps', 'road', 'near', 'hotel', 'restaurant'].includes(w) && w.length >= 4);
 
-      if (specificCandidate && countToAdd === 1) {
-        modifiedStops.push(createStopObject(specificCandidate, modifiedStops.length, 'SPECIFIC SPOT'));
-        actionReason = (actionReason ? actionReason + ' & added ' : 'Added ') + specificCandidate.name;
+        if (words.length > 0 && words.some((w) => lower.includes(w))) {
+          specificCandidate = cand;
+          break;
+        }
+      }
+
+      if (specificCandidate) {
+        const alreadyIn = modifiedStops.some(
+          (ms) => (ms.name || '').toLowerCase() === specificCandidate.name.toLowerCase()
+        );
+        if (!alreadyIn) {
+          modifiedStops.push(createStopObject(specificCandidate, modifiedStops.length, 'ADDED SPOT'));
+          actionReason = (actionReason ? actionReason + ' & added ' : 'Added ') + specificCandidate.name;
+        } else {
+          actionReason = `${specificCandidate.name} is already in your trail!`;
+        }
       } else {
-        // Multi-add or category-based add
+        // Multi-add or generic add (e.g. "add a specific place", "add 10 more", "add a snack spot")
         const addedList = [];
         for (let i = 0; i < countToAdd; i++) {
           const candidate =
@@ -481,8 +510,8 @@ export default function ChatTab({ location, setLocation, settings }) {
       actionReason = 'Prioritized free & low-cost stops to cut budget';
     }
 
-    // Safety check: if modifiedStops is empty, populate with first available spot
-    if (modifiedStops.length === 0 && candidatePool.length > 0) {
+    // Safety check: if modifiedStops is empty and user was not explicitly removing, populate with first available spot
+    if (modifiedStops.length === 0 && !isRemove && candidatePool.length > 0) {
       const fallback = candidatePool[0];
       modifiedStops = [createStopObject(fallback, 0, 'ACTIVE')];
       if (!actionReason) actionReason = `Updated route to ${fallback.name}`;
@@ -1386,7 +1415,7 @@ Return JSON in this format:
           </div>
 
           {/* Trail Map Canvas (Scrollable with Dynamic Multi-Stop Path) */}
-          <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[78vh] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth flex flex-col justify-between">
+          <div className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[78vh] overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth">
             {/* Dynamic Trail SVG Line: Starts at START at top, terminates at END at bottom */}
             {(() => {
               const stops = currentPlan.stops || [];
@@ -1394,26 +1423,26 @@ Return JSON in this format:
               const stopNodes = stops.map((_, sIdx) => {
                 const isLeft = sIdx % 2 === 0;
                 return {
-                  cx: isLeft ? 38 : 322,
-                  cy: 80 + sIdx * 88,
+                  cx: isLeft ? 26 : 330,
+                  cy: 114 + sIdx * 96,
                   idx: sIdx,
                 };
               });
 
-              const endCy = 42 + stopsCount * 88 + 16;
+              const endCy = stopsCount === 0 ? 90 : 60 + stopsCount * 96 + 12;
               const endPoint = { cx: 180, cy: endCy };
-              const svgHeight = endCy + 65;
+              const svgHeight = endCy + 70;
 
               // Build smooth curved path through all stops
-              let pathD = `M 240 20`;
+              let pathD = `M 240 18`;
               if (stopNodes.length > 0) {
-                pathD += ` C 170 24, 45 45, ${stopNodes[0].cx} ${stopNodes[0].cy}`;
+                pathD += ` C 140 22, 26 55, ${stopNodes[0].cx} ${stopNodes[0].cy}`;
                 for (let i = 0; i < stopNodes.length - 1; i++) {
                   const curr = stopNodes[i];
                   const next = stopNodes[i + 1];
                   const midY = (curr.cy + next.cy) / 2;
-                  const c1x = curr.cx > next.cx ? curr.cx - 50 : curr.cx + 50;
-                  const c2x = next.cx < curr.cx ? next.cx - 40 : next.cx + 40;
+                  const c1x = curr.cx > next.cx ? curr.cx - 60 : curr.cx + 60;
+                  const c2x = next.cx < curr.cx ? next.cx - 50 : next.cx + 50;
                   pathD += ` C ${c1x} ${midY - 10}, ${c2x} ${midY + 10}, ${next.cx} ${next.cy}`;
                 }
                 const last = stopNodes[stopNodes.length - 1];
@@ -1421,7 +1450,7 @@ Return JSON in this format:
                 const cLastX = last.cx > 180 ? 250 : 110;
                 pathD += ` C ${cLastX} ${lastMidY}, 180 ${endCy - 15}, ${endPoint.cx} ${endPoint.cy}`;
               } else {
-                pathD += ` C 180 50, 180 100, ${endPoint.cx} ${endPoint.cy}`;
+                pathD += ` C 180 30, 180 60, ${endPoint.cx} ${endPoint.cy}`;
               }
 
               return (
@@ -1463,7 +1492,7 @@ Return JSON in this format:
                   />
 
                   {/* Start Waypoint Node (Top right at Start Station) */}
-                  <circle cx="240" cy="20" r="5.5" fill="#0B3BF4" stroke="#090D16" strokeWidth="2" />
+                  <circle cx="240" cy="18" r="5.5" fill="#0B3BF4" stroke="#090D16" strokeWidth="2" />
 
                   {/* Dynamic Waypoint Nodes for all Stops */}
                   {stopNodes.map((node, i) => (
@@ -1503,6 +1532,14 @@ Return JSON in this format:
 
             {/* Dynamic Trail Steps with Live GPS Distance & Check-in */}
             <div className="relative z-10 space-y-3">
+              {(currentPlan.stops || []).length === 0 && (
+                <div className="py-4 px-3 text-center bg-white/70 border-[2px] border-dashed border-gray-400 rounded-2xl shadow-[0_2px_0_0_#000000]">
+                  <p className="text-xs font-black text-black">Route cleared</p>
+                  <p className="text-[10px] font-bold text-gray-500 mt-0.5">
+                    Ask AI to "add [place]" or choose a vibe below
+                  </p>
+                </div>
+              )}
               {(currentPlan.stops || []).map((stop, sIdx) => {
                 const isLeft = sIdx % 2 === 0;
                 const stopId = stop.id || stop.name;
@@ -1627,7 +1664,7 @@ Return JSON in this format:
             </div>
 
             {/* MANDATORY SAFE RETURN END LOCATION ALWAYS ON THE BOTTOM OF THAT BOX */}
-            <div className="relative z-10 mt-4 mb-1">
+            <div className="relative z-10 mt-3 mb-1">
               <div className="bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-3 px-3.5 flex items-center justify-between shadow-[0_4px_0_0_#000000]">
                 <div className="flex items-center gap-2.5">
                   <span className="w-7 h-7 rounded-full bg-black text-amber-400 font-black text-sm flex items-center justify-center shrink-0 shadow-[0_1px_0_0_#000000]">
