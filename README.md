@@ -26,11 +26,13 @@ app_port: 7860
 [![Ollama](https://img.shields.io/badge/Ollama-Local_Inference-black?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.com/)
 [![Qwen 2.5](https://img.shields.io/badge/Model-Qwen_2.5_3B-blueviolet?style=for-the-badge)](https://huggingface.co/Qwen)
 [![PWA](https://img.shields.io/badge/PWA-Installable-purple?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
+[![DEV Community](https://img.shields.io/badge/DEV_Community-Read_Article-0A0A0A?style=for-the-badge&logo=dev.to&logoColor=white)](https://dev.to/fm9447/spot-undoo-privacy-first-ai-kerala-micro-travel-planner-layover-explorer-1528)
 [![Demo Video](https://img.shields.io/badge/Demo_Video-Watch_on_ngram-FF4F00?style=for-the-badge&logo=youtube&logoColor=white)](https://www.ngram.com/app/v2/chat/wrun_41M55NHJZP0GJNJ5J90J6HXVYK)
 
 <br/><br/>
 
 [![Watch Demo Video](https://img.shields.io/badge/▶_Watch_Demo_Video-Click_Here-brightgreen?style=for-the-badge)](https://www.ngram.com/app/v2/chat/wrun_41M55NHJZP0GJNJ5J90J6HXVYK)
+[![Read on DEV](https://img.shields.io/badge/📖_Read_Full_Article_on_DEV-Click_Here-black?style=for-the-badge)](https://dev.to/fm9447/spot-undoo-privacy-first-ai-kerala-micro-travel-planner-layover-explorer-1528)
 
 </div>
 
