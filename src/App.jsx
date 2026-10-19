@@ -133,8 +133,8 @@ export default function App() {
         onLogout={handleLogout}
       />
 
-      {/* 2. Main Tab Body */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-24 md:pb-12 overflow-x-hidden">
+      {/* 2. Main Tab Body (Responsive widescreen desktop layout) */}
+      <main className="flex-1 w-full max-w-[1680px] mx-auto px-3 sm:px-6 lg:px-8 pb-24 md:pb-8 overflow-x-hidden">
         {activeTab === 'explore' && (
           <ExploreTab location={location} setLocation={setLocation} />
         )}

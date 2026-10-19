@@ -1437,9 +1437,9 @@ Return JSON in this format:
         />
       )}
 
-      {/* VIEW 1: PRE-INTENT PROMPT SCREEN (Exact match to User Screenshot) */}
+      {/* VIEW 1: PRE-INTENT PROMPT SCREEN (Responsive Widescreen Desktop Studio) */}
       {viewState === 'form' ? (
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div className="max-w-6xl mx-auto space-y-4">
           {/* Page Title & History Button */}
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-black text-black tracking-tight">
@@ -1447,7 +1447,7 @@ Return JSON in this format:
             </h2>
             <button
               onClick={loadHistory}
-              className="flex items-center gap-1 bg-white border-[2px] border-black rounded-full px-2.5 py-1 text-[11px] font-black text-black shadow-[0_2px_0_0_#000000] hover:bg-gray-100 transition active:translate-y-0.5"
+              className="flex items-center gap-1 bg-white border-[2px] border-black rounded-full px-2.5 py-1 text-[11px] font-black text-black shadow-[0_2px_0_0_#000000] hover:bg-gray-100 transition active:translate-y-0.5 cursor-pointer"
               title="View saved plans in MongoDB"
             >
               <History size={13} />
@@ -1459,8 +1459,11 @@ Return JSON in this format:
             POWERED BY LOCAL QWEN 2.5:3B / QWEN 3:4B
           </div>
 
-          {/* Master Form Card */}
-          <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            {/* Left: Master Form (7 cols on lg) */}
+            <div className="lg:col-span-7 space-y-4">
+              {/* Master Form Card */}
+              <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-4">
             {/* GOOGLE MAPS STYLE LOCATION & STARTING POINT SELECTOR */}
             <div className="space-y-1.5">
               <label className="text-[11px] font-black uppercase tracking-wider text-black flex items-center justify-between">
@@ -1619,6 +1622,117 @@ Return JSON in this format:
               </>
             )}
           </button>
+            </div>
+
+            {/* Right: Desktop Layover Studio Assistant (5 cols on lg) */}
+            <div className="hidden lg:block lg:col-span-5 space-y-4 sticky top-20">
+              {/* Regional Hub Card */}
+              <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs font-black text-black">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>Regional Transit Anchor</span>
+                  </div>
+                  <span className="text-[9px] font-black bg-amber-100 text-amber-900 border border-black/30 rounded-full px-2 py-0.5 uppercase">
+                    {currentCity.district || 'Kerala Hub'}
+                  </span>
+                </div>
+
+                <div className="bg-[#F8FAFC] border-[1.5px] border-black rounded-2xl p-3 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">🚆</span>
+                    <div>
+                      <div className="font-black text-xs text-black leading-tight">
+                        {currentCity.hub?.stationName || currentCity.displayName}
+                      </div>
+                      <div className="text-[10px] font-bold text-gray-500">
+                        Safe Return Point • 0 km
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 pt-2 border-t border-gray-200 text-center">
+                    <div className="bg-white border border-black/20 rounded-xl p-2">
+                      <div className="text-[9px] font-bold text-gray-500 uppercase">Usable Time</div>
+                      <div className="text-xs font-black text-[#0B3BF4] mt-0.5">
+                        {availableTimeHrs * 60 - 30} mins
+                      </div>
+                    </div>
+                    <div className="bg-white border border-black/20 rounded-xl p-2">
+                      <div className="text-[9px] font-bold text-gray-500 uppercase">Buffer Window</div>
+                      <div className="text-xs font-black text-amber-600 mt-0.5">
+                        30m Return Safe
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Inspiration Presets */}
+              <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black text-black uppercase tracking-wider flex items-center gap-1.5">
+                    <Sparkles size={13} className="text-[#0B3BF4]" /> Quick Vibe Presets
+                  </span>
+                  <span className="text-[9px] font-bold text-gray-500">Tap to load</span>
+                </div>
+
+                <div className="space-y-2">
+                  {[
+                    {
+                      title: '🚆 Layover Quick Chai & Heritage',
+                      mode: 'layover',
+                      time: 2,
+                      budget: 300,
+                      vibes: ['☕ Chai & View', '🌿 Hidden Nature'],
+                      prompt: 'Quick walking distance spots near the station with amazing tea and zero traffic risks.',
+                    },
+                    {
+                      title: '🍜 Street Food & Halwa Crawl',
+                      mode: 'quick',
+                      time: 3,
+                      budget: 450,
+                      vibes: ['🍜 Street Food'],
+                      prompt: 'Best authentic local street food, Malabar snacks, and late-night snacks within budget.',
+                    },
+                    {
+                      title: '🎮 AC LAN Gaming & Chillout',
+                      mode: 'quick',
+                      time: 4,
+                      budget: 600,
+                      vibes: ['🎮 Gaming & Chill'],
+                      prompt: 'Cool cafe with fast fiber or gaming PCs with AC to beat the afternoon Kerala heat.',
+                    },
+                  ].map((preset) => (
+                    <button
+                      key={preset.title}
+                      type="button"
+                      onClick={() => {
+                        setTripMode(preset.mode);
+                        setAvailableTimeHrs(preset.time);
+                        setMaxBudget(preset.budget);
+                        setSelectedVibes(preset.vibes);
+                        setPromptText(preset.prompt);
+                      }}
+                      className="w-full text-left p-2.5 rounded-2xl border-[1.5px] border-black bg-[#F8FAFC] hover:bg-[#EFF6FF] hover:border-[#0B3BF4] shadow-[0_2px_0_0_#000000] transition active:translate-y-0.5 cursor-pointer space-y-1 group"
+                    >
+                      <div className="font-black text-xs text-black group-hover:text-[#0B3BF4] transition">
+                        {preset.title}
+                      </div>
+                      <div className="text-[10px] text-gray-500 font-semibold line-clamp-1">
+                        {preset.prompt}
+                      </div>
+                      <div className="flex items-center gap-2 text-[9px] font-bold text-gray-600 pt-0.5">
+                        <span>⏳ {preset.time}h</span>
+                        <span>•</span>
+                        <span>₹{preset.budget} max</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       ) : (
         /* VIEW 2: ADVENTURE TRAIL MAP (Results Screen) */

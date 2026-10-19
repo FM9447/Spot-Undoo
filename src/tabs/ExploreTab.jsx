@@ -4,6 +4,7 @@ import { KERALA_CITIES } from '../data/keralaCitiesData';
 import { haversineKm } from '../utils/plannerMath';
 import InteractiveMap from '../components/InteractiveMap';
 import ImageCarousel from '../components/ImageCarousel';
+import SpotDetailsCard from '../components/SpotDetailsCard';
 import RideComparatorModal from '../components/RideComparatorModal';
 import LocationPickerModal from '../components/LocationPickerModal';
 import { getBackendUrl } from '../utils/apiConfig';
@@ -413,142 +414,6 @@ export default function ExploreTab({ location, setLocation }) {
         </div>
       )}
 
-      {/* 1. Dual Location Controls Card */}
-      <div className="bg-white border-[2.5px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] space-y-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-xs font-black text-black">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>GPS: {location?.label || 'Your Location'}</span>
-          </div>
-          <button
-            onClick={usePhoneGPS}
-            className="text-[10px] font-black text-[#0B3BF4] hover:underline cursor-pointer flex items-center gap-0.5"
-          >
-            <Navigation size={10} /> Refresh
-          </button>
-        </div>
-
-        {/* Location Selector Trigger Button */}
-        <button
-          type="button"
-          onClick={() => setShowLocationModal(true)}
-          className="w-full flex items-center justify-between gap-2 bg-[#F4F6F9] hover:bg-gray-100 border-[2px] border-black rounded-xl px-3 py-2 text-xs font-black text-black shadow-[0_1.5px_0_0_#000000] transition active:translate-y-0.5 cursor-pointer"
-        >
-          <div className="flex items-center gap-2 truncate text-left">
-            <MapPin size={14} className="text-[#0B3BF4] shrink-0" strokeWidth={2.5} />
-            <span className="truncate">
-              {selectedCityFilter === 'Your Location'
-                ? `📍 Your Location (${location?.label?.replace(/\s*\(Active\)/i, '') || 'Live GPS'})`
-                : selectedCityFilter === 'All Cities'
-                ? '🌴 All Kerala Spots'
-                : `📍 ${KERALA_CITIES[selectedCityFilter]?.displayName || selectedCityFilter}`}
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5 shrink-0 text-gray-600">
-            <span className="text-[10px] font-black bg-white border border-black rounded-full px-2 py-0.5 shadow-sm">
-              Change
-            </span>
-            <ChevronDown size={14} className="text-black" />
-          </div>
-        </button>
-
-        {/* Search input */}
-        <div className="flex items-center gap-2 bg-white border-[2px] border-black rounded-xl px-3 py-1.5">
-          <Search size={14} className="text-black shrink-0" strokeWidth={2.5} />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search places, food, or areas near you..."
-            className="w-full text-xs font-bold text-black placeholder-gray-400 outline-none bg-transparent"
-          />
-          {searchQuery && (
-            <button onClick={() => setSearchQuery('')} className="text-xs font-bold text-gray-500 cursor-pointer">
-              ✕
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* 2A. View Switcher Row & Spot Counter */}
-      <div className="flex items-center justify-between gap-2 px-0.5">
-        <span className="text-[11px] font-black text-gray-600 uppercase tracking-wider">
-          {filteredSpots.length} Spots Found
-        </span>
-        {/* View Switcher: Map (Default) | Canvas | Grid */}
-        <div className="shrink-0 flex items-center bg-white border-[2px] border-black rounded-full p-0.5 shadow-[0_2px_0_0_#000000]">
-          <button
-            type="button"
-            onClick={() => setViewMode('osm')}
-            className={`px-2.5 py-1 rounded-full text-xs font-black transition cursor-pointer ${
-              viewMode === 'osm' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
-            }`}
-          >
-            🗺️ Map
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewMode('cartoon')}
-            className={`px-2 py-1 rounded-full text-xs font-black transition cursor-pointer ${
-              viewMode === 'cartoon' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
-            }`}
-          >
-            🎨 Canvas
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewMode('grid')}
-            className={`px-2 py-1 rounded-full text-xs font-black transition cursor-pointer ${
-              viewMode === 'grid' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
-            }`}
-          >
-            📱 Grid
-          </button>
-        </div>
-      </div>
-
-      {/* 2B. Category Filters (Full width horizontal scroll) */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none w-full">
-        {CATEGORIES.map((cat) => {
-          const isSelected = activeCategory === cat;
-          return (
-            <button
-              key={cat}
-              type="button"
-              onClick={() => setActiveCategory(cat)}
-              className={`text-xs font-black px-3 py-1 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] active:translate-y-0.5 shrink-0 cursor-pointer ${
-                isSelected
-                  ? 'bg-[#0B3BF4] text-white'
-                  : 'bg-white text-black hover:bg-gray-100'
-              }`}
-            >
-              {cat}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* 2B. City Region Filter Pills (No "City:" label) */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-        {CITIES_LIST.map((cityName) => {
-          const isSelected = selectedCityFilter === cityName;
-          return (
-            <button
-              key={cityName}
-              type="button"
-              onClick={() => handleCitySelect(cityName)}
-              className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border-[1.5px] border-black transition shadow-[0_1px_0_0_#000000] active:translate-y-0.5 shrink-0 cursor-pointer ${
-                isSelected
-                  ? 'bg-amber-400 text-black'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              {cityName === 'Your Location' ? '📍 Your Location' : cityName}
-            </button>
-          );
-        })}
-      </div>
-
       {/* Location Selection Modal (Google Maps Style) */}
       <LocationPickerModal
         isOpen={showLocationModal}
@@ -558,18 +423,396 @@ export default function ExploreTab({ location, setLocation }) {
         showAllKeralaOption={true}
       />
 
-      {/* 3. View Content (OSM Live Map / Cartoon Canvas / Grid) */}
-      {viewMode === 'osm' ? (
-        <div className="w-full">
-          <InteractiveMap
-            spots={filteredSpots}
-            selectedSpot={selectedSpot}
-            onSelectSpot={setSelectedSpot}
-            userLocation={location}
-            height="min(72vh, 680px)"
-          />
+      {/* ── DESKTOP SPLIT STUDIO LAYOUT (Visible on lg+ screens when viewMode === 'osm') ── */}
+      {viewMode === 'osm' && (
+        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-5 w-full items-start">
+          {/* Left Studio Sidebar (4 cols on xl, 5 cols on lg) */}
+          <div className="lg:col-span-5 xl:col-span-4 space-y-3">
+            {/* Dual Location & Search Card */}
+            <div className="bg-white border-[2.5px] border-black rounded-3xl p-3.5 shadow-[0_4px_0_0_#000000] space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-xs font-black text-black">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>GPS Hub: {location?.label || 'Your Location'}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={usePhoneGPS}
+                  className="text-[11px] font-black text-[#0B3BF4] hover:underline cursor-pointer flex items-center gap-0.5"
+                >
+                  <Navigation size={11} /> Refresh
+                </button>
+              </div>
+
+              {/* Location Picker Trigger */}
+              <button
+                type="button"
+                onClick={() => setShowLocationModal(true)}
+                className="w-full flex items-center justify-between gap-2 bg-[#F4F6F9] hover:bg-gray-100 border-[2px] border-black rounded-2xl px-3 py-2 text-xs font-black text-black shadow-[0_1.5px_0_0_#000000] transition active:translate-y-0.5 cursor-pointer"
+              >
+                <div className="flex items-center gap-2 truncate text-left">
+                  <MapPin size={14} className="text-[#0B3BF4] shrink-0" strokeWidth={2.5} />
+                  <span className="truncate">
+                    {selectedCityFilter === 'Your Location'
+                      ? `📍 Your Location (${location?.label?.replace(/\s*\(Active\)/i, '') || 'Live GPS'})`
+                      : selectedCityFilter === 'All Cities'
+                      ? '🌴 All Kerala Spots'
+                      : `📍 ${KERALA_CITIES[selectedCityFilter]?.displayName || selectedCityFilter}`}
+                  </span>
+                </div>
+                <span className="text-[10px] font-black bg-white border border-black rounded-full px-2 py-0.5 shadow-sm">
+                  Change
+                </span>
+              </button>
+
+              {/* Search Bar */}
+              <div className="flex items-center gap-2 bg-white border-[2px] border-black rounded-2xl px-3 py-2">
+                <Search size={14} className="text-black shrink-0" strokeWidth={2.5} />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search spots, food, hidden nature, areas..."
+                  className="w-full text-xs font-bold text-black placeholder-gray-400 outline-none bg-transparent"
+                />
+                {searchQuery && (
+                  <button onClick={() => setSearchQuery('')} className="text-xs font-bold text-gray-500 cursor-pointer">
+                    ✕
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none w-full">
+              {CATEGORIES.map((cat) => {
+                const isSelected = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setActiveCategory(cat)}
+                    className={`text-xs font-black px-3 py-1 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] active:translate-y-0.5 shrink-0 cursor-pointer ${
+                      isSelected
+                        ? 'bg-[#0B3BF4] text-white'
+                        : 'bg-white text-black hover:bg-gray-100'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* City Region Filter Pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+              {CITIES_LIST.map((cityName) => {
+                const isSelected = selectedCityFilter === cityName;
+                return (
+                  <button
+                    key={cityName}
+                    type="button"
+                    onClick={() => handleCitySelect(cityName)}
+                    className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border-[1.5px] border-black transition shadow-[0_1px_0_0_#000000] active:translate-y-0.5 shrink-0 cursor-pointer ${
+                      isSelected
+                        ? 'bg-amber-400 text-black'
+                        : 'bg-white text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    {cityName === 'Your Location' ? '📍 Your Location' : cityName}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Dynamic Main Panel: Spot Details Card OR Scrollable Spots List */}
+            {selectedSpot ? (
+              <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-3 max-h-[calc(100vh-280px)] overflow-y-auto scrollbar-thin">
+                <SpotDetailsCard
+                  spot={selectedSpot}
+                  onClose={() => setSelectedSpot(null)}
+                  onOpenRides={handleOpenRides}
+                  userRating={userRating}
+                  setUserRating={setUserRating}
+                  userReviewText={userReviewText}
+                  setUserReviewText={setUserReviewText}
+                  reviewSubmitted={reviewSubmitted}
+                  setReviewSubmitted={setReviewSubmitted}
+                  communityReviews={communityReviews}
+                  setCommunityReviews={setCommunityReviews}
+                  bookmarkedIds={bookmarkedIds}
+                  toggleBookmark={toggleBookmark}
+                  location={location}
+                  isDesktop={true}
+                />
+              </div>
+            ) : (
+              <div className="bg-white border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] space-y-2">
+                <div className="flex items-center justify-between px-1">
+                  <span className="text-xs font-black text-black uppercase tracking-wider">
+                    {filteredSpots.length} Spots Nearby
+                  </span>
+                  <span className="text-[10px] font-bold text-gray-500">
+                    Click card to inspect on map
+                  </span>
+                </div>
+                <div className="max-h-[calc(100vh-320px)] overflow-y-auto space-y-2 pr-1 scrollbar-thin">
+                  {filteredSpots.map((spot) => (
+                    <div
+                      key={spot.id || spot.name}
+                      onClick={() => setSelectedSpot(spot)}
+                      className="group flex items-center gap-2.5 p-2 rounded-2xl border-[2px] border-black bg-[#F8FAFC] hover:bg-white hover:border-[#0B3BF4] shadow-[0_2px_0_0_#000000] cursor-pointer transition active:translate-y-0.5"
+                    >
+                      <div className="w-16 h-16 rounded-xl border border-black overflow-hidden shrink-0 bg-gray-100">
+                        <img
+                          src={getRealSpotPhoto(spot)}
+                          alt={spot.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[9px] font-black bg-amber-100 text-amber-900 border border-black/30 rounded-md px-1.5 py-0.2 uppercase truncate max-w-[120px]">
+                            {spot.category}
+                          </span>
+                          <span className="text-[10px] font-black text-emerald-700 ml-auto shrink-0">
+                            {spot.expense === 0 ? 'FREE' : `₹${spot.expense}`}
+                          </span>
+                        </div>
+                        <h4 className="font-black text-xs text-black truncate mt-0.5 group-hover:text-[#0B3BF4] transition">
+                          {spot.name}
+                        </h4>
+                        <div className="flex items-center justify-between text-[10px] text-gray-500 font-bold mt-1">
+                          <span className="truncate max-w-[140px]">
+                            📍 {spot.distanceKm ? `${spot.distanceKm} km` : (spot.cityName || 'Nearby')}
+                          </span>
+                          <span className="flex items-center gap-0.5 text-black shrink-0">
+                            ⭐ {spot.rating || 4.8}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {filteredSpots.length === 0 && (
+                    <div className="p-6 text-center text-xs font-bold text-gray-500">
+                      No spots match this filter.
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Right Studio Map Area (8 cols on xl, 7 cols on lg) */}
+          <div className="lg:col-span-7 xl:col-span-8 sticky top-20 space-y-2">
+            {/* Map Top Bar */}
+            <div className="flex items-center justify-between px-3 py-1.5 bg-white border-[2.5px] border-black rounded-2xl shadow-[0_3px_0_0_#000000]">
+              <div className="flex items-center gap-2 text-xs font-black text-black truncate">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                <span className="truncate">
+                  {selectedCityFilter === 'Your Location' ? (location?.label || 'Your Location') : selectedCityFilter}
+                </span>
+                <span className="text-[10px] text-gray-500 font-bold shrink-0 hidden sm:inline">
+                  • {filteredSpots.length} spots
+                </span>
+              </div>
+
+              {/* View Switcher: Map | Canvas | Grid */}
+              <div className="shrink-0 flex items-center bg-[#F4F6F9] border-[1.5px] border-black rounded-full p-0.5 shadow-[0_1px_0_0_#000000]">
+                <button
+                  type="button"
+                  onClick={() => setViewMode('osm')}
+                  className={`px-3 py-1 rounded-full text-xs font-black transition cursor-pointer ${
+                    viewMode === 'osm' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
+                  }`}
+                >
+                  🗺️ Map
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('cartoon')}
+                  className={`px-3 py-1 rounded-full text-xs font-black transition cursor-pointer ${
+                    viewMode === 'cartoon' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
+                  }`}
+                >
+                  🎨 Canvas
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('grid')}
+                  className={`px-3 py-1 rounded-full text-xs font-black transition cursor-pointer ${
+                    viewMode === 'grid' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
+                  }`}
+                >
+                  📱 Grid
+                </button>
+              </div>
+            </div>
+
+            {/* Interactive Map */}
+            <InteractiveMap
+              spots={filteredSpots}
+              selectedSpot={selectedSpot}
+              onSelectSpot={setSelectedSpot}
+              userLocation={location}
+              height="calc(100vh - 165px)"
+            />
+          </div>
         </div>
-      ) : viewMode === 'cartoon' ? (
+      )}
+
+      {/* ── MOBILE / NON-OSM VIEW LAYOUT ── */}
+      <div className={viewMode === 'osm' ? 'lg:hidden space-y-3' : 'space-y-3'}>
+        {/* Mobile Top Controls: Location & Search */}
+        <div className="bg-white border-[2.5px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5 text-xs font-black text-black">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>GPS: {location?.label || 'Your Location'}</span>
+            </div>
+            <button
+              onClick={usePhoneGPS}
+              className="text-[10px] font-black text-[#0B3BF4] hover:underline cursor-pointer flex items-center gap-0.5"
+            >
+              <Navigation size={10} /> Refresh
+            </button>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowLocationModal(true)}
+            className="w-full flex items-center justify-between gap-2 bg-[#F4F6F9] hover:bg-gray-100 border-[2px] border-black rounded-xl px-3 py-2 text-xs font-black text-black shadow-[0_1.5px_0_0_#000000] transition active:translate-y-0.5 cursor-pointer"
+          >
+            <div className="flex items-center gap-2 truncate text-left">
+              <MapPin size={14} className="text-[#0B3BF4] shrink-0" strokeWidth={2.5} />
+              <span className="truncate">
+                {selectedCityFilter === 'Your Location'
+                  ? `📍 Your Location (${location?.label?.replace(/\s*\(Active\)/i, '') || 'Live GPS'})`
+                  : selectedCityFilter === 'All Cities'
+                  ? '🌴 All Kerala Spots'
+                  : `📍 ${KERALA_CITIES[selectedCityFilter]?.displayName || selectedCityFilter}`}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0 text-gray-600">
+              <span className="text-[10px] font-black bg-white border border-black rounded-full px-2 py-0.5 shadow-sm">
+                Change
+              </span>
+              <ChevronDown size={14} className="text-black" />
+            </div>
+          </button>
+
+          <div className="flex items-center gap-2 bg-white border-[2px] border-black rounded-xl px-3 py-1.5">
+            <Search size={14} className="text-black shrink-0" strokeWidth={2.5} />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search places, food, or areas near you..."
+              className="w-full text-xs font-bold text-black placeholder-gray-400 outline-none bg-transparent"
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery('')} className="text-xs font-bold text-gray-500 cursor-pointer">
+                ✕
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* View Switcher Row & Spot Counter */}
+        <div className="flex items-center justify-between gap-2 px-0.5">
+          <span className="text-[11px] font-black text-gray-600 uppercase tracking-wider">
+            {filteredSpots.length} Spots Found
+          </span>
+          <div className="shrink-0 flex items-center bg-white border-[2px] border-black rounded-full p-0.5 shadow-[0_2px_0_0_#000000]">
+            <button
+              type="button"
+              onClick={() => setViewMode('osm')}
+              className={`px-2.5 py-1 rounded-full text-xs font-black transition cursor-pointer ${
+                viewMode === 'osm' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
+              }`}
+            >
+              🗺️ Map
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('cartoon')}
+              className={`px-2 py-1 rounded-full text-xs font-black transition cursor-pointer ${
+                viewMode === 'cartoon' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
+              }`}
+            >
+              🎨 Canvas
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('grid')}
+              className={`px-2 py-1 rounded-full text-xs font-black transition cursor-pointer ${
+                viewMode === 'grid' ? 'bg-[#0B3BF4] text-white shadow-sm' : 'text-gray-700 hover:text-black'
+              }`}
+            >
+              📱 Grid
+            </button>
+          </div>
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none w-full">
+          {CATEGORIES.map((cat) => {
+            const isSelected = activeCategory === cat;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
+                className={`text-xs font-black px-3 py-1 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] active:translate-y-0.5 shrink-0 cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#0B3BF4] text-white'
+                    : 'bg-white text-black hover:bg-gray-100'
+                }`}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* City Region Filter Pills */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          {CITIES_LIST.map((cityName) => {
+            const isSelected = selectedCityFilter === cityName;
+            return (
+              <button
+                key={cityName}
+                type="button"
+                onClick={() => handleCitySelect(cityName)}
+                className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border-[1.5px] border-black transition shadow-[0_1px_0_0_#000000] active:translate-y-0.5 shrink-0 cursor-pointer ${
+                  isSelected
+                    ? 'bg-amber-400 text-black'
+                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                {cityName === 'Your Location' ? '📍 Your Location' : cityName}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Mobile View Content */}
+        {viewMode === 'osm' && (
+          <div className="w-full">
+            <InteractiveMap
+              spots={filteredSpots}
+              selectedSpot={selectedSpot}
+              onSelectSpot={setSelectedSpot}
+              userLocation={location}
+              height="min(72vh, 680px)"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Content for non-OSM modes (Canvas or Grid) */}
+      {viewMode === 'cartoon' ? (
         <div
           ref={trailContainerRef}
           className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[540px] md:max-h-[720px] max-w-4xl mx-auto overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
@@ -1030,267 +1273,37 @@ export default function ExploreTab({ location, setLocation }) {
         )
       )}
 
-      {/* 4. Selected-Place Popup Modal Overlay */}
+      {/* 4. Selected-Place Popup Modal Overlay (Mobile Only — on desktop, it docks into the left studio panel) */}
       {selectedSpot && (
         <div
           onClick={() => setSelectedSpot(null)}
-          className="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-3 animate-in fade-in duration-200"
+          className="lg:hidden fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-3 animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
             className="bg-white border-[3px] border-black rounded-3xl p-4 shadow-[0_8px_0_0_#000000] w-full max-w-lg max-h-[88vh] overflow-y-auto space-y-3 relative"
           >
-            {/* Handle */}
             <div className="w-12 h-1 bg-black/20 rounded-full mx-auto" />
-
-          {/* Top Bar: Badge + Rating + Close */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="bg-[#FEF3C7] border-[1.5px] border-black rounded-full px-2.5 py-0.5 text-xs font-black text-black">
-                {selectedSpot.badge || selectedSpot.category || 'Scenic Spot'}
-              </span>
-              <div className="flex items-center gap-1 text-xs font-black text-black">
-                <Star size={13} className="text-amber-500 fill-amber-500" />
-                <span>{selectedSpot.rating || 4.9}</span>
-                <span className="text-gray-500 font-bold">({selectedSpot.reviewCount || 128})</span>
-              </div>
-            </div>
-            <button
-              onClick={() => setSelectedSpot(null)}
-              className="w-7 h-7 rounded-full border-[2px] border-black bg-white flex items-center justify-center hover:bg-gray-100 font-black text-xs shadow-[0_1px_0_0_#000000]"
-            >
-              ✕
-            </button>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-xl font-black text-black leading-tight">
-            {selectedSpot.name}
-          </h3>
-
-          {/* Spot Photos Carousel with cyclic navigation < > and link */}
-          <ImageCarousel
-            images={getRealSpotPhotos(selectedSpot)}
-            links={selectedSpot.links || []}
-            alt={selectedSpot.name}
-            className="w-full h-44 rounded-2xl border-[2px] border-black shadow-[0_2px_0_0_#000000]"
-          />
-
-          {/* 4-Box Stats Grid */}
-          <div className="border-[2px] border-black rounded-2xl overflow-hidden grid grid-cols-4 divide-x-[2px] divide-black text-center py-2 bg-white shadow-[0_2px_0_0_#000000]">
-            <div>
-              <div className="text-[9px] font-bold text-gray-500 uppercase">Schedule</div>
-              <div className="text-[11px] font-black text-black mt-0.5">
-                {selectedSpot.schedule || '14:15 - 15:00'}
-              </div>
-            </div>
-            <div>
-              <div className="text-[9px] font-bold text-gray-500 uppercase">Est. Cost</div>
-              <div className="text-[11px] font-black text-emerald-600 mt-0.5">
-                {selectedSpot.expense === 0 ? 'Free' : `₹${selectedSpot.expense}`}
-              </div>
-            </div>
-            <div>
-              <div className="text-[9px] font-bold text-gray-500 uppercase">Distance</div>
-              <div className="text-[11px] font-black text-black mt-0.5">
-                {selectedSpot.distanceText || '2.1km (10m)'}
-              </div>
-            </div>
-            <div>
-              <div className="text-[9px] font-bold text-gray-500 uppercase">Return Time</div>
-              <div className="text-[11px] font-black text-[#0B3BF4] mt-0.5">
-                {selectedSpot.returnText || '10m back (₹30)'}
-              </div>
-            </div>
-          </div>
-
-          {/* Multimodal Ride Hailing Comparator (Uber, Rapido, Ola) Button */}
-          <button
-            type="button"
-            onClick={() => handleOpenRides(selectedSpot)}
-            className="w-full bg-[#FFE500] hover:bg-[#FACC15] border-[2.5px] border-black rounded-2xl py-2.5 px-3 font-black text-xs text-black shadow-[0_3px_0_0_#000000] flex items-center justify-between active:translate-y-0.5 transition cursor-pointer"
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-base">🛺</span>
-              <span className="tracking-tight uppercase">Compare Uber, Rapido & Autos</span>
-            </div>
-            <div className="flex items-center gap-1 text-[10px] font-black bg-white px-2 py-0.5 rounded-lg border border-black shadow-[0_1px_0_0_#000000]">
-              <span>Fast Fares</span>
-              <span>→</span>
-            </div>
-          </button>
-
-          {/* Community Quote Box */}
-          <div className="border-[1.5px] border-black rounded-2xl p-3 bg-[#FFFDF5] text-xs font-semibold text-black leading-relaxed flex items-start gap-2 shadow-[0_1px_0_0_#000000]">
-            <span className="text-gray-400 mt-0.5">💬</span>
-            <p>"{selectedSpot.review}"</p>
-          </div>
-
-          {/* Interactive User Review & Rating Section */}
-          <div className="border-[2px] border-black rounded-2xl p-3 bg-white space-y-2 shadow-[0_2px_0_0_#000000]">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase tracking-wider text-black flex items-center gap-1">
-                <span>⭐</span> Rate & Add Review
-              </span>
-              {/* Star Rating Selector */}
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    key={star}
-                    type="button"
-                    onClick={() => setUserRating(star)}
-                    className="p-0.5 focus:outline-none"
-                  >
-                    <Star
-                      size={14}
-                      className={
-                        star <= userRating
-                          ? 'text-amber-500 fill-amber-500'
-                          : 'text-gray-300'
-                      }
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={userReviewText}
-                onChange={(e) => setUserReviewText(e.target.value)}
-                placeholder="Share your local tip or experience here..."
-                className="flex-1 border-[1.5px] border-black rounded-xl px-2.5 py-1.5 text-xs font-bold text-black outline-none bg-[#F4F6F9]"
-              />
-              <button
-                type="button"
-                onClick={async () => {
-                  const cleanedText = sanitizeText(userReviewText.trim());
-                  if (!cleanedText) return;
-                  const spotKey = selectedSpot.id || selectedSpot.name;
-                  const newReview = {
-                    rating: userRating,
-                    text: cleanedText,
-                    author: 'Local Explorer',
-                    date: new Date().toLocaleDateString(),
-                  };
-
-                  // 1. Save to localStorage
-                  const key = `reviews_${spotKey}`;
-                  const existing = JSON.parse(localStorage.getItem(key) || '[]');
-                  localStorage.setItem(key, JSON.stringify([newReview, ...existing]));
-
-                  // 2. Persist to MongoDB Atlas backend
-                  fetch(`${getBackendUrl()}/api/reviews`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      spotId: spotKey,
-                      spotName: selectedSpot.name,
-                      rating: userRating,
-                      reviewText: cleanedText,
-                      author: 'Local Explorer',
-                    }),
-                  }).catch(console.warn);
-
-                  // 3. Update communityReviews state so it renders immediately
-                  setCommunityReviews((prev) => [newReview, ...prev]);
-
-                  // 4. Update selectedSpot rating & review count
-                  setSelectedSpot((prev) => ({
-                    ...prev,
-                    review: cleanedText,
-                    rating: Number(
-                      (
-                        ((prev.rating || 4.5) * (prev.reviewCount || 10) + userRating) /
-                        ((prev.reviewCount || 10) + 1)
-                      ).toFixed(1)
-                    ),
-                    reviewCount: (prev.reviewCount || 10) + 1,
-                  }));
-
-                  setUserReviewText('');
-                  setReviewSubmitted(true);
-                  setTimeout(() => setReviewSubmitted(false), 3000);
-                }}
-                className="bg-[#0B3BF4] text-white border-[1.5px] border-black rounded-xl px-3 py-1.5 text-xs font-black shadow-[0_2px_0_0_#000000] active:translate-y-0.5"
-              >
-                Post
-              </button>
-            </div>
-            {reviewSubmitted && (
-              <p className="text-[10px] font-black text-emerald-600 flex items-center gap-1">
-                ✓ Review saved to MongoDB Atlas & spot!
-              </p>
-            )}
-
-            {/* Community Reviews List */}
-            {communityReviews && communityReviews.length > 0 && (
-              <div className="pt-2 border-t border-black/10 space-y-1.5">
-                <div className="text-[10px] font-black uppercase tracking-wider text-gray-500">
-                  Community Reviews ({communityReviews.length})
-                </div>
-                <div className="max-h-36 overflow-y-auto space-y-1.5 pr-1 scrollbar-thin">
-                  {communityReviews.map((rev, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-[#F8FAFC] border-[1.5px] border-black rounded-xl p-2 text-xs"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-black text-[11px] text-black">
-                          {rev.author || 'Local Explorer'}
-                        </span>
-                        <div className="flex items-center gap-1 text-[10px] font-bold text-amber-600">
-                          <span>{'★'.repeat(rev.rating || 5)}</span>
-                          <span className="text-gray-400">· {rev.date || 'Recent'}</span>
-                        </div>
-                      </div>
-                      <p className="text-[11px] font-medium text-gray-800 mt-0.5 leading-snug">
-                        "{rev.text}"
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Action Row */}
-          <div className="flex items-center gap-2 pt-1">
-            <button
-              type="button"
-              onClick={() => handleOpenRides(selectedSpot)}
-              className="bg-[#FFE500] hover:bg-[#FACC15] border-[2.5px] border-black rounded-2xl py-3 px-3 font-black text-xs text-black shadow-[0_3px_0_0_#000000] flex items-center justify-center gap-1.5 active:translate-y-0.5 transition cursor-pointer"
-              title="Compare Uber, Rapido, and Ola Auto"
-            >
-              <span className="text-base">🛺</span>
-              <span>Rides</span>
-            </button>
-            <a
-              href={`https://www.google.com/maps/dir/?api=1&origin=${location?.lat || 10.7606},${location?.lon || 76.2711}&destination=${selectedSpot.lat},${selectedSpot.lng}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 bg-[#F59E0B] border-[2.5px] border-black rounded-2xl py-3 px-3 font-black text-xs text-black shadow-[0_3px_0_0_#000000] flex items-center justify-center gap-1.5 hover:bg-amber-400 active:translate-y-0.5 transition text-center"
-            >
-              <MapPin size={15} strokeWidth={2.5} />
-              <span>Google Maps</span>
-              <ExternalLink size={12} strokeWidth={2.5} />
-            </a>
-            <button
-              onClick={() => toggleBookmark(selectedSpot.id || selectedSpot.name)}
-              className={`w-12 h-12 border-[2.5px] border-black rounded-2xl flex items-center justify-center shadow-[0_3px_0_0_#000000] active:translate-y-0.5 transition shrink-0 ${
-                bookmarkedIds.includes(selectedSpot.id || selectedSpot.name)
-                  ? 'bg-[#0B3BF4] text-white'
-                  : 'bg-white text-black hover:bg-gray-100'
-              }`}
-              title="Save spot"
-            >
-              <Bookmark size={18} strokeWidth={2.4} />
-            </button>
+            <SpotDetailsCard
+              spot={selectedSpot}
+              onClose={() => setSelectedSpot(null)}
+              onOpenRides={handleOpenRides}
+              userRating={userRating}
+              setUserRating={setUserRating}
+              userReviewText={userReviewText}
+              setUserReviewText={setUserReviewText}
+              reviewSubmitted={reviewSubmitted}
+              setReviewSubmitted={setReviewSubmitted}
+              communityReviews={communityReviews}
+              setCommunityReviews={setCommunityReviews}
+              bookmarkedIds={bookmarkedIds}
+              toggleBookmark={toggleBookmark}
+              location={location}
+              isDesktop={false}
+            />
           </div>
         </div>
-      </div>
-    )}
+      )}
 
       {/* Multimodal Ride Hailing Comparator (Uber, Rapido, Ola) Modal */}
       <RideComparatorModal
