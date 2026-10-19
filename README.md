@@ -48,17 +48,16 @@ Whether you have a 45-minute train layover at **Shoranur Junction**, an evening 
 
 ---
 
-## 📸 Screenshots
+## 📸 Latest App Screenshots
 
 <div align="center">
-  <img src="screeens/screen png/AI Trip & Vibe Intent Prompt.png" width="30%" />
-  <img src="screeens/screen png/Adventure Trail Map - Crisp White Neo-Brutalist.png" width="30%" />
-  <img src="screeens/screen png/Explore Nearby Spots - Discovery Map.png" width="30%" />
+  <img src="screeens/latest_explore.png" width="30%" alt="Neo-Brutalist 60fps OpenStreetMap" />
+  <img src="screeens/latest_planner.png" width="30%" alt="AI Itinerary Planner" />
+  <img src="screeens/latest_upload.png" width="30%" alt="Community Hidden Spot Upload" />
 </div>
 <br/>
 <div align="center">
-  <img src="screeens/screen png/Local AI Telemetry & Gemma 4 Inspector.png" width="45%" />
-  <img src="screeens/screen png/Share a Hidden Spot & Gemma Vision.png" width="45%" />
+  <img src="screeens/latest_login.png" width="45%" alt="Native Neo-Brutalist Authentication" />
 </div>
 
 ---
