@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
 import BottomNav from './components/BottomNav';
 import ExploreTab from './tabs/ExploreTab';
@@ -105,6 +106,7 @@ export default function App() {
             </div>
           </div>
         )}
+        <Analytics />
       </>
     );
   }
@@ -172,6 +174,7 @@ export default function App() {
           </div>
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
