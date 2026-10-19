@@ -133,13 +133,12 @@ Benchmarked on an **NVIDIA GeForce RTX 3050 Laptop GPU (6GB VRAM)**:
 
 ```mermaid
 flowchart TD
-    User["📱 Android / Desktop User (PWA)"] -->|HTTP / Local Wi-Fi| Vite["⚡ Vite + React 18 Frontend (:5173)"]
-    Vite -->|Static Kerala Spots (70)| LocalSeed["📦 keralaCitiesData.js"]
-    Vite -->|User Spots & Reviews| Express["🚀 Express REST API (:4000)"]
-    Express -->|CRUD Sync| Mongo["🍃 MongoDB Atlas (Cloud Cluster)"]
-    Vite -->|Filtered Prompt & Constraints| Ollama["🦙 Ollama Local Server (:11434)"]
-    Ollama -->|GPU Inference (71 t/s)| Qwen["🧠 spot-undo-qwen (3B Edge)"]
-    Qwen -->|Structured JSON Plans| Vite
+    User["📱 Android Native APK / Web PWA"] -->|"HTTP / REST API"| Vite["⚡ Vite + React 18 Frontend"]
+    Vite -->|"Curated Geo Spots"| LocalSeed["📦 keralaCitiesData.js"]
+    Vite -->|"User Spots & Reviews"| Express["🚀 Express REST API"]
+    Express -->|"Database CRUD"| Mongo["🍃 MongoDB Atlas Cloud"]
+    Vite -->|"Filtered Prompts"| AI["🧠 Groq Cloud / Local Ollama"]
+    AI -->|"JSON Travel Plans"| Vite
 ```
 
 ---
