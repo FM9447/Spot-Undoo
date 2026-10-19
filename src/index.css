@@ -78,3 +78,15 @@
   animation: pulse-glow 1.25s ease-in-out infinite;
 }
 
+/* 60fps GPU Hardware Acceleration for Leaflet Map Panning */
+.leaflet-container {
+  will-change: transform;
+}
+.leaflet-pane,
+.leaflet-marker-pane,
+.leaflet-tile-pane,
+.leaflet-overlay-pane {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+

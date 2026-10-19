@@ -36,6 +36,14 @@ const AVADA_TILE_PROVIDERS = {
   },
 };
 
+// Helper to memoize zoom tiers so panning/moving the map causes zero React re-renders
+const getZoomTier = (z) => {
+  if (z < 8.5) return 1;
+  if (z < 11.0) return 2;
+  if (z < 13.5) return 3;
+  return 4;
+};
+
 export default function InteractiveMap({
   center = [10.7606, 76.2711],
   zoom = 14,
@@ -50,6 +58,7 @@ export default function InteractiveMap({
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const tileLayerRef = useRef(null);
+  const markersLayerRef = useRef(null);
   const markersRef = useRef([]);
   const polylineRef = useRef(null);
   const gpsMarkerRef = useRef(null);
@@ -60,7 +69,7 @@ export default function InteractiveMap({
     () => localStorage.getItem('avada_map_style') || 'standard'
   );
   const [showStyleMenu, setShowStyleMenu] = useState(false);
-  const [currentZoom, setCurrentZoom] = useState(() => zoom || 12);
+  const [zoomTier, setZoomTier] = useState(() => getZoomTier(zoom || 14));
 
   // Sync style changes from Settings modal
   useEffect(() => {
@@ -92,13 +101,20 @@ export default function InteractiveMap({
         preferCanvas: true,
       });
 
-      // Track zoom level smoothly with debounce
+      // Markers Layer Group for fast batch DOM manipulation
+      const markersLayer = L.layerGroup().addTo(map);
+      markersLayerRef.current = markersLayer;
+
+      // Track zoom level: ONLY fires on zoomend (never on move/pan gestures)
+      // Only updates state if visual zoom tier changes
       let zoomTimer = null;
-      map.on('zoomend moveend', () => {
+      map.on('zoomend', () => {
         if (zoomTimer) clearTimeout(zoomTimer);
         zoomTimer = setTimeout(() => {
-          setCurrentZoom(map.getZoom());
-        }, 120);
+          const currentZ = map.getZoom();
+          const newTier = getZoomTier(currentZ);
+          setZoomTier((prevTier) => (prevTier !== newTier ? newTier : prevTier));
+        }, 60);
       });
 
       // Avada OpenStreetMap Tile Layer (100% Free, Zero API Key, Zero Watermarks)
@@ -141,7 +157,9 @@ export default function InteractiveMap({
     if (!map) return;
 
     // Clear old markers & polylines
-    markersRef.current.forEach((m) => m.remove());
+    if (markersLayerRef.current) {
+      markersLayerRef.current.clearLayers();
+    }
     markersRef.current = [];
     if (polylineRef.current) {
       if (Array.isArray(polylineRef.current)) {
@@ -176,8 +194,12 @@ export default function InteractiveMap({
       });
 
       const userMarker = L.marker([userLocation.lat, userLocation.lon], { icon: userIcon })
-        .addTo(map)
         .bindPopup(`<b>${userLocation.label || 'Starting Station'}</b><br/>Safe Return Hub`);
+      if (markersLayerRef.current) {
+        markersLayerRef.current.addLayer(userMarker);
+      } else {
+        userMarker.addTo(map);
+      }
       markersRef.current.push(userMarker);
     }
 
@@ -185,19 +207,12 @@ export default function InteractiveMap({
     const shouldFitBounds = prevSpotsKeyRef.current !== prevSpotsKey;
     prevSpotsKeyRef.current = prevSpotsKey;
 
-    const viewBounds = map.getBounds ? map.getBounds().pad(0.35) : null;
-
-    // Spot Markers with Dynamic Multi-Level Zoom Scaling & Viewport Culling
+    // Spot Markers with Memoized Zoom Tiers (Hardware GPU accelerated Leaflet translation)
     spots.forEach((spot, idx) => {
       if (!spot.lat || !spot.lng) return;
       routeLatLngs.push([spot.lat, spot.lng]);
 
       const isSelected = selectedSpot && (selectedSpot.id === spot.id || selectedSpot.name === spot.name);
-
-      // Viewport culling: when zoomed in, only render spots within viewport to guarantee buttery smooth 60fps
-      if (currentZoom >= 9.5 && !showRoute && viewBounds && !isSelected) {
-        if (!viewBounds.contains([spot.lat, spot.lng])) return;
-      }
 
       const spotPhoto = getRealSpotPhoto(spot);
       const priceText = spot.expense === 0 ? 'FREE' : (spot.expense ? `₹${spot.expense}` : (spot.fare ? `₹${spot.fare}` : 'FREE'));
@@ -210,8 +225,8 @@ export default function InteractiveMap({
 
       let spotIcon;
 
-      // ── LEVEL 1: Zoom < 8.5 (State-wide / South India view) ──
-      if (currentZoom < 8.5) {
+      // ── LEVEL 1: Zoom Tier 1 (< 8.5 State-wide) ──
+      if (zoomTier === 1) {
         if (!showRoute) {
           // Explore Mode: Minimalist 7px dot pin so all-Kerala view remains clean
           spotIcon = L.divIcon({
@@ -238,8 +253,8 @@ export default function InteractiveMap({
           });
         }
       }
-      // ── LEVEL 2: 8.5 <= Zoom < 11.0 (Between State and District view) ──
-      else if (currentZoom < 11.0) {
+      // ── LEVEL 2: Zoom Tier 2 (8.5 <= Zoom < 11.0 District view) ──
+      else if (zoomTier === 2) {
         spotIcon = L.divIcon({
           className: 'custom-spot-marker-mini',
           html: `
@@ -288,8 +303,8 @@ export default function InteractiveMap({
           iconAnchor: [16, 42],
         });
       }
-      // ── LEVEL 3: 11.0 <= Zoom < 13.5 (District / City Hub view) ──
-      else if (currentZoom < 13.5) {
+      // ── LEVEL 3: Zoom Tier 3 (11.0 <= Zoom < 13.5 City Hub view) ──
+      else if (zoomTier === 3) {
         spotIcon = L.divIcon({
           className: 'custom-spot-marker-med',
           html: `
@@ -405,11 +420,17 @@ export default function InteractiveMap({
         });
       }
 
-      const marker = L.marker([spot.lat, spot.lng], { icon: spotIcon }).addTo(map);
+      const marker = L.marker([spot.lat, spot.lng], { icon: spotIcon });
+      if (markersLayerRef.current) {
+        markersLayerRef.current.addLayer(marker);
+      } else {
+        marker.addTo(map);
+      }
 
       marker.on('click', () => {
         if (onSelectSpot) onSelectSpot(spot);
-        const targetZoom = currentZoom < 11.5 ? 14 : currentZoom;
+        const currZ = map.getZoom();
+        const targetZoom = currZ < 11.5 ? 14 : currZ;
         map.flyTo([spot.lat, spot.lng], targetZoom, { duration: 0.8 });
       });
 
@@ -457,7 +478,7 @@ export default function InteractiveMap({
         }
       } catch {}
     }
-  }, [spots, selectedSpot, userLocation, onSelectSpot, showRoute, currentZoom]);
+  }, [spots, selectedSpot, userLocation, onSelectSpot, showRoute, zoomTier]);
 
   // Recenter map on user location
   const handleRecenter = () => {
