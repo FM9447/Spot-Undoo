@@ -25,6 +25,15 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('explore');
   const [location, setLocation] = useState(DEFAULT_LOCATION);
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'brutalist';
+    return localStorage.getItem('app_theme') || 'brutalist';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('app_theme', theme);
+  }, [theme]);
   const [loggedIn, setLoggedIn] = useState(() => {
     if (typeof window === 'undefined') return false;
     const viewParam = new URLSearchParams(window.location.search).get('view');
@@ -119,6 +128,8 @@ export default function App() {
         setLocation={setLocation}
         settings={settings}
         setSettings={setSettings}
+        theme={theme}
+        setTheme={setTheme}
         gpsStatus={gpsStatus}
         onRefreshGPS={() => {
           setGpsStatus('acquiring');

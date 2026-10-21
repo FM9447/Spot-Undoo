@@ -12,8 +12,16 @@ import {
   CheckCircle2,
   Loader2,
   Sparkles,
+  Palette,
 } from 'lucide-react';
 import { uploadImageToFirebase } from '../utils/firebaseStorage';
+
+const APP_THEMES = [
+  { id: 'brutalist', name: 'Neo-Brutalist', desc: 'Bold 2.5px strokes, hard shadows & pop contrast', icon: '🟡', bg: 'bg-[#FFE500]' },
+  { id: 'glass', name: 'Glass Luxe', desc: 'Apple iOS frosted glass, soft blur & ambient lighting', icon: '🪞', bg: 'bg-indigo-100' },
+  { id: 'organic', name: 'Kerala Organic', desc: 'Warm linen paper, forest green & terracotta clay', icon: '🌿', bg: 'bg-emerald-100' },
+  { id: 'cyber', name: 'Midnight Cyber', desc: 'Obsidian titanium, electric cyan & neon emerald', icon: '🌌', bg: 'bg-slate-900 text-white' },
+];
 
 export default function SettingsModal({
   isOpen,
@@ -22,6 +30,8 @@ export default function SettingsModal({
   onUpdateUser,
   settings,
   setSettings,
+  theme = 'brutalist',
+  setTheme = () => {},
   onLogout,
   onClearSpots,
 }) {
@@ -252,6 +262,56 @@ export default function SettingsModal({
               <option value="Munnar">Munnar</option>
               <option value="Varkala">Varkala</option>
             </select>
+          </div>
+        </div>
+
+        {/* ── APP DESIGN AESTHETIC / THEME ── */}
+        <div className="bg-[#FEF3C7] border-[2.5px] border-black rounded-2xl p-4 shadow-[0_3px_0_0_#000000] space-y-3">
+          <div className="text-[11px] font-black uppercase tracking-wider text-black flex items-center justify-between">
+            <span className="flex items-center gap-1.5">
+              <Palette size={14} strokeWidth={2.6} className="text-amber-800" />
+              <span>App Design Aesthetic</span>
+            </span>
+            <span className="bg-amber-600 text-white text-[9px] px-2 py-0.5 rounded-full font-black">
+              Live Switcher
+            </span>
+          </div>
+
+          <p className="text-[11px] text-gray-800 font-bold leading-snug">
+            Choose your interface visual styling beyond neo-brutalism:
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {APP_THEMES.map((t) => {
+              const isSelected = theme === t.id;
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => setTheme(t.id)}
+                  className={`text-left p-2.5 rounded-xl border-[2px] border-black transition-all cursor-pointer flex flex-col justify-between ${
+                    isSelected
+                      ? 'bg-white shadow-[0_3px_0_0_#000000] scale-[1.02]'
+                      : 'bg-[#FFFDF5] hover:bg-white shadow-[0_1px_0_0_#000000]'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-black text-black flex items-center gap-1">
+                      <span>{t.icon}</span>
+                      <span>{t.name}</span>
+                    </span>
+                    {isSelected && (
+                      <span className="bg-[#0B3BF4] text-white rounded-full p-0.5">
+                        <CheckCircle2 size={12} strokeWidth={3} />
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[10px] text-gray-600 font-bold mt-1 line-clamp-1">
+                    {t.desc}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
