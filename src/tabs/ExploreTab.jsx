@@ -1208,12 +1208,12 @@ export default function ExploreTab({ location, setLocation }) {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3.5 sm:gap-4 pt-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3.5 sm:gap-4 pt-2 items-start">
             {filteredSpots.map((spot, idx) => (
               <div
                 key={spot.id || spot.name}
                 onClick={() => setSelectedSpot(spot)}
-                className={`relative bg-white border-[2px] border-black rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition w-full ${
+                className={`relative flex flex-col justify-between bg-white border-[2px] border-black rounded-xl p-2 pt-3 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition w-full ${
                   idx % 2 === 0 ? '-rotate-1 hover:rotate-0' : 'rotate-1 hover:rotate-0'
                 }`}
               >
@@ -1224,11 +1224,15 @@ export default function ExploreTab({ location, setLocation }) {
                   </div>
                 </div>
 
-                {/* Photo Frame */}
-                <div className="relative w-full h-22 rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                {/* Photo Frame with Strict 4:3 Aspect Ratio (Prevents Row Stretching) */}
+                <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden border border-black mb-1.5 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] shrink-0">
                   <img
                     src={getRealSpotPhoto(spot)}
                     alt={spot.name}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=70';
+                    }}
                     className="w-full h-full object-cover"
                   />
                   {spot.badge && (
@@ -1241,15 +1245,15 @@ export default function ExploreTab({ location, setLocation }) {
                 </div>
 
                 {/* Polaroid Chin */}
-                <div className="px-0.5 space-y-0.5">
-                  <div className="font-black text-[10px] text-black truncate leading-tight">
+                <div className="px-0.5 space-y-1">
+                  <div className="font-black text-[11px] text-black truncate leading-tight">
                     {spot.name}
                   </div>
-                  <div className="text-[9px] font-bold text-emerald-700 flex items-center justify-between">
+                  <div className="text-[9.5px] font-bold text-emerald-700 flex items-center justify-between">
                     <span>{spot.expense === 0 ? 'Free' : `₹${spot.expense}`}</span>
                     <span className="flex items-center gap-0.5">{spot.rating || 4.8} ⭐</span>
                   </div>
-                  <div className="text-[8.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                  <div className="text-[9px] font-semibold text-gray-500 flex items-center justify-between pt-1 border-t border-gray-200">
                     <span className="truncate max-w-[95px]">
                       📍 {spot.distanceKm ? `${spot.distanceKm} km` : spot.transitText || 'Near station'}
                     </span>
@@ -1259,7 +1263,7 @@ export default function ExploreTab({ location, setLocation }) {
                         e.stopPropagation();
                         setRideDestination(spot);
                       }}
-                      className="bg-[#FFE500] text-black text-[7px] font-black px-1.5 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-yellow-400 active:translate-y-0.5 cursor-pointer flex items-center gap-0.5 shrink-0"
+                      className="bg-[#FFE500] text-black text-[8px] font-black px-2 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-yellow-400 active:translate-y-0.5 cursor-pointer flex items-center gap-0.5 shrink-0"
                       title="Compare Uber, Rapido & Auto fares"
                     >
                       <span>🛺</span>

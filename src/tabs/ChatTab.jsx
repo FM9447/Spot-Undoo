@@ -8,6 +8,7 @@ import LocationPickerModal from '../components/LocationPickerModal';
 import { getBackendUrl } from '../utils/apiConfig';
 import { haversineKm } from '../utils/plannerMath';
 import SpotUndooLoadingScreen from '../components/SpotUndooLoadingScreen';
+import { getRealSpotPhoto } from '../utils/realPhotoResolver';
 
 const MODES = [
   { id: 'layover', label: '🚆 Layover (Train/Flight)' },
@@ -1867,7 +1868,7 @@ Return JSON in this format:
             /* VIEW MODE 2: Scrollable Neo-Brutalist Trail Canvas (Calibrated for ~3 compact Polaroid cards + scroll) */
             <div
               ref={trailContainerRef}
-              className="relative bg-[#F4F6F9] border-[2.5px] border-black rounded-3xl p-3 shadow-[0_4px_0_0_#000000] max-h-[480px] md:max-h-[680px] max-w-4xl mx-auto overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
+              className="relative bg-gradient-to-b from-[#F0F5FA] via-[#E8F1F8] to-[#F4F7FB] border-[2.5px] border-black rounded-3xl p-3 sm:p-4 shadow-[0_4px_0_0_#000000] max-h-[520px] md:max-h-[720px] max-w-4xl mx-auto overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
             >
               {/* Clean Minimal Background Canvas: Subtle Dot Grid & Dotted Trail Path */}
               <svg
@@ -2041,8 +2042,12 @@ Return JSON in this format:
                         {/* Polaroid Photo Frame */}
                         <div className="relative w-full h-[72px] rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                           <img
-                            src={stop.photo || currentCity.spots[sIdx % currentCity.spots.length]?.photo}
+                            src={getRealSpotPhoto(stop) || stop.photo || 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=70'}
                             alt={stop.name}
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=70';
+                            }}
                             onLoad={measureTrail}
                             className={`w-full h-full object-cover ${
                               isReached ? 'grayscale contrast-110 opacity-75' : ''

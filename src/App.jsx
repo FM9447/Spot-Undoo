@@ -119,7 +119,13 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen w-full relative flex flex-col font-sans overflow-x-hidden bg-[#F4F6F9]">
+    <div className="min-h-screen w-full relative flex flex-col font-sans overflow-x-hidden bg-transparent">
+      {/* Dynamic Ambient Background Lighting for Rich Desktop Depth */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="ambient-orb-1 absolute -top-40 left-1/4 w-[650px] h-[650px] bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-transparent rounded-full blur-[130px] opacity-75 pointer-events-none" />
+        <div className="ambient-orb-2 absolute top-1/3 -right-32 w-[550px] h-[550px] bg-gradient-to-bl from-teal-400/15 via-emerald-500/10 to-transparent rounded-full blur-[140px] opacity-70 pointer-events-none" />
+        <div className="ambient-orb-3 absolute -bottom-24 left-1/6 w-[600px] h-[600px] bg-gradient-to-tr from-amber-400/12 via-rose-500/8 to-transparent rounded-full blur-[150px] opacity-65 pointer-events-none" />
+      </div>
       {/* 1. Header (Responsive full-width on mobile, structured on desktop) */}
       <Header
         activeTab={activeTab}
