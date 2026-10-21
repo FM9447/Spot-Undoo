@@ -125,6 +125,19 @@ export default function App() {
         <div className="ambient-orb-1 absolute -top-40 left-1/4 w-[650px] h-[650px] bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-transparent rounded-full blur-[130px] opacity-75 pointer-events-none" />
         <div className="ambient-orb-2 absolute top-1/3 -right-32 w-[550px] h-[550px] bg-gradient-to-bl from-teal-400/15 via-emerald-500/10 to-transparent rounded-full blur-[140px] opacity-70 pointer-events-none" />
         <div className="ambient-orb-3 absolute -bottom-24 left-1/6 w-[600px] h-[600px] bg-gradient-to-tr from-amber-400/12 via-rose-500/8 to-transparent rounded-full blur-[150px] opacity-65 pointer-events-none" />
+
+        {/* Global Cartographic Desktop Side Topo & Coordinate Watermarks */}
+        <svg className="absolute inset-0 w-full h-full opacity-25 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          {/* Left margin contours */}
+          <path d="M -40 120 C 140 180, 80 340, -10 460 C 100 580, 70 750, -30 880" fill="none" stroke="#64748B" strokeWidth="1.2" strokeDasharray="5 7" />
+          <path d="M -70 200 C 110 260, 60 410, -40 540 C 70 670, 50 820, -50 960" fill="none" stroke="#94A3B8" strokeWidth="0.8" />
+          <text x="18" y="240" fill="#64748B" fontSize="8" fontWeight="900" fontFamily="monospace" letterSpacing="1" transform="rotate(-90 18 240)">KERALA CARTOGRAPHY • N 10° 01'</text>
+          
+          {/* Right margin contours */}
+          <path d="M 100% 160 C calc(100% - 150px) 250, calc(100% - 80px) 420, 100% 560" fill="none" stroke="#64748B" strokeWidth="1.2" strokeDasharray="5 7" />
+          <path d="M 100% 280 C calc(100% - 110px) 360, calc(100% - 50px) 520, 100% 660" fill="none" stroke="#94A3B8" strokeWidth="0.8" />
+          <text x="calc(100% - 20px)" y="340" fill="#64748B" fontSize="8" fontWeight="900" fontFamily="monospace" letterSpacing="1" transform="rotate(90 calc(100% - 20px) 340)">ARABIAN SEA EXPEDITION • E 76° 18'</text>
+        </svg>
       </div>
       {/* 1. Header (Responsive full-width on mobile, structured on desktop) */}
       <Header

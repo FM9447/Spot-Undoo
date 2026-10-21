@@ -1041,19 +1041,19 @@ export default function ExploreTab({ location, setLocation }) {
                     {/* Compact Polaroid Snapshot Card: Pinned right onto the dotted path */}
                     <div
                       onClick={() => setSelectedSpot(spot)}
-                      className={`relative bg-white border-[2px] border-black rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[155px] w-full ${
+                      className={`relative bg-white border-[2px] border-black rounded-2xl p-2 sm:p-2.5 pt-3 sm:pt-3.5 pb-2.5 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[165px] sm:max-w-[230px] md:max-w-[270px] w-full ${
                         isLeft ? '-rotate-1 hover:rotate-0' : 'rotate-1 hover:rotate-0'
                       } ${isSelected ? 'ring-2 ring-[#0B3BF4]' : ''}`}
                     >
                       {/* 3D Push-Pin with Number Pinned Exactly on the Dotted Trail Path */}
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
-                        <div className="trail-card-pin w-5 h-5 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-[1.5px] border-black shadow-[0_2px_0_0_rgba(0,0,0,0.4)] ring-1 ring-red-300/60 flex items-center justify-center font-black text-[10px] text-white">
+                        <div className="trail-card-pin w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-[1.5px] border-black shadow-[0_2px_0_0_rgba(0,0,0,0.4)] ring-1 ring-red-300/60 flex items-center justify-center font-black text-[10px] sm:text-xs text-white">
                           {idx + 1}
                         </div>
                       </div>
 
                       {/* Photo Frame */}
-                      <div className="relative w-full h-[72px] rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                      <div className="relative w-full h-[76px] sm:h-[105px] md:h-[120px] rounded-lg overflow-hidden border border-black mb-1.5 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                         <img
                           src={getRealSpotPhoto(spot)}
                           alt={spot.name}
@@ -1062,7 +1062,7 @@ export default function ExploreTab({ location, setLocation }) {
                         />
                         {spot.badge && (
                           <div className="absolute top-1 right-1">
-                            <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] px-1 py-0.2 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
+                            <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] sm:text-[7.5px] px-1.5 py-0.5 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
                               {spot.badge}
                             </span>
                           </div>
@@ -1070,25 +1070,25 @@ export default function ExploreTab({ location, setLocation }) {
                       </div>
 
                       {/* Polaroid Bottom Chin with location details and direct Map jump */}
-                      <div className="px-0.5 space-y-0.5">
-                        <div className="font-black text-[10px] text-black truncate leading-tight">
+                      <div className="px-0.5 space-y-0.5 sm:space-y-1">
+                        <div className="font-black text-[10px] sm:text-xs text-black truncate leading-tight">
                           {spot.name}
                         </div>
 
                         {/* Location area & landmark */}
-                        <div className="text-[8px] font-bold text-gray-600 truncate flex items-center gap-0.5">
+                        <div className="text-[8px] sm:text-[9.5px] font-bold text-gray-600 truncate flex items-center gap-0.5">
                           <span>📍</span>
                           <span className="truncate">{spot.area ? `${spot.area}, ${spot.cityName || ''}` : (spot.cityName || 'Kerala')}</span>
                         </div>
 
-                        <div className="text-[8.5px] font-bold text-emerald-700 flex items-center justify-between pt-0.5">
+                        <div className="text-[8.5px] sm:text-[10px] font-bold text-emerald-700 flex items-center justify-between pt-0.5">
                           <span>{spot.expense === 0 ? 'Free' : `₹${spot.expense}`}</span>
-                          <span className="flex items-center gap-0.5">{spot.rating || 4.8} ⭐</span>
+                          <span className="flex items-center gap-0.5 font-black">{spot.rating || 4.8} ⭐</span>
                         </div>
 
                         {/* Bottom Bar: Live Distance + Direct Map View & Rides Buttons */}
-                        <div className="text-[7.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                          <span className="truncate max-w-[65px]">
+                        <div className="text-[7.5px] sm:text-[9px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                          <span className="truncate max-w-[65px] sm:max-w-[100px]">
                             {distKm !== null ? `${distKm.toFixed(1)} km` : spot.transitText || 'Near station'}
                           </span>
                           <div className="flex items-center gap-1">
@@ -1098,7 +1098,7 @@ export default function ExploreTab({ location, setLocation }) {
                                 e.stopPropagation();
                                 setRideDestination(spot);
                               }}
-                              className="bg-[#FFE500] text-black text-[7px] font-black px-1.5 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-yellow-400 active:translate-y-0.5 cursor-pointer flex items-center gap-0.5"
+                              className="bg-[#FFE500] text-black text-[7px] sm:text-[8px] font-black px-1.5 sm:px-2 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-yellow-400 active:translate-y-0.5 cursor-pointer flex items-center gap-0.5"
                               title="Compare Uber, Rapido & Auto fares"
                             >
                               <span>🛺</span>
@@ -1111,7 +1111,7 @@ export default function ExploreTab({ location, setLocation }) {
                                 setSelectedSpot(spot);
                                 setViewMode('osm');
                               }}
-                              className="bg-[#0B3BF4] text-white text-[7px] font-black px-1.5 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-blue-700 active:translate-y-0.5 cursor-pointer"
+                              className="bg-[#0B3BF4] text-white text-[7px] sm:text-[8px] font-black px-1.5 sm:px-2 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-blue-700 active:translate-y-0.5 cursor-pointer"
                               title="View on Map"
                             >
                               Map ↗
@@ -1126,16 +1126,27 @@ export default function ExploreTab({ location, setLocation }) {
                 // Illustrated Adventure Sticker rendered in the empty opposite half
                 const doodleSticker = (
                   <div className="w-[48%] flex justify-center py-2 pointer-events-none select-none">
-                    <div className={`bg-white/85 border-[1.5px] border-black/25 rounded-2xl p-2.5 shadow-[0_2px_0_0_rgba(0,0,0,0.06)] flex items-center gap-2 max-w-[155px] w-full ${
-                      isLeft ? 'rotate-1' : '-rotate-1'
+                    <div className={`bg-white/95 backdrop-blur border-[2px] border-black/30 rounded-2xl p-2.5 sm:p-3.5 shadow-[0_3px_0_0_rgba(0,0,0,0.08)] flex flex-col gap-1.5 max-w-[165px] sm:max-w-[260px] md:max-w-[320px] w-full transition-all ${
+                      isLeft ? 'rotate-1 hover:rotate-0' : '-rotate-1 hover:rotate-0'
                     }`}>
-                      <span className="text-xl shrink-0">{doodle.icon}</span>
-                      <div className="leading-tight overflow-hidden">
-                        <div className="text-[7px] font-black uppercase tracking-wider text-[#0B3BF4]">
-                          {doodle.tag} • KM {(idx * 1.4 + 0.6).toFixed(1)}
+                      <div className="flex items-center justify-between border-b border-black/10 pb-1">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <span className="text-lg sm:text-xl shrink-0">{doodle.icon}</span>
+                          <span className="text-[7.5px] sm:text-[8.5px] font-black uppercase tracking-wider text-[#0B3BF4] truncate">
+                            {doodle.tag} • KM {(idx * 1.4 + 0.6).toFixed(1)}
+                          </span>
                         </div>
-                        <div className="font-black text-[9px] text-black truncate">{doodle.title}</div>
-                        <div className="text-[7.5px] font-semibold text-gray-500 truncate">{doodle.desc}</div>
+                        <span className="hidden sm:inline text-[7.5px] font-black bg-amber-100 text-amber-900 border border-amber-300 rounded-full px-1.5 py-0.2 shrink-0">
+                          SCOUT INTEL
+                        </span>
+                      </div>
+                      <div>
+                        <div className="font-black text-[10px] sm:text-[11.5px] text-black truncate">{doodle.title}</div>
+                        <div className="text-[8px] sm:text-[9.5px] font-medium text-gray-600 line-clamp-2 mt-0.5 leading-snug">{doodle.desc}</div>
+                      </div>
+                      <div className="hidden sm:flex items-center justify-between text-[8px] font-bold text-gray-500 pt-1 border-t border-dashed border-gray-200">
+                        <span className="flex items-center gap-1">🌴 <span>Kerala Waypoint</span></span>
+                        <span className="text-emerald-700 font-black">★ Local Favorite</span>
                       </div>
                     </div>
                   </div>

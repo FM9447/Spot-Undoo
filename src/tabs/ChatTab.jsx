@@ -1770,57 +1770,61 @@ Return JSON in this format:
             </button>
           </div>
 
-          {/* Plan Switcher Pills & Interactive Route Map Toggle */}
-          <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 scrollbar-none">
-            <div className="flex items-center gap-1.5 shrink-0">
-              {plans.map((p, idx) => {
-                const isSelected = activePlanIdx === idx;
-                return (
+          {/* Responsive 2-Column Expedition Workstation on Desktop */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            {/* Main Trail & Map Viewport (8 Columns on Desktop) */}
+            <div className="lg:col-span-8 space-y-3">
+              {/* Plan Switcher Pills & Interactive Route Map Toggle */}
+              <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 scrollbar-none">
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {plans.map((p, idx) => {
+                    const isSelected = activePlanIdx === idx;
+                    return (
+                      <button
+                        key={p.id || idx}
+                        onClick={() => {
+                          setActivePlanIdx(idx);
+                        }}
+                        className={`text-xs font-black px-3 py-1.5 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] shrink-0 active:translate-y-0.5 ${
+                          isSelected
+                            ? 'bg-[#0B3BF4] text-white'
+                            : 'bg-white text-black hover:bg-gray-100'
+                        }`}
+                      >
+                        {p.title?.split(':')[0] || `Plan ${idx + 1}`}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Trail Canvas vs OSM Live Map Toggle */}
+                <div className="flex items-center gap-1 bg-white border-[2px] border-black rounded-full p-0.5 shadow-[0_2px_0_0_#000000] shrink-0">
                   <button
-                    key={p.id || idx}
-                    onClick={() => {
-                      setActivePlanIdx(idx);
-                    }}
-                    className={`text-xs font-black px-3 py-1.5 rounded-full border-[2px] border-black transition shadow-[0_2px_0_0_#000000] shrink-0 active:translate-y-0.5 ${
-                      isSelected
+                    type="button"
+                    onClick={() => setMapViewMode('trail')}
+                    className={`px-2.5 py-1 rounded-full text-[11px] font-black transition flex items-center gap-1 ${
+                      mapViewMode === 'trail'
                         ? 'bg-[#0B3BF4] text-white'
-                        : 'bg-white text-black hover:bg-gray-100'
+                        : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
-                    {p.title?.split(':')[0] || `Plan ${idx + 1}`}
+                    <span>🗺️</span>
+                    <span>Trail</span>
                   </button>
-                );
-              })}
-            </div>
-
-            {/* Trail Canvas vs OSM Live Map Toggle */}
-            <div className="flex items-center gap-1 bg-white border-[2px] border-black rounded-full p-0.5 shadow-[0_2px_0_0_#000000] shrink-0">
-              <button
-                type="button"
-                onClick={() => setMapViewMode('trail')}
-                className={`px-2.5 py-1 rounded-full text-[11px] font-black transition flex items-center gap-1 ${
-                  mapViewMode === 'trail'
-                    ? 'bg-[#0B3BF4] text-white'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                <span>🗺️</span>
-                <span>Trail</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setMapViewMode('osm')}
-                className={`px-2.5 py-1 rounded-full text-[11px] font-black transition flex items-center gap-1 ${
-                  mapViewMode === 'osm'
-                    ? 'bg-[#0B3BF4] text-white'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                <span>🛰️</span>
-                <span>Map</span>
-              </button>
-            </div>
-          </div>
+                  <button
+                    type="button"
+                    onClick={() => setMapViewMode('osm')}
+                    className={`px-2.5 py-1 rounded-full text-[11px] font-black transition flex items-center gap-1 ${
+                      mapViewMode === 'osm'
+                        ? 'bg-[#0B3BF4] text-white'
+                        : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    <span>🛰️</span>
+                    <span>Map</span>
+                  </button>
+                </div>
+              </div>
 
           {/* VIEW MODE 1: OSM Live Map Mode */}
           {mapViewMode === 'osm' ? (
@@ -1868,38 +1872,92 @@ Return JSON in this format:
             /* VIEW MODE 2: Scrollable Neo-Brutalist Trail Canvas (Calibrated for ~3 compact Polaroid cards + scroll) */
             <div
               ref={trailContainerRef}
-              className="relative bg-gradient-to-b from-[#F0F5FA] via-[#E8F1F8] to-[#F4F7FB] border-[2.5px] border-black rounded-3xl p-3 sm:p-4 shadow-[0_4px_0_0_#000000] max-h-[520px] md:max-h-[720px] max-w-4xl mx-auto overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
+              className="relative bg-gradient-to-b from-[#F2F7FB] via-[#EAF2F8] to-[#F4F8FC] border-[2.5px] border-black rounded-3xl p-3 sm:p-5 shadow-[0_4px_0_0_#000000] max-h-[540px] md:max-h-[760px] lg:max-h-[820px] max-w-4xl mx-auto overflow-y-auto overflow-x-hidden scrollbar-thin scroll-smooth"
             >
-              {/* Clean Minimal Background Canvas: Subtle Dot Grid & Dotted Trail Path */}
+              {/* Illustrated Kerala Backwaters & Expedition Cartography Canvas */}
               <svg
-                className="absolute inset-0 w-full pointer-events-none"
+                className="absolute inset-0 w-full pointer-events-none select-none"
                 style={{ height: `${trailDimensions.height}px` }}
                 width={trailDimensions.width}
                 height={trailDimensions.height}
               >
                 <defs>
+                  {/* Subtle Cartographic Coordinate Dot Grid with Micro-Crosshairs */}
                   <pattern id="chatTrailGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <circle cx="20" cy="20" r="0.8" fill="#CBD5E1" opacity="0.6" />
+                    <circle cx="20" cy="20" r="0.9" fill="#94A3B8" opacity="0.35" />
+                    <path d="M 20 18 L 20 22 M 18 20 L 22 20" stroke="#CBD5E1" strokeWidth="0.5" opacity="0.4" />
                   </pattern>
+
+                  {/* Shimmering Backwaters River Water Gradient */}
+                  <linearGradient id="chatRiverWaterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#BAE6FD" />
+                    <stop offset="50%" stopColor="#7DD3FC" />
+                    <stop offset="100%" stopColor="#38BDF8" />
+                  </linearGradient>
+
+                  {/* Lush Shoreline Sandbar Gradient */}
+                  <linearGradient id="chatSandbarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#FEF3C7" stopOpacity="0.7" />
+                    <stop offset="100%" stopColor="#FDE68A" stopOpacity="0.3" />
+                  </linearGradient>
+
+                  {/* Backwater Palm Grove Greenery Gradient */}
+                  <linearGradient id="chatLushGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#DCFCE7" stopOpacity="0.65" />
+                    <stop offset="100%" stopColor="#BBF7D0" stopOpacity="0.25" />
+                  </linearGradient>
                 </defs>
 
-                {/* Subtle Coordinate Dot Grid */}
+                {/* 1. Coordinate Grid */}
                 <rect width="100%" height="100%" fill="url(#chatTrailGrid)" />
 
-                {/* Gentle, Subtle Elevation Contours */}
-                {Array.from({ length: Math.ceil(trailDimensions.height / 220) + 1 }).map((_, cIdx) => {
-                  const yBase = cIdx * 220 + 80;
+                {/* 2. Soft Terrain Landmass Patches Along Canvas Margins */}
+                {Array.from({ length: Math.ceil(trailDimensions.height / 360) + 1 }).map((_, lIdx) => {
+                  const y = lIdx * 360;
+                  const isEven = lIdx % 2 === 0;
                   return (
-                    <g key={cIdx} opacity="0.35">
+                    <g key={`landmass-${lIdx}`} opacity="0.6">
+                      {isEven ? (
+                        <path
+                          d={`M 0 ${y + 30} Q ${trailDimensions.width * 0.22} ${y + 70}, ${trailDimensions.width * 0.14} ${y + 180} T 0 ${y + 300} Z`}
+                          fill="url(#chatLushGreenGrad)"
+                        />
+                      ) : (
+                        <path
+                          d={`M ${trailDimensions.width} ${y + 50} Q ${trailDimensions.width * 0.8} ${y + 100}, ${trailDimensions.width * 0.86} ${y + 200} T ${trailDimensions.width} ${y + 320} Z`}
+                          fill="url(#chatLushGreenGrad)"
+                        />
+                      )}
+                    </g>
+                  );
+                })}
+
+                {/* 3. Topographic Elevation Contours with Altitude Tags */}
+                {Array.from({ length: Math.ceil(trailDimensions.height / 190) + 2 }).map((_, cIdx) => {
+                  const yBase = cIdx * 190 + 45;
+                  const alt = cIdx * 30 + 15;
+                  return (
+                    <g key={`topo-${cIdx}`} opacity="0.45">
                       <path
-                        d={`M 0 ${yBase} Q ${trailDimensions.width * 0.25} ${yBase - 35}, ${trailDimensions.width * 0.5} ${yBase + 25} T ${trailDimensions.width} ${yBase - 15}`}
+                        d={`M 0 ${yBase} Q ${trailDimensions.width * 0.28} ${yBase - 35}, ${trailDimensions.width * 0.52} ${yBase + 28} T ${trailDimensions.width} ${yBase - 15}`}
                         fill="none"
                         stroke="#CBD5E1"
                         strokeWidth="1.2"
                         strokeDasharray="4 6"
                       />
+                      <text
+                        x={trailDimensions.width - 60}
+                        y={yBase - 6}
+                        fill="#94A3B8"
+                        fontSize="7.5"
+                        fontWeight="800"
+                        fontFamily="monospace"
+                        letterSpacing="0.8"
+                      >
+                        {alt}m ALT
+                      </text>
                       <path
-                        d={`M 0 ${yBase + 110} Q ${trailDimensions.width * 0.35} ${yBase + 140}, ${trailDimensions.width * 0.7} ${yBase + 85} T ${trailDimensions.width} ${yBase + 120}`}
+                        d={`M 0 ${yBase + 95} Q ${trailDimensions.width * 0.38} ${yBase + 125}, ${trailDimensions.width * 0.68} ${yBase + 75} T ${trailDimensions.width} ${yBase + 105}`}
                         fill="none"
                         stroke="#E2E8F0"
                         strokeWidth="1"
@@ -1908,18 +1966,66 @@ Return JSON in this format:
                   );
                 })}
 
-                {/* Pure Dotted Path Running Directly Through All Red Push-Pins */}
+                {/* 4. Illustrated Kerala Backwaters River Ribbon (Flows directly beneath itinerary trail) */}
+                {measuredPath.map((seg, sIdx) => (
+                  <g key={`river-ribbon-${sIdx}`}>
+                    {/* Broad shoreline sandbar */}
+                    <path
+                      d={seg.d}
+                      fill="none"
+                      stroke="#BAE6FD"
+                      strokeWidth="50"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.45"
+                    />
+                    {/* Deep crystal water river channel */}
+                    <path
+                      d={seg.d}
+                      fill="none"
+                      stroke="url(#chatRiverWaterGrad)"
+                      strokeWidth="30"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.8"
+                    />
+                    {/* Water flow current dashes */}
+                    <path
+                      d={seg.d}
+                      fill="none"
+                      stroke="#0284C7"
+                      strokeWidth="2.2"
+                      strokeDasharray="14 18"
+                      strokeLinecap="round"
+                      opacity="0.6"
+                    />
+                  </g>
+                ))}
+
+                {/* 5. Pure Dotted Journey Trail On Top of the River */}
                 {measuredPath.map((seg, sIdx) => (
                   <path
-                    key={sIdx}
+                    key={`trail-dot-${sIdx}`}
                     d={seg.d}
                     fill="none"
-                    stroke={seg.isVisited ? '#9CA3AF' : '#0B3BF4'}
+                    stroke={seg.isVisited ? '#6B7280' : '#0B3BF4'}
                     strokeWidth="3.5"
                     strokeDasharray="6 6"
                     strokeLinecap="round"
                   />
                 ))}
+
+                {/* 6. Compass Rose & Cartographic Watermark in Top-Right Corner */}
+                <g transform={`translate(${Math.max(40, trailDimensions.width - 65)}, 45)`} opacity="0.32">
+                  <circle cx="0" cy="0" r="26" fill="none" stroke="#64748B" strokeWidth="1" strokeDasharray="3 3" />
+                  <circle cx="0" cy="0" r="18" fill="none" stroke="#0B3BF4" strokeWidth="0.8" />
+                  <path d="M 0 -24 L 3 -6 L 0 0 L -3 -6 Z" fill="#0B3BF4" />
+                  <path d="M 0 24 L 3 6 L 0 0 L -3 6 Z" fill="#64748B" />
+                  <path d="M -24 0 L -6 3 L 0 0 L -6 -3 Z" fill="#64748B" />
+                  <path d="M 24 0 L 6 3 L 0 0 L 6 -3 Z" fill="#64748B" />
+                  <text x="0" y="-27" textAnchor="middle" fill="#0B3BF4" fontSize="7" fontWeight="900">N</text>
+                  <text x="0" y="34" textAnchor="middle" fill="#64748B" fontSize="5.5" fontWeight="800" fontFamily="monospace">10°N 76°E</text>
+                </g>
               </svg>
 
               {/* TOP HEADER: CIRCULAR START NODE & STATION HUB */}
@@ -2018,7 +2124,7 @@ Return JSON in this format:
                       {/* Compact Polaroid Snapshot Card: Pinned right onto the dotted path */}
                       <div
                         onClick={() => setSelectedSpot(stop.data || stop)}
-                        className={`relative rounded-xl p-1.5 pt-2.5 pb-2 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[155px] w-full ${
+                        className={`relative rounded-2xl p-2 sm:p-2.5 pt-3 sm:pt-3.5 pb-2.5 shadow-[0_3px_0_0_#000000] cursor-pointer hover:scale-[1.02] active:scale-98 transition max-w-[165px] sm:max-w-[230px] md:max-w-[270px] w-full ${
                           isLeft ? '-rotate-1 hover:rotate-0' : 'rotate-1 hover:rotate-0'
                         } ${
                           isReached
@@ -2029,7 +2135,7 @@ Return JSON in this format:
                         {/* 3D Push-Pin with Number Pinned Directly on the Dotted Trail Path */}
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
                           <div
-                            className={`trail-card-pin w-5 h-5 rounded-full border-[1.5px] shadow-[0_2px_0_0_rgba(0,0,0,0.4)] flex items-center justify-center font-black text-[10px] ${
+                            className={`trail-card-pin w-5 h-5 sm:w-6 sm:h-6 rounded-full border-[1.5px] shadow-[0_2px_0_0_rgba(0,0,0,0.4)] flex items-center justify-center font-black text-[10px] sm:text-xs ${
                               isReached
                                 ? 'bg-[#E5E7EB] text-gray-700 border-gray-500'
                                 : 'bg-gradient-to-br from-red-400 via-red-500 to-red-600 border-black text-white ring-1 ring-red-300/60'
@@ -2040,7 +2146,7 @@ Return JSON in this format:
                         </div>
 
                         {/* Polaroid Photo Frame */}
-                        <div className="relative w-full h-[72px] rounded-md overflow-hidden border border-black mb-1 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                        <div className="relative w-full h-[76px] sm:h-[105px] md:h-[120px] rounded-lg overflow-hidden border border-black mb-1.5 bg-gray-100 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
                           <img
                             src={getRealSpotPhoto(stop) || stop.photo || 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=70'}
                             alt={stop.name}
@@ -2055,11 +2161,11 @@ Return JSON in this format:
                           />
                           <div className="absolute top-1 right-1">
                             {isReached ? (
-                              <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[6.5px] px-1 py-0.2 rounded uppercase">
+                              <span className="bg-[#E5E7EB] border border-gray-400 text-gray-600 font-black text-[6.5px] sm:text-[7.5px] px-1 py-0.2 rounded uppercase">
                                 VISITED
                               </span>
                             ) : (
-                              <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] px-1 py-0.2 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
+                              <span className="bg-[#F59E0B] border border-black text-black font-black text-[6.5px] sm:text-[7.5px] px-1.5 py-0.5 rounded uppercase shadow-[0_0.5px_0_0_#000000]">
                                 {stop.badge || stop.category || 'SPOT'}
                               </span>
                             )}
@@ -2067,25 +2173,25 @@ Return JSON in this format:
                         </div>
 
                         {/* Polaroid Bottom Chin with location details and direct Map jump */}
-                        <div className="px-0.5 space-y-0.5">
-                          <div className="font-black text-[10px] text-black truncate leading-tight">
+                        <div className="px-0.5 space-y-0.5 sm:space-y-1">
+                          <div className="font-black text-[10px] sm:text-xs text-black truncate leading-tight">
                             {stop.name}
                           </div>
 
                           {/* Location area & landmark */}
-                          <div className="text-[8px] font-bold text-gray-600 truncate flex items-center gap-0.5">
+                          <div className="text-[8px] sm:text-[9.5px] font-bold text-gray-600 truncate flex items-center gap-0.5">
                             <span>📍</span>
                             <span className="truncate">{stop.area || stop.data?.area || stop.data?.cityName || currentCity.displayName}</span>
                           </div>
 
-                          <div className={`text-[8.5px] font-bold flex items-center justify-between pt-0.5 ${isReached ? 'text-gray-500' : 'text-emerald-700'}`}>
+                          <div className={`text-[8.5px] sm:text-[10px] font-bold flex items-center justify-between pt-0.5 ${isReached ? 'text-gray-500' : 'text-emerald-700'}`}>
                             <span>{stop.costText || (stop.expense === 0 ? 'Free' : `₹${stop.expense}`) + ` • ${stop.spendTime || 30}m`}</span>
-                            <span className="flex items-center gap-0.5">{stop.rating || stop.data?.rating || 5} ⭐</span>
+                            <span className="flex items-center gap-0.5 font-black">{stop.rating || stop.data?.rating || 5} ⭐</span>
                           </div>
 
                           {/* Bottom Bar: Live Distance + Direct Map View Button */}
-                          <div className="text-[7.5px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
-                            <span className="truncate max-w-[85px]">
+                          <div className="text-[7.5px] sm:text-[9px] font-semibold text-gray-500 flex items-center justify-between pt-0.5 border-t border-gray-200">
+                            <span className="truncate max-w-[85px] sm:max-w-[130px]">
                               {distMeters ? `${distMeters < 1000 ? `${distMeters}m` : `${(distMeters / 1000).toFixed(1)}k`}` : (stop.distanceText || '0.8 km')}
                             </span>
                             <button
@@ -2095,7 +2201,7 @@ Return JSON in this format:
                                 setSelectedSpot(stop.data || stop);
                                 setMapViewMode('osm');
                               }}
-                              className="bg-[#0B3BF4] text-white text-[7.5px] font-black px-1.5 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-blue-700 active:translate-y-0.5 cursor-pointer"
+                              className="bg-[#0B3BF4] text-white text-[7.5px] sm:text-[8.5px] font-black px-1.5 sm:px-2 py-0.5 rounded-full border border-black shadow-[0_0.5px_0_0_#000000] hover:bg-blue-700 active:translate-y-0.5 cursor-pointer"
                               title="View on Map"
                             >
                               Map ↗
@@ -2106,19 +2212,30 @@ Return JSON in this format:
                     </div>
                   );
 
-                  // Illustrated Adventure Sticker rendered in the empty opposite half
+                  // Illustrated Adventure Sticker rendered in the opposite half
                   const doodleSticker = (
                     <div className="w-[48%] flex justify-center py-2 pointer-events-none select-none">
-                      <div className={`bg-white/85 border-[1.5px] border-black/25 rounded-2xl p-2.5 shadow-[0_2px_0_0_rgba(0,0,0,0.06)] flex items-center gap-2 max-w-[155px] w-full ${
-                        isLeft ? 'rotate-1' : '-rotate-1'
+                      <div className={`bg-white/95 backdrop-blur border-[2px] border-black/30 rounded-2xl p-2.5 sm:p-3.5 shadow-[0_3px_0_0_rgba(0,0,0,0.08)] flex flex-col gap-1.5 max-w-[165px] sm:max-w-[260px] md:max-w-[320px] w-full transition-all ${
+                        isLeft ? 'rotate-1 hover:rotate-0' : '-rotate-1 hover:rotate-0'
                       }`}>
-                        <span className="text-xl shrink-0">{doodle.icon}</span>
-                        <div className="leading-tight overflow-hidden">
-                          <div className="text-[7px] font-black uppercase tracking-wider text-[#0B3BF4]">
-                            {doodle.tag} • KM {(sIdx * 1.5 + 0.8).toFixed(1)}
+                        <div className="flex items-center justify-between border-b border-black/10 pb-1">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <span className="text-lg sm:text-xl shrink-0">{doodle.icon}</span>
+                            <span className="text-[7.5px] sm:text-[8.5px] font-black uppercase tracking-wider text-[#0B3BF4] truncate">
+                              {doodle.tag} • KM {(sIdx * 1.5 + 0.8).toFixed(1)}
+                            </span>
                           </div>
-                          <div className="font-black text-[9px] text-black truncate">{doodle.title}</div>
-                          <div className="text-[7.5px] font-semibold text-gray-500 truncate">{doodle.desc}</div>
+                          <span className="hidden sm:inline text-[7.5px] font-black bg-amber-100 text-amber-900 border border-amber-300 rounded-full px-1.5 py-0.2 shrink-0">
+                            SCOUT INTEL
+                          </span>
+                        </div>
+                        <div>
+                          <div className="font-black text-[10px] sm:text-[11.5px] text-black truncate">{doodle.title}</div>
+                          <div className="text-[8px] sm:text-[9.5px] font-medium text-gray-600 line-clamp-2 mt-0.5 leading-snug">{doodle.desc}</div>
+                        </div>
+                        <div className="hidden sm:flex items-center justify-between text-[8px] font-bold text-gray-500 pt-1 border-t border-dashed border-gray-200">
+                          <span className="flex items-center gap-1">🌴 <span>Kerala Waypoint</span></span>
+                          <span className="text-emerald-700 font-black">★ Local Favorite</span>
                         </div>
                       </div>
                     </div>
@@ -2169,78 +2286,233 @@ Return JSON in this format:
             </div>
           )}
 
-          {/* Interactive AI Chat Plan Modifier */}
-          <div className="bg-white border-[2.5px] border-black rounded-3xl p-3.5 shadow-[0_4px_0_0_#000000] space-y-2.5 mt-2">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5 font-black text-xs text-black">
-                <Sparkles size={13} className="text-[#0B3BF4] fill-[#0B3BF4]" />
-                <span>Prompt AI to Update / Adapt Plan</span>
-              </div>
-              <span className="text-[9px] font-black bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full border border-purple-300">
-                Live AI Co-Pilot
-              </span>
-            </div>
+              {/* Mobile-Only AI Chat Plan Modifier (Hidden on Desktop) */}
+              <div className="lg:hidden bg-white border-[2.5px] border-black rounded-3xl p-3.5 shadow-[0_4px_0_0_#000000] space-y-2.5 mt-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 font-black text-xs text-black">
+                    <Sparkles size={13} className="text-[#0B3BF4] fill-[#0B3BF4]" />
+                    <span>Prompt AI to Update / Adapt Plan</span>
+                  </div>
+                  <span className="text-[9px] font-black bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full border border-purple-300">
+                    Live AI Co-Pilot
+                  </span>
+                </div>
 
-            {/* Quick prompt chips */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-              {[
-                '⚡ Make it 30m faster',
-                '☕ Add a chai stop',
-                '💰 Cut budget by ₹100',
-                '🚶 Only walking distance',
-                '🌿 More quiet nature',
-              ].map((chip) => (
-                <button
-                  key={chip}
-                  type="button"
-                  onClick={() => handleModifyPlan(chip)}
-                  disabled={isModifyingPlan}
-                  className="text-[10px] font-bold px-2.5 py-1 rounded-full border border-black bg-[#F4F6F9] hover:bg-[#EFF6FF] hover:border-[#0B3BF4] text-black shrink-0 transition cursor-pointer disabled:opacity-50"
-                >
-                  {chip}
-                </button>
-              ))}
-            </div>
+                {/* Quick prompt chips */}
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+                  {[
+                    '⚡ Make it 30m faster',
+                    '☕ Add a chai stop',
+                    '💰 Cut budget by ₹100',
+                    '🚶 Only walking distance',
+                    '🌿 More quiet nature',
+                  ].map((chip) => (
+                    <button
+                      key={chip}
+                      type="button"
+                      onClick={() => handleModifyPlan(chip)}
+                      disabled={isModifyingPlan}
+                      className="text-[10px] font-bold px-2.5 py-1 rounded-full border border-black bg-[#F4F6F9] hover:bg-[#EFF6FF] hover:border-[#0B3BF4] text-black shrink-0 transition cursor-pointer disabled:opacity-50"
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
 
-            {/* Chat Prompt Input Bar */}
-            <div className="flex items-center gap-1.5 border-[2px] border-black rounded-2xl p-1 bg-[#F9FAFB] shadow-[0_2px_0_0_#000000]">
-              <input
-                type="text"
-                value={chatModifierInput}
-                onChange={(e) => setChatModifierInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleModifyPlan();
-                  }
-                }}
-                placeholder="e.g. Train delayed 20m, drop stop 2 & add snacks..."
-                className="flex-1 bg-transparent text-xs font-bold text-black px-2.5 outline-none placeholder:text-gray-400"
-              />
-              <button
-                type="button"
-                onClick={() => handleModifyPlan()}
-                disabled={isModifyingPlan || !chatModifierInput.trim()}
-                className="bg-[#0B3BF4] hover:bg-blue-600 disabled:opacity-40 text-white border-[1.5px] border-black rounded-xl px-3 py-1.5 text-xs font-black flex items-center gap-1 shadow-[0_1.5px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer"
-              >
-                {isModifyingPlan ? (
-                  <Loader2 size={13} className="animate-spin text-white" />
-                ) : (
-                  <>
-                    <span>Update</span>
-                    <Send size={11} />
-                  </>
+                {/* Chat Prompt Input Bar */}
+                <div className="flex items-center gap-1.5 border-[2px] border-black rounded-2xl p-1 bg-[#F9FAFB] shadow-[0_2px_0_0_#000000]">
+                  <input
+                    type="text"
+                    value={chatModifierInput}
+                    onChange={(e) => setChatModifierInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleModifyPlan();
+                      }
+                    }}
+                    placeholder="e.g. Train delayed 20m, drop stop 2 & add snacks..."
+                    className="flex-1 bg-transparent text-xs font-bold text-black px-2.5 outline-none placeholder:text-gray-400"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleModifyPlan()}
+                    disabled={isModifyingPlan || !chatModifierInput.trim()}
+                    className="bg-[#0B3BF4] hover:bg-blue-600 disabled:opacity-40 text-white border-[1.5px] border-black rounded-xl px-3 py-1.5 text-xs font-black flex items-center gap-1 shadow-[0_1.5px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer"
+                  >
+                    {isModifyingPlan ? (
+                      <Loader2 size={13} className="animate-spin text-white" />
+                    ) : (
+                      <>
+                        <span>Update</span>
+                        <Send size={11} />
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Status Toast */}
+                {modificationMsg && (
+                  <div className="bg-[#ECFDF5] border border-emerald-400 rounded-xl p-2 text-xs font-bold text-emerald-900 flex items-center gap-1.5 animate-fadeIn">
+                    <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                    <span>{modificationMsg}</span>
+                  </div>
                 )}
-              </button>
+              </div>
             </div>
 
-            {/* Status Toast */}
-            {modificationMsg && (
-              <div className="bg-[#ECFDF5] border border-emerald-400 rounded-xl p-2 text-xs font-bold text-emerald-900 flex items-center gap-1.5 animate-fadeIn">
-                <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
-                <span>{modificationMsg}</span>
+            {/* Desktop Expedition Command Deck (4 Columns on Desktop) */}
+            <div className="hidden lg:flex lg:col-span-4 flex-col gap-3.5 sticky top-20">
+              {/* 1. Journey Progress & Intel HUD */}
+              <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-3">
+                <div className="flex items-center justify-between border-b border-black/10 pb-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="w-8 h-8 rounded-full bg-blue-100 border border-black flex items-center justify-center text-sm shadow-[0_1px_0_0_#000000]">
+                      🧭
+                    </span>
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-wider text-gray-500">
+                        EXPEDITION DECK
+                      </div>
+                      <div className="text-xs font-black text-black">
+                        {currentCity.name} Hub Route
+                      </div>
+                    </div>
+                  </div>
+                  <span className="text-[9.5px] font-black bg-emerald-100 text-emerald-800 border border-emerald-400 px-2.5 py-0.5 rounded-full">
+                    {visitedStopIds.length} / {(currentPlan.stops || []).length} VISITED
+                  </span>
+                </div>
+
+                {/* Route Vibe & Return Info */}
+                <div className="bg-[#F8FAFC] border border-black/15 rounded-2xl p-2.5 space-y-1.5">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-gray-600">Selected Vibe</span>
+                    <span className="font-black text-black truncate max-w-[160px]">{currentPlan.vibe || 'Curated'}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-gray-600">Safe Return</span>
+                    <span className="font-black text-amber-700">{currentPlan.returnTime || '17:10 PM'}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-gray-600">Total Stops</span>
+                    <span className="font-black text-black">{(currentPlan.stops || []).length} locations</span>
+                  </div>
+                </div>
+
+                {/* Budget Gauge */}
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between text-xs font-bold">
+                    <span className="text-gray-600">Estimated Budget</span>
+                    <span className="text-black font-black">
+                      ₹{currentPlan.totalCost || (currentPlan.stops || []).reduce((sum, s) => sum + (s.expense || 0), 0)}
+                      <span className="text-gray-400 font-semibold text-[10px]"> / ₹{maxBudget} max</span>
+                    </span>
+                  </div>
+                  <div className="w-full h-2.5 bg-gray-100 rounded-full border border-black overflow-hidden p-0.5">
+                    <div
+                      className="h-full bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-500 rounded-full transition-all duration-500"
+                      style={{
+                        width: `${Math.min(
+                          100,
+                          Math.round(
+                            ((currentPlan.totalCost || (currentPlan.stops || []).reduce((sum, s) => sum + (s.expense || 0), 0)) / (maxBudget || 500)) * 100
+                          )
+                        )}%`,
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
-            )}
+
+              {/* 2. Desktop AI Co-Pilot Modifier (Accessible without scrolling) */}
+              <div className="bg-white border-[2.5px] border-black rounded-3xl p-4 shadow-[0_4px_0_0_#000000] space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 font-black text-xs text-black">
+                    <Sparkles size={14} className="text-[#0B3BF4] fill-[#0B3BF4]" />
+                    <span>Live AI Route Co-Pilot</span>
+                  </div>
+                  <span className="text-[9px] font-black bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full border border-purple-300">
+                    Instant Adapt
+                  </span>
+                </div>
+
+                {/* Quick Chips */}
+                <div className="flex flex-wrap gap-1">
+                  {[
+                    '⚡ 30m faster',
+                    '☕ Add chai stop',
+                    '💰 Cut budget ₹100',
+                    '🚶 Walking only',
+                    '🌿 Quiet nature',
+                  ].map((chip) => (
+                    <button
+                      key={chip}
+                      type="button"
+                      onClick={() => handleModifyPlan(chip)}
+                      disabled={isModifyingPlan}
+                      className="text-[9.5px] font-bold px-2 py-1 rounded-full border border-black bg-[#F4F6F9] hover:bg-[#EFF6FF] hover:border-[#0B3BF4] text-black transition cursor-pointer disabled:opacity-50"
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Chat Input */}
+                <div className="flex items-center gap-1 border-[2px] border-black rounded-2xl p-1 bg-[#F9FAFB] shadow-[0_2px_0_0_#000000]">
+                  <input
+                    type="text"
+                    value={chatModifierInput}
+                    onChange={(e) => setChatModifierInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleModifyPlan();
+                      }
+                    }}
+                    placeholder="e.g. Add street food near station..."
+                    className="flex-1 bg-transparent text-xs font-bold text-black px-2 outline-none placeholder:text-gray-400"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleModifyPlan()}
+                    disabled={isModifyingPlan || !chatModifierInput.trim()}
+                    className="bg-[#0B3BF4] hover:bg-blue-600 disabled:opacity-40 text-white border-[1.5px] border-black rounded-xl px-2.5 py-1 text-xs font-black flex items-center gap-1 shadow-[0_1.5px_0_0_#000000] active:translate-y-0.5 transition cursor-pointer"
+                  >
+                    {isModifyingPlan ? (
+                      <Loader2 size={12} className="animate-spin text-white" />
+                    ) : (
+                      <>
+                        <span>Update</span>
+                        <Send size={10} />
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {modificationMsg && (
+                  <div className="bg-[#ECFDF5] border border-emerald-400 rounded-xl p-2 text-xs font-bold text-emerald-900 flex items-center gap-1.5 animate-fadeIn">
+                    <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                    <span className="truncate">{modificationMsg}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* 3. Live Kerala Radar & Explorer Wisdom */}
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-[2px] border-black rounded-3xl p-3.5 shadow-[0_3px_0_0_#000000] space-y-2">
+                <div className="flex items-center gap-1.5 font-black text-xs text-black">
+                  <span>⛅</span>
+                  <span>29°C Tropical Breeze • Kerala</span>
+                </div>
+                <p className="text-[10px] font-medium text-gray-700 leading-snug">
+                  💡 <span className="font-bold">Local Intel:</span> Kerala autorickshaws charge ₹30 minimum. Most chai stalls open at 6:00 AM and stay fresh till 11:30 PM.
+                </p>
+                <div className="flex items-center justify-between text-[9px] font-bold text-gray-500 pt-1 border-t border-black/10">
+                  <span>Sunset: 18:24 PM</span>
+                  <span className="text-emerald-700">✓ Safe for solo explorers</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Selected Spot Popup Modal Overlay */}
