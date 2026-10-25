@@ -3,6 +3,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Navigation, MapPin, Layers, Sparkles } from 'lucide-react';
 import { getRealSpotPhoto } from '../utils/realPhotoResolver';
+import { acquireGPS } from '../utils/gps';
 
 const AVADA_TILE_PROVIDERS = {
   standard: {
@@ -480,24 +481,39 @@ export default function InteractiveMap({
     }
   }, [spots, selectedSpot, userLocation, onSelectSpot, showRoute, zoomTier]);
 
-  // Recenter map on user location
+  // Recenter map on user location or current route spots
   const handleRecenter = () => {
-    if (mapInstanceRef.current && userLocation?.lat && userLocation?.lon) {
-      mapInstanceRef.current.flyTo([userLocation.lat, userLocation.lon], 14, { duration: 0.8 });
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    // 1. If userLocation coordinates are provided, fly to user location
+    if (userLocation?.lat && userLocation?.lon) {
+      map.flyTo([userLocation.lat, userLocation.lon], 14, { duration: 0.8 });
+      return;
+    }
+
+    // 2. If spots exist, fit map bounds to encompass all visible stops
+    if (spots && spots.length > 0) {
+      const validSpots = spots.filter((s) => s.lat && (s.lng || s.lon));
+      if (validSpots.length > 0) {
+        const bounds = L.latLngBounds(validSpots.map((s) => [s.lat, s.lng || s.lon]));
+        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+        return;
+      }
+    }
+
+    // 3. Fallback to default center prop
+    if (center && center.length === 2) {
+      map.flyTo(center, zoom || 14, { duration: 0.8 });
     }
   };
 
-  // Live GPS tracking
+  // Live GPS tracking with Capacitor Native Geolocation & HTML5 fallback
   const handleLocateGPS = () => {
-    if (!navigator.geolocation) {
-      alert('GPS is not supported by your browser');
-      return;
-    }
     setGpsLoading(true);
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
+    acquireGPS({
+      onSuccess: ({ lat, lon, label }) => {
         setGpsLoading(false);
-        const { latitude, longitude } = pos.coords;
         const map = mapInstanceRef.current;
         if (!map) return;
 
@@ -515,26 +531,39 @@ export default function InteractiveMap({
           iconAnchor: [16, 16],
         });
 
-        const m = L.marker([latitude, longitude], { icon: liveIcon })
+        const m = L.marker([lat, lon], { icon: liveIcon })
           .addTo(map)
-          .bindPopup('<b>📍 Your Live Location</b><br/>Real-time GPS Active');
+          .bindPopup(`<b>📍 Live Location</b><br/>${label || 'Active GPS'}`);
         gpsMarkerRef.current = m;
 
-        map.flyTo([latitude, longitude], 15, { duration: 0.8 });
-        onLocationFound?.({ lat: latitude, lon: longitude });
+        map.flyTo([lat, lon], 15, { duration: 0.8 });
+        onLocationFound?.({ lat, lon });
       },
-      (err) => {
+      onError: (err) => {
         setGpsLoading(false);
         console.warn('GPS location error:', err);
+        // Fallback to standard HTML5 geolocation
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              const { latitude, longitude } = pos.coords;
+              const map = mapInstanceRef.current;
+              if (map) {
+                map.flyTo([latitude, longitude], 15, { duration: 0.8 });
+                onLocationFound?.({ lat: latitude, lon: longitude });
+              }
+            },
+            () => {}
+          );
+        }
       },
-      { enableHighAccuracy: true, timeout: 8000 }
-    );
+    });
   };
 
   return (
     <div
       style={{ height }}
-      className="cartoon-map-wrapper relative w-full rounded-3xl overflow-hidden border-[3px] border-black shadow-[0_4px_0_0_#000000] bg-[#e5e7eb]"
+      className="cartoon-map-wrapper relative w-full rounded-3xl overflow-hidden border-[3px] border-black shadow-[0_4px_0_0_#000000] bg-[#e5e7eb] isolate z-0"
     >
       <style>{`
         .cartoon-map-wrapper .leaflet-tile-pane {
@@ -563,7 +592,7 @@ export default function InteractiveMap({
 
       {/* Pulsing Logo Map Loader Overlay */}
       {mapLoading && (
-        <div className="absolute inset-0 z-[500] bg-[#F4F6F9] flex flex-col items-center justify-center p-4 transition-opacity duration-300 rounded-3xl pointer-events-none">
+        <div className="absolute inset-0 z-40 bg-[#F4F6F9] flex flex-col items-center justify-center p-4 transition-opacity duration-300 rounded-3xl pointer-events-none">
           <div className="relative flex flex-col items-center">
             <div className="absolute -inset-4 bg-blue-500/10 rounded-full blur-xl animate-pulse-glow" />
             <img
@@ -578,52 +607,46 @@ export default function InteractiveMap({
         </div>
       )}
 
-
-      {/* Cartoon Compass Rose Badge */}
-      <div className="absolute top-3 right-12 z-[400] bg-white border-[2px] border-black rounded-full px-2 py-0.5 text-[9px] font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1 select-none pointer-events-none">
-        <span>🧭</span>
-        <span className="text-red-600">N</span>
-      </div>
-
-      {/* Floating GPS and Recenter Buttons (Lifted above mobile bottom navigation) */}
-      <div className="absolute bottom-20 right-3.5 z-[400] flex items-center gap-2">
+      {/* Floating GPS and Recenter Buttons (Positioned neatly inside the map corner) */}
+      <div className="absolute bottom-3 right-3 z-20 flex items-center gap-1.5">
         <button
           type="button"
           onClick={handleLocateGPS}
           disabled={gpsLoading}
-          className="bg-white border-[2px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] flex items-center gap-1.5 text-xs font-black active:translate-y-0.5 hover:bg-emerald-50 text-emerald-800 transition cursor-pointer"
+          className="bg-white border-[2px] border-black rounded-xl px-2.5 py-1.5 shadow-[0_2px_0_0_#000000] flex items-center gap-1.5 text-xs font-black active:translate-y-0.5 hover:bg-emerald-50 text-emerald-800 transition cursor-pointer"
           title="Track Live GPS Location"
         >
           <span className={`w-2 h-2 rounded-full bg-emerald-500 inline-block ${gpsLoading ? 'animate-spin' : 'animate-ping'}`} />
-          <span>{gpsLoading ? 'Locating...' : 'My GPS'}</span>
+          <span className="text-[11px]">{gpsLoading ? 'Locating...' : 'GPS'}</span>
         </button>
 
         <button
           type="button"
           onClick={handleRecenter}
-          className="bg-white border-[2px] border-black rounded-2xl p-2.5 shadow-[0_3px_0_0_#000000] flex items-center gap-1.5 text-xs font-black active:translate-y-0.5 hover:bg-gray-50 transition cursor-pointer"
+          className="bg-white border-[2px] border-black rounded-xl px-2.5 py-1.5 shadow-[0_2px_0_0_#000000] flex items-center gap-1.5 text-xs font-black active:translate-y-0.5 hover:bg-gray-50 transition cursor-pointer"
+          title="Recenter Map View"
         >
-          <Navigation size={14} className="text-[#0B3BF4]" strokeWidth={2.5} />
-          <span>Recenter</span>
+          <Navigation size={12} className="text-[#0B3BF4]" strokeWidth={2.5} />
+          <span className="text-[11px]">Recenter</span>
         </button>
       </div>
 
       {/* Avada OpenStreetMap Style Selector Pill */}
-      <div className="absolute top-3 left-3 z-[400] flex flex-col gap-1.5">
+      <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5">
         <button
           type="button"
           onClick={() => setShowStyleMenu(!showStyleMenu)}
           className="bg-white/95 backdrop-blur border-[2px] border-black rounded-full px-2.5 py-1 text-[10px] font-black shadow-[0_2px_0_0_#000000] flex items-center gap-1.5 hover:bg-yellow-50 active:scale-95 transition cursor-pointer"
-          title="Switch Avada OpenStreetMap Style"
+          title="Switch OpenStreetMap Style"
         >
           <span>{AVADA_TILE_PROVIDERS[mapStyle]?.icon || '🗺️'}</span>
-          <span>{AVADA_TILE_PROVIDERS[mapStyle]?.name || 'Avada Map'}</span>
+          <span>{AVADA_TILE_PROVIDERS[mapStyle]?.name || 'Standard OSM'}</span>
           <Layers size={11} className="text-[#0B3BF4]" strokeWidth={2.5} />
         </button>
 
         {showStyleMenu && (
           <div className="bg-white border-[2px] border-black rounded-2xl p-1.5 shadow-[0_4px_0_0_#000000] flex flex-col gap-1 min-w-[140px] animate-fade-in">
-            <span className="text-[9px] font-black uppercase text-gray-500 px-2 py-0.5">Avada OSM Styles</span>
+            <span className="text-[9px] font-black uppercase text-gray-500 px-2 py-0.5">OSM Styles</span>
             {Object.entries(AVADA_TILE_PROVIDERS).map(([key, prov]) => (
               <button
                 key={key}

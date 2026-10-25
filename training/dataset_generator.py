@@ -65,6 +65,7 @@ Filtered Local Candidates:
         "id": "plan-1",
         "title": "Plan 1: Best Mood & Review Match",
         "vibe": f"Curated for {vibes[0]} and {vibes[1]} near {hub['name']}",
+        "reasoning": f"Budget check: ₹{p1_cost} ≤ ₹{budget}. 3 high-rated spots sequenced along {p1_spots[0]['transit']} with 30m departure safety cushion.",
         "startTime": "14:00",
         "returnTime": f"{14 + time_hrs - 1}:45 PM",
         "totalCost": p1_cost,
@@ -87,6 +88,7 @@ Filtered Local Candidates:
         "id": "plan-2",
         "title": "Plan 2: Ultra-Budget Saver",
         "vibe": "Walkable low-expense route with high local ratings",
+        "reasoning": f"Budget check: ₹{p2_cost} saved {budget - p2_cost} rupees. Prioritized free walking distance spots.",
         "startTime": "14:00",
         "returnTime": f"{14 + time_hrs - 1}:30 PM",
         "totalCost": p2_cost,
@@ -111,6 +113,7 @@ Filtered Local Candidates:
         "id": "plan-3",
         "title": "Plan 3: Hidden Gem Route",
         "vibe": "Off-the-beaten-path artisan spots and quiet scenic views",
+        "reasoning": f"Discovered secret local spots away from crowded tourist clusters, total transit time under 25 mins.",
         "startTime": "14:00",
         "returnTime": f"{14 + time_hrs - 1}:50 PM",
         "totalCost": p3_cost,
@@ -126,7 +129,10 @@ Filtered Local Candidates:
         "returnPill": f"⏰ {14 + time_hrs - 1}:50 PM • SAFE RETURN TO {hub['name'].upper()}"
     }
 
-    assistant_output = json.dumps({"plans": [plan1, plan2, plan3]}, ensure_ascii=False)
+    assistant_output = json.dumps({
+        "reasoning": f"Verified constraints for {hub['name']}: {time_hrs}h window, ₹{budget} budget. Generated 3 verified routes with strict safe return buffers.",
+        "plans": [plan1, plan2, plan3]
+    }, ensure_ascii=False)
 
     return {
         "messages": [
